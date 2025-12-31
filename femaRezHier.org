@@ -1,0 +1,23 @@
+| Nr | Deutsch                               | Emoji        | Englisch                           | Emoji        |
+|----+---------------------------------------+--------------+-----------------------------------+--------------|
+| 0  | Frauen Mädchen Damen Hierarchie Omas  | 👑👵👩‍🦰 | Women Girls Ladies Hierarchy Grandmas | 👑👵👩‍🦰 |
+| 1  | Verhältnisse                          | 👥           | Relationships                     | 👥           |
+| 2  | Gestaltung weiblich                   | 🎨           | Design female                      | 🎨           |
+| 3  | Bedingung                             | 📜           | Condition                          | 📜           |
+| 4  | Fangen weiblich                       | 🪤           | Catching female                     | 🪤           |
+| 5  | Karriere                              | 🚀           | Career                              | 🚀           |
+| 6  | Reinheit weiblich                     | ✨           | Purity female                        | ✨           |
+| 7  | Bürger                                | 🗳️          | Citizen                             | 🗳️          |
+| 8  | Regeln Gesetze weiblich               | ⚖️           | Rules Laws female                   | ⚖️           |
+| 9  | Kategorien                             | 📂           | Categories                          | 📂           |
+| 10 | Definitionen weiblich                 | 📖           | Definitions female                   | 📖           |
+| 11 | Zuschauer Zuhörer                     | 👀👂        | Spectators Listeners                 | 👀👂        |
+| 12 | Kartieren Sieben Sortieren weiblich   | 🗺️           | Mapping Seven Sorting female         | 🗺️           |
+| 13 | Bestimmer-Sollen!                     | 👑           | Determiner-Shall!                    | 👑           |
+| 14 | Analysist weiblich                     | 🔍           | Analyst female                        | 🔍           |
+| 15 | Invariante Überprüferin Wach          | 🛡️           | Invariant Checker Alert               | 🛡️           |
+| 16 | Respekt-Verteiler weiblich            | 🙌           | Respect Distributor female            | 🙌           |
+| 17 | Gedanklich nachvollziehen             | 🧠           | Mentally comprehend                  | 🧠           |
+| 18 | Totalitaristin weiblich               | 🏰           | Totalitarian female                  | 🏰           |
+| 19 | Fundamentalist                        | ⛪           | Fundamentalist                       | ⛪           |
+| 20 | Gedichtskodiererin weiblich Dekodieren | 📝🔓       | Poem coder female Decoding            | 📝🔓       |
