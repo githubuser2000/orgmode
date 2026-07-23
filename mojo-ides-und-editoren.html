@@ -1,0 +1,1716 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+<head>
+<!-- 2026-07-23 Thu 11:46 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IDEs und Editoren für Mojo</title>
+<meta name="author" content="termux" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'JavaScript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">IDEs und Editoren für Mojo
+<br />
+<span class="subtitle">Offizielle Unterstützung, Community-Lösungen und Einrichtung</span>
+</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Inhaltsverzeichnis</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org0fdc7df">1. Kurzantwort</a></li>
+<li><a href="#org84d6991">2. Übersicht</a></li>
+<li><a href="#org15ae002">3. Was bedeutet „Mojo beherrschen“?</a>
+<ul>
+<li><a href="#orga22e2f5">3.1. Stufe 1: reine Textbearbeitung</a></li>
+<li><a href="#org052f985">3.2. Stufe 2: Syntaxparser</a></li>
+<li><a href="#org95b9810">3.3. Stufe 3: Language Server Protocol</a></li>
+<li><a href="#org7622acf">3.4. Stufe 4: vollständige IDE-Integration</a></li>
+</ul>
+</li>
+<li><a href="#org3b0f0cc">4. Visual Studio Code</a>
+<ul>
+<li><a href="#orgd3cb8df">4.1. Status</a></li>
+<li><a href="#org52dbbcb">4.2. Unterstützte Funktionen</a></li>
+<li><a href="#org78c31c0">4.3. Installation über die Oberfläche</a></li>
+<li><a href="#orgcdb1c58">4.4. Installation über die Kommandozeile</a></li>
+<li><a href="#orgf540f2f">4.5. SDK aus einer virtuellen Python-Umgebung verwenden</a></li>
+<li><a href="#orgb023ac3">4.6. SDK automatisch erkennen lassen</a></li>
+<li><a href="#org7cecc2d">4.7. Urteil</a></li>
+</ul>
+</li>
+<li><a href="#org9c6e4c7">5. Cursor und andere VS-Code-Ableger</a>
+<ul>
+<li><a href="#orgf9fc2fa">5.1. Cursor</a></li>
+<li><a href="#org46f5d44">5.2. VSCodium und Code-OSS</a></li>
+<li><a href="#org49e0d3f">5.3. Windsurf und weitere Ableger</a></li>
+</ul>
+</li>
+<li><a href="#org92dfc0e">6. Helix</a>
+<ul>
+<li><a href="#org759d950">6.1. Status</a></li>
+<li><a href="#orgfc77ef1">6.2. Installation prüfen</a></li>
+<li><a href="#orgd0f4f00">6.3. Mojo-Werkzeuge prüfen</a></li>
+<li><a href="#org28586fe">6.4. Vorteil von Helix</a></li>
+<li><a href="#org51ba7e9">6.5. Einschränkung</a></li>
+<li><a href="#org97d9288">6.6. Urteil</a></li>
+</ul>
+</li>
+<li><a href="#org2f4e600">7. Neovim</a>
+<ul>
+<li><a href="#orgcfece03">7.1. Status</a></li>
+<li><a href="#org1085a5e">7.2. Voraussetzungen prüfen</a></li>
+<li><a href="#org1b530fd">7.3. Minimale Dateityperkennung</a></li>
+<li><a href="#org2704f6d">7.4. Minimaler LSP-Start für aktuelles Neovim</a></li>
+<li><a href="#org548bd7a">7.5. Mojo-Datei aus Neovim starten</a></li>
+<li><a href="#org29d0387">7.6. Syntaxhervorhebung</a></li>
+<li><a href="#orgfd3a78a">7.7. Debugging</a></li>
+<li><a href="#org7b31d79">7.8. Urteil</a></li>
+</ul>
+</li>
+<li><a href="#org22bb3c2">8. Emacs und Doom Emacs</a>
+<ul>
+<li><a href="#org8e46e83">8.1. Status</a></li>
+<li><a href="#org67b82be">8.2. Ein einfacher eigener Mojo-Mode</a></li>
+<li><a href="#org81f9a3c">8.3. Absoluten LSP-Pfad verwenden</a></li>
+<li><a href="#org1dc8f0c">8.4. Mojo aus Emacs starten</a></li>
+<li><a href="#orgcad38fa">8.5. Grenzen dieses einfachen Modes</a></li>
+<li><a href="#org57b1739">8.6. Doom-Emacs-Urteil</a></li>
+</ul>
+</li>
+<li><a href="#org1b86abf">9. JupyterLab und Jupyter Notebook</a>
+<ul>
+<li><a href="#org3330e74">9.1. Status</a></li>
+<li><a href="#orgff35e66">9.2. Lokale Installation mit Pixi</a></li>
+<li><a href="#org0266f3f">9.3. Mojo im Notebook aktivieren</a></li>
+<li><a href="#org388cb07">9.4. Geeignete Einsatzbereiche</a></li>
+<li><a href="#org265734f">9.5. Grenzen</a></li>
+</ul>
+</li>
+<li><a href="#orgd581934">10. JetBrains-IDEs</a>
+<ul>
+<li><a href="#org870b9ac">10.1. Community-Plugin</a></li>
+<li><a href="#orgc335ab8">10.2. Wichtige Einschränkung</a></li>
+<li><a href="#orgf0a9f4c">10.3. Urteil</a></li>
+</ul>
+</li>
+<li><a href="#orgdd78f45">11. Vim</a></li>
+<li><a href="#org75405ac">12. Sublime Text</a></li>
+<li><a href="#org5e7d55a">13. Zed</a></li>
+<li><a href="#org70a7bf0">14. Reine Kommandozeilenentwicklung</a></li>
+<li><a href="#org2f5624c">15. Empfehlungen nach Nutzertyp</a>
+<ul>
+<li><a href="#org19a0f16">15.1. Möglichst vollständig und unkompliziert</a></li>
+<li><a href="#org9d5d74b">15.2. VS Code mit KI-Funktionen</a></li>
+<li><a href="#orgfc424f7">15.3. Freie VS-Code-Variante</a></li>
+<li><a href="#orgaabd506">15.4. Terminal und wenig Konfiguration</a></li>
+<li><a href="#org048b0e5">15.5. Bereits erfahrener Neovim-Nutzer</a></li>
+<li><a href="#org84acc99">15.6. Bereits erfahrener Doom-Emacs-Nutzer</a></li>
+<li><a href="#org573681b">15.7. Interaktive Experimente</a></li>
+<li><a href="#org5239435">15.8. JetBrains-Nutzer</a></li>
+</ul>
+</li>
+<li><a href="#orge9b318a">16. Gesamturteil</a></li>
+<li><a href="#org3d8c943">17. Quellen</a>
+<ul>
+<li><a href="#orgb4e741f">17.1. Offizielle Mojo-Quellen</a></li>
+<li><a href="#org3b1ea15">17.2. Weitere Projekte</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0fdc7df" class="outline-2">
+<h2 id="org0fdc7df"><span class="section-number-2">1.</span> Kurzantwort</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Die derzeit beste und vollständigste Entwicklungsumgebung für Mojo ist:
+</p>
+
+<blockquote>
+<p>
+Visual Studio Code mit der offiziellen Erweiterung
+<code>modular-mojotools.vscode-mojo</code>
+</p>
+</blockquote>
+
+<p>
+Die offizielle Erweiterung funktioniert außerdem in vielen Editoren, die auf
+Visual Studio Code beziehungsweise Code-OSS beruhen und VS-Code-Erweiterungen
+unterstützen. Modular nennt insbesondere Cursor.
+</p>
+
+<p>
+Helix besitzt mittlerweile eingebaute Mojo-Unterstützung. Emacs, Doom Emacs
+und Neovim können Mojo über den Mojo-Language-Server verwenden, benötigen aber
+mehr manuelle Konfiguration. JupyterLab unterstützt interaktive Mojo-Zellen.
+</p>
+</div>
+</div>
+<div id="outline-container-org84d6991" class="outline-2">
+<h2 id="org84d6991"><span class="section-number-2">2.</span> Übersicht</h2>
+<div class="outline-text-2" id="text-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">IDE oder Editor</th>
+<th scope="col" class="org-left">Mojo-Unterstützung</th>
+<th scope="col" class="org-left">Herkunft</th>
+<th scope="col" class="org-left">LSP</th>
+<th scope="col" class="org-left">Debugger</th>
+<th scope="col" class="org-left">Empfehlung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Visual Studio Code</td>
+<td class="org-left">sehr vollständig</td>
+<td class="org-left">offiziell von Modular</td>
+<td class="org-left">ja</td>
+<td class="org-left">ja</td>
+<td class="org-left">beste allgemeine Wahl</td>
+</tr>
+
+<tr>
+<td class="org-left">Cursor</td>
+<td class="org-left">sehr vollständig</td>
+<td class="org-left">offizielle VS-Code-Erweiterung</td>
+<td class="org-left">ja</td>
+<td class="org-left">ja</td>
+<td class="org-left">sehr gute Wahl</td>
+</tr>
+
+<tr>
+<td class="org-left">VSCodium / Code-OSS</td>
+<td class="org-left">gut bis sehr vollständig</td>
+<td class="org-left">offizielle Erweiterung über Open VSX oder VSIX</td>
+<td class="org-left">ja</td>
+<td class="org-left">meist</td>
+<td class="org-left">gute freie Alternative</td>
+</tr>
+
+<tr>
+<td class="org-left">andere VS-Code-Ableger</td>
+<td class="org-left">abhängig vom Ableger</td>
+<td class="org-left">offizielle Erweiterung</td>
+<td class="org-left">meist</td>
+<td class="org-left">abhängig</td>
+<td class="org-left">grundsätzlich geeignet</td>
+</tr>
+
+<tr>
+<td class="org-left">Helix</td>
+<td class="org-left">gut</td>
+<td class="org-left">eingebaut/community</td>
+<td class="org-left">ja</td>
+<td class="org-left">begrenzt</td>
+<td class="org-left">beste Terminal-Standardlösung</td>
+</tr>
+
+<tr>
+<td class="org-left">Neovim</td>
+<td class="org-left">gut nach Einrichtung</td>
+<td class="org-left">community/manuell</td>
+<td class="org-left">ja</td>
+<td class="org-left">manuell</td>
+<td class="org-left">gut für Neovim-Nutzer</td>
+</tr>
+
+<tr>
+<td class="org-left">Emacs</td>
+<td class="org-left">gut nach Einrichtung</td>
+<td class="org-left">community/manuell</td>
+<td class="org-left">ja</td>
+<td class="org-left">manuell</td>
+<td class="org-left">gut für Emacs-Nutzer</td>
+</tr>
+
+<tr>
+<td class="org-left">Doom Emacs</td>
+<td class="org-left">gut nach Einrichtung</td>
+<td class="org-left">community/manuell</td>
+<td class="org-left">ja</td>
+<td class="org-left">manuell</td>
+<td class="org-left">gut für Doom-Nutzer</td>
+</tr>
+
+<tr>
+<td class="org-left">JupyterLab</td>
+<td class="org-left">gut für Experimente</td>
+<td class="org-left">offiziell dokumentiert</td>
+<td class="org-left">nicht wie normale IDE</td>
+<td class="org-left">nein</td>
+<td class="org-left">gut für Notebooks</td>
+</tr>
+
+<tr>
+<td class="org-left">JetBrains-IDEs</td>
+<td class="org-left">eingeschränkt/veraltet</td>
+<td class="org-left">Community-Plugin</td>
+<td class="org-left">teilweise</td>
+<td class="org-left">nein</td>
+<td class="org-left">derzeit nicht erste Wahl</td>
+</tr>
+
+<tr>
+<td class="org-left">Vim</td>
+<td class="org-left">hauptsächlich Text/Syntax</td>
+<td class="org-left">manuell/community</td>
+<td class="org-left">möglich</td>
+<td class="org-left">manuell</td>
+<td class="org-left">nur für erfahrene Nutzer</td>
+</tr>
+
+<tr>
+<td class="org-left">Sublime Text</td>
+<td class="org-left">manuell möglich</td>
+<td class="org-left">generischer LSP</td>
+<td class="org-left">möglich</td>
+<td class="org-left">nein</td>
+<td class="org-left">keine etablierte Mojo-Lösung</td>
+</tr>
+
+<tr>
+<td class="org-left">Zed</td>
+<td class="org-left">derzeit keine etablierte offizielle Erweiterung</td>
+<td class="org-left">eventuell selbst konfigurierbar</td>
+<td class="org-left">theoretisch</td>
+<td class="org-left">abhängig</td>
+<td class="org-left">nicht erste Wahl</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org15ae002" class="outline-2">
+<h2 id="org15ae002"><span class="section-number-2">3.</span> Was bedeutet „Mojo beherrschen“?</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Es gibt mehrere Stufen der Sprachunterstützung.
+</p>
+</div>
+<div id="outline-container-orga22e2f5" class="outline-3">
+<h3 id="orga22e2f5"><span class="section-number-3">3.1.</span> Stufe 1: reine Textbearbeitung</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Der Editor erkennt lediglich Dateien mit der Endung <code>.mojo</code>.
+</p>
+
+<p>
+Mögliche Funktionen:
+</p>
+
+<ul class="org-ul">
+<li>Einrückung</li>
+<li>Kommentare</li>
+<li>Klammerpaare</li>
+<li>grundlegende Syntaxfarben</li>
+</ul>
+
+<p>
+Das ist noch keine vollständige IDE-Unterstützung.
+</p>
+</div>
+</div>
+<div id="outline-container-org052f985" class="outline-3">
+<h3 id="org052f985"><span class="section-number-3">3.2.</span> Stufe 2: Syntaxparser</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Ein TextMate- oder Tree-sitter-Parser erkennt die syntaktische Struktur.
+</p>
+
+<p>
+Zusätzliche Funktionen:
+</p>
+
+<ul class="org-ul">
+<li>genauere Syntaxhervorhebung</li>
+<li>Code-Faltung</li>
+<li>strukturelle Navigation</li>
+<li>teilweise automatische Einrückung</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org95b9810" class="outline-3">
+<h3 id="org95b9810"><span class="section-number-3">3.3.</span> Stufe 3: Language Server Protocol</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Der Editor startet <code>mojo-lsp-server</code> und erhält semantische Informationen.
+</p>
+
+<p>
+Mögliche Funktionen:
+</p>
+
+<ul class="org-ul">
+<li>Codevervollständigung</li>
+<li>Fehlermeldungen während des Tippens</li>
+<li>Hover-Dokumentation</li>
+<li>Signaturhilfe</li>
+<li>Symbolnavigation</li>
+<li>Quick Fixes</li>
+<li>Formatierung</li>
+<li>Finden von Deklarationen</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7622acf" class="outline-3">
+<h3 id="org7622acf"><span class="section-number-3">3.4.</span> Stufe 4: vollständige IDE-Integration</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+Zusätzlich zum LSP werden Mojo-spezifische Befehle und Debugger integriert.
+</p>
+
+<p>
+Beispiele:
+</p>
+
+<ul class="org-ul">
+<li>aktuelle Datei starten</li>
+<li>Breakpoints setzen</li>
+<li>Variablen betrachten</li>
+<li>Mojo-SDK automatisch erkennen</li>
+<li>Umgebungen auswählen</li>
+<li>Format on Save</li>
+<li>Mojo-Befehle in der Befehlspalette</li>
+</ul>
+
+<p>
+Diese Stufe bietet gegenwärtig vor allem die offizielle VS-Code-Erweiterung.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org3b0f0cc" class="outline-2">
+<h2 id="org3b0f0cc"><span class="section-number-2">4.</span> Visual Studio Code</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orgd3cb8df" class="outline-3">
+<h3 id="orgd3cb8df"><span class="section-number-3">4.1.</span> Status</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Visual Studio Code besitzt die vollständigste offizielle Mojo-Unterstützung.
+</p>
+
+<p>
+Die Erweiterung stammt direkt vom Modular-Team:
+</p>
+
+<pre class="example" id="org6d9f793">
+modular-mojotools.vscode-mojo
+</pre>
+</div>
+</div>
+<div id="outline-container-org52dbbcb" class="outline-3">
+<h3 id="org52dbbcb"><span class="section-number-3">4.2.</span> Unterstützte Funktionen</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+Die offizielle Erweiterung bietet unter anderem:
+</p>
+
+<ul class="org-ul">
+<li>Syntaxhervorhebung für <code>.mojo</code>-Dateien</li>
+<li>Codevervollständigung</li>
+<li>Signaturhilfe</li>
+<li>semantische Diagnosen</li>
+<li>Quick Fixes</li>
+<li>Hover-Dokumentation</li>
+<li>Navigation zu Symbolen</li>
+<li>Outline-Ansicht</li>
+<li>Formatierung</li>
+<li>Formatierung beim Speichern</li>
+<li>Ausführung einer Mojo-Datei</li>
+<li>LLDB-basierte Debugger-Integration</li>
+<li>LSP-Unterstützung in Codeblöcken von Docstrings</li>
+<li>automatische Erkennung installierter Mojo-SDKs</li>
+<li>Auswahl eines bestimmten Mojo-SDKs pro Projekt</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org78c31c0" class="outline-3">
+<h3 id="org78c31c0"><span class="section-number-3">4.3.</span> Installation über die Oberfläche</h3>
+<div class="outline-text-3" id="text-4-3">
+<ol class="org-ol">
+<li>Visual Studio Code öffnen.</li>
+<li>Die Erweiterungsansicht öffnen.</li>
+<li>Nach <code>Mojo</code> suchen.</li>
+<li>Darauf achten, dass der Herausgeber Modular ist.</li>
+<li>Die Erweiterung installieren.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgcdb1c58" class="outline-3">
+<h3 id="orgcdb1c58"><span class="section-number-3">4.4.</span> Installation über die Kommandozeile</h3>
+<div class="outline-text-3" id="text-4-4">
+<div class="org-src-container">
+<pre class="src src-sh"><code>code --install-extension modular-mojotools.vscode-mojo
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf540f2f" class="outline-3">
+<h3 id="orgf540f2f"><span class="section-number-3">4.5.</span> SDK aus einer virtuellen Python-Umgebung verwenden</h3>
+<div class="outline-text-3" id="text-4-5">
+<p>
+Bei einer mit <code>uv</code> erzeugten Umgebung kann der Pfad ausdrücklich eingetragen
+werden.
+</p>
+
+<p>
+Beispiel für <code>.vscode/settings.json</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-json"><code>{
+  "mojo.sdk.path": "/root/mojo/.venv",
+  "[mojo]": {
+    "editor.defaultFormatter": "modular-mojotools.vscode-mojo",
+    "editor.formatOnSave": true
+  }
+}
+</code></pre>
+</div>
+
+<p>
+Der Wert von <code>mojo.sdk.path</code> soll auf das Wurzelverzeichnis der Umgebung
+zeigen, nicht direkt auf die ausführbare Datei <code>bin/mojo</code>.
+</p>
+
+<p>
+Für eine Benutzerinstallation könnte der Pfad beispielsweise so aussehen:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-json"><code>{
+  "mojo.sdk.path": "/home/alex/mojo/.venv"
+}
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb023ac3" class="outline-3">
+<h3 id="orgb023ac3"><span class="section-number-3">4.6.</span> SDK automatisch erkennen lassen</h3>
+<div class="outline-text-3" id="text-4-6">
+<p>
+Die Erweiterung sucht das SDK unter anderem über:
+</p>
+
+<ul class="org-ul">
+<li>eine explizite Einstellung <code>mojo.sdk.path</code></li>
+<li>eine SDK-Struktur innerhalb eines Modular-Monorepositorys</li>
+<li>die von der Python-Erweiterung gewählte Python-Umgebung</li>
+<li>Pixi-, Conda- oder Wheel-Umgebungen</li>
+</ul>
+
+<p>
+Wird das falsche SDK gefunden, kann in der Befehlspalette zunächst Folgendes
+ausgeführt werden:
+</p>
+
+<pre class="example" id="orgc835de3">
+Python: Select Interpreter
+</pre>
+
+<p>
+Danach wird die Umgebung ausgewählt, in der Mojo installiert ist.
+</p>
+</div>
+</div>
+<div id="outline-container-org7cecc2d" class="outline-3">
+<h3 id="org7cecc2d"><span class="section-number-3">4.7.</span> Urteil</h3>
+<div class="outline-text-3" id="text-4-7">
+<blockquote>
+<p>
+Visual Studio Code ist die erste Wahl, wenn möglichst viel ohne manuelle
+Konfiguration funktionieren soll.
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div id="outline-container-org9c6e4c7" class="outline-2">
+<h2 id="org9c6e4c7"><span class="section-number-2">5.</span> Cursor und andere VS-Code-Ableger</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-orgf9fc2fa" class="outline-3">
+<h3 id="orgf9fc2fa"><span class="section-number-3">5.1.</span> Cursor</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+Modular nennt Cursor ausdrücklich als unterstützten Editor für die offizielle
+Mojo-Erweiterung.
+</p>
+
+<p>
+Die Erweiterung kann je nach Cursor-Version über den Erweiterungsdialog oder
+über Open VSX installiert werden.
+</p>
+
+<p>
+Suche nach:
+</p>
+
+<pre class="example" id="orgddcf81e">
+Mojo
+Herausgeber: Modular
+</pre>
+
+<p>
+Cursor erhält damit im Wesentlichen dieselben Mojo-Funktionen wie VS Code:
+</p>
+
+<ul class="org-ul">
+<li>Syntaxhervorhebung</li>
+<li>LSP</li>
+<li>Vervollständigung</li>
+<li>Diagnosen</li>
+<li>Hover</li>
+<li>Formatierung</li>
+<li>Ausführung</li>
+<li>möglicherweise Debugger-Integration</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org46f5d44" class="outline-3">
+<h3 id="org46f5d44"><span class="section-number-3">5.2.</span> VSCodium und Code-OSS</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+VSCodium und andere Code-OSS-Versionen verwenden häufig Open VSX statt des
+Microsoft Marketplace.
+</p>
+
+<p>
+Die offizielle Mojo-Erweiterung wird ebenfalls über Open VSX angeboten.
+</p>
+
+<p>
+Je nach Distribution kann man:
+</p>
+
+<ol class="org-ol">
+<li>im Erweiterungsdialog nach <code>Mojo</code> suchen;</li>
+<li>die Erweiterung aus Open VSX installieren;</li>
+<li>eine <code>.vsix</code>-Datei manuell installieren.</li>
+</ol>
+
+<p>
+Manuelle VSIX-Installation:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>codium --install-extension datei.vsix
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org49e0d3f" class="outline-3">
+<h3 id="org49e0d3f"><span class="section-number-3">5.3.</span> Windsurf und weitere Ableger</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+Andere VS-Code-kompatible Editoren können die Erweiterung grundsätzlich
+verwenden, sofern sie:
+</p>
+
+<ul class="org-ul">
+<li>VS-Code-Erweiterungen unterstützen;</li>
+<li>Zugriff auf den Marketplace oder Open VSX besitzen;</li>
+<li>die benötigten VS-Code-APIs implementieren;</li>
+<li>lokale Prozesse wie den Mojo-LSP starten dürfen.</li>
+</ul>
+
+<p>
+Nicht jeder Ableger garantiert vollständige Debugger- oder SDK-Erkennung.
+Syntax, LSP und Formatierung funktionieren meist eher als komplexere
+Debugger-Funktionen.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org92dfc0e" class="outline-2">
+<h2 id="org92dfc0e"><span class="section-number-2">6.</span> Helix</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-org759d950" class="outline-3">
+<h3 id="org759d950"><span class="section-number-3">6.1.</span> Status</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+Helix besitzt Mojo als eingebaute Sprache. In den offiziellen
+Helix-Änderungsprotokollen wird Mojo als hinzugefügte Sprache geführt.
+Später wurden auch Language-Server- und Formatter-Konfigurationen aktualisiert.
+</p>
+
+<p>
+Helix bietet damit ohne ein großes Plugin-System:
+</p>
+
+<ul class="org-ul">
+<li>Erkennung von <code>.mojo</code>-Dateien</li>
+<li>Tree-sitter-Syntaxhervorhebung</li>
+<li>LSP-Anbindung</li>
+<li>Formatierung</li>
+<li>strukturelle Navigation</li>
+<li>Terminal-basierte Bedienung</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgfc77ef1" class="outline-3">
+<h3 id="orgfc77ef1"><span class="section-number-3">6.2.</span> Installation prüfen</h3>
+<div class="outline-text-3" id="text-6-2">
+<div class="org-src-container">
+<pre class="src src-sh"><code>hx --health mojo
+</code></pre>
+</div>
+
+<p>
+Die Ausgabe zeigt, ob folgende Bestandteile gefunden werden:
+</p>
+
+<ul class="org-ul">
+<li>Mojo-Language-Server</li>
+<li>Formatter</li>
+<li>Tree-sitter-Grammatik</li>
+<li>Debug-Adapter, sofern vorhanden</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd0f4f00" class="outline-3">
+<h3 id="orgd0f4f00"><span class="section-number-3">6.3.</span> Mojo-Werkzeuge prüfen</h3>
+<div class="outline-text-3" id="text-6-3">
+<div class="org-src-container">
+<pre class="src src-sh"><code>command -v mojo
+command -v mojo-lsp-server
+mojo --version
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org28586fe" class="outline-3">
+<h3 id="org28586fe"><span class="section-number-3">6.4.</span> Vorteil von Helix</h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+Helix benötigt für viele Sprachen keine separate Plugin-Sammlung. Die
+Sprachkonfiguration gehört zum Editor beziehungsweise dessen Runtime-Dateien.
+</p>
+</div>
+</div>
+<div id="outline-container-org51ba7e9" class="outline-3">
+<h3 id="org51ba7e9"><span class="section-number-3">6.5.</span> Einschränkung</h3>
+<div class="outline-text-3" id="text-6-5">
+<p>
+Die Mojo-Integration wird nicht vom Modular-Team gepflegt. Die
+Debugger-Integration ist nicht so vollständig und komfortabel wie in VS Code.
+</p>
+</div>
+</div>
+<div id="outline-container-org97d9288" class="outline-3">
+<h3 id="org97d9288"><span class="section-number-3">6.6.</span> Urteil</h3>
+<div class="outline-text-3" id="text-6-6">
+<blockquote>
+<p>
+Helix ist die beste einfache Terminal-Lösung für Mojo, sofern die installierte
+Helix-Version aktuell ist und den Mojo-LSP findet.
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div id="outline-container-org2f4e600" class="outline-2">
+<h2 id="org2f4e600"><span class="section-number-2">7.</span> Neovim</h2>
+<div class="outline-text-2" id="text-7">
+</div>
+<div id="outline-container-orgcfece03" class="outline-3">
+<h3 id="orgcfece03"><span class="section-number-3">7.1.</span> Status</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+Neovim besitzt keinen offiziellen Mojo-Plugin-Stack vom Modular-Team.
+</p>
+
+<p>
+Mojo kann trotzdem gut verwendet werden durch:
+</p>
+
+<ul class="org-ul">
+<li>Neovims eingebauten LSP-Client</li>
+<li><code>mojo-lsp-server</code></li>
+<li>eine Mojo-Tree-sitter-Grammatik</li>
+<li>manuelle Dateityperkennung</li>
+<li>einen Terminalbefehl für <code>mojo run</code></li>
+<li>optional eine DAP-/LLDB-Konfiguration</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1085a5e" class="outline-3">
+<h3 id="org1085a5e"><span class="section-number-3">7.2.</span> Voraussetzungen prüfen</h3>
+<div class="outline-text-3" id="text-7-2">
+<div class="org-src-container">
+<pre class="src src-sh"><code>command -v nvim
+command -v mojo
+command -v mojo-lsp-server
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1b530fd" class="outline-3">
+<h3 id="org1b530fd"><span class="section-number-3">7.3.</span> Minimale Dateityperkennung</h3>
+<div class="outline-text-3" id="text-7-3">
+<p>
+In <code>~/.config/nvim/init.lua</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lua"><code>vim.filetype.add({
+  extension = {
+    mojo = "mojo",
+  },
+})
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2704f6d" class="outline-3">
+<h3 id="org2704f6d"><span class="section-number-3">7.4.</span> Minimaler LSP-Start für aktuelles Neovim</h3>
+<div class="outline-text-3" id="text-7-4">
+<p>
+Für Neovim-Versionen mit <code>vim.lsp.config()</code> und <code>vim.lsp.enable()</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lua"><code>vim.lsp.config("mojo", {
+  cmd = { "mojo-lsp-server" },
+  filetypes = { "mojo" },
+  root_markers = {
+    "pixi.toml",
+    "pyproject.toml",
+    ".git",
+  },
+})
+
+vim.lsp.enable("mojo")
+</code></pre>
+</div>
+
+<p>
+Falls <code>mojo-lsp-server</code> nicht im normalen <code>PATH</code> liegt, kann der absolute Pfad
+verwendet werden:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lua"><code>vim.lsp.config("mojo", {
+  cmd = {
+    "/home/alex/mojo/.venv/bin/mojo-lsp-server",
+  },
+  filetypes = { "mojo" },
+  root_markers = {
+    "pixi.toml",
+    "pyproject.toml",
+    ".git",
+  },
+})
+
+vim.lsp.enable("mojo")
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org548bd7a" class="outline-3">
+<h3 id="org548bd7a"><span class="section-number-3">7.5.</span> Mojo-Datei aus Neovim starten</h3>
+<div class="outline-text-3" id="text-7-5">
+<div class="org-src-container">
+<pre class="src src-lua"><code>vim.api.nvim_create_autocmd("FileType", {
+  pattern = "mojo",
+  callback = function()
+    vim.keymap.set(
+      "n",
+      "&lt;leader&gt;mr",
+      function()
+        vim.cmd("split | terminal mojo run " .. vim.fn.shellescape(vim.fn.expand("%:p")))
+      end,
+      {
+        buffer = true,
+        desc = "Mojo-Datei ausführen",
+      }
+    )
+  end,
+})
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org29d0387" class="outline-3">
+<h3 id="org29d0387"><span class="section-number-3">7.6.</span> Syntaxhervorhebung</h3>
+<div class="outline-text-3" id="text-7-6">
+<p>
+Es existieren Community-Grammatiken wie <code>tree-sitter-mojo</code>. Deren
+Kompatibilität mit der aktuellen Mojo-Syntax und der jeweiligen
+<code>nvim-treesitter</code>-Generation muss geprüft werden.
+</p>
+
+<p>
+Als grober Übergang kann eine <code>.mojo</code>-Datei wie Python hervorgehoben werden.
+Das ist aber semantisch ungenau, weil Mojo eigene Schlüsselwörter,
+Eigentumsregeln, Typausdrücke und Compile-Time-Konstrukte besitzt.
+</p>
+</div>
+</div>
+<div id="outline-container-orgfd3a78a" class="outline-3">
+<h3 id="orgfd3a78a"><span class="section-number-3">7.7.</span> Debugging</h3>
+<div class="outline-text-3" id="text-7-7">
+<p>
+Debugging kann über LLDB und <code>nvim-dap</code> eingerichtet werden. Dies ist jedoch
+keine offizielle Mojo-Neovim-Integration und benötigt eine eigene
+Startkonfiguration.
+</p>
+</div>
+</div>
+<div id="outline-container-org7b31d79" class="outline-3">
+<h3 id="org7b31d79"><span class="section-number-3">7.8.</span> Urteil</h3>
+<div class="outline-text-3" id="text-7-8">
+<blockquote>
+<p>
+Neovim ist für Mojo gut geeignet, wenn der Nutzer LSP, Tree-sitter und
+Debugger selbst konfigurieren möchte. Es ist nicht so sofort einsatzbereit wie
+VS Code oder Helix.
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div id="outline-container-org22bb3c2" class="outline-2">
+<h2 id="org22bb3c2"><span class="section-number-2">8.</span> Emacs und Doom Emacs</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-org8e46e83" class="outline-3">
+<h3 id="org8e46e83"><span class="section-number-3">8.1.</span> Status</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+Für Emacs gibt es keine offizielle Mojo-Erweiterung von Modular.
+</p>
+
+<p>
+Mojo kann dennoch über einen generischen Major Mode und einen LSP-Client
+verwendet werden.
+</p>
+
+<p>
+Mögliche LSP-Clients:
+</p>
+
+<ul class="org-ul">
+<li>Eglot</li>
+<li>lsp-mode</li>
+<li>lsp-bridge</li>
+</ul>
+
+<p>
+<code>lsp-bridge</code> führt Mojo ausdrücklich in seiner Liste unterstützter
+Language-Server-Konfigurationen.
+</p>
+</div>
+</div>
+<div id="outline-container-org67b82be" class="outline-3">
+<h3 id="org67b82be"><span class="section-number-3">8.2.</span> Ein einfacher eigener Mojo-Mode</h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+Diese Konfiguration kann in normales Emacs oder in Doom Emacs übernommen
+werden.
+</p>
+
+<p>
+Für Doom Emacs gehört sie typischerweise nach:
+</p>
+
+<pre class="example" id="orgf497687">
+~/.config/doom/config.el
+</pre>
+
+<p>
+Konfiguration:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #51afef;">define-derived-mode</span> <span style="color: #c678dd;">mojo-mode</span> python-mode <span style="color: #98be65;">"Mojo"</span>
+  <span style="color: #83898d;">"Ein einfacher Major Mode f&#252;r die Programmiersprache Mojo."</span>
+  (<span style="color: #51afef;">setq-local</span> <span style="color: #dcaeea;">comment-start</span> <span style="color: #98be65;">"#"</span>)
+  (<span style="color: #51afef;">setq-local</span> <span style="color: #dcaeea;">comment-end</span> <span style="color: #98be65;">""</span>)
+  (<span style="color: #51afef;">setq-local</span> <span style="color: #dcaeea;">indent-tabs-mode</span> nil)
+  (<span style="color: #51afef;">setq-local</span> <span style="color: #dcaeea;">tab-width</span> 4))
+
+(<span style="color: #c678dd;">add-to-list</span> <span style="color: #51afef;">'</span><span style="color: #dcaeea;">auto-mode-alist</span> <span style="color: #51afef;">'</span>(<span style="color: #98be65;">"\\.mojo\\'"</span> . mojo-mode))
+
+(<span style="color: #51afef;">with-eval-after-load</span> <span style="color: #51afef;">'</span><span style="color: #ECBE7B;">eglot</span>
+  (<span style="color: #c678dd;">add-to-list</span>
+   <span style="color: #51afef;">'</span><span style="color: #ECBE7B;">eglot-server-programs</span>
+   <span style="color: #51afef;">'</span>(mojo-mode . (<span style="color: #98be65;">"mojo-lsp-server"</span>))))
+
+(<span style="color: #c678dd;">add-hook</span> <span style="color: #51afef;">'</span><span style="color: #ECBE7B;">mojo-mode-hook</span> <span style="color: #51afef;">#'</span><span style="color: #ECBE7B;">eglot-ensure</span>)
+</code></pre>
+</div>
+
+<p>
+Danach Doom Emacs neu synchronisieren und starten:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>doom sync
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org81f9a3c" class="outline-3">
+<h3 id="org81f9a3c"><span class="section-number-3">8.3.</span> Absoluten LSP-Pfad verwenden</h3>
+<div class="outline-text-3" id="text-8-3">
+<p>
+Liegt Mojo in einer <code>uv</code>-Umgebung, kann der vollständige Pfad eingetragen
+werden:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #51afef;">with-eval-after-load</span> <span style="color: #51afef;">'</span><span style="color: #ECBE7B;">eglot</span>
+  (<span style="color: #c678dd;">add-to-list</span>
+   <span style="color: #51afef;">'</span><span style="color: #ECBE7B;">eglot-server-programs</span>
+   <span style="color: #51afef;">'</span>(mojo-mode
+     . (<span style="color: #98be65;">"/home/alex/mojo/.venv/bin/mojo-lsp-server"</span>))))
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1dc8f0c" class="outline-3">
+<h3 id="org1dc8f0c"><span class="section-number-3">8.4.</span> Mojo aus Emacs starten</h3>
+<div class="outline-text-3" id="text-8-4">
+<p>
+Eine einfache interaktive Funktion:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #51afef;">defun</span> <span style="color: #c678dd;">mojo-run-current-file</span> ()
+  <span style="color: #83898d;">"F&#252;hre die aktuelle Mojo-Datei mit `mojo run` aus."</span>
+  (<span style="color: #51afef;">interactive</span>)
+  (<span style="color: #51afef;">unless</span> <span style="color: #dcaeea;">buffer-file-name</span>
+    (<span style="color: #c678dd;">user-error</span> <span style="color: #98be65;">"Der aktuelle Puffer besitzt keine Datei"</span>))
+  (<span style="color: #c678dd;">save-buffer</span>)
+  (<span style="color: #c678dd;">compile</span>
+   (<span style="color: #a9a1e1;">format</span>
+    <span style="color: #98be65;">"mojo run %s"</span>
+    (<span style="color: #c678dd;">shell-quote-argument</span> <span style="color: #dcaeea;">buffer-file-name</span>))))
+
+(<span style="color: #a9a1e1;">define-key</span> mojo-mode-map
+            (<span style="color: #c678dd;">kbd</span> <span style="color: #98be65;">"C-c C-r"</span>)
+            <span style="color: #51afef;">#'</span><span style="color: #ECBE7B;">mojo-run-current-file</span>)
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcad38fa" class="outline-3">
+<h3 id="orgcad38fa"><span class="section-number-3">8.5.</span> Grenzen dieses einfachen Modes</h3>
+<div class="outline-text-3" id="text-8-5">
+<p>
+Der Mode erbt seine Syntaxgrundlage von <code>python-mode</code>. Dadurch funktionieren:
+</p>
+
+<ul class="org-ul">
+<li>Einrückung</li>
+<li>Kommentare</li>
+<li>viele grundlegende Farben</li>
+<li>Navigation</li>
+<li>Eglot-LSP-Funktionen</li>
+</ul>
+
+<p>
+Nicht exakt abgebildet werden möglicherweise:
+</p>
+
+<ul class="org-ul">
+<li>Mojo-spezifische Schlüsselwörter</li>
+<li>Traits</li>
+<li>Ownership- und Argumentkonventionen</li>
+<li><code>comptime</code>-Konstrukte</li>
+<li>spezielle Typausdrücke</li>
+<li>neue Sprachmerkmale</li>
+</ul>
+
+<p>
+Der Language Server gleicht einen Teil dieser Schwächen durch semantische
+Diagnosen und Vervollständigung aus.
+</p>
+</div>
+</div>
+<div id="outline-container-org57b1739" class="outline-3">
+<h3 id="org57b1739"><span class="section-number-3">8.6.</span> Doom-Emacs-Urteil</h3>
+<div class="outline-text-3" id="text-8-6">
+<blockquote>
+<p>
+Doom Emacs kann Mojo brauchbar bearbeiten und über Eglot oder lsp-bridge
+semantisch verstehen. Es gibt aber gegenwärtig keine offizielle, vollständig
+integrierte Mojo-Doom-Schicht.
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div id="outline-container-org1b86abf" class="outline-2">
+<h2 id="org1b86abf"><span class="section-number-2">9.</span> JupyterLab und Jupyter Notebook</h2>
+<div class="outline-text-2" id="text-9">
+</div>
+<div id="outline-container-org3330e74" class="outline-3">
+<h3 id="org3330e74"><span class="section-number-3">9.1.</span> Status</h3>
+<div class="outline-text-3" id="text-9-1">
+<p>
+Mojo dokumentiert offiziell die Verwendung in JupyterLab und in
+Jupyter-Notebook-Umgebungen.
+</p>
+
+<p>
+Der aktuelle Ansatz verwendet einen Python-Kernel und lädt
+<code>mojo.notebook</code>. Mojo-Code wird in Zellen mit der Magic-Anweisung <code>%%mojo</code>
+ausgeführt.
+</p>
+</div>
+</div>
+<div id="outline-container-orgff35e66" class="outline-3">
+<h3 id="orgff35e66"><span class="section-number-3">9.2.</span> Lokale Installation mit Pixi</h3>
+<div class="outline-text-3" id="text-9-2">
+<div class="org-src-container">
+<pre class="src src-sh"><code>pixi add mojo jupyterlab ipykernel
+</code></pre>
+</div>
+
+<p>
+JupyterLab starten:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>jupyter lab
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0266f3f" class="outline-3">
+<h3 id="org0266f3f"><span class="section-number-3">9.3.</span> Mojo im Notebook aktivieren</h3>
+<div class="outline-text-3" id="text-9-3">
+<p>
+In einer Python-Zelle:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><code><span style="color: #51afef;">import</span> mojo.notebook
+</code></pre>
+</div>
+
+<p>
+Danach eine Mojo-Zelle:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mojo"><code>%%mojo
+
+def main():
+    print("Hallo aus Mojo")
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org388cb07" class="outline-3">
+<h3 id="org388cb07"><span class="section-number-3">9.4.</span> Geeignete Einsatzbereiche</h3>
+<div class="outline-text-3" id="text-9-4">
+<p>
+JupyterLab eignet sich für:
+</p>
+
+<ul class="org-ul">
+<li>Experimente</li>
+<li>numerische Berechnungen</li>
+<li>schrittweise Erklärungen</li>
+<li>GPU-Beispiele</li>
+<li>Visualisierung zusammen mit Python</li>
+<li>Lehrmaterial</li>
+<li>kurze Benchmarks</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org265734f" class="outline-3">
+<h3 id="org265734f"><span class="section-number-3">9.5.</span> Grenzen</h3>
+<div class="outline-text-3" id="text-9-5">
+<p>
+JupyterLab ist kein vollständiger Ersatz für eine Projekt-IDE.
+</p>
+
+<p>
+Insbesondere sind große Mehrdateienprojekte, Refactorings und klassisches
+Debugger-Arbeiten in VS Code oder einem LSP-Editor meist angenehmer.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd581934" class="outline-2">
+<h2 id="orgd581934"><span class="section-number-2">10.</span> JetBrains-IDEs</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+Zu den JetBrains-IDEs gehören unter anderem:
+</p>
+
+<ul class="org-ul">
+<li>IntelliJ IDEA</li>
+<li>PyCharm</li>
+<li>CLion</li>
+<li>DataSpell</li>
+<li>RustRover</li>
+</ul>
+</div>
+<div id="outline-container-org870b9ac" class="outline-3">
+<h3 id="org870b9ac"><span class="section-number-3">10.1.</span> Community-Plugin</h3>
+<div class="outline-text-3" id="text-10-1">
+<p>
+Im JetBrains Marketplace existierte beziehungsweise existiert ein
+Community-Plugin namens <code>Mojo</code>.
+</p>
+
+<p>
+Es bot hauptsächlich:
+</p>
+
+<ul class="org-ul">
+<li>grundlegende Bearbeitung</li>
+<li>Syntaxprüfung</li>
+<li>Syntaxhervorhebung</li>
+<li>Kommentare</li>
+<li>Formatierung</li>
+<li>teilweise LSP-Anbindung in kommerziellen JetBrains-Varianten</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc335ab8" class="outline-3">
+<h3 id="orgc335ab8"><span class="section-number-3">10.2.</span> Wichtige Einschränkung</h3>
+<div class="outline-text-3" id="text-10-2">
+<p>
+Das zugehörige öffentliche Repository wurde am 18. Mai 2025 archiviert und ist
+nur noch lesbar.
+</p>
+
+<p>
+Damit besteht ein erhebliches Risiko, dass:
+</p>
+
+<ul class="org-ul">
+<li>neue Mojo-Syntax nicht vollständig erkannt wird;</li>
+<li>das Plugin mit neueren JetBrains-Versionen nicht kompatibel ist;</li>
+<li>der aktuelle Mojo-LSP nicht sauber integriert wird;</li>
+<li>Fehler nicht mehr behoben werden.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf0a9f4c" class="outline-3">
+<h3 id="orgf0a9f4c"><span class="section-number-3">10.3.</span> Urteil</h3>
+<div class="outline-text-3" id="text-10-3">
+<blockquote>
+<p>
+JetBrains ist für Mojo derzeit nicht die erste Wahl. Das Community-Plugin kann
+für einfache Bearbeitung ausreichen, ist aber keine gleichwertige Alternative
+zur offiziellen VS-Code-Erweiterung.
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdd78f45" class="outline-2">
+<h2 id="orgdd78f45"><span class="section-number-2">11.</span> Vim</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+Vim kann Mojo-Dateien grundsätzlich bearbeiten.
+</p>
+
+<p>
+Mögliche Einrichtung:
+</p>
+
+<ul class="org-ul">
+<li><code>.mojo</code>-Dateien einem eigenen Dateityp zuordnen</li>
+<li>vorläufig Python-Syntax verwenden</li>
+<li>einen generischen LSP-Client installieren</li>
+<li><code>mojo-lsp-server</code> manuell konfigurieren</li>
+<li><code>mojo format</code> als externen Formatter verwenden</li>
+<li><code>mojo run</code> über einen Vim-Befehl starten</li>
+</ul>
+
+<p>
+Eine einfache Dateityperkennung in <code>~/.vim/ftdetect/mojo.vim</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-vim"><code>au BufRead,BufNewFile *.mojo set filetype=mojo
+</code></pre>
+</div>
+
+<p>
+Ein einfacher Syntax-Fallback in <code>~/.vim/syntax/mojo.vim</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-vim"><code>runtime! syntax/python.vim
+let b:current_syntax = "mojo"
+</code></pre>
+</div>
+
+<p>
+Dieser Fallback ist nicht vollständig korrekt. Neovim oder Helix sind für
+moderne LSP- und Tree-sitter-Funktionen normalerweise einfacher.
+</p>
+</div>
+</div>
+<div id="outline-container-org75405ac" class="outline-2">
+<h2 id="org75405ac"><span class="section-number-2">12.</span> Sublime Text</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+Sublime Text besitzt einen generischen LSP-Client und kann prinzipiell einen
+über Standard-Ein-/Ausgabe arbeitenden Language Server starten.
+</p>
+
+<p>
+Dafür wären notwendig:
+</p>
+
+<ul class="org-ul">
+<li>LSP-Paket für Sublime Text</li>
+<li>manuelle Sprachdefinition für <code>.mojo</code></li>
+<li>Startbefehl <code>mojo-lsp-server</code></li>
+<li>gegebenenfalls eine TextMate-Syntax</li>
+<li>eigener Build-Befehl für <code>mojo run</code></li>
+</ul>
+
+<p>
+Eine aktuelle offizielle Mojo-Erweiterung von Modular für Sublime Text ist
+nicht etabliert.
+</p>
+</div>
+</div>
+<div id="outline-container-org5e7d55a" class="outline-2">
+<h2 id="org5e7d55a"><span class="section-number-2">13.</span> Zed</h2>
+<div class="outline-text-2" id="text-13">
+<p>
+Zed unterstützt über Erweiterungen:
+</p>
+
+<ul class="org-ul">
+<li>Tree-sitter-Sprachen</li>
+<li>Language Server</li>
+<li>Debug-Adapter</li>
+<li>eigene Sprachdefinitionen</li>
+</ul>
+
+<p>
+Eine Mojo-Erweiterung wäre deshalb technisch möglich.
+</p>
+
+<p>
+Gegenwärtig ist jedoch keine etablierte offizielle Mojo-Erweiterung von
+Modular für Zed dokumentiert. Ohne eigene oder Community-Erweiterung erkennt
+Zed Mojo daher nicht in derselben Qualität wie VS Code oder Helix.
+</p>
+</div>
+</div>
+<div id="outline-container-org70a7bf0" class="outline-2">
+<h2 id="org70a7bf0"><span class="section-number-2">14.</span> Reine Kommandozeilenentwicklung</h2>
+<div class="outline-text-2" id="text-14">
+<p>
+Mojo kann unabhängig von jeder IDE verwendet werden.
+</p>
+
+<p>
+Wichtige Befehle:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>mojo --version
+mojo run programm.mojo
+mojo build programm.mojo
+mojo format programm.mojo
+mojo test
+</code></pre>
+</div>
+
+<p>
+Mit einem beliebigen Editor kann man daher immer mindestens:
+</p>
+
+<ol class="org-ol">
+<li><code>.mojo</code>-Dateien bearbeiten;</li>
+<li>im Terminal kompilieren;</li>
+<li>das Programm starten;</li>
+<li>den Formatter ausführen;</li>
+<li>Tests ausführen.</li>
+</ol>
+
+<p>
+Die IDE entscheidet vor allem über Komfort, nicht darüber, ob Mojo grundsätzlich
+kompiliert werden kann.
+</p>
+</div>
+</div>
+<div id="outline-container-org2f5624c" class="outline-2">
+<h2 id="org2f5624c"><span class="section-number-2">15.</span> Empfehlungen nach Nutzertyp</h2>
+<div class="outline-text-2" id="text-15">
+</div>
+<div id="outline-container-org19a0f16" class="outline-3">
+<h3 id="org19a0f16"><span class="section-number-3">15.1.</span> Möglichst vollständig und unkompliziert</h3>
+<div class="outline-text-3" id="text-15-1">
+<blockquote>
+<p>
+Visual Studio Code mit der offiziellen Mojo-Erweiterung
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-org9d5d74b" class="outline-3">
+<h3 id="org9d5d74b"><span class="section-number-3">15.2.</span> VS Code mit KI-Funktionen</h3>
+<div class="outline-text-3" id="text-15-2">
+<blockquote>
+<p>
+Cursor mit der offiziellen Mojo-Erweiterung
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-orgfc424f7" class="outline-3">
+<h3 id="orgfc424f7"><span class="section-number-3">15.3.</span> Freie VS-Code-Variante</h3>
+<div class="outline-text-3" id="text-15-3">
+<blockquote>
+<p>
+VSCodium mit der Erweiterung aus Open VSX
+</p>
+</blockquote>
+
+<p>
+Dabei muss geprüft werden, ob alle Debugger-Funktionen im jeweiligen Build
+verfügbar sind.
+</p>
+</div>
+</div>
+<div id="outline-container-orgaabd506" class="outline-3">
+<h3 id="orgaabd506"><span class="section-number-3">15.4.</span> Terminal und wenig Konfiguration</h3>
+<div class="outline-text-3" id="text-15-4">
+<blockquote>
+<p>
+Helix
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-org048b0e5" class="outline-3">
+<h3 id="org048b0e5"><span class="section-number-3">15.5.</span> Bereits erfahrener Neovim-Nutzer</h3>
+<div class="outline-text-3" id="text-15-5">
+<blockquote>
+<p>
+Neovim mit <code>mojo-lsp-server</code> und Tree-sitter
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-org84acc99" class="outline-3">
+<h3 id="org84acc99"><span class="section-number-3">15.6.</span> Bereits erfahrener Doom-Emacs-Nutzer</h3>
+<div class="outline-text-3" id="text-15-6">
+<blockquote>
+<p>
+Doom Emacs mit eigenem <code>mojo-mode</code> und Eglot oder lsp-bridge
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-org573681b" class="outline-3">
+<h3 id="org573681b"><span class="section-number-3">15.7.</span> Interaktive Experimente</h3>
+<div class="outline-text-3" id="text-15-7">
+<blockquote>
+<p>
+JupyterLab mit <code>mojo.notebook</code> und <code>%%mojo</code>
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-org5239435" class="outline-3">
+<h3 id="org5239435"><span class="section-number-3">15.8.</span> JetBrains-Nutzer</h3>
+<div class="outline-text-3" id="text-15-8">
+<p>
+JetBrains kann für einfache Bearbeitung versucht werden. Für ernsthafte
+Mojo-Entwicklung ist derzeit ein paralleles VS-Code- oder Helix-Setup
+vernünftiger.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orge9b318a" class="outline-2">
+<h2 id="orge9b318a"><span class="section-number-2">16.</span> Gesamturteil</h2>
+<div class="outline-text-2" id="text-16">
+<p>
+Die Mojo-IDE-Landschaft ist noch deutlich kleiner als bei Python, Rust, C++
+oder Java.
+</p>
+
+<p>
+Die Rangfolge lautet gegenwärtig ungefähr:
+</p>
+
+<ol class="org-ol">
+<li>Visual Studio Code</li>
+<li>Cursor und andere gut kompatible VS-Code-Ableger</li>
+<li>Helix</li>
+<li>Neovim</li>
+<li>Emacs beziehungsweise Doom Emacs</li>
+<li>JupyterLab für interaktive Aufgaben</li>
+<li>JetBrains mit veraltetem Community-Plugin</li>
+<li>Vim, Sublime Text und Zed mit eigener Einrichtung</li>
+</ol>
+
+<p>
+Die wichtigste Unterscheidung ist:
+</p>
+
+<blockquote>
+<p>
+VS Code besitzt eine offizielle vollständige Mojo-Integration.
+</p>
+
+<p>
+Andere Editoren verwenden überwiegend den mit Mojo gelieferten Language Server
+und eigene Syntaxdefinitionen.
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-org3d8c943" class="outline-2">
+<h2 id="org3d8c943"><span class="section-number-2">17.</span> Quellen</h2>
+<div class="outline-text-2" id="text-17">
+</div>
+<div id="outline-container-orgb4e741f" class="outline-3">
+<h3 id="orgb4e741f"><span class="section-number-3">17.1.</span> Offizielle Mojo-Quellen</h3>
+<div class="outline-text-3" id="text-17-1">
+<ul class="org-ul">
+<li><a href="https://mojolang.org/install/">Mojo installieren</a></li>
+<li><a href="https://mojolang.org/docs/faq/">Offizielle Mojo-FAQ</a></li>
+<li><a href="https://github.com/modular/vscode-mojo">Offizielle Mojo-Erweiterung für Visual Studio Code</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=modular-mojotools.vscode-mojo">Mojo im Visual Studio Marketplace</a></li>
+<li><a href="https://mojolang.org/nightly/docs/tools/notebooks/">Offizielle Anleitung für Jupyter-Notebooks</a></li>
+<li><a href="https://mojolang.org/releases/">Mojo-Releases</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3b1ea15" class="outline-3">
+<h3 id="org3b1ea15"><span class="section-number-3">17.2.</span> Weitere Projekte</h3>
+<div class="outline-text-3" id="text-17-2">
+<ul class="org-ul">
+<li><a href="https://github.com/helix-editor/helix">Helix-Editor</a></li>
+<li><a href="https://github.com/helix-editor/helix/blob/master/CHANGELOG.md">Helix-Änderungsprotokoll mit Mojo-Unterstützung</a></li>
+<li><a href="https://github.com/manateelazycat/lsp-bridge">lsp-bridge für Emacs</a></li>
+<li><a href="https://github.com/lsh/tree-sitter-mojo">Community-Grammatik tree-sitter-mojo</a></li>
+<li><a href="https://plugins.jetbrains.com/plugin/23371-mojo">Mojo-Plugin im JetBrains Marketplace</a></li>
+<li><a href="https://github.com/kishmakov/mojo-at-jetbrains">Archiviertes Repository des JetBrains-Plugins</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Datum: 2026-07-23</p>
+<p class="author">Autor: termux</p>
+<p class="date">Erstellt am: 2026-07-23 Thu 11:46</p>
+</div>
+</body>
+</html>

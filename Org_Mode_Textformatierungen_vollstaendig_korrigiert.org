@@ -1,0 +1,742 @@
+#+title: Org Mode – vollständige Übersicht der Textformatierungen
+#+author: OpenAI
+#+language: de
+#+options: toc:3 num:t
+#+startup: overview
+#+property: header-args :eval never-export
+
+* Hinweise
+
+Diese Datei zeigt die wichtigsten und praktisch relevanten
+Textformatierungen von Org Mode.
+
+Die Syntaxbeispiele stehen überwiegend in =Example=-Blöcken, damit sie
+beim HTML- oder PDF-Export nicht selbst interpretiert werden.
+
+* Grundlegende Hervorhebungen
+
+** Fett
+
+Syntax:
+
+#+begin_example
+*Dieser Text ist fett.*
+#+end_example
+
+Darstellung:
+
+*Dieser Text ist fett.*
+
+** Kursiv
+
+Syntax:
+
+#+begin_example
+/Dieser Text ist kursiv./
+#+end_example
+
+Darstellung:
+
+/Dieser Text ist kursiv./
+
+** Unterstrichen
+
+Syntax:
+
+#+begin_example
+_Dieser Text ist unterstrichen._
+#+end_example
+
+Darstellung:
+
+_Dieser Text ist unterstrichen._
+
+** Durchgestrichen
+
+Syntax:
+
+#+begin_example
++Dieser Text ist durchgestrichen.+
+#+end_example
+
+Darstellung:
+
++Dieser Text ist durchgestrichen.+
+
+** Quellcode im Fließtext
+
+Syntax:
+
+#+begin_example
+~doom sync~
+#+end_example
+
+Darstellung:
+
+~doom sync~
+
+** Wörtlicher Text
+
+Syntax:
+
+#+begin_example
+=Dieser Text wird wörtlich dargestellt.=
+#+end_example
+
+Darstellung:
+
+=Dieser Text wird wörtlich dargestellt.=
+
+* Kombinationen von Hervorhebungen
+
+#+begin_example
+*/fett und kursiv/*
+*_fett und unterstrichen_*
+/_unterstrichen und kursiv_/
+*~fetter Code~*
+/~kursiver Code~/
+#+end_example
+
+Hinweis: Nicht jede beliebige Verschachtelung wird von jedem Export-Backend
+gleich dargestellt. Einfachere Kombinationen sind robuster.
+
+* Regeln für Hervorhebungszeichen
+
+Funktioniert normalerweise:
+
+#+begin_example
+Das ist *fett* und das ist /kursiv/.
+#+end_example
+
+Problematisch kann sein:
+
+#+begin_example
+Wort*mittenimwort*
+#+end_example
+
+Ein Leerzeichen direkt innerhalb der Begrenzungszeichen verhindert meist
+die Hervorhebung:
+
+#+begin_example
+* nicht fett *
+#+end_example
+
+* Absätze und Zeilenumbrüche
+
+** Neuer Absatz
+
+Ein leerer Zeilenabstand erzeugt einen neuen Absatz.
+
+#+begin_example
+Erster Absatz.
+
+Zweiter Absatz.
+#+end_example
+
+** Harter Zeilenumbruch
+
+Zwei Rückwärtsschrägstriche am Zeilenende erzwingen einen Zeilenumbruch:
+
+#+begin_example
+Erste Zeile.\\
+Zweite Zeile.
+#+end_example
+
+* Überschriften
+
+#+begin_example
+* Ebene 1
+** Ebene 2
+*** Ebene 3
+**** Ebene 4
+#+end_example
+
+** Überschrift mit TODO-Status
+
+#+begin_example
+* TODO Aufgabe
+* DONE Erledigte Aufgabe
+#+end_example
+
+** Überschrift mit Priorität
+
+#+begin_example
+* TODO [#A] Sehr wichtige Aufgabe
+#+end_example
+
+** Überschrift mit Tags
+
+#+begin_example
+* Notiz zu Emacs                          :emacs:editor:
+#+end_example
+
+** Überschrift mit Statistik-Cookie
+
+#+begin_example
+* Projekt [2/5]
+* Projekt [40%]
+#+end_example
+
+* Listen
+
+** Ungeordnete Listen
+
+#+begin_example
+- Erster Punkt
+- Zweiter Punkt
+  - Unterpunkt
+  - Noch ein Unterpunkt
+#+end_example
+
+** Geordnete Listen
+
+#+begin_example
+1. Erster Schritt
+2. Zweiter Schritt
+3. Dritter Schritt
+#+end_example
+
+** Beschreibungslisten
+
+#+begin_example
+- Emacs :: erweiterbarer Texteditor
+- Org Mode :: strukturiertes Klartextformat
+- Doom Emacs :: vorkonfigurierte Emacs-Distribution
+#+end_example
+
+** Kontrollkästchen
+
+#+begin_example
+- [ ] offen
+- [X] erledigt
+- [-] teilweise erledigt
+#+end_example
+
+* Zitate und besondere Textblöcke
+
+** Zitatblock
+
+#+begin_example
+#+begin_quote
+Dies ist ein Zitat.
+Es kann mehrere Zeilen enthalten.
+#+end_quote
+#+end_example
+
+** Example-Block
+
+Die Syntax eines Example-Blocks wird hier als festbreiter Text mit
+Doppelpunkt-Präfix gezeigt, damit keine gleichartigen Blöcke
+ineinander verschachtelt werden:
+
+: #+begin_example
+: Dieser Inhalt wird wörtlich dargestellt.
+: *Fettzeichen* werden nicht interpretiert.
+: #+end_example
+
+** Verse-Block
+
+#+begin_example
+#+begin_verse
+Erste Verszeile
+  eingerückte Verszeile
+Dritte Verszeile
+#+end_verse
+#+end_example
+
+** Center-Block
+
+#+begin_example
+#+begin_center
+Dieser Text wird beim Export zentriert.
+#+end_center
+#+end_example
+
+** Comment-Block
+
+#+begin_example
+#+begin_comment
+Dieser Text erscheint nicht im Export.
+#+end_comment
+#+end_example
+
+** Export-Block
+
+#+begin_example
+#+begin_export html
+<strong>Direktes HTML</strong>
+#+end_export
+#+end_example
+
+* Quellcodeblöcke
+
+Allgemeine Syntax:
+
+#+begin_example
+#+begin_src SPRACHE
+Quellcode
+#+end_src
+#+end_example
+
+** Shell
+
+#+begin_example
+#+begin_src shell
+printf '%s\n' "Hallo"
+#+end_src
+#+end_example
+
+** Python
+
+#+begin_example
+#+begin_src python
+print("Hallo aus Python")
+#+end_src
+#+end_example
+
+** Rust
+
+#+begin_example
+#+begin_src rust
+fn main() {
+    println!("Hallo aus Rust");
+}
+#+end_src
+#+end_example
+
+** Mojo
+
+#+begin_example
+#+begin_src mojo
+fn main():
+    print("Hallo aus Mojo")
+#+end_src
+#+end_example
+
+** Header-Argumente
+
+#+begin_example
+#+begin_src python :results output :exports both
+print(2 + 3)
+#+end_src
+#+end_example
+
+| Argument         | Bedeutung                            |
+|------------------+--------------------------------------|
+| :results output  | Programmausgabe als Ergebnis         |
+| :results value   | Rückgabewert als Ergebnis            |
+| :exports code    | nur Code exportieren                 |
+| :exports results | nur Ergebnis exportieren             |
+| :exports both    | Code und Ergebnis exportieren        |
+| :exports none    | weder Code noch Ergebnis exportieren |
+| :eval never      | Block nicht ausführen                |
+| :dir PFAD        | Arbeitsverzeichnis setzen            |
+
+* Inline-Quellcode
+
+#+begin_example
+src_python{2 + 3}
+#+end_example
+
+Mit Ergebnisangabe:
+
+#+begin_example
+src_python[:results value]{2 + 3}
+#+end_example
+
+* Tabellen
+
+** Einfache Tabelle
+
+#+begin_example
+| Name    | Sprache | Status  |
+|---------+---------+---------|
+| Projekt | Rust    | aktiv   |
+| Test    | Python  | geplant |
+#+end_example
+
+** Tabellenformel
+
+#+begin_example
+| Produkt | Anzahl | Preis | Summe |
+|---------+--------+-------+-------|
+| Kabel   |      3 |  6.00 | 18.00 |
+#+TBLFM: $4=$2*$3;%.2f
+#+end_example
+
+* Links
+
+Die Beispiele stehen absichtlich in einem Example-Block.
+
+#+begin_example
+Weblink:
+[[https://orgmode.org][Org Mode]]
+
+Dateilink:
+[[file:~/Dokumente/datei.txt][Datei öffnen]]
+
+Interner Überschriftenlink:
+[[*Überschrift][Zum Abschnitt]]
+
+CUSTOM_ID-Link:
+[[#mein-ziel][Zum festen Ziel]]
+
+Benannter Link:
+[[zielname][Zum benannten Element]]
+#+end_example
+
+* Ziele und Anker
+
+** CUSTOM_ID
+
+#+begin_example
+* Zielüberschrift
+  :PROPERTIES:
+  :CUSTOM_ID: mein-ziel
+  :END:
+
+[[#mein-ziel][Zum Ziel]]
+#+end_example
+
+** Benanntes Element
+
+Dies ist ein tatsächlich vorhandenes, benanntes Element. Der folgende
+Link ist deshalb auch beim HTML-Export auflösbar.
+
+#+name: mein-beispiel
+#+begin_example
+Benannter Inhalt
+#+end_example
+
+Verweis auf das Element:
+
+[[mein-beispiel][Zum benannten Beispiel]]
+
+* Bilder
+
+#+begin_example
+#+caption: Beispielabbildung
+#+name: fig:beispiel
+[[file:bilder/beispiel.png]]
+
+[[fig:beispiel][Zur Beispielabbildung]]
+#+end_example
+
+HTML-Attribute:
+
+#+begin_example
+#+attr_html: :width 600 :alt Beispielbild
+[[file:bilder/beispiel.png]]
+#+end_example
+
+LaTeX-Attribute:
+
+#+begin_example
+#+attr_latex: :width 0.8\textwidth
+[[file:bilder/beispiel.png]]
+#+end_example
+
+* Fußnoten
+
+** Benannte Fußnote
+
+Org Mode ist ein Klartextsystem.[fn:klartext]
+
+[fn:klartext] Die Quelldatei bleibt auch ohne Emacs lesbar.
+
+** Inline-Fußnote
+
+#+begin_example
+Text mit Inline-Fußnote.[fn::Dies ist die Fußnote.]
+#+end_example
+
+** Benannte Inline-Fußnote
+
+#+begin_example
+Text.[fn:name:Inhalt der benannten Inline-Fußnote.]
+#+end_example
+
+* Hochstellungen und Tiefstellungen
+
+** Hochstellung
+
+#+begin_example
+x^2
+x^{10}
+#+end_example
+
+** Tiefstellung
+
+#+begin_example
+H_2O
+a_{n+1}
+#+end_example
+
+** Interpretation deaktivieren
+
+#+begin_example
+#+options: ^:nil
+#+end_example
+
+Oder nur mit geschweiften Klammern:
+
+#+begin_example
+#+options: ^:{}
+#+end_example
+
+* Mathematische Formeln und LaTeX
+
+** Inline-Formel
+
+#+begin_example
+\( E = mc^2 \)
+#+end_example
+
+** Abgesetzte Formel
+
+#+begin_example
+\[
+\int_0^1 x^2\,dx = \frac{1}{3}
+\]
+#+end_example
+
+** LaTeX-Umgebung
+
+#+begin_example
+\begin{equation}
+a^2+b^2=c^2
+\end{equation}
+#+end_example
+
+LaTeX-Vorschau in Emacs:
+
+#+begin_example
+C-c C-x C-l
+#+end_example
+
+* Sonderzeichen und Org-Entities
+
+#+begin_example
+\alpha
+\beta
+\gamma
+\Delta
+\rightarrow
+\le
+\ge
+\times
+\copy
+#+end_example
+
+Mit:
+
+#+begin_example
+M-x org-toggle-pretty-entities
+#+end_example
+
+können Entities im Org-Puffer hübscher angezeigt werden.
+
+* Horizontale Linie
+
+#+begin_example
+-----
+#+end_example
+
+* Kommentare
+
+** Kommentarzeile
+
+#+begin_example
+# Diese Zeile wird nicht exportiert.
+#+end_example
+
+** COMMENT-Überschrift
+
+#+begin_example
+* COMMENT Interner Abschnitt
+#+end_example
+
+** Kommentarblock
+
+#+begin_example
+#+begin_comment
+Nicht exportierter Text.
+#+end_comment
+#+end_example
+
+* Festbreitentext mit Doppelpunkt
+
+#+begin_example
+: erste feste Zeile
+: zweite feste Zeile
+#+end_example
+
+* Typografische Zeichen
+
+Unicode kann direkt verwendet werden:
+
+#+begin_example
+– Gedankenstrich
+— Geviertstrich
+„deutsche Anführungszeichen“
+‚einfache deutsche Anführungszeichen‘
+… Auslassungspunkte
+→ Pfeil
+© Copyright
+#+end_example
+
+* Dokument-Metadaten
+
+#+begin_example
+#+title: Mein Dokument
+#+subtitle: Untertitel
+#+author: Alexander
+#+date: 2026-07-23
+#+language: de
+#+description: Kurze Beschreibung
+#+keywords: Emacs, Org Mode, Dokumentation
+#+options: toc:3 num:t
+#+startup: overview
+#+end_example
+
+* Exportoptionen
+
+#+begin_example
+#+options: toc:3 num:t author:t date:t title:t
+#+end_example
+
+| Option     | Bedeutung                                   |
+|------------+---------------------------------------------|
+| toc:nil    | kein Inhaltsverzeichnis                     |
+| toc:2      | Inhaltsverzeichnis bis Ebene 2              |
+| num:nil    | Überschriften nicht nummerieren             |
+| num:t      | Überschriften nummerieren                   |
+| author:nil | Autor nicht exportieren                     |
+| date:nil   | Datum nicht exportieren                     |
+| title:nil  | Titel nicht exportieren                     |
+| ^:nil      | Hoch- und Tiefstellung deaktivieren         |
+| ^:{}       | Hoch- und Tiefstellung nur mit Klammern     |
+| \n:t      | Zeilenumbrüche stärker erhalten             |
+
+* HTML-spezifische Formatierung
+
+HTML-Attribute:
+
+#+begin_example
+#+attr_html: :class hinweis :id wichtiger-hinweis
+#+begin_quote
+Wichtiger Text
+#+end_quote
+#+end_example
+
+HTML-Kopfbereich:
+
+#+begin_example
+#+html_head: <link rel="stylesheet" href="style.css">
+#+end_example
+
+Direktes HTML:
+
+#+begin_example
+#+begin_export html
+<div class="warnung">HTML-Inhalt</div>
+#+end_export
+#+end_example
+
+* LaTeX- und PDF-spezifische Formatierung
+
+#+begin_example
+#+latex_class: article
+#+latex_header: \usepackage[ngerman]{babel}
+#+latex_header: \usepackage{microtype}
+#+latex_compiler: lualatex
+#+end_example
+
+* Textformatierung per Tastatur
+
+| Taste                          | Wirkung                                |
+|--------------------------------+----------------------------------------|
+| C-c C-x C-f                    | Textauszeichnung auswählen             |
+| M-x org-emphasize              | Text hervorheben                       |
+| M-x org-toggle-pretty-entities | Entities hübscher anzeigen             |
+| M-x org-toggle-link-display    | Rohlinks/Beschreibungen umschalten     |
+| M-x org-toggle-inline-images   | Inline-Bilder umschalten               |
+| M-x visual-line-mode           | visuellen Zeilenumbruch aktivieren     |
+| M-x org-indent-mode            | visuelle Einrückung aktivieren         |
+
+* Kompakte Referenz
+
+| Format            | Org-Syntax                   |
+|-------------------+------------------------------|
+| Fett              | =*Text*=                     |
+| Kursiv            | =/Text/=                     |
+| Unterstrichen     | =_Text_=                     |
+| Durchgestrichen   | =+Text+=                     |
+| Code              | =~Text~=                     |
+| Wörtlich          | ==Text==                     |
+| Hochstellung      | =x^2= oder =x^{10}=          |
+| Tiefstellung      | =H_2O= oder =a_{n+1}=        |
+| Link              | =[[Ziel][Beschreibung]]=     |
+| Fußnote           | =[fn:name]=                  |
+| Inline-Formel     | =\( E=mc^2 \)=             |
+| Blockformel       | =\[ ... \]=                |
+| Kommentarzeile    | =# Kommentar=                |
+| Horizontale Linie | =-----=                      |
+| Harter Umbruch    | zwei Rückwärtsschrägstriche  |
+| Festbreitenzeile  | =: Text=                     |
+
+* Abschlussbeispiel
+
+#+begin_example
+#+title: Beispieltext
+
+* Einführung
+
+Dies ist *fetter*, /kursiver/, _unterstrichener_ und
++durchgestrichener+ Text.
+
+Der Befehl ~doom sync~ steht als Code im Fließtext.
+
+Eine Formel: \( E = mc^2 \)
+
+Eine Fußnote.[fn:beispiel]
+
+-----
+
+#+begin_quote
+Ein Zitat.
+#+end_quote
+
+| Format | Beispiel |
+|--------+----------|
+| Fett   | *Text*   |
+| Code   | ~Befehl~ |
+
+[fn:beispiel] Dies ist eine Beispiel-Fußnote.
+#+end_example
+
+* Export
+
+HTML:
+
+#+begin_example
+C-c C-e h h
+#+end_example
+
+HTML erzeugen und öffnen:
+
+#+begin_example
+C-c C-e h o
+#+end_example
+
+PDF über LaTeX:
+
+#+begin_example
+C-c C-e l p
+#+end_example
+
+PDF erzeugen und öffnen:
+
+#+begin_example
+C-c C-e l o
+#+end_example

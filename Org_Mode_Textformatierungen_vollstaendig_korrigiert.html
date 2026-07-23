@@ -1,0 +1,1694 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+<head>
+<!-- 2026-07-23 Thu 11:25 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Org Mode – vollständige Übersicht der Textformatierungen Beispieltext</title>
+<meta name="author" content="OpenAI" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'JavaScript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Org Mode – vollständige Übersicht der Textformatierungen Beispieltext</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Inhaltsverzeichnis</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgcf5dd3a">1. Hinweise</a></li>
+<li><a href="#org89c2210">2. Grundlegende Hervorhebungen</a>
+<ul>
+<li><a href="#org968b8a1">2.1. Fett</a></li>
+<li><a href="#orgcbe0cfc">2.2. Kursiv</a></li>
+<li><a href="#orgabd1811">2.3. Unterstrichen</a></li>
+<li><a href="#org0f1bc04">2.4. Durchgestrichen</a></li>
+<li><a href="#orgc92fb9d">2.5. Quellcode im Fließtext</a></li>
+<li><a href="#orgf238f09">2.6. Wörtlicher Text</a></li>
+</ul>
+</li>
+<li><a href="#org4511b66">3. Kombinationen von Hervorhebungen</a></li>
+<li><a href="#orgc0d95df">4. Regeln für Hervorhebungszeichen</a></li>
+<li><a href="#orgb16c1bc">5. nicht fett *</a></li>
+<li><a href="#orgcaca95b">6. Absätze und Zeilenumbrüche</a>
+<ul>
+<li><a href="#orgc47cb9f">6.1. Neuer Absatz</a></li>
+<li><a href="#org0fb9b47">6.2. Harter Zeilenumbruch</a></li>
+</ul>
+</li>
+<li><a href="#org816c303">7. Überschriften</a></li>
+<li><a href="#orgdfa4f3e">8. Ebene 1</a>
+<ul>
+<li><a href="#org192781a">8.1. Ebene 2</a>
+<ul>
+<li><a href="#orgdca059c">8.1.1. Ebene 3</a></li>
+</ul>
+</li>
+<li><a href="#orgbb4f5a8">8.2. Überschrift mit TODO-Status</a></li>
+</ul>
+</li>
+<li><a href="#org5dc8038">9. <span class="todo TODO">TODO</span> Aufgabe</a></li>
+<li><a href="#orgeca8095">10. <span class="done DONE">DONE</span> Erledigte Aufgabe</a>
+<ul>
+<li><a href="#orgb3c72ad">10.1. Überschrift mit Priorität</a></li>
+</ul>
+</li>
+<li><a href="#orgd630dee">11. <span class="todo TODO">TODO</span> Sehr wichtige Aufgabe</a>
+<ul>
+<li><a href="#org3a9af4c">11.1. Überschrift mit Tags</a></li>
+</ul>
+</li>
+<li><a href="#orge3066be">12. Notiz zu Emacs&nbsp;&nbsp;&nbsp<span class="tag"><span class="emacs">emacs</span>&nbsp;<span class="editor">editor</span></span></a>
+<ul>
+<li><a href="#org1231f4d">12.1. Überschrift mit Statistik-Cookie</a></li>
+</ul>
+</li>
+<li><a href="#org82c4296">13. Projekt <code>[2/5]</code></a></li>
+<li><a href="#orge8efd93">14. Projekt <code>[40%]</code></a></li>
+<li><a href="#org1a4e72c">15. Listen</a>
+<ul>
+<li><a href="#org6c1e64d">15.1. Ungeordnete Listen</a></li>
+<li><a href="#org96051a6">15.2. Geordnete Listen</a></li>
+<li><a href="#org39e11f1">15.3. Beschreibungslisten</a></li>
+<li><a href="#org0d52c63">15.4. Kontrollkästchen</a></li>
+</ul>
+</li>
+<li><a href="#org61e9d25">16. Zitate und besondere Textblöcke</a>
+<ul>
+<li><a href="#org3785f77">16.1. Zitatblock</a></li>
+<li><a href="#org8bb287a">16.2. Example-Block</a></li>
+<li><a href="#orgdecad55">16.3. Verse-Block</a></li>
+<li><a href="#orgf0f9578">16.4. Center-Block</a></li>
+<li><a href="#org1021a80">16.5. Comment-Block</a></li>
+<li><a href="#orgab3e7e0">16.6. Export-Block</a></li>
+</ul>
+</li>
+<li><a href="#org2be9398">17. Quellcodeblöcke</a>
+<ul>
+<li><a href="#orga7bc05f">17.1. Shell</a></li>
+<li><a href="#org707a00d">17.2. Python</a></li>
+<li><a href="#org673718a">17.3. Rust</a></li>
+<li><a href="#orga639cdc">17.4. Mojo</a></li>
+<li><a href="#org6640396">17.5. Header-Argumente</a></li>
+</ul>
+</li>
+<li><a href="#orgda23d54">18. Inline-Quellcode</a></li>
+<li><a href="#org574a823">19. Tabellen</a>
+<ul>
+<li><a href="#org004c519">19.1. Einfache Tabelle</a></li>
+<li><a href="#org4cb5067">19.2. Tabellenformel</a></li>
+</ul>
+</li>
+<li><a href="#org1df387e">20. Links</a></li>
+<li><a href="#org8f27731">21. Ziele und Anker</a>
+<ul>
+<li><a href="#orgb5b6fa0">21.1. CUSTOM<sub>ID</sub></a></li>
+</ul>
+</li>
+<li><a href="#mein-ziel">22. Zielüberschrift</a>
+<ul>
+<li><a href="#org73b6b10">22.1. Benanntes Element</a></li>
+</ul>
+</li>
+<li><a href="#org9da7f3a">23. Bilder</a></li>
+<li><a href="#org79a9afd">24. Fußnoten</a>
+<ul>
+<li><a href="#org40e25f4">24.1. Benannte Fußnote</a></li>
+<li><a href="#orgd05cee0">24.2. Inline-Fußnote</a></li>
+<li><a href="#org4a2b40c">24.3. Benannte Inline-Fußnote</a></li>
+</ul>
+</li>
+<li><a href="#orge8c761a">25. Hochstellungen und Tiefstellungen</a>
+<ul>
+<li><a href="#orgf24e7fa">25.1. Hochstellung</a></li>
+<li><a href="#org96ef9b8">25.2. Tiefstellung</a></li>
+<li><a href="#orgc4689a1">25.3. Interpretation deaktivieren</a></li>
+</ul>
+</li>
+<li><a href="#org0ee517a">26. Mathematische Formeln und LaTeX</a>
+<ul>
+<li><a href="#orga11170e">26.1. Inline-Formel</a></li>
+<li><a href="#orgdded011">26.2. Abgesetzte Formel</a></li>
+<li><a href="#org5ccb3d7">26.3. LaTeX-Umgebung</a></li>
+</ul>
+</li>
+<li><a href="#org1b8c884">27. Sonderzeichen und Org-Entities</a></li>
+<li><a href="#org88b29c9">28. Horizontale Linie</a></li>
+<li><a href="#orgca04bae">29. Kommentare</a>
+<ul>
+<li><a href="#orgf9f87b4">29.1. Kommentarzeile</a></li>
+<li><a href="#org2841042">29.2. COMMENT-Überschrift</a></li>
+</ul>
+</li>
+<li><a href="#org84ec5fc">30. Festbreitentext mit Doppelpunkt</a></li>
+<li><a href="#org5bc4c50">31. Typografische Zeichen</a></li>
+<li><a href="#org5007f7c">32. Dokument-Metadaten</a></li>
+<li><a href="#orgbb13ad8">33. Exportoptionen</a></li>
+<li><a href="#org046782b">34. HTML-spezifische Formatierung</a></li>
+<li><a href="#org5ef2cfc">35. LaTeX- und PDF-spezifische Formatierung</a></li>
+<li><a href="#orgb424693">36. Textformatierung per Tastatur</a></li>
+<li><a href="#org732608c">37. Kompakte Referenz</a></li>
+<li><a href="#org61dd31f">38. Abschlussbeispiel</a></li>
+<li><a href="#orge90e8a7">39. Einführung</a></li>
+<li><a href="#orgf044d04">40. Export</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgcf5dd3a" class="outline-2">
+<h2 id="orgcf5dd3a"><span class="section-number-2">1.</span> Hinweise</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Diese Datei zeigt die wichtigsten und praktisch relevanten
+Textformatierungen von Org Mode.
+</p>
+
+<p>
+Die Syntaxbeispiele stehen überwiegend in <code>Example</code>-Blöcken, damit sie
+beim HTML- oder PDF-Export nicht selbst interpretiert werden.
+</p>
+</div>
+</div>
+<div id="outline-container-org89c2210" class="outline-2">
+<h2 id="org89c2210"><span class="section-number-2">2.</span> Grundlegende Hervorhebungen</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org968b8a1" class="outline-3">
+<h3 id="org968b8a1"><span class="section-number-3">2.1.</span> Fett</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Syntax:
+</p>
+
+<pre class="example" id="orge023238">
+*Dieser Text ist fett.*
+</pre>
+
+<p>
+Darstellung:
+</p>
+
+<p>
+<b>Dieser Text ist fett.</b>
+</p>
+</div>
+</div>
+<div id="outline-container-orgcbe0cfc" class="outline-3">
+<h3 id="orgcbe0cfc"><span class="section-number-3">2.2.</span> Kursiv</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Syntax:
+</p>
+
+<pre class="example" id="org27f457c">
+/Dieser Text ist kursiv./
+</pre>
+
+<p>
+Darstellung:
+</p>
+
+<p>
+<i>Dieser Text ist kursiv.</i>
+</p>
+</div>
+</div>
+<div id="outline-container-orgabd1811" class="outline-3">
+<h3 id="orgabd1811"><span class="section-number-3">2.3.</span> Unterstrichen</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Syntax:
+</p>
+
+<pre class="example" id="orgf833849">
+_Dieser Text ist unterstrichen._
+</pre>
+
+<p>
+Darstellung:
+</p>
+
+<p>
+<span class="underline">Dieser Text ist unterstrichen.</span>
+</p>
+</div>
+</div>
+<div id="outline-container-org0f1bc04" class="outline-3">
+<h3 id="org0f1bc04"><span class="section-number-3">2.4.</span> Durchgestrichen</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+Syntax:
+</p>
+
+<pre class="example" id="orgdfccb89">
++Dieser Text ist durchgestrichen.+
+</pre>
+
+<p>
+Darstellung:
+</p>
+
+<p>
+<del>Dieser Text ist durchgestrichen.</del>
+</p>
+</div>
+</div>
+<div id="outline-container-orgc92fb9d" class="outline-3">
+<h3 id="orgc92fb9d"><span class="section-number-3">2.5.</span> Quellcode im Fließtext</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+Syntax:
+</p>
+
+<pre class="example" id="org28a0b30">
+~doom sync~
+</pre>
+
+<p>
+Darstellung:
+</p>
+
+<p>
+<code>doom sync</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orgf238f09" class="outline-3">
+<h3 id="orgf238f09"><span class="section-number-3">2.6.</span> Wörtlicher Text</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+Syntax:
+</p>
+
+<pre class="example" id="org84a0352">
+=Dieser Text wird wörtlich dargestellt.=
+</pre>
+
+<p>
+Darstellung:
+</p>
+
+<p>
+<code>Dieser Text wird wörtlich dargestellt.</code>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org4511b66" class="outline-2">
+<h2 id="org4511b66"><span class="section-number-2">3.</span> Kombinationen von Hervorhebungen</h2>
+<div class="outline-text-2" id="text-3">
+<pre class="example" id="org4790f8c">
+*/fett und kursiv/*
+*_fett und unterstrichen_*
+/_unterstrichen und kursiv_/
+*~fetter Code~*
+/~kursiver Code~/
+</pre>
+
+<p>
+Hinweis: Nicht jede beliebige Verschachtelung wird von jedem Export-Backend
+gleich dargestellt. Einfachere Kombinationen sind robuster.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc0d95df" class="outline-2">
+<h2 id="orgc0d95df"><span class="section-number-2">4.</span> Regeln für Hervorhebungszeichen</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Funktioniert normalerweise:
+</p>
+
+<pre class="example" id="orgbe6e523">
+Das ist *fett* und das ist /kursiv/.
+</pre>
+
+<p>
+Problematisch kann sein:
+</p>
+
+<pre class="example" id="orgd509044">
+Wort*mittenimwort*
+</pre>
+
+<p>
+Ein Leerzeichen direkt innerhalb der Begrenzungszeichen verhindert meist
+die Hervorhebung:
+</p>
+
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+<div id="outline-container-orgb16c1bc" class="outline-2">
+<h2 id="orgb16c1bc"><span class="section-number-2">5.</span> nicht fett *</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+#+end<sub>example</sub>
+</p>
+</div>
+</div>
+<div id="outline-container-orgcaca95b" class="outline-2">
+<h2 id="orgcaca95b"><span class="section-number-2">6.</span> Absätze und Zeilenumbrüche</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-orgc47cb9f" class="outline-3">
+<h3 id="orgc47cb9f"><span class="section-number-3">6.1.</span> Neuer Absatz</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+Ein leerer Zeilenabstand erzeugt einen neuen Absatz.
+</p>
+
+<pre class="example" id="orge267cf3">
+Erster Absatz.
+
+Zweiter Absatz.
+</pre>
+</div>
+</div>
+<div id="outline-container-org0fb9b47" class="outline-3">
+<h3 id="org0fb9b47"><span class="section-number-3">6.2.</span> Harter Zeilenumbruch</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+Zwei Rückwärtsschrägstriche am Zeilenende erzwingen einen Zeilenumbruch:
+</p>
+
+<pre class="example" id="orgc87ccac">
+Erste Zeile.\\
+Zweite Zeile.
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org816c303" class="outline-2">
+<h2 id="org816c303"><span class="section-number-2">7.</span> Überschriften</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+<div id="outline-container-orgdfa4f3e" class="outline-2">
+<h2 id="orgdfa4f3e"><span class="section-number-2">8.</span> Ebene 1</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-org192781a" class="outline-3">
+<h3 id="org192781a"><span class="section-number-3">8.1.</span> Ebene 2</h3>
+<div class="outline-text-3" id="text-8-1">
+</div>
+<div id="outline-container-orgdca059c" class="outline-4">
+<h4 id="orgdca059c"><span class="section-number-4">8.1.1.</span> Ebene 3</h4>
+<div class="outline-text-4" id="text-8-1-1">
+</div>
+<ol class="org-ol">
+<li><a id="orgbfcd9da"></a>Ebene 4<br />
+<div class="outline-text-5" id="text-8-1-1-1">
+<p>
+#+end<sub>example</sub>
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgbb4f5a8" class="outline-3">
+<h3 id="orgbb4f5a8"><span class="section-number-3">8.2.</span> Überschrift mit TODO-Status</h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org5dc8038" class="outline-2">
+<h2 id="org5dc8038"><span class="section-number-2">9.</span> <span class="todo TODO">TODO</span> Aufgabe</h2>
+</div>
+<div id="outline-container-orgeca8095" class="outline-2">
+<h2 id="orgeca8095"><span class="section-number-2">10.</span> <span class="done DONE">DONE</span> Erledigte Aufgabe</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+#+end<sub>example</sub>
+</p>
+</div>
+<div id="outline-container-orgb3c72ad" class="outline-3">
+<h3 id="orgb3c72ad"><span class="section-number-3">10.1.</span> Überschrift mit Priorität</h3>
+<div class="outline-text-3" id="text-10-1">
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd630dee" class="outline-2">
+<h2 id="orgd630dee"><span class="section-number-2">11.</span> <span class="todo TODO">TODO</span> Sehr wichtige Aufgabe</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+#+end<sub>example</sub>
+</p>
+</div>
+<div id="outline-container-org3a9af4c" class="outline-3">
+<h3 id="org3a9af4c"><span class="section-number-3">11.1.</span> Überschrift mit Tags</h3>
+<div class="outline-text-3" id="text-11-1">
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orge3066be" class="outline-2">
+<h2 id="orge3066be"><span class="section-number-2">12.</span> Notiz zu Emacs&nbsp;&nbsp;&nbsp<span class="tag"><span class="emacs">emacs</span>&nbsp;<span class="editor">editor</span></span></h2>
+<div class="outline-text-2" id="text-12">
+<p>
+#+end<sub>example</sub>
+</p>
+</div>
+<div id="outline-container-org1231f4d" class="outline-3">
+<h3 id="org1231f4d"><span class="section-number-3">12.1.</span> Überschrift mit Statistik-Cookie</h3>
+<div class="outline-text-3" id="text-12-1">
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org82c4296" class="outline-2">
+<h2 id="org82c4296"><span class="section-number-2">13.</span> Projekt <code>[2/5]</code></h2>
+</div>
+<div id="outline-container-orge8efd93" class="outline-2">
+<h2 id="orge8efd93"><span class="section-number-2">14.</span> Projekt <code>[40%]</code></h2>
+<div class="outline-text-2" id="text-14">
+<p>
+#+end<sub>example</sub>
+</p>
+</div>
+</div>
+<div id="outline-container-org1a4e72c" class="outline-2">
+<h2 id="org1a4e72c"><span class="section-number-2">15.</span> Listen</h2>
+<div class="outline-text-2" id="text-15">
+</div>
+<div id="outline-container-org6c1e64d" class="outline-3">
+<h3 id="org6c1e64d"><span class="section-number-3">15.1.</span> Ungeordnete Listen</h3>
+<div class="outline-text-3" id="text-15-1">
+<pre class="example" id="org967c53c">
+- Erster Punkt
+- Zweiter Punkt
+  - Unterpunkt
+  - Noch ein Unterpunkt
+</pre>
+</div>
+</div>
+<div id="outline-container-org96051a6" class="outline-3">
+<h3 id="org96051a6"><span class="section-number-3">15.2.</span> Geordnete Listen</h3>
+<div class="outline-text-3" id="text-15-2">
+<pre class="example" id="orge777860">
+1. Erster Schritt
+2. Zweiter Schritt
+3. Dritter Schritt
+</pre>
+</div>
+</div>
+<div id="outline-container-org39e11f1" class="outline-3">
+<h3 id="org39e11f1"><span class="section-number-3">15.3.</span> Beschreibungslisten</h3>
+<div class="outline-text-3" id="text-15-3">
+<pre class="example" id="org6a305bc">
+- Emacs :: erweiterbarer Texteditor
+- Org Mode :: strukturiertes Klartextformat
+- Doom Emacs :: vorkonfigurierte Emacs-Distribution
+</pre>
+</div>
+</div>
+<div id="outline-container-org0d52c63" class="outline-3">
+<h3 id="org0d52c63"><span class="section-number-3">15.4.</span> Kontrollkästchen</h3>
+<div class="outline-text-3" id="text-15-4">
+<pre class="example" id="orgd69f78b">
+- [ ] offen
+- [X] erledigt
+- [-] teilweise erledigt
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org61e9d25" class="outline-2">
+<h2 id="org61e9d25"><span class="section-number-2">16.</span> Zitate und besondere Textblöcke</h2>
+<div class="outline-text-2" id="text-16">
+</div>
+<div id="outline-container-org3785f77" class="outline-3">
+<h3 id="org3785f77"><span class="section-number-3">16.1.</span> Zitatblock</h3>
+<div class="outline-text-3" id="text-16-1">
+<pre class="example" id="orgac4ecf7">
+#+begin_quote
+Dies ist ein Zitat.
+Es kann mehrere Zeilen enthalten.
+#+end_quote
+</pre>
+</div>
+</div>
+<div id="outline-container-org8bb287a" class="outline-3">
+<h3 id="org8bb287a"><span class="section-number-3">16.2.</span> Example-Block</h3>
+<div class="outline-text-3" id="text-16-2">
+<p>
+Die Syntax eines Example-Blocks wird hier als festbreiter Text mit
+Doppelpunkt-Präfix gezeigt, damit keine gleichartigen Blöcke
+ineinander verschachtelt werden:
+</p>
+
+<pre class="example">
+#+begin_example
+Dieser Inhalt wird wörtlich dargestellt.
+*Fettzeichen* werden nicht interpretiert.
+#+end_example
+</pre>
+</div>
+</div>
+<div id="outline-container-orgdecad55" class="outline-3">
+<h3 id="orgdecad55"><span class="section-number-3">16.3.</span> Verse-Block</h3>
+<div class="outline-text-3" id="text-16-3">
+<pre class="example" id="org9f86335">
+#+begin_verse
+Erste Verszeile
+  eingerückte Verszeile
+Dritte Verszeile
+#+end_verse
+</pre>
+</div>
+</div>
+<div id="outline-container-orgf0f9578" class="outline-3">
+<h3 id="orgf0f9578"><span class="section-number-3">16.4.</span> Center-Block</h3>
+<div class="outline-text-3" id="text-16-4">
+<pre class="example" id="org7344843">
+#+begin_center
+Dieser Text wird beim Export zentriert.
+#+end_center
+</pre>
+</div>
+</div>
+<div id="outline-container-org1021a80" class="outline-3">
+<h3 id="org1021a80"><span class="section-number-3">16.5.</span> Comment-Block</h3>
+<div class="outline-text-3" id="text-16-5">
+<pre class="example" id="orge267b2e">
+#+begin_comment
+Dieser Text erscheint nicht im Export.
+#+end_comment
+</pre>
+</div>
+</div>
+<div id="outline-container-orgab3e7e0" class="outline-3">
+<h3 id="orgab3e7e0"><span class="section-number-3">16.6.</span> Export-Block</h3>
+<div class="outline-text-3" id="text-16-6">
+<pre class="example" id="org8d4dc04">
+#+begin_export html
+&lt;strong&gt;Direktes HTML&lt;/strong&gt;
+#+end_export
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2be9398" class="outline-2">
+<h2 id="org2be9398"><span class="section-number-2">17.</span> Quellcodeblöcke</h2>
+<div class="outline-text-2" id="text-17">
+<p>
+Allgemeine Syntax:
+</p>
+
+<pre class="example" id="orgbbc04b3">
+#+begin_src SPRACHE
+Quellcode
+#+end_src
+</pre>
+</div>
+<div id="outline-container-orga7bc05f" class="outline-3">
+<h3 id="orga7bc05f"><span class="section-number-3">17.1.</span> Shell</h3>
+<div class="outline-text-3" id="text-17-1">
+<pre class="example" id="org6d20398">
+#+begin_src shell
+printf '%s\n' "Hallo"
+#+end_src
+</pre>
+</div>
+</div>
+<div id="outline-container-org707a00d" class="outline-3">
+<h3 id="org707a00d"><span class="section-number-3">17.2.</span> Python</h3>
+<div class="outline-text-3" id="text-17-2">
+<pre class="example" id="org5456414">
+#+begin_src python
+print("Hallo aus Python")
+#+end_src
+</pre>
+</div>
+</div>
+<div id="outline-container-org673718a" class="outline-3">
+<h3 id="org673718a"><span class="section-number-3">17.3.</span> Rust</h3>
+<div class="outline-text-3" id="text-17-3">
+<pre class="example" id="org1670c58">
+#+begin_src rust
+fn main() {
+    println!("Hallo aus Rust");
+}
+#+end_src
+</pre>
+</div>
+</div>
+<div id="outline-container-orga639cdc" class="outline-3">
+<h3 id="orga639cdc"><span class="section-number-3">17.4.</span> Mojo</h3>
+<div class="outline-text-3" id="text-17-4">
+<pre class="example" id="org8277f7b">
+#+begin_src mojo
+fn main():
+    print("Hallo aus Mojo")
+#+end_src
+</pre>
+</div>
+</div>
+<div id="outline-container-org6640396" class="outline-3">
+<h3 id="org6640396"><span class="section-number-3">17.5.</span> Header-Argumente</h3>
+<div class="outline-text-3" id="text-17-5">
+<pre class="example" id="org9dedeb3">
+#+begin_src python :results output :exports both
+print(2 + 3)
+#+end_src
+</pre>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Argument</th>
+<th scope="col" class="org-left">Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">:results output</td>
+<td class="org-left">Programmausgabe als Ergebnis</td>
+</tr>
+
+<tr>
+<td class="org-left">:results value</td>
+<td class="org-left">Rückgabewert als Ergebnis</td>
+</tr>
+
+<tr>
+<td class="org-left">:exports code</td>
+<td class="org-left">nur Code exportieren</td>
+</tr>
+
+<tr>
+<td class="org-left">:exports results</td>
+<td class="org-left">nur Ergebnis exportieren</td>
+</tr>
+
+<tr>
+<td class="org-left">:exports both</td>
+<td class="org-left">Code und Ergebnis exportieren</td>
+</tr>
+
+<tr>
+<td class="org-left">:exports none</td>
+<td class="org-left">weder Code noch Ergebnis exportieren</td>
+</tr>
+
+<tr>
+<td class="org-left">:eval never</td>
+<td class="org-left">Block nicht ausführen</td>
+</tr>
+
+<tr>
+<td class="org-left">:dir PFAD</td>
+<td class="org-left">Arbeitsverzeichnis setzen</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="outline-container-orgda23d54" class="outline-2">
+<h2 id="orgda23d54"><span class="section-number-2">18.</span> Inline-Quellcode</h2>
+<div class="outline-text-2" id="text-18">
+<pre class="example" id="orged16022">
+src_python{2 + 3}
+</pre>
+
+<p>
+Mit Ergebnisangabe:
+</p>
+
+<pre class="example" id="org0806658">
+src_python[:results value]{2 + 3}
+</pre>
+</div>
+</div>
+<div id="outline-container-org574a823" class="outline-2">
+<h2 id="org574a823"><span class="section-number-2">19.</span> Tabellen</h2>
+<div class="outline-text-2" id="text-19">
+</div>
+<div id="outline-container-org004c519" class="outline-3">
+<h3 id="org004c519"><span class="section-number-3">19.1.</span> Einfache Tabelle</h3>
+<div class="outline-text-3" id="text-19-1">
+<pre class="example" id="org89ef217">
+| Name    | Sprache | Status  |
+|---------+---------+---------|
+| Projekt | Rust    | aktiv   |
+| Test    | Python  | geplant |
+</pre>
+</div>
+</div>
+<div id="outline-container-org4cb5067" class="outline-3">
+<h3 id="org4cb5067"><span class="section-number-3">19.2.</span> Tabellenformel</h3>
+<div class="outline-text-3" id="text-19-2">
+<pre class="example" id="orgaf90085">
+| Produkt | Anzahl | Preis | Summe |
+|---------+--------+-------+-------|
+| Kabel   |      3 |  6.00 | 18.00 |
+#+TBLFM: $4=$2*$3;%.2f
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1df387e" class="outline-2">
+<h2 id="org1df387e"><span class="section-number-2">20.</span> Links</h2>
+<div class="outline-text-2" id="text-20">
+<p>
+Die Beispiele stehen absichtlich in einem Example-Block.
+</p>
+
+<pre class="example" id="org1f82d6f">
+Weblink:
+[[https://orgmode.org][Org Mode]]
+
+Dateilink:
+[[file:~/Dokumente/datei.txt][Datei öffnen]]
+
+Interner Überschriftenlink:
+[[*Überschrift][Zum Abschnitt]]
+
+CUSTOM_ID-Link:
+[[#mein-ziel][Zum festen Ziel]]
+
+Benannter Link:
+[[zielname][Zum benannten Element]]
+</pre>
+</div>
+</div>
+<div id="outline-container-org8f27731" class="outline-2">
+<h2 id="org8f27731"><span class="section-number-2">21.</span> Ziele und Anker</h2>
+<div class="outline-text-2" id="text-21">
+</div>
+<div id="outline-container-orgb5b6fa0" class="outline-3">
+<h3 id="orgb5b6fa0"><span class="section-number-3">21.1.</span> CUSTOM<sub>ID</sub></h3>
+<div class="outline-text-3" id="text-21-1">
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-mein-ziel" class="outline-2">
+<h2 id="mein-ziel"><span class="section-number-2">22.</span> Zielüberschrift</h2>
+<div class="outline-text-2" id="text-mein-ziel">
+<p>
+<a href="#mein-ziel">Zum Ziel</a>
+#+end<sub>example</sub>
+</p>
+</div>
+<div id="outline-container-org73b6b10" class="outline-3">
+<h3 id="org73b6b10"><span class="section-number-3">22.1.</span> Benanntes Element</h3>
+<div class="outline-text-3" id="text-22-1">
+<p>
+Dies ist ein tatsächlich vorhandenes, benanntes Element. Der folgende
+Link ist deshalb auch beim HTML-Export auflösbar.
+</p>
+
+<pre class="example" id="org5a3369a">
+Benannter Inhalt
+</pre>
+
+<p>
+Verweis auf das Element:
+</p>
+
+<p>
+<a href="#org5a3369a">Zum benannten Beispiel</a>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org9da7f3a" class="outline-2">
+<h2 id="org9da7f3a"><span class="section-number-2">23.</span> Bilder</h2>
+<div class="outline-text-2" id="text-23">
+<pre class="example" id="org8fd4694">
+#+caption: Beispielabbildung
+#+name: fig:beispiel
+[[file:bilder/beispiel.png]]
+
+[[fig:beispiel][Zur Beispielabbildung]]
+</pre>
+
+<p>
+HTML-Attribute:
+</p>
+
+<pre class="example" id="orgb2526e6">
+#+attr_html: :width 600 :alt Beispielbild
+[[file:bilder/beispiel.png]]
+</pre>
+
+<p>
+LaTeX-Attribute:
+</p>
+
+<pre class="example" id="org0944e47">
+#+attr_latex: :width 0.8\textwidth
+[[file:bilder/beispiel.png]]
+</pre>
+</div>
+</div>
+<div id="outline-container-org79a9afd" class="outline-2">
+<h2 id="org79a9afd"><span class="section-number-2">24.</span> Fußnoten</h2>
+<div class="outline-text-2" id="text-24">
+</div>
+<div id="outline-container-org40e25f4" class="outline-3">
+<h3 id="org40e25f4"><span class="section-number-3">24.1.</span> Benannte Fußnote</h3>
+<div class="outline-text-3" id="text-24-1">
+<p>
+Org Mode ist ein Klartextsystem.<sup><a id="fnr.klartext" class="footref" href="#fn.klartext" role="doc-backlink">1</a></sup>
+</p>
+</div>
+</div>
+<div id="outline-container-orgd05cee0" class="outline-3">
+<h3 id="orgd05cee0"><span class="section-number-3">24.2.</span> Inline-Fußnote</h3>
+<div class="outline-text-3" id="text-24-2">
+<pre class="example" id="org69cb11a">
+Text mit Inline-Fußnote.[fn::Dies ist die Fußnote.]
+</pre>
+</div>
+</div>
+<div id="outline-container-org4a2b40c" class="outline-3">
+<h3 id="org4a2b40c"><span class="section-number-3">24.3.</span> Benannte Inline-Fußnote</h3>
+<div class="outline-text-3" id="text-24-3">
+<pre class="example" id="org6bd2332">
+Text.[fn:name:Inhalt der benannten Inline-Fußnote.]
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge8c761a" class="outline-2">
+<h2 id="orge8c761a"><span class="section-number-2">25.</span> Hochstellungen und Tiefstellungen</h2>
+<div class="outline-text-2" id="text-25">
+</div>
+<div id="outline-container-orgf24e7fa" class="outline-3">
+<h3 id="orgf24e7fa"><span class="section-number-3">25.1.</span> Hochstellung</h3>
+<div class="outline-text-3" id="text-25-1">
+<pre class="example" id="org8e108c4">
+x^2
+x^{10}
+</pre>
+</div>
+</div>
+<div id="outline-container-org96ef9b8" class="outline-3">
+<h3 id="org96ef9b8"><span class="section-number-3">25.2.</span> Tiefstellung</h3>
+<div class="outline-text-3" id="text-25-2">
+<pre class="example" id="org459947f">
+H_2O
+a_{n+1}
+</pre>
+</div>
+</div>
+<div id="outline-container-orgc4689a1" class="outline-3">
+<h3 id="orgc4689a1"><span class="section-number-3">25.3.</span> Interpretation deaktivieren</h3>
+<div class="outline-text-3" id="text-25-3">
+<pre class="example" id="orgfbf4543">
+#+options: ^:nil
+</pre>
+
+<p>
+Oder nur mit geschweiften Klammern:
+</p>
+
+<pre class="example" id="orgd7b4f9b">
+#+options: ^:{}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0ee517a" class="outline-2">
+<h2 id="org0ee517a"><span class="section-number-2">26.</span> Mathematische Formeln und LaTeX</h2>
+<div class="outline-text-2" id="text-26">
+</div>
+<div id="outline-container-orga11170e" class="outline-3">
+<h3 id="orga11170e"><span class="section-number-3">26.1.</span> Inline-Formel</h3>
+<div class="outline-text-3" id="text-26-1">
+<pre class="example" id="org363340e">
+\( E = mc^2 \)
+</pre>
+</div>
+</div>
+<div id="outline-container-orgdded011" class="outline-3">
+<h3 id="orgdded011"><span class="section-number-3">26.2.</span> Abgesetzte Formel</h3>
+<div class="outline-text-3" id="text-26-2">
+<pre class="example" id="orge7276bf">
+\[
+\int_0^1 x^2\,dx = \frac{1}{3}
+\]
+</pre>
+</div>
+</div>
+<div id="outline-container-org5ccb3d7" class="outline-3">
+<h3 id="org5ccb3d7"><span class="section-number-3">26.3.</span> LaTeX-Umgebung</h3>
+<div class="outline-text-3" id="text-26-3">
+<pre class="example" id="orgba3b694">
+\begin{equation}
+a^2+b^2=c^2
+\end{equation}
+</pre>
+
+<p>
+LaTeX-Vorschau in Emacs:
+</p>
+
+<pre class="example" id="orgc7d3794">
+C-c C-x C-l
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1b8c884" class="outline-2">
+<h2 id="org1b8c884"><span class="section-number-2">27.</span> Sonderzeichen und Org-Entities</h2>
+<div class="outline-text-2" id="text-27">
+<pre class="example" id="org88cd45c">
+\alpha
+\beta
+\gamma
+\Delta
+\rightarrow
+\le
+\ge
+\times
+\copy
+</pre>
+
+<p>
+Mit:
+</p>
+
+<pre class="example" id="org25721ff">
+M-x org-toggle-pretty-entities
+</pre>
+
+<p>
+können Entities im Org-Puffer hübscher angezeigt werden.
+</p>
+</div>
+</div>
+<div id="outline-container-org88b29c9" class="outline-2">
+<h2 id="org88b29c9"><span class="section-number-2">28.</span> Horizontale Linie</h2>
+<div class="outline-text-2" id="text-28">
+<pre class="example" id="org6835e64">
+-----
+</pre>
+</div>
+</div>
+<div id="outline-container-orgca04bae" class="outline-2">
+<h2 id="orgca04bae"><span class="section-number-2">29.</span> Kommentare</h2>
+<div class="outline-text-2" id="text-29">
+</div>
+<div id="outline-container-orgf9f87b4" class="outline-3">
+<h3 id="orgf9f87b4"><span class="section-number-3">29.1.</span> Kommentarzeile</h3>
+<div class="outline-text-3" id="text-29-1">
+<pre class="example" id="orgb3e9c89">
+# Diese Zeile wird nicht exportiert.
+</pre>
+</div>
+</div>
+<div id="outline-container-org2841042" class="outline-3">
+<h3 id="org2841042"><span class="section-number-3">29.2.</span> COMMENT-Überschrift</h3>
+<div class="outline-text-3" id="text-29-2">
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org84ec5fc" class="outline-2">
+<h2 id="org84ec5fc"><span class="section-number-2">30.</span> Festbreitentext mit Doppelpunkt</h2>
+<div class="outline-text-2" id="text-30">
+<pre class="example" id="orgcc5cf2c">
+: erste feste Zeile
+: zweite feste Zeile
+</pre>
+</div>
+</div>
+<div id="outline-container-org5bc4c50" class="outline-2">
+<h2 id="org5bc4c50"><span class="section-number-2">31.</span> Typografische Zeichen</h2>
+<div class="outline-text-2" id="text-31">
+<p>
+Unicode kann direkt verwendet werden:
+</p>
+
+<pre class="example" id="org4c0f550">
+– Gedankenstrich
+— Geviertstrich
+„deutsche Anführungszeichen“
+‚einfache deutsche Anführungszeichen‘
+… Auslassungspunkte
+→ Pfeil
+© Copyright
+</pre>
+</div>
+</div>
+<div id="outline-container-org5007f7c" class="outline-2">
+<h2 id="org5007f7c"><span class="section-number-2">32.</span> Dokument-Metadaten</h2>
+<div class="outline-text-2" id="text-32">
+<pre class="example" id="org13375d1">
+#+title: Mein Dokument
+#+subtitle: Untertitel
+#+author: Alexander
+#+date: 2026-07-23
+#+language: de
+#+description: Kurze Beschreibung
+#+keywords: Emacs, Org Mode, Dokumentation
+#+options: toc:3 num:t
+#+startup: overview
+</pre>
+</div>
+</div>
+<div id="outline-container-orgbb13ad8" class="outline-2">
+<h2 id="orgbb13ad8"><span class="section-number-2">33.</span> Exportoptionen</h2>
+<div class="outline-text-2" id="text-33">
+<pre class="example" id="orgefc52ba">
+#+options: toc:3 num:t author:t date:t title:t
+</pre>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Option</th>
+<th scope="col" class="org-left">Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">toc:nil</td>
+<td class="org-left">kein Inhaltsverzeichnis</td>
+</tr>
+
+<tr>
+<td class="org-left">toc:2</td>
+<td class="org-left">Inhaltsverzeichnis bis Ebene 2</td>
+</tr>
+
+<tr>
+<td class="org-left">num:nil</td>
+<td class="org-left">Überschriften nicht nummerieren</td>
+</tr>
+
+<tr>
+<td class="org-left">num:t</td>
+<td class="org-left">Überschriften nummerieren</td>
+</tr>
+
+<tr>
+<td class="org-left">author:nil</td>
+<td class="org-left">Autor nicht exportieren</td>
+</tr>
+
+<tr>
+<td class="org-left">date:nil</td>
+<td class="org-left">Datum nicht exportieren</td>
+</tr>
+
+<tr>
+<td class="org-left">title:nil</td>
+<td class="org-left">Titel nicht exportieren</td>
+</tr>
+
+<tr>
+<td class="org-left">^:nil</td>
+<td class="org-left">Hoch- und Tiefstellung deaktivieren</td>
+</tr>
+
+<tr>
+<td class="org-left">^:{}</td>
+<td class="org-left">Hoch- und Tiefstellung nur mit Klammern</td>
+</tr>
+
+<tr>
+<td class="org-left">\n:t</td>
+<td class="org-left">Zeilenumbrüche stärker erhalten</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org046782b" class="outline-2">
+<h2 id="org046782b"><span class="section-number-2">34.</span> HTML-spezifische Formatierung</h2>
+<div class="outline-text-2" id="text-34">
+<p>
+HTML-Attribute:
+</p>
+
+<pre class="example" id="orgee2ce3c">
+#+attr_html: :class hinweis :id wichtiger-hinweis
+#+begin_quote
+Wichtiger Text
+#+end_quote
+</pre>
+
+<p>
+HTML-Kopfbereich:
+</p>
+
+<pre class="example" id="org339cf00">
+#+html_head: &lt;link rel="stylesheet" href="style.css"&gt;
+</pre>
+
+<p>
+Direktes HTML:
+</p>
+
+<pre class="example" id="orgcfe63e1">
+#+begin_export html
+&lt;div class="warnung"&gt;HTML-Inhalt&lt;/div&gt;
+#+end_export
+</pre>
+</div>
+</div>
+<div id="outline-container-org5ef2cfc" class="outline-2">
+<h2 id="org5ef2cfc"><span class="section-number-2">35.</span> LaTeX- und PDF-spezifische Formatierung</h2>
+<div class="outline-text-2" id="text-35">
+<pre class="example" id="org809b037">
+#+latex_class: article
+#+latex_header: \usepackage[ngerman]{babel}
+#+latex_header: \usepackage{microtype}
+#+latex_compiler: lualatex
+</pre>
+</div>
+</div>
+<div id="outline-container-orgb424693" class="outline-2">
+<h2 id="orgb424693"><span class="section-number-2">36.</span> Textformatierung per Tastatur</h2>
+<div class="outline-text-2" id="text-36">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-c C-x C-f</td>
+<td class="org-left">Textauszeichnung auswählen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x org-emphasize</td>
+<td class="org-left">Text hervorheben</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x org-toggle-pretty-entities</td>
+<td class="org-left">Entities hübscher anzeigen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x org-toggle-link-display</td>
+<td class="org-left">Rohlinks/Beschreibungen umschalten</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x org-toggle-inline-images</td>
+<td class="org-left">Inline-Bilder umschalten</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x visual-line-mode</td>
+<td class="org-left">visuellen Zeilenumbruch aktivieren</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x org-indent-mode</td>
+<td class="org-left">visuelle Einrückung aktivieren</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org732608c" class="outline-2">
+<h2 id="org732608c"><span class="section-number-2">37.</span> Kompakte Referenz</h2>
+<div class="outline-text-2" id="text-37">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Format</th>
+<th scope="col" class="org-left">Org-Syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Fett</td>
+<td class="org-left"><code>*Text*</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Kursiv</td>
+<td class="org-left"><code>/Text/</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Unterstrichen</td>
+<td class="org-left"><code>_Text_</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Durchgestrichen</td>
+<td class="org-left"><code>+Text+</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Code</td>
+<td class="org-left"><code>~Text~</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Wörtlich</td>
+<td class="org-left"><code>=Text=</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Hochstellung</td>
+<td class="org-left"><code>x^2</code> oder <code>x^{10}</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Tiefstellung</td>
+<td class="org-left"><code>H_2O</code> oder <code>a_{n+1}</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Link</td>
+<td class="org-left"><code>[[Ziel][Beschreibung]]</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Fußnote</td>
+<td class="org-left"><code>[fn:name]</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Inline-Formel</td>
+<td class="org-left"><code>\( E=mc^2 \)</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Blockformel</td>
+<td class="org-left"><code>\[ ... \]</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Kommentarzeile</td>
+<td class="org-left"><code># Kommentar</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Horizontale Linie</td>
+<td class="org-left"><code>-----</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Harter Umbruch</td>
+<td class="org-left">zwei Rückwärtsschrägstriche</td>
+</tr>
+
+<tr>
+<td class="org-left">Festbreitenzeile</td>
+<td class="org-left"><code>: Text</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org61dd31f" class="outline-2">
+<h2 id="org61dd31f"><span class="section-number-2">38.</span> Abschlussbeispiel</h2>
+<div class="outline-text-2" id="text-38">
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+<div id="outline-container-orge90e8a7" class="outline-2">
+<h2 id="orge90e8a7"><span class="section-number-2">39.</span> Einführung</h2>
+<div class="outline-text-2" id="text-39">
+<p>
+Dies ist <b>fetter</b>, <i>kursiver</i>, <span class="underline">unterstrichener</span> und
+<del>durchgestrichener</del> Text.
+</p>
+
+<p>
+Der Befehl <code>doom sync</code> steht als Code im Fließtext.
+</p>
+
+<p>
+Eine Formel: \( E = mc^2 \)
+</p>
+
+<p>
+Eine Fußnote.<sup><a id="fnr.beispiel" class="footref" href="#fn.beispiel" role="doc-backlink">2</a></sup>
+</p>
+
+<hr />
+
+<blockquote>
+<p>
+Ein Zitat.
+</p>
+</blockquote>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Format</th>
+<th scope="col" class="org-left">Beispiel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Fett</td>
+<td class="org-left"><b>Text</b></td>
+</tr>
+
+<tr>
+<td class="org-left">Code</td>
+<td class="org-left"><code>Befehl</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgf044d04" class="outline-2">
+<h2 id="orgf044d04"><span class="section-number-2">40.</span> Export</h2>
+<div class="outline-text-2" id="text-40">
+<p>
+HTML:
+</p>
+
+<pre class="example" id="orge7bd9b9">
+C-c C-e h h
+</pre>
+
+<p>
+HTML erzeugen und öffnen:
+</p>
+
+<pre class="example" id="org0984457">
+C-c C-e h o
+</pre>
+
+<p>
+PDF über LaTeX:
+</p>
+
+<pre class="example" id="orgf7c751d">
+C-c C-e l p
+</pre>
+
+<p>
+PDF erzeugen und öffnen:
+</p>
+
+<pre class="example" id="orgbe97102">
+C-c C-e l o
+</pre>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Fu&szlig;noten: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.klartext" class="footnum" href="#fnr.klartext" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+Die Quelldatei bleibt auch ohne Emacs lesbar.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.beispiel" class="footnum" href="#fnr.beispiel" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+Dies ist eine Beispiel-Fußnote.
+#+end<sub>example</sub>
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="author">Autor: OpenAI</p>
+<p class="date">Erstellt am: 2026-07-23 Thu 11:25</p>
+</div>
+</body>
+</html>
