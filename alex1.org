@@ -1,0 +1,16 @@
+#+title: mein Bericht
+#+author: "Alexander Kern"
+#+language: de
+#+options: toc:2 num: t
+#+latex_compiler: lualatex
+
+= todo =
+
+* Entgiftungstee
+* Sozialhilfe Nachweis Krankenkasse
+* weniger rauchenn :alex:
+* Tabbak und Kaffee kaufen
+* Org Mode lernen
+* in welchen OSS funktioniert C, Rust, Zig, C++, Mojo
+* Wann sollte Zig die erste Wahl sein?
+* Reta als Gui mit Steuerelementen, wie in der cli

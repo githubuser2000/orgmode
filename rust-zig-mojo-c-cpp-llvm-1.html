@@ -1,0 +1,5076 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+<head>
+<!-- 2026-07-23 Thu 10:19 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rust, Zig, Mojo, C, C++ und LLVM</title>
+<meta name="author" content="termux" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'JavaScript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Rust, Zig, Mojo, C, C++ und LLVM
+<br />
+<span class="subtitle">Plattformunterstützung, Computerarchitekturen, Betriebssysteme und Compiler-Infrastruktur</span>
+</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Inhaltsverzeichnis</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org342b357">1. Teil I: Unterstützte Computerarchitekturen und Betriebssysteme</a>
+<ul>
+<li><a href="#org84faa5a">1.1. Grundsätzliches</a></li>
+<li><a href="#org2838ad6">1.2. Überblick</a></li>
+<li><a href="#org28c345d">1.3. Rust</a>
+<ul>
+<li><a href="#org8aca1e6">1.3.1. Rust-Supportstufen</a></li>
+<li><a href="#org99c0241">1.3.2. Rust auf Linux</a></li>
+<li><a href="#org478ff95">1.3.3. Rust auf Windows</a></li>
+<li><a href="#org0606a32">1.3.4. Rust auf macOS</a></li>
+<li><a href="#org8c3474b">1.3.5. Rust auf Android</a></li>
+<li><a href="#orgf7681cd">1.3.6. Rust auf Apple-Mobilsystemen</a></li>
+<li><a href="#orgef0ab20">1.3.7. Rust auf BSD-Systemen und weiteren Betriebssystemen</a></li>
+<li><a href="#org744a4ef">1.3.8. Rust und WebAssembly</a></li>
+<li><a href="#org64928d2">1.3.9. Rust auf Mikrocontrollern</a></li>
+<li><a href="#org78ad46a">1.3.10. Rust-Zusammenfassung</a></li>
+</ul>
+</li>
+<li><a href="#org225a261">1.4. Zig</a>
+<ul>
+<li><a href="#orgc7a0225">1.4.1. Zig-Zielbeschreibung</a></li>
+<li><a href="#org354967f">1.4.2. Zig auf Linux</a></li>
+<li><a href="#org0005b1a">1.4.3. Zig auf Windows und macOS</a></li>
+<li><a href="#orgc06041d">1.4.4. Zig auf Android</a></li>
+<li><a href="#org39dd709">1.4.5. Zig auf BSD-Systemen und Apple-Mobilsystemen</a></li>
+<li><a href="#orge8f993a">1.4.6. Zig und WebAssembly</a></li>
+<li><a href="#org391e32a">1.4.7. Zig auf Embedded-Systemen</a></li>
+<li><a href="#org0f42d19">1.4.8. Zig und GPUs</a></li>
+<li><a href="#org904d680">1.4.9. Zig als C- und C++-Compiler</a></li>
+<li><a href="#orge35aa8f">1.4.10. Zig-Zusammenfassung</a></li>
+</ul>
+</li>
+<li><a href="#org6c7bc1e">1.5. Mojo</a>
+<ul>
+<li><a href="#orgc68406e">1.5.1. Offiziell unterstützte Hostsysteme</a></li>
+<li><a href="#org4ee8492">1.5.2. Mojo auf x86-64-Linux</a></li>
+<li><a href="#orgc5aeaef">1.5.3. Mojo auf ARM64-Linux und macOS</a></li>
+<li><a href="#org946cf0a">1.5.4. Mojo auf Windows</a></li>
+<li><a href="#org2c952f8">1.5.5. Mojo auf Android, BSD und RISC-V</a></li>
+<li><a href="#orgd53805f">1.5.6. Mojo-Cross-Compilation</a></li>
+<li><a href="#orgd5a125e">1.5.7. Mojo und GPUs</a></li>
+<li><a href="#org98eb2d6">1.5.8. Mojo-Zusammenfassung</a></li>
+</ul>
+</li>
+<li><a href="#org7befe05">1.6. C</a>
+<ul>
+<li><a href="#orgae247a7">1.6.1. C auf Desktop- und Serversystemen</a></li>
+<li><a href="#org17e46d2">1.6.2. C auf Windows, macOS und Android</a></li>
+<li><a href="#orgd533206">1.6.3. C auf BSD, Unix und Mikrocontrollern</a></li>
+<li><a href="#orge7e7e8c">1.6.4. C und Echtzeitbetriebssysteme</a></li>
+<li><a href="#orge351bd9">1.6.5. C und WebAssembly</a></li>
+<li><a href="#orgaa9b164">1.6.6. Einschränkungen von C</a></li>
+</ul>
+</li>
+<li><a href="#orgcb16fb5">1.7. C++</a>
+<ul>
+<li><a href="#org37a4565">1.7.1. C++ auf Desktop- und Serversystemen</a></li>
+<li><a href="#org5524442">1.7.2. C++ auf Windows, Linux, Apple und Android</a></li>
+<li><a href="#org21e0c23">1.7.3. C++ auf Embedded-Systemen</a></li>
+<li><a href="#orgfee0282">1.7.4. Unterschied zwischen C und C++ bei kleinen Plattformen</a></li>
+</ul>
+</li>
+<li><a href="#org4b239a5">1.8. Direkter Vergleich</a>
+<ul>
+<li><a href="#org7468138">1.8.1. Linux x86-64</a></li>
+<li><a href="#org6211847">1.8.2. Linux ARM64</a></li>
+<li><a href="#org3f4c774">1.8.3. Windows x86-64</a></li>
+<li><a href="#org889e082">1.8.4. Windows ARM64</a></li>
+<li><a href="#org08b9ea8">1.8.5. macOS ARM64</a></li>
+<li><a href="#org1e1fc29">1.8.6. Android</a></li>
+<li><a href="#org4944a0b">1.8.7. WebAssembly</a></li>
+<li><a href="#org40f6ea9">1.8.8. Mikrocontroller und Bare Metal</a></li>
+</ul>
+</li>
+<li><a href="#orgef09915">1.9. Welche Sprache für welchen Einsatz?</a>
+<ul>
+<li><a href="#org63871a7">1.9.1. C als erste Wahl</a></li>
+<li><a href="#org3947dc7">1.9.2. C++ als erste Wahl</a></li>
+<li><a href="#orgb1f2e3e">1.9.3. Rust als erste Wahl</a></li>
+<li><a href="#org1147ed0">1.9.4. Zig als erste Wahl</a></li>
+<li><a href="#org169970f">1.9.5. Mojo als erste Wahl</a></li>
+</ul>
+</li>
+<li><a href="#org5692125">1.10. Ranglisten</a>
+<ul>
+<li><a href="#orgc869805">1.10.1. Nach realer Plattformbreite</a></li>
+<li><a href="#org5581223">1.10.2. Nach Cross-Compilation</a></li>
+<li><a href="#orge0f2ae0">1.10.3. Nach Embedded-Eignung</a></li>
+<li><a href="#org9e3c829">1.10.4. Nach statischer Speichersicherheit</a></li>
+<li><a href="#org4aa7439">1.10.5. Nach Unterstützung alter und exotischer Systeme</a></li>
+</ul>
+</li>
+<li><a href="#org108fc35">1.11. Wichtig für Android und Termux</a></li>
+<li><a href="#org1cc79f1">1.12. Wichtig für das Samsung Galaxy Note 8</a></li>
+<li><a href="#orgd9645dc">1.13. Wichtig für einen alten AMD-Turion-Rechner</a></li>
+<li><a href="#org2b5a974">1.14. Wichtig für RISC-V</a></li>
+<li><a href="#orga25c700">1.15. Wichtig für Betriebssystementwicklung</a></li>
+<li><a href="#org8a934a7">1.16. Zusammenfassung</a></li>
+</ul>
+</li>
+<li><a href="#org1b00386">2. Teil II: Was ist LLVM?</a>
+<ul>
+<li><a href="#org5686624">2.1. Grundidee</a></li>
+<li><a href="#orgbd9e0ac">2.2. Die drei Hauptteile einer LLVM-Compilerkette</a>
+<ul>
+<li><a href="#org504d10d">2.2.1. 1. Das Frontend</a></li>
+<li><a href="#orgf45467b">2.2.2. 2. LLVM-IR</a></li>
+<li><a href="#org38aa4ba">2.2.3. 3. Das Backend</a></li>
+</ul>
+</li>
+<li><a href="#orge804bd4">2.3. Warum LLVM so wichtig ist</a></li>
+<li><a href="#org4edf2ab">2.4. Wichtige LLVM-Komponenten und Werkzeuge</a>
+<ul>
+<li><a href="#org2281163">2.4.1. Clang</a></li>
+<li><a href="#org89666d6">2.4.2. llvm-as</a></li>
+<li><a href="#org6e4864b">2.4.3. llvm-dis</a></li>
+<li><a href="#orgfe115a3">2.4.4. opt</a></li>
+<li><a href="#org29d11c8">2.4.5. llc</a></li>
+<li><a href="#org1cacbf9">2.4.6. lld</a></li>
+<li><a href="#org05889ba">2.4.7. LLDB</a></li>
+<li><a href="#org77e833e">2.4.8. llvm-objdump</a></li>
+<li><a href="#orga81f1a0">2.4.9. Weitere Werkzeuge</a></li>
+</ul>
+</li>
+<li><a href="#org73336b7">2.5. Beispiel einer vollständigen LLVM-Kette</a></li>
+<li><a href="#orge5d27bc">2.6. LLVM ist nicht der vollständige Compiler</a></li>
+<li><a href="#org1437cb2">2.7. LLVM und Optimierungen</a>
+<ul>
+<li><a href="#org6ee5af3">2.7.1. Konstantenfaltung</a></li>
+<li><a href="#orga93a600">2.7.2. Dead-Code-Elimination</a></li>
+<li><a href="#org2dd39f9">2.7.3. Inlining</a></li>
+<li><a href="#org35a6315">2.7.4. Schleifenoptimierungen</a></li>
+<li><a href="#org43d9139">2.7.5. Vektorisierung</a></li>
+<li><a href="#orgcae8000">2.7.6. Escape- und Alias-Analysen</a></li>
+</ul>
+</li>
+<li><a href="#orgd53a552">2.8. Optimierungsstufen</a></li>
+<li><a href="#orgf7e0483">2.9. LLVM und MLIR</a>
+<ul>
+<li><a href="#org7cf6e25">2.9.1. MLIR-Dialekte</a></li>
+</ul>
+</li>
+<li><a href="#orgc6ea47e">2.10. Ist LLVM eine virtuelle Maschine?</a></li>
+<li><a href="#orgd3d64ea">2.11. Ahead-of-time- und Just-in-time-Kompilierung</a>
+<ul>
+<li><a href="#org9d54448">2.11.1. Ahead-of-time-Kompilierung</a></li>
+<li><a href="#org66df75e">2.11.2. Just-in-time-Kompilierung</a></li>
+</ul>
+</li>
+<li><a href="#orga79a502">2.12. LLVM gegenüber GCC</a></li>
+<li><a href="#org0dafdf8">2.13. LLVM gegenüber einer virtuellen Maschine</a></li>
+<li><a href="#org222bd33">2.14. Verwendung von LLVM durch verschiedene Sprachen</a>
+<ul>
+<li><a href="#orgeb13fc1">2.14.1. C</a></li>
+<li><a href="#orgd3b6636">2.14.2. C++</a></li>
+<li><a href="#org5c49148">2.14.3. Rust</a></li>
+<li><a href="#org4153f9b">2.14.4. Zig</a></li>
+<li><a href="#org30e23c4">2.14.5. Mojo</a></li>
+</ul>
+</li>
+<li><a href="#org903bde9">2.15. LLVM und Cross-Compilation</a></li>
+<li><a href="#orga5c7db5">2.16. Target Triple</a></li>
+<li><a href="#org7cb433c">2.17. LLVM und ABI</a></li>
+<li><a href="#org59d5b15">2.18. LLVM und Linker</a></li>
+<li><a href="#orga1d2be6">2.19. LLVM und Objektdateiformate</a></li>
+<li><a href="#orgdc1177a">2.20. LLVM und Debug-Informationen</a></li>
+<li><a href="#org4707c97">2.21. LLVM und Sanitizer</a>
+<ul>
+<li><a href="#orgc109cb8">2.21.1. AddressSanitizer</a></li>
+<li><a href="#org5c0525c">2.21.2. UndefinedBehaviorSanitizer</a></li>
+<li><a href="#orgecc7f40">2.21.3. ThreadSanitizer</a></li>
+</ul>
+</li>
+<li><a href="#org21c357a">2.22. LLVM und Link-Time Optimization</a></li>
+<li><a href="#orgdb1e1e4">2.23. LLVM und Profile-Guided Optimization</a></li>
+<li><a href="#orgce097bd">2.24. LLVM und GPUs</a></li>
+<li><a href="#org3c70a3c">2.25. Grenzen von LLVM</a></li>
+<li><a href="#org1a326cf">2.26. Kann man eine eigene Sprache mit LLVM bauen?</a>
+<ul>
+<li><a href="#org3cc5bc4">2.26.1. Lexer</a></li>
+<li><a href="#org8da5e1b">2.26.2. Parser und AST</a></li>
+<li><a href="#org0cd5379">2.26.3. LLVM-IR-Erzeugung</a></li>
+</ul>
+</li>
+<li><a href="#orgb81d52e">2.27. LLVM als Bibliothek</a></li>
+<li><a href="#org4a07de3">2.28. LLVM-Versionen und Kompatibilität</a></li>
+<li><a href="#org16cdba7">2.29. Praktische Befehle zum Ausprobieren</a></li>
+<li><a href="#org40a78fe">2.30. Ein kleines Experiment</a></li>
+<li><a href="#orgdc3d90e">2.31. Kurzer Vergleich der Begriffe</a></li>
+<li><a href="#orgc0245f8">2.32. Zusammenfassung</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org342b357" class="outline-2">
+<h2 id="org342b357"><span class="section-number-2">1.</span> Teil I: Unterstützte Computerarchitekturen und Betriebssysteme</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org84faa5a" class="outline-3">
+<h3 id="org84faa5a"><span class="section-number-3">1.1.</span> Grundsätzliches</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Nicht allein die Programmiersprache entscheidet, auf welchen Systemen ein Programm funktioniert.
+</p>
+
+<p>
+Entscheidend ist die Kombination aus:
+</p>
+
+<ul class="org-ul">
+<li>Programmiersprache</li>
+<li>Compiler</li>
+<li>Standardbibliothek</li>
+<li>Linker</li>
+<li>Zielarchitektur</li>
+<li>Betriebssystem</li>
+<li>ABI</li>
+<li>Betriebssystem-SDK</li>
+<li>C-Laufzeitbibliothek</li>
+<li>unterstützter Toolchain</li>
+</ul>
+
+<p>
+Eine Sprache kann eine CPU-Architektur grundsätzlich unterstützen, ohne dass für jedes Betriebssystem auf dieser Architektur eine vollständige Toolchain existiert.
+</p>
+
+<p>
+Beispielsweise bedeutet:
+</p>
+
+<pre class="example" id="org197c1fd">
+ARM64 wird unterstützt
+</pre>
+
+<p>
+nicht automatisch, dass alle folgenden Systeme gleichermaßen unterstützt werden:
+</p>
+
+<ul class="org-ul">
+<li>ARM64-Linux</li>
+<li>ARM64-Android</li>
+<li>ARM64-Windows</li>
+<li>ARM64-macOS</li>
+<li>ARM64-FreeBSD</li>
+<li>ARM64 ohne Betriebssystem</li>
+</ul>
+
+<p>
+Eine vollständige Zielplattform wird häufig mit einem sogenannten <b>Target Triple</b> beschrieben.
+</p>
+
+<p>
+Beispiele:
+</p>
+
+<pre class="example" id="org9f7f17a">
+x86_64-unknown-linux-gnu
+aarch64-unknown-linux-gnu
+x86_64-pc-windows-msvc
+aarch64-apple-darwin
+riscv64-unknown-linux-gnu
+wasm32-wasi
+</pre>
+</div>
+</div>
+<div id="outline-container-org2838ad6" class="outline-3">
+<h3 id="org2838ad6"><span class="section-number-3">1.2.</span> Überblick</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Die Plattformabdeckung lässt sich grob folgendermaßen einordnen:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Sprache</th>
+<th scope="col" class="org-left">Plattformbreite</th>
+<th scope="col" class="org-left">Cross-Compilation</th>
+<th scope="col" class="org-left">Embedded</th>
+<th scope="col" class="org-left">Mobile Systeme</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C</td>
+<td class="org-left">hervorragend</td>
+<td class="org-left">sehr gut</td>
+<td class="org-left">hervorragend</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">C++</td>
+<td class="org-left">hervorragend</td>
+<td class="org-left">sehr gut</td>
+<td class="org-left">sehr gut</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">Rust</td>
+<td class="org-left">sehr groß</td>
+<td class="org-left">gut</td>
+<td class="org-left">sehr gut</td>
+<td class="org-left">sehr gut</td>
+</tr>
+
+<tr>
+<td class="org-left">Zig</td>
+<td class="org-left">sehr groß</td>
+<td class="org-left">hervorragend</td>
+<td class="org-left">sehr gut</td>
+<td class="org-left">teilweise</td>
+</tr>
+
+<tr>
+<td class="org-left">Mojo</td>
+<td class="org-left">derzeit klein</td>
+<td class="org-left">eingeschränkt</td>
+<td class="org-left">kaum</td>
+<td class="org-left">kaum</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Nach realer Plattformbreite ergibt sich ungefähr:
+</p>
+
+<ol class="org-ol">
+<li>C</li>
+<li>C++</li>
+<li>Rust</li>
+<li>Zig</li>
+<li>Mojo</li>
+</ol>
+
+<p>
+Nach eingebauter und einfacher Cross-Compilation:
+</p>
+
+<ol class="org-ol">
+<li>Zig</li>
+<li>C und C++ mit Clang</li>
+<li>Rust</li>
+<li>Mojo</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org28c345d" class="outline-3">
+<h3 id="org28c345d"><span class="section-number-3">1.3.</span> Rust</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Rust unterstützt zahlreiche Architekturen und Betriebssysteme.
+</p>
+
+<p>
+Die Rust-Zielplattformen werden in verschiedene Qualitätsstufen eingeteilt.
+</p>
+</div>
+<div id="outline-container-org8aca1e6" class="outline-4">
+<h4 id="org8aca1e6"><span class="section-number-4">1.3.1.</span> Rust-Supportstufen</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+Rust unterscheidet insbesondere:
+</p>
+
+<ul class="org-ul">
+<li>Tier 1</li>
+<li>Tier 2</li>
+<li>Tier 3</li>
+</ul>
+
+<p>
+Tier 1 bedeutet ungefähr:
+</p>
+
+<ul class="org-ul">
+<li>Compiler wird offiziell bereitgestellt</li>
+<li>Standardbibliothek wird bereitgestellt</li>
+<li>Zielplattform wird regelmäßig getestet</li>
+<li>Fehler verhindern normalerweise einen Rust-Release</li>
+</ul>
+
+<p>
+Tier 2 bedeutet ungefähr:
+</p>
+
+<ul class="org-ul">
+<li>Compiler und Standardbibliothek können bereitgestellt werden</li>
+<li>Tests sind weniger vollständig</li>
+<li>nicht jedes Ziel wird auf echter Hardware getestet</li>
+</ul>
+
+<p>
+Tier 3 bedeutet ungefähr:
+</p>
+
+<ul class="org-ul">
+<li>der Compiler kennt das Ziel</li>
+<li>Unterstützung kann experimentell sein</li>
+<li>offizielle Binärpakete fehlen möglicherweise</li>
+<li>eigene Toolchain-Builds können erforderlich sein</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org99c0241" class="outline-4">
+<h4 id="org99c0241"><span class="section-number-4">1.3.2.</span> Rust auf Linux</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+Sehr gut unterstützt sind insbesondere:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Architektur</th>
+<th scope="col" class="org-left">Betriebssystem</th>
+<th scope="col" class="org-left">Typische ABI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">x86-64</td>
+<td class="org-left">Linux</td>
+<td class="org-left">GNU/glibc</td>
+</tr>
+
+<tr>
+<td class="org-left">x86-64</td>
+<td class="org-left">Linux</td>
+<td class="org-left">Musl</td>
+</tr>
+
+<tr>
+<td class="org-left">x86 32 Bit</td>
+<td class="org-left">Linux</td>
+<td class="org-left">GNU/glibc</td>
+</tr>
+
+<tr>
+<td class="org-left">ARM64</td>
+<td class="org-left">Linux</td>
+<td class="org-left">GNU/glibc</td>
+</tr>
+
+<tr>
+<td class="org-left">ARM64</td>
+<td class="org-left">Linux</td>
+<td class="org-left">Musl</td>
+</tr>
+
+<tr>
+<td class="org-left">ARMv6</td>
+<td class="org-left">Linux</td>
+<td class="org-left">GNU</td>
+</tr>
+
+<tr>
+<td class="org-left">ARMv7</td>
+<td class="org-left">Linux</td>
+<td class="org-left">GNU</td>
+</tr>
+
+<tr>
+<td class="org-left">RISC-V 64</td>
+<td class="org-left">Linux</td>
+<td class="org-left">GNU</td>
+</tr>
+
+<tr>
+<td class="org-left">PowerPC</td>
+<td class="org-left">Linux</td>
+<td class="org-left">GNU</td>
+</tr>
+
+<tr>
+<td class="org-left">PowerPC64</td>
+<td class="org-left">Linux</td>
+<td class="org-left">GNU</td>
+</tr>
+
+<tr>
+<td class="org-left">PowerPC64LE</td>
+<td class="org-left">Linux</td>
+<td class="org-left">GNU</td>
+</tr>
+
+<tr>
+<td class="org-left">s390x</td>
+<td class="org-left">Linux</td>
+<td class="org-left">GNU</td>
+</tr>
+
+<tr>
+<td class="org-left">LoongArch64</td>
+<td class="org-left">Linux</td>
+<td class="org-left">GNU</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Wichtige Linux-Ziele sind beispielsweise:
+</p>
+
+<pre class="example" id="org517dd6a">
+x86_64-unknown-linux-gnu
+x86_64-unknown-linux-musl
+aarch64-unknown-linux-gnu
+aarch64-unknown-linux-musl
+armv7-unknown-linux-gnueabihf
+riscv64gc-unknown-linux-gnu
+powerpc64le-unknown-linux-gnu
+s390x-unknown-linux-gnu
+loongarch64-unknown-linux-gnu
+</pre>
+</div>
+</div>
+<div id="outline-container-org478ff95" class="outline-4">
+<h4 id="org478ff95"><span class="section-number-4">1.3.3.</span> Rust auf Windows</h4>
+<div class="outline-text-4" id="text-1-3-3">
+<p>
+Rust unterstützt unter Windows hauptsächlich:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Architektur</th>
+<th scope="col" class="org-left">Toolchain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">x86 32 Bit</td>
+<td class="org-left">MSVC</td>
+</tr>
+
+<tr>
+<td class="org-left">x86 32 Bit</td>
+<td class="org-left">GNU/MinGW</td>
+</tr>
+
+<tr>
+<td class="org-left">x86-64</td>
+<td class="org-left">MSVC</td>
+</tr>
+
+<tr>
+<td class="org-left">x86-64</td>
+<td class="org-left">GNU/MinGW</td>
+</tr>
+
+<tr>
+<td class="org-left">ARM64</td>
+<td class="org-left">MSVC</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Wichtige Ziele:
+</p>
+
+<pre class="example" id="org5964544">
+i686-pc-windows-msvc
+i686-pc-windows-gnu
+x86_64-pc-windows-msvc
+x86_64-pc-windows-gnu
+aarch64-pc-windows-msvc
+</pre>
+
+<p>
+Für normale Windows-Programme ist die MSVC-Toolchain meist die beste Wahl.
+</p>
+</div>
+</div>
+<div id="outline-container-org0606a32" class="outline-4">
+<h4 id="org0606a32"><span class="section-number-4">1.3.4.</span> Rust auf macOS</h4>
+<div class="outline-text-4" id="text-1-3-4">
+<p>
+Rust unterstützt:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Architektur</th>
+<th scope="col" class="org-left">Betriebssystem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">x86-64</td>
+<td class="org-left">macOS</td>
+</tr>
+
+<tr>
+<td class="org-left">ARM64</td>
+<td class="org-left">macOS</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Ziele:
+</p>
+
+<pre class="example" id="orgd98f805">
+x86_64-apple-darwin
+aarch64-apple-darwin
+</pre>
+
+<p>
+ARM64 wird für Apple-Silicon-Prozessoren wie M1, M2, M3, M4 und folgende Generationen verwendet.
+</p>
+</div>
+</div>
+<div id="outline-container-org8c3474b" class="outline-4">
+<h4 id="org8c3474b"><span class="section-number-4">1.3.5.</span> Rust auf Android</h4>
+<div class="outline-text-4" id="text-1-3-5">
+<p>
+Rust unterstützt Android für:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Architektur</th>
+<th scope="col" class="org-left">Android-ABI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">ARMv7</td>
+<td class="org-left">armeabi-v7a</td>
+</tr>
+
+<tr>
+<td class="org-left">ARM64</td>
+<td class="org-left">arm64-v8a</td>
+</tr>
+
+<tr>
+<td class="org-left">x86</td>
+<td class="org-left">x86</td>
+</tr>
+
+<tr>
+<td class="org-left">x86-64</td>
+<td class="org-left">x86<sub>64</sub></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Typische Rust-Ziele:
+</p>
+
+<pre class="example" id="org4546d09">
+armv7-linux-androideabi
+aarch64-linux-android
+i686-linux-android
+x86_64-linux-android
+</pre>
+
+<p>
+Zum Linken wird normalerweise das Android NDK benötigt.
+</p>
+
+<p>
+Rust funktioniert daher grundsätzlich auch für Android-Anwendungen und native Android-Bibliotheken.
+</p>
+</div>
+</div>
+<div id="outline-container-orgf7681cd" class="outline-4">
+<h4 id="orgf7681cd"><span class="section-number-4">1.3.6.</span> Rust auf Apple-Mobilsystemen</h4>
+<div class="outline-text-4" id="text-1-3-6">
+<p>
+Rust unterstützt unter anderem:
+</p>
+
+<ul class="org-ul">
+<li>iOS</li>
+<li>iPadOS</li>
+<li>tvOS</li>
+<li>watchOS</li>
+<li>visionOS</li>
+</ul>
+
+<p>
+Dabei werden hauptsächlich folgende Architekturen verwendet:
+</p>
+
+<ul class="org-ul">
+<li>ARM64 auf realen Geräten</li>
+<li>ARM64 oder x86-64 im Simulator, abhängig vom Host</li>
+</ul>
+
+<p>
+Beispiele:
+</p>
+
+<pre class="example" id="orgc8e5b85">
+aarch64-apple-ios
+aarch64-apple-ios-sim
+x86_64-apple-ios
+</pre>
+</div>
+</div>
+<div id="outline-container-orgef0ab20" class="outline-4">
+<h4 id="orgef0ab20"><span class="section-number-4">1.3.7.</span> Rust auf BSD-Systemen und weiteren Betriebssystemen</h4>
+<div class="outline-text-4" id="text-1-3-7">
+<p>
+Rust unterstützt unter anderem:
+</p>
+
+<ul class="org-ul">
+<li>FreeBSD</li>
+<li>NetBSD</li>
+<li>OpenBSD</li>
+<li>DragonFly BSD, eingeschränkter</li>
+<li>Redox OS</li>
+<li>Fuchsia</li>
+<li>illumos</li>
+<li>Solaris</li>
+<li>Haiku, teilweise</li>
+<li>QNX, teilweise</li>
+<li>VxWorks, teilweise</li>
+<li>NuttX</li>
+<li>RTEMS</li>
+<li>UEFI</li>
+<li>Hermit</li>
+<li>Systeme ohne Betriebssystem</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org744a4ef" class="outline-4">
+<h4 id="org744a4ef"><span class="section-number-4">1.3.8.</span> Rust und WebAssembly</h4>
+<div class="outline-text-4" id="text-1-3-8">
+<p>
+Wichtige Ziele:
+</p>
+
+<pre class="example" id="org95e8353">
+wasm32-unknown-unknown
+wasm32-wasip1
+wasm32-wasip2
+wasm32-unknown-emscripten
+</pre>
+
+<p>
+Einsatzbereiche:
+</p>
+
+<ul class="org-ul">
+<li>Browser</li>
+<li>Webanwendungen</li>
+<li>Node.js</li>
+<li>WASI-Runtimes</li>
+<li>Plugins</li>
+<li>serverseitige Sandbox-Systeme</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org64928d2" class="outline-4">
+<h4 id="org64928d2"><span class="section-number-4">1.3.9.</span> Rust auf Mikrocontrollern</h4>
+<div class="outline-text-4" id="text-1-3-9">
+<p>
+Rust kann ohne vollständige Standardbibliothek mit <code>#![no_std]</code> auf Embedded-Systemen verwendet werden.
+</p>
+
+<p>
+Unterstützte Architekturen sind unter anderem:
+</p>
+
+<ul class="org-ul">
+<li>ARM Cortex-M</li>
+<li>ARM Cortex-R</li>
+<li>ARM Cortex-A</li>
+<li>RISC-V 32 Bit</li>
+<li>RISC-V 64 Bit</li>
+<li>AVR, teilweise</li>
+<li>MSP430, teilweise</li>
+<li>Xtensa, teilweise über externe Toolchains</li>
+<li>x86 ohne Betriebssystem</li>
+</ul>
+
+<p>
+Typische ARM-Mikrocontroller-Ziele:
+</p>
+
+<pre class="example" id="org704676a">
+thumbv6m-none-eabi
+thumbv7m-none-eabi
+thumbv7em-none-eabi
+thumbv7em-none-eabihf
+thumbv8m.base-none-eabi
+thumbv8m.main-none-eabi
+</pre>
+</div>
+</div>
+<div id="outline-container-org78ad46a" class="outline-4">
+<h4 id="org78ad46a"><span class="section-number-4">1.3.10.</span> Rust-Zusammenfassung</h4>
+<div class="outline-text-4" id="text-1-3-10">
+<p>
+Rust eignet sich besonders gut für:
+</p>
+
+<ul class="org-ul">
+<li>Linux</li>
+<li>Windows</li>
+<li>macOS</li>
+<li>Android</li>
+<li>WebAssembly</li>
+<li>Embedded-Systeme</li>
+<li>Netzwerksoftware</li>
+<li>Betriebssystemkomponenten</li>
+<li>Kommandozeilenprogramme</li>
+<li>Server</li>
+<li>sicherheitskritische Systemsoftware</li>
+</ul>
+
+<p>
+Rust ist weniger universell als C, bietet dafür aber wesentlich stärkere statische Speichersicherheitsgarantien.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org225a261" class="outline-3">
+<h3 id="org225a261"><span class="section-number-3">1.4.</span> Zig</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Zig besitzt eine sehr breite Zielarchitektur-Unterstützung.
+</p>
+
+<p>
+Eine besondere Stärke von Zig ist die eingebaute Cross-Compilation.
+</p>
+
+<p>
+Alle bekannten Ziele können angezeigt werden mit:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>zig targets
+</code></pre>
+</div>
+</div>
+<div id="outline-container-orgc7a0225" class="outline-4">
+<h4 id="orgc7a0225"><span class="section-number-4">1.4.1.</span> Zig-Zielbeschreibung</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<p>
+Zig verwendet Ziele, die aus mehreren Teilen bestehen:
+</p>
+
+<ul class="org-ul">
+<li>CPU-Architektur</li>
+<li>Betriebssystem</li>
+<li>ABI</li>
+<li>CPU-Modell</li>
+<li>CPU-Eigenschaften</li>
+<li>Betriebssystemversion</li>
+<li>libc-Version</li>
+</ul>
+
+<p>
+Beispiel:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>zig build-exe <span style="color: #98be65;">\</span>
+  -target aarch64-linux-gnu <span style="color: #98be65;">\</span>
+  programm.zig
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org354967f" class="outline-4">
+<h4 id="org354967f"><span class="section-number-4">1.4.2.</span> Zig auf Linux</h4>
+<div class="outline-text-4" id="text-1-4-2">
+<p>
+Zig unterstützt Linux unter anderem für:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Architektur</th>
+<th scope="col" class="org-left">Betriebssystem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">x86</td>
+<td class="org-left">Linux</td>
+</tr>
+
+<tr>
+<td class="org-left">x86-64</td>
+<td class="org-left">Linux</td>
+</tr>
+
+<tr>
+<td class="org-left">ARM</td>
+<td class="org-left">Linux</td>
+</tr>
+
+<tr>
+<td class="org-left">ARM64</td>
+<td class="org-left">Linux</td>
+</tr>
+
+<tr>
+<td class="org-left">RISC-V 32</td>
+<td class="org-left">Linux</td>
+</tr>
+
+<tr>
+<td class="org-left">RISC-V 64</td>
+<td class="org-left">Linux</td>
+</tr>
+
+<tr>
+<td class="org-left">MIPS</td>
+<td class="org-left">Linux</td>
+</tr>
+
+<tr>
+<td class="org-left">MIPS64</td>
+<td class="org-left">Linux</td>
+</tr>
+
+<tr>
+<td class="org-left">PowerPC</td>
+<td class="org-left">Linux</td>
+</tr>
+
+<tr>
+<td class="org-left">PowerPC64</td>
+<td class="org-left">Linux</td>
+</tr>
+
+<tr>
+<td class="org-left">PowerPC64LE</td>
+<td class="org-left">Linux</td>
+</tr>
+
+<tr>
+<td class="org-left">s390x</td>
+<td class="org-left">Linux</td>
+</tr>
+
+<tr>
+<td class="org-left">LoongArch64</td>
+<td class="org-left">Linux</td>
+</tr>
+
+<tr>
+<td class="org-left">Hexagon</td>
+<td class="org-left">Linux</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Zig kann häufig sowohl glibc als auch Musl verwenden.
+</p>
+
+<p>
+Beispiele:
+</p>
+
+<pre class="example" id="org217d9de">
+x86_64-linux-gnu
+x86_64-linux-musl
+aarch64-linux-gnu
+aarch64-linux-musl
+riscv64-linux-gnu
+powerpc64le-linux-gnu
+</pre>
+</div>
+</div>
+<div id="outline-container-org0005b1a" class="outline-4">
+<h4 id="org0005b1a"><span class="section-number-4">1.4.3.</span> Zig auf Windows und macOS</h4>
+<div class="outline-text-4" id="text-1-4-3">
+<p>
+Zig unterstützt unter Windows insbesondere:
+</p>
+
+<ul class="org-ul">
+<li>x86</li>
+<li>x86-64</li>
+<li>ARM64</li>
+</ul>
+
+<p>
+Beispiele:
+</p>
+
+<pre class="example" id="org2490767">
+x86-windows-gnu
+x86_64-windows-gnu
+aarch64-windows-gnu
+</pre>
+
+<p>
+Auf macOS unterstützt Zig:
+</p>
+
+<pre class="example" id="orgdcb89e4">
+x86_64-macos
+aarch64-macos
+</pre>
+
+<p>
+Für Apple-Ziele können Apple-SDKs und technische oder rechtliche Einschränkungen relevant sein.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc06041d" class="outline-4">
+<h4 id="orgc06041d"><span class="section-number-4">1.4.4.</span> Zig auf Android</h4>
+<div class="outline-text-4" id="text-1-4-4">
+<p>
+Zig kann Android-Ziele grundsätzlich ansprechen.
+</p>
+
+<p>
+Typische Architekturen:
+</p>
+
+<ul class="org-ul">
+<li>ARMv7</li>
+<li>ARM64</li>
+<li>x86</li>
+<li>x86-64</li>
+</ul>
+
+<p>
+Beispiel:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>zig build-exe <span style="color: #98be65;">\</span>
+  -target aarch64-linux-android <span style="color: #98be65;">\</span>
+  programm.zig
+</code></pre>
+</div>
+
+<p>
+In der Praxis werden häufig zusätzlich benötigt:
+</p>
+
+<ul class="org-ul">
+<li>Android NDK</li>
+<li>Android-Sysroot</li>
+<li>passende API-Level</li>
+<li>Android-Bibliotheken</li>
+<li>korrekte Linkeroptionen</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org39dd709" class="outline-4">
+<h4 id="org39dd709"><span class="section-number-4">1.4.5.</span> Zig auf BSD-Systemen und Apple-Mobilsystemen</h4>
+<div class="outline-text-4" id="text-1-4-5">
+<p>
+Zig unterstützt unter anderem:
+</p>
+
+<ul class="org-ul">
+<li>FreeBSD</li>
+<li>NetBSD</li>
+<li>OpenBSD</li>
+<li>DragonFly BSD</li>
+<li>iOS</li>
+<li>tvOS</li>
+<li>watchOS</li>
+<li>visionOS</li>
+</ul>
+
+<p>
+Die genaue Qualitätsstufe hängt von der Kombination und Zig-Version ab.
+</p>
+</div>
+</div>
+<div id="outline-container-orge8f993a" class="outline-4">
+<h4 id="orge8f993a"><span class="section-number-4">1.4.6.</span> Zig und WebAssembly</h4>
+<div class="outline-text-4" id="text-1-4-6">
+<p>
+Beispiele:
+</p>
+
+<pre class="example" id="org0b0da53">
+wasm32-freestanding
+wasm32-wasi
+wasm64-wasi
+</pre>
+
+<p>
+Zig eignet sich gut für:
+</p>
+
+<ul class="org-ul">
+<li>Browsermodule</li>
+<li>WASI-Programme</li>
+<li>Plugins</li>
+<li>kleine portable Binärmodule</li>
+<li>Spiele- und Grafikcode</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org391e32a" class="outline-4">
+<h4 id="org391e32a"><span class="section-number-4">1.4.7.</span> Zig auf Embedded-Systemen</h4>
+<div class="outline-text-4" id="text-1-4-7">
+<p>
+Zig unterstützt zahlreiche freestanding Architekturen:
+</p>
+
+<ul class="org-ul">
+<li>ARM</li>
+<li>Thumb</li>
+<li>ARM64</li>
+<li>AVR</li>
+<li>MSP430</li>
+<li>RISC-V</li>
+<li>x86</li>
+<li>MIPS</li>
+<li>PowerPC</li>
+<li>SPARC</li>
+<li>Motorola 68000</li>
+<li>LoongArch</li>
+<li>BPF</li>
+</ul>
+
+<p>
+Beispiele:
+</p>
+
+<pre class="example" id="org31276da">
+thumb-freestanding-eabi
+riscv32-freestanding
+riscv64-freestanding
+avr-freestanding
+msp430-freestanding
+</pre>
+</div>
+</div>
+<div id="outline-container-org0f42d19" class="outline-4">
+<h4 id="org0f42d19"><span class="section-number-4">1.4.8.</span> Zig und GPUs</h4>
+<div class="outline-text-4" id="text-1-4-8">
+<p>
+Zig kennt auch Ziele für:
+</p>
+
+<ul class="org-ul">
+<li>NVIDIA PTX</li>
+<li>AMDGCN</li>
+<li>SPIR-V</li>
+<li>Vulkan</li>
+<li>OpenCL</li>
+<li>OpenGL-nahe Shader-Ziele</li>
+</ul>
+
+<p>
+Diese Ziele sind teilweise experimentell.
+</p>
+</div>
+</div>
+<div id="outline-container-org904d680" class="outline-4">
+<h4 id="org904d680"><span class="section-number-4">1.4.9.</span> Zig als C- und C++-Compiler</h4>
+<div class="outline-text-4" id="text-1-4-9">
+<p>
+C kompilieren:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>zig cc programm.c -o programm
+</code></pre>
+</div>
+
+<p>
+C++ kompilieren:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>zig c++ programm.cpp -o programm
+</code></pre>
+</div>
+
+<p>
+C für ARM64-Linux cross-compilieren:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>zig cc <span style="color: #98be65;">\</span>
+  -target aarch64-linux-gnu <span style="color: #98be65;">\</span>
+  programm.c <span style="color: #98be65;">\</span>
+  -o programm-arm64
+</code></pre>
+</div>
+
+<p>
+C für Windows cross-compilieren:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>zig cc <span style="color: #98be65;">\</span>
+  -target x86_64-windows-gnu <span style="color: #98be65;">\</span>
+  programm.c <span style="color: #98be65;">\</span>
+  -o programm.exe
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge35aa8f" class="outline-4">
+<h4 id="orge35aa8f"><span class="section-number-4">1.4.10.</span> Zig-Zusammenfassung</h4>
+<div class="outline-text-4" id="text-1-4-10">
+<p>
+Zig eignet sich besonders gut für:
+</p>
+
+<ul class="org-ul">
+<li>Cross-Compilation</li>
+<li>Betriebssystementwicklung</li>
+<li>Embedded-Systeme</li>
+<li>C-Ersatz</li>
+<li>kleine native Programme</li>
+<li>Compiler und Toolchains</li>
+<li>Build-Systeme</li>
+<li>Programme ohne Garbage Collector</li>
+<li>Software mit expliziter Speicherverwaltung</li>
+</ul>
+
+<p>
+Die Zahl der theoretisch bekannten Ziele ist sehr groß. Die tatsächliche Reife unterscheidet sich deutlich zwischen den Zielplattformen.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org6c7bc1e" class="outline-3">
+<h3 id="org6c7bc1e"><span class="section-number-3">1.5.</span> Mojo</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+Mojo besitzt derzeit eine wesentlich kleinere Plattformabdeckung als Rust, Zig, C und C++.
+</p>
+
+<p>
+Mojo ist stark auf moderne CPUs, MLIR, LLVM, KI-Berechnungen und Hochleistungsrechnen ausgerichtet.
+</p>
+</div>
+<div id="outline-container-orgc68406e" class="outline-4">
+<h4 id="orgc68406e"><span class="section-number-4">1.5.1.</span> Offiziell unterstützte Hostsysteme</h4>
+<div class="outline-text-4" id="text-1-5-1">
+<p>
+Mojo unterstützt hauptsächlich:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Architektur</th>
+<th scope="col" class="org-left">Betriebssystem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">x86-64</td>
+<td class="org-left">Linux</td>
+</tr>
+
+<tr>
+<td class="org-left">ARM64</td>
+<td class="org-left">Linux</td>
+</tr>
+
+<tr>
+<td class="org-left">ARM64</td>
+<td class="org-left">macOS</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org4ee8492" class="outline-4">
+<h4 id="org4ee8492"><span class="section-number-4">1.5.2.</span> Mojo auf x86-64-Linux</h4>
+<div class="outline-text-4" id="text-1-5-2">
+<p>
+Für x86-64 wird eine moderne CPU vorausgesetzt.
+</p>
+
+<p>
+Die Anforderungen entsprechen ungefähr der Mikroarchitekturstufe <code>x86-64-v3</code>.
+</p>
+
+<p>
+Dazu gehören typischerweise CPU-Funktionen wie:
+</p>
+
+<ul class="org-ul">
+<li>AVX</li>
+<li>AVX2</li>
+<li>BMI1</li>
+<li>BMI2</li>
+<li>FMA</li>
+<li>weitere moderne x86-Erweiterungen</li>
+</ul>
+
+<p>
+Geeignete Prozessoren sind ungefähr:
+</p>
+
+<ul class="org-ul">
+<li>Intel Haswell oder neuer</li>
+<li>vergleichbare moderne AMD-Prozessoren</li>
+</ul>
+
+<p>
+Sehr alte x86-64-Prozessoren funktionieren daher nicht.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc5aeaef" class="outline-4">
+<h4 id="orgc5aeaef"><span class="section-number-4">1.5.3.</span> Mojo auf ARM64-Linux und macOS</h4>
+<div class="outline-text-4" id="text-1-5-3">
+<p>
+Mojo unterstützt moderne ARM64-Linux-Systeme.
+</p>
+
+<p>
+Als CPU-Klasse wird ungefähr ARM Neoverse N1 oder neuer vorausgesetzt.
+</p>
+
+<p>
+Mojo unterstützt macOS auf Apple Silicon:
+</p>
+
+<ul class="org-ul">
+<li>Apple M1</li>
+<li>Apple M2</li>
+<li>Apple M3</li>
+<li>Apple M4</li>
+<li>spätere Apple-Silicon-Generationen</li>
+</ul>
+
+<p>
+Intel-Macs werden nicht offiziell unterstützt.
+</p>
+</div>
+</div>
+<div id="outline-container-org946cf0a" class="outline-4">
+<h4 id="org946cf0a"><span class="section-number-4">1.5.4.</span> Mojo auf Windows</h4>
+<div class="outline-text-4" id="text-1-5-4">
+<p>
+Mojo wird nicht als normales natives Windows-Programm unterstützt.
+</p>
+
+<p>
+Vorgesehene Umgebung:
+</p>
+
+<pre class="example" id="orgd9769e8">
+Windows
+   ↓
+WSL
+   ↓
+Linux
+   ↓
+Mojo
+</pre>
+
+<p>
+Die erzeugten Programme sind dabei zunächst Linux-Programme.
+</p>
+</div>
+</div>
+<div id="outline-container-org2c952f8" class="outline-4">
+<h4 id="org2c952f8"><span class="section-number-4">1.5.5.</span> Mojo auf Android, BSD und RISC-V</h4>
+<div class="outline-text-4" id="text-1-5-5">
+<p>
+Nicht offiziell unterstützt werden insbesondere:
+</p>
+
+<ul class="org-ul">
+<li>Android</li>
+<li>Termux</li>
+<li>FreeBSD</li>
+<li>OpenBSD</li>
+<li>NetBSD</li>
+<li>DragonFly BSD</li>
+<li>RISC-V als normale native Mojo-Plattform</li>
+<li>klassische Mikrocontroller</li>
+<li>Bare Metal</li>
+</ul>
+
+<p>
+Android verwendet Bionic statt glibc und besitzt eine andere ABI und Laufzeitumgebung.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd53805f" class="outline-4">
+<h4 id="orgd53805f"><span class="section-number-4">1.5.6.</span> Mojo-Cross-Compilation</h4>
+<div class="outline-text-4" id="text-1-5-6">
+<p>
+Mojo kann Zielparameter wie Target Triple und Ziel-CPU verwenden.
+</p>
+
+<p>
+Beispiel:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>mojo build <span style="color: #98be65;">\</span>
+  --target-triple aarch64-unknown-linux-gnu <span style="color: #98be65;">\</span>
+  --target-cpu cortex-a72 <span style="color: #98be65;">\</span>
+  --emit object <span style="color: #98be65;">\</span>
+  -o programm.o <span style="color: #98be65;">\</span>
+  programm.mojo
+</code></pre>
+</div>
+
+<p>
+Mojo kann für fremde Ziele unter anderem erzeugen:
+</p>
+
+<ul class="org-ul">
+<li>LLVM-IR</li>
+<li>LLVM-Bitcode</li>
+<li>Assemblersprache</li>
+<li>Objektdateien</li>
+</ul>
+
+<p>
+Für fertige Executables können zusätzlich erforderlich sein:
+</p>
+
+<ul class="org-ul">
+<li>externer Linker</li>
+<li>Ziel-Sysroot</li>
+<li>C-Laufzeit</li>
+<li>Zielbibliotheken</li>
+<li>passende Mojo-Runtime</li>
+<li>kompatible Standardbibliothek</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd5a125e" class="outline-4">
+<h4 id="orgd5a125e"><span class="section-number-4">1.5.7.</span> Mojo und GPUs</h4>
+<div class="outline-text-4" id="text-1-5-7">
+<p>
+Mojo unterstützt GPU-Programmierung insbesondere für:
+</p>
+
+<ul class="org-ul">
+<li>NVIDIA-GPUs</li>
+<li>AMD-GPUs</li>
+<li>Apple-Silicon-GPUs</li>
+</ul>
+
+<p>
+Das ist GPU-Gerätecode innerhalb einer unterstützten Hostumgebung und keine allgemeine zusätzliche Betriebssystemunterstützung.
+</p>
+</div>
+</div>
+<div id="outline-container-org98eb2d6" class="outline-4">
+<h4 id="org98eb2d6"><span class="section-number-4">1.5.8.</span> Mojo-Zusammenfassung</h4>
+<div class="outline-text-4" id="text-1-5-8">
+<p>
+Mojo eignet sich derzeit vor allem für:
+</p>
+
+<ul class="org-ul">
+<li>moderne x86-64-Linux-Systeme</li>
+<li>moderne ARM64-Linux-Systeme</li>
+<li>Apple-Silicon-macOS</li>
+<li>KI-Berechnungen</li>
+<li>numerische Hochleistungsprogramme</li>
+<li>SIMD</li>
+<li>CPU- und GPU-Kernel</li>
+<li>MLIR-basierte Compilertechnik</li>
+</ul>
+
+<p>
+Mojo ist derzeit weniger geeignet für:
+</p>
+
+<ul class="org-ul">
+<li>Android</li>
+<li>Termux</li>
+<li>Windows ohne WSL</li>
+<li>BSD-Systeme</li>
+<li>RISC-V-Systeme</li>
+<li>alte x86-64-Prozessoren</li>
+<li>Mikrocontroller</li>
+<li>Bare Metal</li>
+<li>exotische Betriebssysteme</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org7befe05" class="outline-3">
+<h3 id="org7befe05"><span class="section-number-3">1.6.</span> C</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+C besitzt die größte reale Plattformunterstützung aller hier verglichenen Sprachen.
+</p>
+
+<p>
+Wichtige C-Compiler sind:
+</p>
+
+<ul class="org-ul">
+<li>GCC</li>
+<li>Clang</li>
+<li>Microsoft Visual C</li>
+<li>Intel-Compiler</li>
+<li>TinyCC</li>
+<li>PCC</li>
+<li>SDCC</li>
+<li>IAR</li>
+<li>Keil</li>
+<li>herstellerspezifische Embedded-Compiler</li>
+</ul>
+</div>
+<div id="outline-container-orgae247a7" class="outline-4">
+<h4 id="orgae247a7"><span class="section-number-4">1.6.1.</span> C auf Desktop- und Serversystemen</h4>
+<div class="outline-text-4" id="text-1-6-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Architektur</th>
+<th scope="col" class="org-left">Betriebssysteme</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">x86</td>
+<td class="org-left">Linux, Windows, BSD, ältere Unix-Systeme</td>
+</tr>
+
+<tr>
+<td class="org-left">x86-64</td>
+<td class="org-left">Linux, Windows, macOS, BSD, Solaris, illumos</td>
+</tr>
+
+<tr>
+<td class="org-left">ARM</td>
+<td class="org-left">Linux, BSD, Android, Embedded-Systeme</td>
+</tr>
+
+<tr>
+<td class="org-left">ARM64</td>
+<td class="org-left">Linux, Windows, macOS, Android, BSD</td>
+</tr>
+
+<tr>
+<td class="org-left">RISC-V</td>
+<td class="org-left">Linux, BSD, Embedded-Systeme</td>
+</tr>
+
+<tr>
+<td class="org-left">PowerPC</td>
+<td class="org-left">Linux, BSD, AIX, Embedded-Systeme</td>
+</tr>
+
+<tr>
+<td class="org-left">MIPS</td>
+<td class="org-left">Linux, BSD, Router, Embedded-Systeme</td>
+</tr>
+
+<tr>
+<td class="org-left">s390x</td>
+<td class="org-left">Linux, IBM-Systeme</td>
+</tr>
+
+<tr>
+<td class="org-left">SPARC</td>
+<td class="org-left">Solaris, Linux, BSD</td>
+</tr>
+
+<tr>
+<td class="org-left">LoongArch</td>
+<td class="org-left">Linux</td>
+</tr>
+
+<tr>
+<td class="org-left">Motorola 68k</td>
+<td class="org-left">ältere Unix-, Amiga- und Embedded-Systeme</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org17e46d2" class="outline-4">
+<h4 id="org17e46d2"><span class="section-number-4">1.6.2.</span> C auf Windows, macOS und Android</h4>
+<div class="outline-text-4" id="text-1-6-2">
+<p>
+C funktioniert unter Windows auf:
+</p>
+
+<ul class="org-ul">
+<li>x86</li>
+<li>x86-64</li>
+<li>ARM64</li>
+</ul>
+
+<p>
+C wird auf folgenden Apple-Systemen unterstützt:
+</p>
+
+<ul class="org-ul">
+<li>macOS</li>
+<li>iOS</li>
+<li>iPadOS</li>
+<li>tvOS</li>
+<li>watchOS</li>
+<li>visionOS</li>
+</ul>
+
+<p>
+Das Android NDK unterstützt hauptsächlich:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">ABI</th>
+<th scope="col" class="org-left">Architektur</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">armeabi-v7a</td>
+<td class="org-left">ARMv7</td>
+</tr>
+
+<tr>
+<td class="org-left">arm64-v8a</td>
+<td class="org-left">ARM64</td>
+</tr>
+
+<tr>
+<td class="org-left">x86</td>
+<td class="org-left">x86</td>
+</tr>
+
+<tr>
+<td class="org-left">x86<sub>64</sub></td>
+<td class="org-left">x86-64</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgd533206" class="outline-4">
+<h4 id="orgd533206"><span class="section-number-4">1.6.3.</span> C auf BSD, Unix und Mikrocontrollern</h4>
+<div class="outline-text-4" id="text-1-6-3">
+<p>
+C funktioniert unter anderem auf:
+</p>
+
+<ul class="org-ul">
+<li>FreeBSD</li>
+<li>OpenBSD</li>
+<li>NetBSD</li>
+<li>DragonFly BSD</li>
+<li>Solaris</li>
+<li>illumos</li>
+<li>AIX</li>
+<li>HP-UX</li>
+<li>QNX</li>
+<li>Haiku</li>
+<li>Minix</li>
+</ul>
+
+<p>
+C ist die am weitesten verbreitete Mikrocontrollersprache.
+</p>
+
+<p>
+Unterstützte Architekturen sind unter anderem:
+</p>
+
+<ul class="org-ul">
+<li>AVR</li>
+<li>PIC</li>
+<li>MSP430</li>
+<li>ARM Cortex-M</li>
+<li>ARM Cortex-R</li>
+<li>RISC-V</li>
+<li>8051</li>
+<li>MIPS</li>
+<li>Xtensa</li>
+<li>ESP8266</li>
+<li>ESP32</li>
+<li>Motorola 68000</li>
+<li>PowerPC</li>
+<li>Renesas RX</li>
+<li>Renesas RL78</li>
+<li>Infineon TriCore</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge7e7e8c" class="outline-4">
+<h4 id="orge7e7e8c"><span class="section-number-4">1.6.4.</span> C und Echtzeitbetriebssysteme</h4>
+<div class="outline-text-4" id="text-1-6-4">
+<p>
+C wird häufig verwendet mit:
+</p>
+
+<ul class="org-ul">
+<li>FreeRTOS</li>
+<li>Zephyr</li>
+<li>ThreadX</li>
+<li>VxWorks</li>
+<li>QNX</li>
+<li>NuttX</li>
+<li>RTEMS</li>
+<li>embedded Linux</li>
+<li>proprietären RTOS</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge351bd9" class="outline-4">
+<h4 id="orge351bd9"><span class="section-number-4">1.6.5.</span> C und WebAssembly</h4>
+<div class="outline-text-4" id="text-1-6-5">
+<p>
+C kann über Clang oder Emscripten nach WebAssembly kompiliert werden.
+</p>
+
+<p>
+Beispiel:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>emcc programm.c -o programm.js
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgaa9b164" class="outline-4">
+<h4 id="orgaa9b164"><span class="section-number-4">1.6.6.</span> Einschränkungen von C</h4>
+<div class="outline-text-4" id="text-1-6-6">
+<p>
+Die breite Plattformunterstützung bedeutet nicht, dass jedes C-Programm unverändert überall funktioniert.
+</p>
+
+<p>
+Probleme können entstehen durch:
+</p>
+
+<ul class="org-ul">
+<li>unterschiedliche Integergrößen</li>
+<li>unterschiedliche Zeigergrößen</li>
+<li>Endianness</li>
+<li>unterschiedliche Betriebssystem-APIs</li>
+<li>unterschiedliche Threadmodelle</li>
+<li>unterschiedliche Dateisysteme</li>
+<li>verschiedene ABIs</li>
+<li>nicht verfügbare Bibliotheken</li>
+<li>undefiniertes Verhalten</li>
+<li>Annahmen über Speicherlayout</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcb16fb5" class="outline-3">
+<h3 id="orgcb16fb5"><span class="section-number-3">1.7.</span> C++</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+C++ funktioniert grundsätzlich auf fast allen Plattformen, auf denen auch C verfügbar ist.
+</p>
+
+<p>
+Wichtige C++-Compiler sind:
+</p>
+
+<ul class="org-ul">
+<li>GCC/G++</li>
+<li>Clang/Clang++</li>
+<li>Microsoft Visual C++</li>
+<li>Intel-Compiler</li>
+<li>Apple Clang</li>
+<li>IAR C++</li>
+<li>Keil C++</li>
+<li>herstellerspezifische Embedded-Compiler</li>
+</ul>
+</div>
+<div id="outline-container-org37a4565" class="outline-4">
+<h4 id="org37a4565"><span class="section-number-4">1.7.1.</span> C++ auf Desktop- und Serversystemen</h4>
+<div class="outline-text-4" id="text-1-7-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Architektur</th>
+<th scope="col" class="org-left">Betriebssysteme</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">x86</td>
+<td class="org-left">Linux, Windows, BSD</td>
+</tr>
+
+<tr>
+<td class="org-left">x86-64</td>
+<td class="org-left">Linux, Windows, macOS, BSD, Solaris</td>
+</tr>
+
+<tr>
+<td class="org-left">ARM</td>
+<td class="org-left">Linux, Android, Embedded-Systeme</td>
+</tr>
+
+<tr>
+<td class="org-left">ARM64</td>
+<td class="org-left">Linux, Windows, macOS, Android, BSD</td>
+</tr>
+
+<tr>
+<td class="org-left">RISC-V</td>
+<td class="org-left">Linux, BSD, Embedded-Systeme</td>
+</tr>
+
+<tr>
+<td class="org-left">PowerPC</td>
+<td class="org-left">Linux, BSD, AIX, Embedded-Systeme</td>
+</tr>
+
+<tr>
+<td class="org-left">MIPS</td>
+<td class="org-left">Linux, BSD, Embedded-Systeme</td>
+</tr>
+
+<tr>
+<td class="org-left">s390x</td>
+<td class="org-left">Linux</td>
+</tr>
+
+<tr>
+<td class="org-left">SPARC</td>
+<td class="org-left">Solaris, Linux</td>
+</tr>
+
+<tr>
+<td class="org-left">LoongArch</td>
+<td class="org-left">Linux</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org5524442" class="outline-4">
+<h4 id="org5524442"><span class="section-number-4">1.7.2.</span> C++ auf Windows, Linux, Apple und Android</h4>
+<div class="outline-text-4" id="text-1-7-2">
+<p>
+C++ besitzt unter Windows sehr starke Unterstützung auf:
+</p>
+
+<ul class="org-ul">
+<li>x86</li>
+<li>x86-64</li>
+<li>ARM64</li>
+</ul>
+
+<p>
+C++ wird von Apple Clang unterstützt für:
+</p>
+
+<ul class="org-ul">
+<li>macOS</li>
+<li>iOS</li>
+<li>iPadOS</li>
+<li>tvOS</li>
+<li>watchOS</li>
+<li>visionOS</li>
+</ul>
+
+<p>
+C++ wird über das Android NDK unterstützt auf:
+</p>
+
+<ul class="org-ul">
+<li>ARMv7</li>
+<li>ARM64</li>
+<li>x86</li>
+<li>x86-64</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org21e0c23" class="outline-4">
+<h4 id="org21e0c23"><span class="section-number-4">1.7.3.</span> C++ auf Embedded-Systemen</h4>
+<div class="outline-text-4" id="text-1-7-3">
+<p>
+C++ kann auf vielen Mikrocontrollern und Embedded-Systemen verwendet werden.
+</p>
+
+<p>
+Architekturen:
+</p>
+
+<ul class="org-ul">
+<li>ARM Cortex-M</li>
+<li>ARM Cortex-R</li>
+<li>AVR</li>
+<li>RISC-V</li>
+<li>ESP32</li>
+<li>Xtensa</li>
+<li>PowerPC</li>
+<li>MIPS</li>
+<li>viele Automotive-Controller</li>
+</ul>
+
+<p>
+Häufig werden bestimmte Funktionen deaktiviert:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>-fno-exceptions
+-fno-rtti
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfee0282" class="outline-4">
+<h4 id="orgfee0282"><span class="section-number-4">1.7.4.</span> Unterschied zwischen C und C++ bei kleinen Plattformen</h4>
+<div class="outline-text-4" id="text-1-7-4">
+<p>
+C benötigt oft nur:
+</p>
+
+<ul class="org-ul">
+<li>Startcode</li>
+<li>wenige Laufzeitfunktionen</li>
+<li>eventuell keine Standardbibliothek</li>
+</ul>
+
+<p>
+C++ kann zusätzlich benötigen:
+</p>
+
+<ul class="org-ul">
+<li>Konstruktorinitialisierung</li>
+<li>C++-Runtime</li>
+<li>Exception-Unterstützung</li>
+<li>RTTI</li>
+<li>Operator <code>new</code> und <code>delete</code></li>
+<li>C++-Standardbibliothek</li>
+<li>Threadunterstützung</li>
+</ul>
+
+<p>
+Daher kann gelten:
+</p>
+
+<pre class="example" id="orgf93a645">
+C vollständig verfügbar
+C++-Compiler vorhanden
+C++-Standardbibliothek nur teilweise verfügbar
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4b239a5" class="outline-3">
+<h3 id="org4b239a5"><span class="section-number-3">1.8.</span> Direkter Vergleich</h3>
+<div class="outline-text-3" id="text-1-8">
+</div>
+<div id="outline-container-org7468138" class="outline-4">
+<h4 id="org7468138"><span class="section-number-4">1.8.1.</span> Linux x86-64</h4>
+<div class="outline-text-4" id="text-1-8-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Sprache</th>
+<th scope="col" class="org-left">Unterstützung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">C++</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">Rust</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">Zig</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">Mojo</td>
+<td class="org-left">gut, aber moderne CPU erforderlich</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org6211847" class="outline-4">
+<h4 id="org6211847"><span class="section-number-4">1.8.2.</span> Linux ARM64</h4>
+<div class="outline-text-4" id="text-1-8-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Sprache</th>
+<th scope="col" class="org-left">Unterstützung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">C++</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">Rust</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">Zig</td>
+<td class="org-left">sehr gut</td>
+</tr>
+
+<tr>
+<td class="org-left">Mojo</td>
+<td class="org-left">unterstützt, moderne CPU erforderlich</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org3f4c774" class="outline-4">
+<h4 id="org3f4c774"><span class="section-number-4">1.8.3.</span> Windows x86-64</h4>
+<div class="outline-text-4" id="text-1-8-3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Sprache</th>
+<th scope="col" class="org-left">Unterstützung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">C++</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">Rust</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">Zig</td>
+<td class="org-left">gut</td>
+</tr>
+
+<tr>
+<td class="org-left">Mojo</td>
+<td class="org-left">nur innerhalb von WSL</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org889e082" class="outline-4">
+<h4 id="org889e082"><span class="section-number-4">1.8.4.</span> Windows ARM64</h4>
+<div class="outline-text-4" id="text-1-8-4">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Sprache</th>
+<th scope="col" class="org-left">Unterstützung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C</td>
+<td class="org-left">sehr gut</td>
+</tr>
+
+<tr>
+<td class="org-left">C++</td>
+<td class="org-left">sehr gut</td>
+</tr>
+
+<tr>
+<td class="org-left">Rust</td>
+<td class="org-left">gut</td>
+</tr>
+
+<tr>
+<td class="org-left">Zig</td>
+<td class="org-left">gut bis eingeschränkt</td>
+</tr>
+
+<tr>
+<td class="org-left">Mojo</td>
+<td class="org-left">nicht nativ unterstützt</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org08b9ea8" class="outline-4">
+<h4 id="org08b9ea8"><span class="section-number-4">1.8.5.</span> macOS ARM64</h4>
+<div class="outline-text-4" id="text-1-8-5">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Sprache</th>
+<th scope="col" class="org-left">Unterstützung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">C++</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">Rust</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">Zig</td>
+<td class="org-left">gut</td>
+</tr>
+
+<tr>
+<td class="org-left">Mojo</td>
+<td class="org-left">offiziell unterstützt</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org1e1fc29" class="outline-4">
+<h4 id="org1e1fc29"><span class="section-number-4">1.8.6.</span> Android</h4>
+<div class="outline-text-4" id="text-1-8-6">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Sprache</th>
+<th scope="col" class="org-left">Unterstützung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">C++</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">Rust</td>
+<td class="org-left">gut</td>
+</tr>
+
+<tr>
+<td class="org-left">Zig</td>
+<td class="org-left">möglich, aber weniger bequem</td>
+</tr>
+
+<tr>
+<td class="org-left">Mojo</td>
+<td class="org-left">nicht offiziell unterstützt</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org4944a0b" class="outline-4">
+<h4 id="org4944a0b"><span class="section-number-4">1.8.7.</span> WebAssembly</h4>
+<div class="outline-text-4" id="text-1-8-7">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Sprache</th>
+<th scope="col" class="org-left">Unterstützung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">C++</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">Rust</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">Zig</td>
+<td class="org-left">sehr gut</td>
+</tr>
+
+<tr>
+<td class="org-left">Mojo</td>
+<td class="org-left">derzeit kein verbreiteter Hauptweg</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org40f6ea9" class="outline-4">
+<h4 id="org40f6ea9"><span class="section-number-4">1.8.8.</span> Mikrocontroller und Bare Metal</h4>
+<div class="outline-text-4" id="text-1-8-8">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Sprache</th>
+<th scope="col" class="org-left">Unterstützung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">C++</td>
+<td class="org-left">sehr gut</td>
+</tr>
+
+<tr>
+<td class="org-left">Rust</td>
+<td class="org-left">sehr gut</td>
+</tr>
+
+<tr>
+<td class="org-left">Zig</td>
+<td class="org-left">sehr gut</td>
+</tr>
+
+<tr>
+<td class="org-left">Mojo</td>
+<td class="org-left">nicht offiziell unterstützt</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="outline-container-orgef09915" class="outline-3">
+<h3 id="orgef09915"><span class="section-number-3">1.9.</span> Welche Sprache für welchen Einsatz?</h3>
+<div class="outline-text-3" id="text-1-9">
+</div>
+<div id="outline-container-org63871a7" class="outline-4">
+<h4 id="org63871a7"><span class="section-number-4">1.9.1.</span> C als erste Wahl</h4>
+<div class="outline-text-4" id="text-1-9-1">
+<ul class="org-ul">
+<li>maximale Plattformabdeckung</li>
+<li>Betriebssystemkerne</li>
+<li>sehr kleine Mikrocontroller</li>
+<li>stabile C-ABI</li>
+<li>alte oder exotische Hardware</li>
+<li>vorhandene Systembibliotheken</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3947dc7" class="outline-4">
+<h4 id="org3947dc7"><span class="section-number-4">1.9.2.</span> C++ als erste Wahl</h4>
+<div class="outline-text-4" id="text-1-9-2">
+<ul class="org-ul">
+<li>große native Anwendungen</li>
+<li>Spiele oder Spiele-Engines</li>
+<li>umfangreiche bestehende C++-Bibliotheken</li>
+<li>Qt, Unreal Engine oder ähnliche Frameworks</li>
+<li>komplexe Echtzeitsoftware</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb1f2e3e" class="outline-4">
+<h4 id="orgb1f2e3e"><span class="section-number-4">1.9.3.</span> Rust als erste Wahl</h4>
+<div class="outline-text-4" id="text-1-9-3">
+<ul class="org-ul">
+<li>Speichersicherheit</li>
+<li>sichere Nebenläufigkeit</li>
+<li>langfristig wartbare Systemsoftware</li>
+<li>moderne Server- und Netzwerkprogramme</li>
+<li>Linux, Windows, macOS oder WebAssembly</li>
+<li>Vermeidung von Use-after-free</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1147ed0" class="outline-4">
+<h4 id="org1147ed0"><span class="section-number-4">1.9.4.</span> Zig als erste Wahl</h4>
+<div class="outline-text-4" id="text-1-9-4">
+<ul class="org-ul">
+<li>Cross-Compilation</li>
+<li>C-Ersatz</li>
+<li>explizite Speicherverwaltung</li>
+<li>Compiler oder Build-Systeme</li>
+<li>kleine Laufzeitumgebung</li>
+<li>Embedded- und freestanding Systeme</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org169970f" class="outline-4">
+<h4 id="org169970f"><span class="section-number-4">1.9.5.</span> Mojo als erste Wahl</h4>
+<div class="outline-text-4" id="text-1-9-5">
+<ul class="org-ul">
+<li>moderne Linux- oder Apple-Silicon-Systeme</li>
+<li>KI- oder numerische Hochleistungsberechnungen</li>
+<li>MLIR-basierte Optimierung</li>
+<li>CPU- und GPU-Kernel</li>
+<li>geringe Plattformabdeckung ist akzeptabel</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org5692125" class="outline-3">
+<h3 id="org5692125"><span class="section-number-3">1.10.</span> Ranglisten</h3>
+<div class="outline-text-3" id="text-1-10">
+</div>
+<div id="outline-container-orgc869805" class="outline-4">
+<h4 id="orgc869805"><span class="section-number-4">1.10.1.</span> Nach realer Plattformbreite</h4>
+<div class="outline-text-4" id="text-1-10-1">
+<ol class="org-ol">
+<li>C</li>
+<li>C++</li>
+<li>Rust</li>
+<li>Zig</li>
+<li>Mojo</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org5581223" class="outline-4">
+<h4 id="org5581223"><span class="section-number-4">1.10.2.</span> Nach Cross-Compilation</h4>
+<div class="outline-text-4" id="text-1-10-2">
+<ol class="org-ol">
+<li>Zig</li>
+<li>C und C++ mit Clang</li>
+<li>Rust</li>
+<li>Mojo</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orge0f2ae0" class="outline-4">
+<h4 id="orge0f2ae0"><span class="section-number-4">1.10.3.</span> Nach Embedded-Eignung</h4>
+<div class="outline-text-4" id="text-1-10-3">
+<ol class="org-ol">
+<li>C</li>
+<li>Rust, Zig und C++, je nach Plattform</li>
+<li>Mojo</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org9e3c829" class="outline-4">
+<h4 id="org9e3c829"><span class="section-number-4">1.10.4.</span> Nach statischer Speichersicherheit</h4>
+<div class="outline-text-4" id="text-1-10-4">
+<ol class="org-ol">
+<li>Rust</li>
+<li>Mojo, abhängig von verwendeten Funktionen und Bibliotheken</li>
+<li>Zig</li>
+<li>C++</li>
+<li>C</li>
+</ol>
+
+<p>
+Diese Rangfolge ist vereinfacht. Mojo bietet derzeit nicht dieselben durchgängigen statischen Garantien wie Rust. Zig besitzt keinen Borrow Checker wie Rust.
+</p>
+</div>
+</div>
+<div id="outline-container-org4aa7439" class="outline-4">
+<h4 id="org4aa7439"><span class="section-number-4">1.10.5.</span> Nach Unterstützung alter und exotischer Systeme</h4>
+<div class="outline-text-4" id="text-1-10-5">
+<ol class="org-ol">
+<li>C</li>
+<li>C++</li>
+<li>Zig</li>
+<li>Rust</li>
+<li>Mojo</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org108fc35" class="outline-3">
+<h3 id="org108fc35"><span class="section-number-3">1.11.</span> Wichtig für Android und Termux</h3>
+<div class="outline-text-3" id="text-1-11">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Sprache</th>
+<th scope="col" class="org-left">Direkt in Android/Termux</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C</td>
+<td class="org-left">sehr gut</td>
+</tr>
+
+<tr>
+<td class="org-left">C++</td>
+<td class="org-left">sehr gut</td>
+</tr>
+
+<tr>
+<td class="org-left">Rust</td>
+<td class="org-left">gut, Toolchain-Anpassungen erforderlich</td>
+</tr>
+
+<tr>
+<td class="org-left">Zig</td>
+<td class="org-left">grundsätzlich möglich</td>
+</tr>
+
+<tr>
+<td class="org-left">Mojo</td>
+<td class="org-left">nicht offiziell unterstützt</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Für native Android-Programme sind C und C++ über das Android NDK besonders etabliert. Rust kann ebenfalls Android-Bibliotheken und Anwendungen erzeugen. Zig kann als Cross-Compiler verwendet werden. Mojo ist derzeit ungeeignet.
+</p>
+</div>
+</div>
+<div id="outline-container-org1cc79f1" class="outline-3">
+<h3 id="org1cc79f1"><span class="section-number-3">1.12.</span> Wichtig für das Samsung Galaxy Note 8</h3>
+<div class="outline-text-3" id="text-1-12">
+<p>
+Das Modell <code>SM-N950F</code> verwendet einen ARM64-fähigen Exynos-Prozessor.
+</p>
+
+<p>
+Geeignete Sprachen:
+</p>
+
+<ul class="org-ul">
+<li>C</li>
+<li>C++</li>
+<li>Rust</li>
+<li>Zig, mit zusätzlicher Einrichtung</li>
+</ul>
+
+<p>
+Mojo funktioniert nicht allein deshalb, weil die CPU ARM64 unterstützt. Es fehlt eine offiziell unterstützte Kombination aus:
+</p>
+
+<pre class="example" id="org3817e5f">
+ARM64 + Android + Bionic + Mojo-Runtime
+</pre>
+</div>
+</div>
+<div id="outline-container-orgd9645dc" class="outline-3">
+<h3 id="orgd9645dc"><span class="section-number-3">1.13.</span> Wichtig für einen alten AMD-Turion-Rechner</h3>
+<div class="outline-text-3" id="text-1-13">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Sprache</th>
+<th scope="col" class="org-left">Eignung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C</td>
+<td class="org-left">sehr gut</td>
+</tr>
+
+<tr>
+<td class="org-left">C++</td>
+<td class="org-left">sehr gut</td>
+</tr>
+
+<tr>
+<td class="org-left">Rust</td>
+<td class="org-left">möglicherweise, abhängig vom genauen Modell</td>
+</tr>
+
+<tr>
+<td class="org-left">Zig</td>
+<td class="org-left">möglicherweise, abhängig von Compiler-Version und CPU</td>
+</tr>
+
+<tr>
+<td class="org-left">Mojo</td>
+<td class="org-left">ungeeignet</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Mojo verlangt eine moderne x86-64-v3-CPU.
+</p>
+
+<p>
+C und C++ können gezielt für ältere x86-64-CPUs kompiliert werden:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>gcc <span style="color: #98be65;">\</span>
+  -march=x86-64 <span style="color: #98be65;">\</span>
+  -mtune=generic <span style="color: #98be65;">\</span>
+  programm.c <span style="color: #98be65;">\</span>
+  -o programm
+</code></pre>
+</div>
+
+<p>
+Bei Rust kann ein konservativer Ziel-CPU-Wert verwendet werden:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code><span style="color: #dcaeea;">RUSTFLAGS</span>=<span style="color: #98be65;">"-C target-cpu=x86-64"</span> <span style="color: #98be65;">\</span>
+cargo build
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2b5a974" class="outline-3">
+<h3 id="org2b5a974"><span class="section-number-3">1.14.</span> Wichtig für RISC-V</h3>
+<div class="outline-text-3" id="text-1-14">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Sprache</th>
+<th scope="col" class="org-left">RISC-V-Unterstützung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C</td>
+<td class="org-left">hervorragend</td>
+</tr>
+
+<tr>
+<td class="org-left">C++</td>
+<td class="org-left">sehr gut</td>
+</tr>
+
+<tr>
+<td class="org-left">Rust</td>
+<td class="org-left">sehr gut</td>
+</tr>
+
+<tr>
+<td class="org-left">Zig</td>
+<td class="org-left">sehr gut bis experimentell</td>
+</tr>
+
+<tr>
+<td class="org-left">Mojo</td>
+<td class="org-left">nicht als normale Plattform</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orga25c700" class="outline-3">
+<h3 id="orga25c700"><span class="section-number-3">1.15.</span> Wichtig für Betriebssystementwicklung</h3>
+<div class="outline-text-3" id="text-1-15">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Sprache</th>
+<th scope="col" class="org-left">Betriebssystementwicklung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C</td>
+<td class="org-left">hervorragend und traditionell</td>
+</tr>
+
+<tr>
+<td class="org-left">C++</td>
+<td class="org-left">gut, aber Runtime muss kontrolliert werden</td>
+</tr>
+
+<tr>
+<td class="org-left">Rust</td>
+<td class="org-left">sehr gut und speichersicherer</td>
+</tr>
+
+<tr>
+<td class="org-left">Zig</td>
+<td class="org-left">sehr gut und systemnah</td>
+</tr>
+
+<tr>
+<td class="org-left">Mojo</td>
+<td class="org-left">derzeit ungeeignet</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org8a934a7" class="outline-3">
+<h3 id="org8a934a7"><span class="section-number-3">1.16.</span> Zusammenfassung</h3>
+<div class="outline-text-3" id="text-1-16">
+<ol class="org-ol">
+<li>Für maximale Plattformbreite ist C die erste Wahl.</li>
+<li>Für große native Anwendungen mit umfangreichen Bibliotheken ist C++ häufig sinnvoll.</li>
+<li>Für moderne sichere Systemsoftware ist Rust besonders stark.</li>
+<li>Für Cross-Compilation, Toolchains und systemnahe Kontrolle ist Zig besonders attraktiv.</li>
+<li>Für moderne KI-, SIMD- und GPU-Berechnungen auf wenigen unterstützten Plattformen ist Mojo interessant.</li>
+<li>Für Android sind C, C++ und Rust wesentlich besser geeignet als Mojo.</li>
+<li>Für alte Rechner und exotische CPUs sind C und C++ am zuverlässigsten.</li>
+<li>Für Embedded-Systeme sind C, Rust und Zig besonders geeignet.</li>
+<li>Für WebAssembly sind C, C++, Rust und Zig gut geeignet.</li>
+<li>Die Unterstützung einer CPU allein garantiert noch keine Unterstützung des darauf laufenden Betriebssystems.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org1b00386" class="outline-2">
+<h2 id="org1b00386"><span class="section-number-2">2.</span> Teil II: Was ist LLVM?</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org5686624" class="outline-3">
+<h3 id="org5686624"><span class="section-number-3">2.1.</span> Grundidee</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+<b>LLVM ist eine modulare Compiler-Infrastruktur.</b>
+</p>
+
+<p>
+LLVM ist kein einzelner Compiler und trotz seines historischen Namens normalerweise auch keine virtuelle Maschine.
+</p>
+
+<p>
+Vereinfacht besteht eine Compilerkette mit LLVM aus folgenden Schritten:
+</p>
+
+<pre class="example" id="org181b6e6">
+Quellcode
+   ↓
+Frontend
+   ↓
+LLVM-IR
+   ↓
+Optimierungen
+   ↓
+Maschinencode für x86-64, ARM64, RISC-V usw.
+</pre>
+
+<p>
+LLVM stellt wiederverwendbare Komponenten bereit für:
+</p>
+
+<ul class="org-ul">
+<li>Zwischendarstellungen</li>
+<li>Programmanalysen</li>
+<li>Optimierungen</li>
+<li>Maschinencodeerzeugung</li>
+<li>Objektdateierzeugung</li>
+<li>Linken</li>
+<li>Debugging</li>
+<li>Just-in-time-Kompilierung</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgbd9e0ac" class="outline-3">
+<h3 id="orgbd9e0ac"><span class="section-number-3">2.2.</span> Die drei Hauptteile einer LLVM-Compilerkette</h3>
+<div class="outline-text-3" id="text-2-2">
+</div>
+<div id="outline-container-org504d10d" class="outline-4">
+<h4 id="org504d10d"><span class="section-number-4">2.2.1.</span> 1. Das Frontend</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+Das Frontend versteht die jeweilige Programmiersprache.
+</p>
+
+<p>
+Beispiele:
+</p>
+
+<ul class="org-ul">
+<li><b>Clang</b> für C, C++ und Objective-C</li>
+<li><code>rustc</code> für Rust</li>
+<li>der Mojo-Compiler für Mojo</li>
+<li>der Zig-Compiler für Zig</li>
+<li>Swift-Compiler</li>
+<li>Fortran-Compiler wie Flang</li>
+</ul>
+
+<p>
+Das Frontend erledigt sprachspezifische Aufgaben wie:
+</p>
+
+<ul class="org-ul">
+<li>Quelltext lexikalisch analysieren</li>
+<li>Syntax analysieren</li>
+<li>Typen überprüfen</li>
+<li>Namen und Variablen auflösen</li>
+<li>Sprachregeln überprüfen</li>
+<li>Makros oder Generics verarbeiten</li>
+<li>eine interne Zwischendarstellung erzeugen</li>
+</ul>
+
+<p>
+LLVM selbst versteht nicht automatisch die ursprüngliche Programmiersprache.
+</p>
+
+<p>
+LLVM kennt beispielsweise nicht unmittelbar:
+</p>
+
+<ul class="org-ul">
+<li>Rust-Lifetimes</li>
+<li>den Rust-Borrow-Checker</li>
+<li>C++-Templates</li>
+<li>Mojo-Traits</li>
+<li>Zig-<code>comptime</code></li>
+<li>Python-Syntax</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf45467b" class="outline-4">
+<h4 id="orgf45467b"><span class="section-number-4">2.2.2.</span> 2. LLVM-IR</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<p>
+LLVM-IR bedeutet:
+</p>
+
+<blockquote>
+<p>
+LLVM Intermediate Representation
+</p>
+</blockquote>
+
+<p>
+Auf Deutsch:
+</p>
+
+<blockquote>
+<p>
+LLVM-Zwischendarstellung
+</p>
+</blockquote>
+
+<p>
+Ein einfaches Beispiel:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-llvm"><code>define i32 @add(i32 %a, i32 %b) {
+  %result = add i32 %a, %b
+  ret i32 %result
+}
+</code></pre>
+</div>
+
+<p>
+Dieser LLVM-IR-Code entspricht ungefähr:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><code><span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">add</span>(<span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">a</span>, <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">b</span>) {
+    <span style="color: #51afef;">return</span> a + b;
+}
+</code></pre>
+</div>
+
+<p>
+LLVM-IR ist:
+</p>
+
+<ul class="org-ul">
+<li>niedriger als C</li>
+<li>höher als konkreter Maschinencode</li>
+<li>streng typisiert</li>
+<li>weitgehend unabhängig von der Ziel-CPU</li>
+<li>für Analysen geeignet</li>
+<li>für Optimierungen geeignet</li>
+<li>als Text darstellbar</li>
+<li>als binärer LLVM-Bitcode speicherbar</li>
+<li>als interne Datenstruktur im Speicher verwendbar</li>
+</ul>
+
+<p>
+LLVM-IR arbeitet unter anderem mit:
+</p>
+
+<ul class="org-ul">
+<li>Funktionen</li>
+<li>Basic Blocks</li>
+<li>Instruktionen</li>
+<li>Registern</li>
+<li>Sprüngen</li>
+<li>Vergleichen</li>
+<li>Speicherzugriffen</li>
+<li>Funktionsaufrufen</li>
+<li>Zeigern</li>
+<li>Vektoren</li>
+<li>atomaren Operationen</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="orgf1a1735"></a>SSA-Form<br />
+<div class="outline-text-5" id="text-2-2-2-1">
+<p>
+LLVM-IR verwendet hauptsächlich die <b>Static Single Assignment Form</b>, abgekürzt <b>SSA</b>.
+</p>
+
+<p>
+Dabei wird jedem virtuellen Register nur einmal ein Wert zugewiesen.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-llvm"><code>%a = add i32 %x, %y
+%b = mul i32 %a, 2
+</code></pre>
+</div>
+
+<p>
+SSA erleichtert:
+</p>
+
+<ul class="org-ul">
+<li>Konstantenpropagierung</li>
+<li>Dead-Code-Elimination</li>
+<li>Datenflussanalyse</li>
+<li>Erkennung redundanter Berechnungen</li>
+<li>Schleifenoptimierungen</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org38aa4ba" class="outline-4">
+<h4 id="org38aa4ba"><span class="section-number-4">2.2.3.</span> 3. Das Backend</h4>
+<div class="outline-text-4" id="text-2-2-3">
+<p>
+Das LLVM-Backend übersetzt LLVM-IR in Code für eine konkrete Zielarchitektur.
+</p>
+
+<p>
+Typische Zielarchitekturen:
+</p>
+
+<ul class="org-ul">
+<li>x86</li>
+<li>x86-64</li>
+<li>ARM</li>
+<li>ARM64 beziehungsweise AArch64</li>
+<li>RISC-V</li>
+<li>PowerPC</li>
+<li>System Z beziehungsweise s390x</li>
+<li>MIPS</li>
+<li>LoongArch</li>
+<li>WebAssembly</li>
+<li>AMDGPU</li>
+<li>NVIDIA PTX beziehungsweise NVPTX</li>
+</ul>
+
+<p>
+Das Backend übernimmt unter anderem:
+</p>
+
+<ul class="org-ul">
+<li>Auswahl konkreter Maschinenbefehle</li>
+<li>Registerzuweisung</li>
+<li>Instruktions-Scheduling</li>
+<li>Umsetzung von Funktionsaufrufen</li>
+<li>Einhaltung der ABI</li>
+<li>Stack-Layout</li>
+<li>CPU-spezifische Optimierungen</li>
+<li>Erzeugung von Assemblercode</li>
+<li>Erzeugung von Objektdateien</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orge804bd4" class="outline-3">
+<h3 id="orge804bd4"><span class="section-number-3">2.3.</span> Warum LLVM so wichtig ist</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Ohne eine gemeinsame Compiler-Infrastruktur müsste jede Programmiersprache für jede Zielarchitektur ein eigenes Backend entwickeln.
+</p>
+
+<p>
+Mit LLVM kann die Architektur vereinfacht werden:
+</p>
+
+<pre class="example" id="org25f4662">
+C ───────┐
+C++ ─────┤
+Rust ────┤
+Mojo ────┤
+Swift ───┤
+         ↓
+      LLVM-IR
+         ↓
+  LLVM-Optimierungen
+         ↓
+x86-64 / ARM64 / RISC-V / WebAssembly / GPU
+</pre>
+
+<p>
+LLVM übernimmt danach einen großen Teil von:
+</p>
+
+<ul class="org-ul">
+<li>Optimierung</li>
+<li>Maschinencodeerzeugung</li>
+<li>Unterstützung verschiedener CPUs</li>
+<li>Objektdateierzeugung</li>
+<li>Debug-Informationen</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4edf2ab" class="outline-3">
+<h3 id="org4edf2ab"><span class="section-number-3">2.4.</span> Wichtige LLVM-Komponenten und Werkzeuge</h3>
+<div class="outline-text-3" id="text-2-4">
+</div>
+<div id="outline-container-org2281163" class="outline-4">
+<h4 id="org2281163"><span class="section-number-4">2.4.1.</span> Clang</h4>
+<div class="outline-text-4" id="text-2-4-1">
+<p>
+<code>clang</code> ist das C-, C++- und Objective-C-Frontend des LLVM-Projekts.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>clang programm.c -o programm
+</code></pre>
+</div>
+
+<p>
+Für C++:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>clang++ programm.cpp -o programm
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org89666d6" class="outline-4">
+<h4 id="org89666d6"><span class="section-number-4">2.4.2.</span> llvm-as</h4>
+<div class="outline-text-4" id="text-2-4-2">
+<p>
+<code>llvm-as</code> übersetzt lesbare LLVM-IR in binären LLVM-Bitcode.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>llvm-as programm.ll -o programm.bc
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6e4864b" class="outline-4">
+<h4 id="org6e4864b"><span class="section-number-4">2.4.3.</span> llvm-dis</h4>
+<div class="outline-text-4" id="text-2-4-3">
+<p>
+<code>llvm-dis</code> wandelt LLVM-Bitcode zurück in lesbare LLVM-IR um.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>llvm-dis programm.bc -o programm.ll
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfe115a3" class="outline-4">
+<h4 id="orgfe115a3"><span class="section-number-4">2.4.4.</span> opt</h4>
+<div class="outline-text-4" id="text-2-4-4">
+<p>
+<code>opt</code> analysiert und optimiert LLVM-IR.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>opt -O2 programm.ll -S -o programm-optimiert.ll
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org29d11c8" class="outline-4">
+<h4 id="org29d11c8"><span class="section-number-4">2.4.5.</span> llc</h4>
+<div class="outline-text-4" id="text-2-4-5">
+<p>
+<code>llc</code> übersetzt LLVM-IR oder LLVM-Bitcode in Assemblercode oder Objektcode.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>llc programm.ll -o programm.s
+</code></pre>
+</div>
+
+<p>
+Für eine Objektdatei:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>llc -filetype=obj programm.ll -o programm.o
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1cacbf9" class="outline-4">
+<h4 id="org1cacbf9"><span class="section-number-4">2.4.6.</span> lld</h4>
+<div class="outline-text-4" id="text-2-4-6">
+<p>
+<code>lld</code> ist der Linker aus dem LLVM-Projekt.
+</p>
+
+<p>
+Ein Linker verbindet:
+</p>
+
+<ul class="org-ul">
+<li>Objektdateien</li>
+<li>statische Bibliotheken</li>
+<li>dynamische Bibliotheken</li>
+<li>Laufzeitbibliotheken</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org05889ba" class="outline-4">
+<h4 id="org05889ba"><span class="section-number-4">2.4.7.</span> LLDB</h4>
+<div class="outline-text-4" id="text-2-4-7">
+<p>
+<code>lldb</code> ist der Debugger des LLVM-Projekts.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>lldb ./programm
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org77e833e" class="outline-4">
+<h4 id="org77e833e"><span class="section-number-4">2.4.8.</span> llvm-objdump</h4>
+<div class="outline-text-4" id="text-2-4-8">
+<p>
+<code>llvm-objdump</code> zeigt Informationen aus Objektdateien und ausführbaren Dateien.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>llvm-objdump -d programm
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga81f1a0" class="outline-4">
+<h4 id="orga81f1a0"><span class="section-number-4">2.4.9.</span> Weitere Werkzeuge</h4>
+<div class="outline-text-4" id="text-2-4-9">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Werkzeug</th>
+<th scope="col" class="org-left">Aufgabe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>llvm-nm</code></td>
+<td class="org-left">Symbole einer Objektdatei anzeigen</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>llvm-readobj</code></td>
+<td class="org-left">Objektdateiformate untersuchen</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>llvm-readelf</code></td>
+<td class="org-left">ELF-Dateien untersuchen</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>llvm-ar</code></td>
+<td class="org-left">statische Bibliotheken erstellen</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>llvm-strip</code></td>
+<td class="org-left">Symbole und Debug-Daten entfernen</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>llvm-link</code></td>
+<td class="org-left">mehrere LLVM-Bitcode-Dateien verbinden</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>llvm-cov</code></td>
+<td class="org-left">Code-Coverage auswerten</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>llvm-profdata</code></td>
+<td class="org-left">Profilinformationen verarbeiten</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>llvm-size</code></td>
+<td class="org-left">Größen von Binärdateibereichen anzeigen</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>llvm-symbolizer</code></td>
+<td class="org-left">Adressen in Symbolnamen umwandeln</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="outline-container-org73336b7" class="outline-3">
+<h3 id="org73336b7"><span class="section-number-3">2.5.</span> Beispiel einer vollständigen LLVM-Kette</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+Ausgangsprogramm:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><code><span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #98be65;">&lt;stdio.h&gt;</span>
+
+<span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">square</span>(<span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">value</span>) {
+    <span style="color: #51afef;">return</span> value * value;
+}
+
+<span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">main</span>(<span style="color: #ECBE7B;">void</span>) {
+    printf(<span style="color: #98be65;">"%d\n"</span>, square(7));
+    <span style="color: #51afef;">return</span> 0;
+}
+</code></pre>
+</div>
+
+<p>
+C nach LLVM-IR übersetzen:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>clang -S -emit-llvm test.c -o test.ll
+</code></pre>
+</div>
+
+<p>
+LLVM-IR optimieren:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>opt -O3 test.ll -S -o test-opt.ll
+</code></pre>
+</div>
+
+<p>
+LLVM-IR in Assembler übersetzen:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>llc test-opt.ll -o test.s
+</code></pre>
+</div>
+
+<p>
+Assembler linken:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>clang test.s -o test
+</code></pre>
+</div>
+
+<p>
+Programm starten:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>./test
+</code></pre>
+</div>
+
+<p>
+Ausgabe:
+</p>
+
+<pre class="example" id="org61e9427">
+49
+</pre>
+</div>
+</div>
+<div id="outline-container-orge5d27bc" class="outline-3">
+<h3 id="orge5d27bc"><span class="section-number-3">2.6.</span> LLVM ist nicht der vollständige Compiler</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+Bei Rust sieht die Kette vereinfacht so aus:
+</p>
+
+<pre class="example" id="org5674105">
+Rust-Quellcode
+   ↓
+Lexer und Parser
+   ↓
+Rust-interne Darstellungen
+   ↓
+Namensauflösung
+   ↓
+Typprüfung
+   ↓
+Borrow Checker
+   ↓
+Monomorphisierung
+   ↓
+LLVM-IR
+   ↓
+LLVM-Optimierungen
+   ↓
+Maschinencode
+   ↓
+Linker
+   ↓
+ausführbares Programm
+</pre>
+
+<p>
+LLVM kennt dabei nicht:
+</p>
+
+<ul class="org-ul">
+<li>Borrow Checking</li>
+<li>Lifetimes</li>
+<li>Traits</li>
+<li>Cargo</li>
+<li>Rust-Makros</li>
+<li>Rust-Module</li>
+<li>Rust-Sichtbarkeitsregeln</li>
+</ul>
+
+<p>
+Diese Aufgaben übernimmt <code>rustc</code> vor der Übergabe an LLVM.
+</p>
+</div>
+</div>
+<div id="outline-container-org1437cb2" class="outline-3">
+<h3 id="org1437cb2"><span class="section-number-3">2.7.</span> LLVM und Optimierungen</h3>
+<div class="outline-text-3" id="text-2-7">
+</div>
+<div id="outline-container-org6ee5af3" class="outline-4">
+<h4 id="org6ee5af3"><span class="section-number-4">2.7.1.</span> Konstantenfaltung</h4>
+<div class="outline-text-4" id="text-2-7-1">
+<p>
+Aus:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><code><span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">value</span> = 10 * 20;
+</code></pre>
+</div>
+
+<p>
+kann werden:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><code><span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">value</span> = 200;
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga93a600" class="outline-4">
+<h4 id="orga93a600"><span class="section-number-4">2.7.2.</span> Dead-Code-Elimination</h4>
+<div class="outline-text-4" id="text-2-7-2">
+<p>
+Nicht erreichbarer oder wirkungsloser Code kann entfernt werden.
+</p>
+</div>
+</div>
+<div id="outline-container-org2dd39f9" class="outline-4">
+<h4 id="org2dd39f9"><span class="section-number-4">2.7.3.</span> Inlining</h4>
+<div class="outline-text-4" id="text-2-7-3">
+<p>
+Ein Funktionsaufruf kann durch den Funktionskörper ersetzt werden.
+</p>
+</div>
+</div>
+<div id="outline-container-org35a6315" class="outline-4">
+<h4 id="org35a6315"><span class="section-number-4">2.7.4.</span> Schleifenoptimierungen</h4>
+<div class="outline-text-4" id="text-2-7-4">
+<p>
+LLVM kann Schleifen unter anderem:
+</p>
+
+<ul class="org-ul">
+<li>entrollen</li>
+<li>vektorisieren</li>
+<li>vereinfachen</li>
+<li>zusammenfassen</li>
+<li>invarianten Code aus der Schleife verschieben</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org43d9139" class="outline-4">
+<h4 id="org43d9139"><span class="section-number-4">2.7.5.</span> Vektorisierung</h4>
+<div class="outline-text-4" id="text-2-7-5">
+<p>
+Skalare Operationen können durch SIMD-Befehle ersetzt werden.
+</p>
+</div>
+</div>
+<div id="outline-container-orgcae8000" class="outline-4">
+<h4 id="orgcae8000"><span class="section-number-4">2.7.6.</span> Escape- und Alias-Analysen</h4>
+<div class="outline-text-4" id="text-2-7-6">
+<p>
+LLVM untersucht, welche Zeiger auf dieselben Speicherbereiche zeigen könnten.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd53a552" class="outline-3">
+<h3 id="orgd53a552"><span class="section-number-3">2.8.</span> Optimierungsstufen</h3>
+<div class="outline-text-3" id="text-2-8">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Stufe</th>
+<th scope="col" class="org-left">Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>-O0</code></td>
+<td class="org-left">kaum Optimierung, meist besser zum Debuggen</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>-O1</code></td>
+<td class="org-left">grundlegende Optimierungen</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>-O2</code></td>
+<td class="org-left">starke Optimierung ohne extreme Maßnahmen</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>-O3</code></td>
+<td class="org-left">aggressive Optimierung</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>-Os</code></td>
+<td class="org-left">auf geringe Codegröße optimieren</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>-Oz</code></td>
+<td class="org-left">noch stärker auf minimale Codegröße optimieren</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Beispiel:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>clang -O3 programm.c -o programm
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf7e0483" class="outline-3">
+<h3 id="orgf7e0483"><span class="section-number-3">2.9.</span> LLVM und MLIR</h3>
+<div class="outline-text-3" id="text-2-9">
+<p>
+MLIR bedeutet:
+</p>
+
+<blockquote>
+<p>
+Multi-Level Intermediate Representation
+</p>
+</blockquote>
+
+<p>
+Eine Compilerkette kann beispielsweise so aussehen:
+</p>
+
+<pre class="example" id="org806f3fa">
+Mojo-Quellcode
+   ↓
+hochsprachliche MLIR-Darstellung
+   ↓
+Tensor-Darstellung
+   ↓
+Schleifen-Darstellung
+   ↓
+Parallelitäts-Darstellung
+   ↓
+GPU-Darstellung
+   ↓
+niedrigere MLIR-Darstellung
+   ↓
+LLVM-Dialekt
+   ↓
+LLVM-IR
+   ↓
+Maschinencode
+</pre>
+
+<p>
+Solange der Compiler weiß, dass eine Operation beispielsweise eine Matrixmultiplikation ist, kann er sie gezielt optimieren:
+</p>
+
+<ul class="org-ul">
+<li>Aufteilung in Blöcke</li>
+<li>Vektorisierung</li>
+<li>Parallelisierung</li>
+<li>GPU-Ausführung</li>
+<li>Nutzung spezieller Tensor-Einheiten</li>
+<li>Anpassung an Cachegrößen</li>
+</ul>
+</div>
+<div id="outline-container-org7cf6e25" class="outline-4">
+<h4 id="org7cf6e25"><span class="section-number-4">2.9.1.</span> MLIR-Dialekte</h4>
+<div class="outline-text-4" id="text-2-9-1">
+<p>
+Beispiele:
+</p>
+
+<ul class="org-ul">
+<li><code>arith</code> für arithmetische Operationen</li>
+<li><code>func</code> für Funktionen</li>
+<li><code>scf</code> für strukturierte Kontrollflüsse</li>
+<li><code>affine</code> für affine Schleifen und Speicherzugriffe</li>
+<li><code>gpu</code> für GPU-Ausführung</li>
+<li><code>vector</code> für Vektoroperationen</li>
+<li><code>llvm</code> für LLVM-nahe Operationen</li>
+<li><code>tensor</code> für Tensoren</li>
+<li><code>memref</code> für Speicherreferenzen</li>
+<li><code>linalg</code> für lineare Algebra</li>
+</ul>
+
+<p>
+Die schrittweise Umwandlung in niedrigere Darstellungen heißt <b>Lowering</b>.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc6ea47e" class="outline-3">
+<h3 id="orgc6ea47e"><span class="section-number-3">2.10.</span> Ist LLVM eine virtuelle Maschine?</h3>
+<div class="outline-text-3" id="text-2-10">
+<p>
+Ursprünglich stand LLVM für:
+</p>
+
+<blockquote>
+<p>
+Low Level Virtual Machine
+</p>
+</blockquote>
+
+<p>
+LLVM ist normalerweise keine virtuelle Maschine wie:
+</p>
+
+<ul class="org-ul">
+<li>Java Virtual Machine</li>
+<li>.NET Common Language Runtime</li>
+<li>WebAssembly-Runtime</li>
+<li>QEMU</li>
+</ul>
+
+<p>
+LLVM dient hauptsächlich dazu, Programme zu analysieren, zu optimieren und in nativen Maschinencode zu übersetzen.
+</p>
+
+<p>
+LLVM kann allerdings auch Just-in-time-Kompilierung ermöglichen.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd3d64ea" class="outline-3">
+<h3 id="orgd3d64ea"><span class="section-number-3">2.11.</span> Ahead-of-time- und Just-in-time-Kompilierung</h3>
+<div class="outline-text-3" id="text-2-11">
+</div>
+<div id="outline-container-org9d54448" class="outline-4">
+<h4 id="org9d54448"><span class="section-number-4">2.11.1.</span> Ahead-of-time-Kompilierung</h4>
+<div class="outline-text-4" id="text-2-11-1">
+<pre class="example" id="org1cf2270">
+Quellcode
+   ↓
+Compiler
+   ↓
+fertige Binärdatei
+   ↓
+späterer Programmstart
+</pre>
+</div>
+</div>
+<div id="outline-container-org66df75e" class="outline-4">
+<h4 id="org66df75e"><span class="section-number-4">2.11.2.</span> Just-in-time-Kompilierung</h4>
+<div class="outline-text-4" id="text-2-11-2">
+<pre class="example" id="org2cc2257">
+Programm oder Bytecode
+   ↓
+laufende JIT-Engine
+   ↓
+Maschinencode wird bei Bedarf erzeugt
+   ↓
+direkte Ausführung
+</pre>
+
+<p>
+LLVM besitzt dafür unter anderem ORC JIT.
+</p>
+
+<p>
+JIT-Kompilierung wird beispielsweise verwendet bei:
+</p>
+
+<ul class="org-ul">
+<li>dynamischen Programmiersprachen</li>
+<li>Datenbankabfragen</li>
+<li>numerischen Kerneln</li>
+<li>Shadern</li>
+<li>Emulatoren</li>
+<li>Laufzeit-Spezialisierung</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orga79a502" class="outline-3">
+<h3 id="orga79a502"><span class="section-number-3">2.12.</span> LLVM gegenüber GCC</h3>
+<div class="outline-text-3" id="text-2-12">
+<p>
+GCC bedeutet:
+</p>
+
+<blockquote>
+<p>
+GNU Compiler Collection
+</p>
+</blockquote>
+
+<p>
+Vereinfacht:
+</p>
+
+<pre class="example" id="org62c5a60">
+GCC:
+Sprachfrontend + GCC-interne IR + Optimierer + Backend
+
+LLVM:
+Frontend wie Clang + LLVM-IR + LLVM-Optimierer + LLVM-Backend
+</pre>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Bereich</th>
+<th scope="col" class="org-left">GCC</th>
+<th scope="col" class="org-left">LLVM/Clang</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-Frontend</td>
+<td class="org-left">GCC</td>
+<td class="org-left">Clang</td>
+</tr>
+
+<tr>
+<td class="org-left">C++-Frontend</td>
+<td class="org-left">G++</td>
+<td class="org-left">Clang++</td>
+</tr>
+
+<tr>
+<td class="org-left">interne Darstellung</td>
+<td class="org-left">GCC-eigene Darstellungen</td>
+<td class="org-left">LLVM-IR</td>
+</tr>
+
+<tr>
+<td class="org-left">Modularität</td>
+<td class="org-left">historisch stärker monolithisch</td>
+<td class="org-left">stark bibliotheksorientiert</td>
+</tr>
+
+<tr>
+<td class="org-left">Fehlermeldungen</td>
+<td class="org-left">inzwischen gut</td>
+<td class="org-left">oft besonders verständlich</td>
+</tr>
+
+<tr>
+<td class="org-left">Erweiterbarkeit</td>
+<td class="org-left">möglich</td>
+<td class="org-left">häufig gut über Bibliotheken</td>
+</tr>
+
+<tr>
+<td class="org-left">Lizenz</td>
+<td class="org-left">GPL</td>
+<td class="org-left">Apache-2.0 mit LLVM-Ausnahmen</td>
+</tr>
+
+<tr>
+<td class="org-left">Linker</td>
+<td class="org-left">häufig GNU ld oder gold</td>
+<td class="org-left">häufig LLD</td>
+</tr>
+
+<tr>
+<td class="org-left">Debugger</td>
+<td class="org-left">GDB</td>
+<td class="org-left">LLDB</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org0dafdf8" class="outline-3">
+<h3 id="org0dafdf8"><span class="section-number-3">2.13.</span> LLVM gegenüber einer virtuellen Maschine</h3>
+<div class="outline-text-3" id="text-2-13">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Eigenschaft</th>
+<th scope="col" class="org-left">LLVM-IR</th>
+<th scope="col" class="org-left">JVM-Bytecode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Hauptzweck</td>
+<td class="org-left">Compileroptimierung und Codegen</td>
+<td class="org-left">portable Laufzeitausführung</td>
+</tr>
+
+<tr>
+<td class="org-left">Typisches Ausführungsmodell</td>
+<td class="org-left">AOT oder JIT</td>
+<td class="org-left">normalerweise VM mit JIT</td>
+</tr>
+
+<tr>
+<td class="org-left">Abstraktionsebene</td>
+<td class="org-left">relativ niedrig</td>
+<td class="org-left">stärker laufzeitorientiert</td>
+</tr>
+
+<tr>
+<td class="org-left">Speicherverwaltung</td>
+<td class="org-left">keine vorgeschriebene GC</td>
+<td class="org-left">normalerweise Garbage Collector</td>
+</tr>
+
+<tr>
+<td class="org-left">Ziel</td>
+<td class="org-left">nativer Maschinencode</td>
+<td class="org-left">JVM-Laufzeitumgebung</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org222bd33" class="outline-3">
+<h3 id="org222bd33"><span class="section-number-3">2.14.</span> Verwendung von LLVM durch verschiedene Sprachen</h3>
+<div class="outline-text-3" id="text-2-14">
+</div>
+<div id="outline-container-orgeb13fc1" class="outline-4">
+<h4 id="orgeb13fc1"><span class="section-number-4">2.14.1.</span> C</h4>
+<div class="outline-text-4" id="text-2-14-1">
+<pre class="example" id="orgbf6553e">
+C
+ ↓
+Clang
+ ↓
+LLVM-IR
+ ↓
+LLVM
+ ↓
+Maschinencode
+</pre>
+</div>
+</div>
+<div id="outline-container-orgd3b6636" class="outline-4">
+<h4 id="orgd3b6636"><span class="section-number-4">2.14.2.</span> C++</h4>
+<div class="outline-text-4" id="text-2-14-2">
+<pre class="example" id="orgef3703f">
+C++
+ ↓
+Clang++
+ ↓
+LLVM-IR
+ ↓
+LLVM
+ ↓
+Maschinencode
+</pre>
+</div>
+</div>
+<div id="outline-container-org5c49148" class="outline-4">
+<h4 id="org5c49148"><span class="section-number-4">2.14.3.</span> Rust</h4>
+<div class="outline-text-4" id="text-2-14-3">
+<pre class="example" id="org24d3229">
+Rust
+ ↓
+rustc-Frontend
+ ↓
+Rust-interne IR
+ ↓
+MIR
+ ↓
+LLVM-IR
+ ↓
+LLVM
+ ↓
+Maschinencode
+</pre>
+
+<p>
+MIR bedeutet:
+</p>
+
+<blockquote>
+<p>
+Mid-level Intermediate Representation
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-org4153f9b" class="outline-4">
+<h4 id="org4153f9b"><span class="section-number-4">2.14.4.</span> Zig</h4>
+<div class="outline-text-4" id="text-2-14-4">
+<pre class="example" id="org75b61a7">
+Zig
+ ↓
+Zig-Frontend
+ ↓
+Zig-interne Darstellungen
+ ↓
+LLVM oder eigenes Backend
+ ↓
+Maschinencode
+</pre>
+
+<p>
+Zig kann auch als C- und C++-Toolchain verwendet werden:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>zig cc programm.c -o programm
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org30e23c4" class="outline-4">
+<h4 id="org30e23c4"><span class="section-number-4">2.14.5.</span> Mojo</h4>
+<div class="outline-text-4" id="text-2-14-5">
+<pre class="example" id="orgb10b829">
+Mojo
+ ↓
+Mojo-Frontend
+ ↓
+MLIR-Dialekte
+ ↓
+weitere Lowering-Schritte
+ ↓
+LLVM-Dialekt
+ ↓
+LLVM-IR
+ ↓
+LLVM-Backend
+ ↓
+CPU- oder GPU-Code
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org903bde9" class="outline-3">
+<h3 id="org903bde9"><span class="section-number-3">2.15.</span> LLVM und Cross-Compilation</h3>
+<div class="outline-text-3" id="text-2-15">
+<p>
+LLVM kann Code für eine andere Architektur erzeugen als diejenige, auf der der Compiler läuft.
+</p>
+
+<p>
+Beispiel:
+</p>
+
+<pre class="example" id="org553a19f">
+Compiler läuft auf:
+x86-64-Linux
+
+erzeugtes Ziel:
+ARM64-Linux
+</pre>
+
+<p>
+Clang-Beispiel:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>clang <span style="color: #98be65;">\</span>
+  --target=aarch64-linux-gnu <span style="color: #98be65;">\</span>
+  programm.c <span style="color: #98be65;">\</span>
+  -c <span style="color: #98be65;">\</span>
+  -o programm.o
+</code></pre>
+</div>
+
+<p>
+Zusätzlich können erforderlich sein:
+</p>
+
+<ul class="org-ul">
+<li>Zielsystem-Header</li>
+<li>Zielsystem-Bibliotheken</li>
+<li>passende C-Laufzeit</li>
+<li>Sysroot</li>
+<li>passender Linker</li>
+<li>Betriebssystem-SDK</li>
+<li>ABI-Informationen</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga5c7db5" class="outline-3">
+<h3 id="orga5c7db5"><span class="section-number-3">2.16.</span> Target Triple</h3>
+<div class="outline-text-3" id="text-2-16">
+<p>
+Beispiel:
+</p>
+
+<pre class="example" id="org2d3f27d">
+x86_64-unknown-linux-gnu
+</pre>
+
+<p>
+Typischer Aufbau:
+</p>
+
+<pre class="example" id="orgfa32c8d">
+Architektur-Hersteller-Betriebssystem-ABI
+</pre>
+
+<p>
+Weitere Beispiele:
+</p>
+
+<pre class="example" id="org5a5dc72">
+aarch64-unknown-linux-gnu
+aarch64-unknown-linux-musl
+x86_64-pc-windows-msvc
+x86_64-pc-windows-gnu
+aarch64-apple-darwin
+wasm32-wasi
+riscv64-unknown-linux-gnu
+</pre>
+</div>
+</div>
+<div id="outline-container-org7cb433c" class="outline-3">
+<h3 id="org7cb433c"><span class="section-number-3">2.17.</span> LLVM und ABI</h3>
+<div class="outline-text-3" id="text-2-17">
+<p>
+ABI bedeutet:
+</p>
+
+<blockquote>
+<p>
+Application Binary Interface
+</p>
+</blockquote>
+
+<p>
+Eine ABI legt fest:
+</p>
+
+<ul class="org-ul">
+<li>Übergabe von Funktionsargumenten</li>
+<li>Rückgabewerte</li>
+<li>verwendete Register</li>
+<li>Stack-Ausrichtung</li>
+<li>Namensdarstellung</li>
+<li>Struktur-Layout</li>
+<li>Aufrufkonventionen</li>
+<li>Behandlung von Exceptions</li>
+<li>Binärformat</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org59d5b15" class="outline-3">
+<h3 id="org59d5b15"><span class="section-number-3">2.18.</span> LLVM und Linker</h3>
+<div class="outline-text-3" id="text-2-18">
+<pre class="example" id="orgc993f6c">
+Quelldatei 1
+   ↓
+Objektdatei 1
+
+Quelldatei 2
+   ↓
+Objektdatei 2
+
+Bibliotheken
+   ↓
+
+Linker
+   ↓
+fertiges Programm
+</pre>
+
+<p>
+Mögliche Linker:
+</p>
+
+<ul class="org-ul">
+<li>LLD</li>
+<li>GNU ld</li>
+<li>GNU gold</li>
+<li>mold</li>
+<li>Microsoft Linker</li>
+<li>Apple ld</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga1d2be6" class="outline-3">
+<h3 id="orga1d2be6"><span class="section-number-3">2.19.</span> LLVM und Objektdateiformate</h3>
+<div class="outline-text-3" id="text-2-19">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Format</th>
+<th scope="col" class="org-left">Typische Betriebssysteme</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">ELF</td>
+<td class="org-left">Linux, BSD, Solaris und viele andere</td>
+</tr>
+
+<tr>
+<td class="org-left">PE/COFF</td>
+<td class="org-left">Windows</td>
+</tr>
+
+<tr>
+<td class="org-left">Mach-O</td>
+<td class="org-left">macOS und andere Apple-Systeme</td>
+</tr>
+
+<tr>
+<td class="org-left">Wasm</td>
+<td class="org-left">WebAssembly</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgdc1177a" class="outline-3">
+<h3 id="orgdc1177a"><span class="section-number-3">2.20.</span> LLVM und Debug-Informationen</h3>
+<div class="outline-text-3" id="text-2-20">
+<p>
+Typische Debug-Formate:
+</p>
+
+<ul class="org-ul">
+<li>DWARF auf Linux und vielen Unix-Systemen</li>
+<li>CodeView beziehungsweise PDB unter Windows</li>
+</ul>
+
+<p>
+Kompilieren mit Debug-Informationen:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>clang -g programm.c -o programm
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4707c97" class="outline-3">
+<h3 id="org4707c97"><span class="section-number-3">2.21.</span> LLVM und Sanitizer</h3>
+<div class="outline-text-3" id="text-2-21">
+</div>
+<div id="outline-container-orgc109cb8" class="outline-4">
+<h4 id="orgc109cb8"><span class="section-number-4">2.21.1.</span> AddressSanitizer</h4>
+<div class="outline-text-4" id="text-2-21-1">
+<div class="org-src-container">
+<pre class="src src-sh"><code>clang <span style="color: #98be65;">\</span>
+  -fsanitize=address <span style="color: #98be65;">\</span>
+  -g <span style="color: #98be65;">\</span>
+  programm.c <span style="color: #98be65;">\</span>
+  -o programm
+</code></pre>
+</div>
+
+<p>
+Findet unter anderem:
+</p>
+
+<ul class="org-ul">
+<li>Zugriffe außerhalb von Puffern</li>
+<li>Use-after-free</li>
+<li>bestimmte Stackfehler</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5c0525c" class="outline-4">
+<h4 id="org5c0525c"><span class="section-number-4">2.21.2.</span> UndefinedBehaviorSanitizer</h4>
+<div class="outline-text-4" id="text-2-21-2">
+<div class="org-src-container">
+<pre class="src src-sh"><code>clang <span style="color: #98be65;">\</span>
+  -fsanitize=undefined <span style="color: #98be65;">\</span>
+  -g <span style="color: #98be65;">\</span>
+  programm.c <span style="color: #98be65;">\</span>
+  -o programm
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgecc7f40" class="outline-4">
+<h4 id="orgecc7f40"><span class="section-number-4">2.21.3.</span> ThreadSanitizer</h4>
+<div class="outline-text-4" id="text-2-21-3">
+<div class="org-src-container">
+<pre class="src src-sh"><code>clang <span style="color: #98be65;">\</span>
+  -fsanitize=thread <span style="color: #98be65;">\</span>
+  -g <span style="color: #98be65;">\</span>
+  programm.c <span style="color: #98be65;">\</span>
+  -o programm
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org21c357a" class="outline-3">
+<h3 id="org21c357a"><span class="section-number-3">2.22.</span> LLVM und Link-Time Optimization</h3>
+<div class="outline-text-3" id="text-2-22">
+<pre class="example" id="org53e4e44">
+a.c ─┐
+     ├→ gemeinsame Optimierung → Programm
+b.c ─┘
+</pre>
+
+<p>
+Beispiel:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>clang <span style="color: #98be65;">\</span>
+  -O3 <span style="color: #98be65;">\</span>
+  -flto <span style="color: #98be65;">\</span>
+  a.c <span style="color: #98be65;">\</span>
+  b.c <span style="color: #98be65;">\</span>
+  -o programm
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdb1e1e4" class="outline-3">
+<h3 id="orgdb1e1e4"><span class="section-number-3">2.23.</span> LLVM und Profile-Guided Optimization</h3>
+<div class="outline-text-3" id="text-2-23">
+<pre class="example" id="org7e57a1d">
+Quellcode
+   ↓
+instrumentierte Version
+   ↓
+typische Programmausführung
+   ↓
+Profilinformationen
+   ↓
+erneute Übersetzung
+   ↓
+optimierte Version
+</pre>
+
+<p>
+PGO kann dem Compiler zeigen:
+</p>
+
+<ul class="org-ul">
+<li>welche Funktionen häufig aufgerufen werden</li>
+<li>welche Verzweigungen meistens genommen werden</li>
+<li>welche Schleifen besonders wichtig sind</li>
+<li>welche Codepfade selten sind</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgce097bd" class="outline-3">
+<h3 id="orgce097bd"><span class="section-number-3">2.24.</span> LLVM und GPUs</h3>
+<div class="outline-text-3" id="text-2-24">
+<p>
+Wichtige GPU-Backends:
+</p>
+
+<ul class="org-ul">
+<li>AMDGPU</li>
+<li>NVPTX</li>
+</ul>
+
+<p>
+Eine mögliche Kette:
+</p>
+
+<pre class="example" id="orgc589213">
+Hochsprache
+   ↓
+GPU-Zwischendarstellung
+   ↓
+LLVM-IR
+   ↓
+AMDGPU- oder NVPTX-Backend
+   ↓
+GPU-Code
+</pre>
+
+<p>
+LLVM allein ersetzt nicht:
+</p>
+
+<ul class="org-ul">
+<li>CUDA</li>
+<li>ROCm</li>
+<li>HIP</li>
+<li>Metal</li>
+<li>OpenCL</li>
+<li>Vulkan</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3c70a3c" class="outline-3">
+<h3 id="org3c70a3c"><span class="section-number-3">2.25.</span> Grenzen von LLVM</h3>
+<div class="outline-text-3" id="text-2-25">
+<p>
+LLVM stellt nicht automatisch bereit:
+</p>
+
+<ul class="org-ul">
+<li>Parser für eine neue Sprache</li>
+<li>Typsystem einer Sprache</li>
+<li>Borrow Checker</li>
+<li>Paketmanager</li>
+<li>Build-System</li>
+<li>Standardbibliothek</li>
+<li>Garbage Collector</li>
+<li>Sprachserver</li>
+<li>vollständige Betriebssystem-SDKs</li>
+<li>Anwendungsframeworks</li>
+<li>automatische Programmsicherheit</li>
+</ul>
+
+<p>
+Wer eine eigene Sprache mit LLVM entwickelt, muss typischerweise selbst bauen:
+</p>
+
+<ul class="org-ul">
+<li>Lexer</li>
+<li>Parser</li>
+<li>AST</li>
+<li>Namensauflösung</li>
+<li>Typprüfung</li>
+<li>Fehlermeldungen</li>
+<li>Laufzeitbibliothek</li>
+<li>Standardbibliothek</li>
+<li>Sprachwerkzeuge</li>
+<li>Übersetzung nach LLVM-IR oder MLIR</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1a326cf" class="outline-3">
+<h3 id="org1a326cf"><span class="section-number-3">2.26.</span> Kann man eine eigene Sprache mit LLVM bauen?</h3>
+<div class="outline-text-3" id="text-2-26">
+<p>
+Ja.
+</p>
+
+<pre class="example" id="org4d85d8d">
+eigene Sprache
+   ↓
+Lexer
+   ↓
+Parser
+   ↓
+AST
+   ↓
+Typprüfung
+   ↓
+eigene Zwischenrepräsentation
+   ↓
+LLVM-IR
+   ↓
+LLVM-Optimierungen
+   ↓
+Maschinencode
+</pre>
+</div>
+<div id="outline-container-org3cc5bc4" class="outline-4">
+<h4 id="org3cc5bc4"><span class="section-number-4">2.26.1.</span> Lexer</h4>
+<div class="outline-text-4" id="text-2-26-1">
+<p>
+Aus:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text"><code>result = 10 + 20
+</code></pre>
+</div>
+
+<p>
+können Tokens werden:
+</p>
+
+<pre class="example" id="org3cec3b2">
+IDENTIFIER(result)
+EQUALS
+INTEGER(10)
+PLUS
+INTEGER(20)
+</pre>
+</div>
+</div>
+<div id="outline-container-org8da5e1b" class="outline-4">
+<h4 id="org8da5e1b"><span class="section-number-4">2.26.2.</span> Parser und AST</h4>
+<div class="outline-text-4" id="text-2-26-2">
+<p>
+Mögliche Struktur:
+</p>
+
+<pre class="example" id="org6489c2a">
+Assignment
+├── Name: result
+└── Add
+    ├── Integer: 10
+    └── Integer: 20
+</pre>
+
+<p>
+AST bedeutet:
+</p>
+
+<blockquote>
+<p>
+Abstract Syntax Tree
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-org0cd5379" class="outline-4">
+<h4 id="org0cd5379"><span class="section-number-4">2.26.3.</span> LLVM-IR-Erzeugung</h4>
+<div class="outline-text-4" id="text-2-26-3">
+<div class="org-src-container">
+<pre class="src src-llvm"><code>%result = add i32 10, 20
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb81d52e" class="outline-3">
+<h3 id="orgb81d52e"><span class="section-number-3">2.27.</span> LLVM als Bibliothek</h3>
+<div class="outline-text-3" id="text-2-27">
+<p>
+LLVM ist nicht nur eine Sammlung von Kommandozeilenprogrammen.
+</p>
+
+<p>
+Ein eigener Compiler kann LLVM verwenden, um:
+</p>
+
+<ul class="org-ul">
+<li>Module anzulegen</li>
+<li>Funktionen zu erzeugen</li>
+<li>Basic Blocks zu erstellen</li>
+<li>Instruktionen einzufügen</li>
+<li>Optimierungspässe auszuführen</li>
+<li>Objektdateien zu erzeugen</li>
+<li>JIT-Code auszuführen</li>
+</ul>
+
+<p>
+LLVM besitzt hauptsächlich eine C++-API, außerdem eine C-API und Bindings für andere Sprachen.
+</p>
+</div>
+</div>
+<div id="outline-container-org4a07de3" class="outline-3">
+<h3 id="org4a07de3"><span class="section-number-3">2.28.</span> LLVM-Versionen und Kompatibilität</h3>
+<div class="outline-text-3" id="text-2-28">
+<p>
+Zwischen Versionen können sich ändern:
+</p>
+
+<ul class="org-ul">
+<li>C++-APIs</li>
+<li>Optimierungspässe</li>
+<li>Kommandozeilenoptionen</li>
+<li>IR-Details</li>
+<li>Standardverhalten</li>
+<li>unterstützte Zielplattformen</li>
+</ul>
+
+<p>
+LLVM-Bitcode ist nicht zwingend als langfristig stabiles Austauschformat zwischen beliebigen LLVM-Versionen gedacht.
+</p>
+</div>
+</div>
+<div id="outline-container-org16cdba7" class="outline-3">
+<h3 id="org16cdba7"><span class="section-number-3">2.29.</span> Praktische Befehle zum Ausprobieren</h3>
+<div class="outline-text-3" id="text-2-29">
+<p>
+LLVM-Version anzeigen:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>clang --version
+</code></pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>llvm-config --version
+</code></pre>
+</div>
+
+<p>
+C-Code als LLVM-IR ausgeben:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>clang <span style="color: #98be65;">\</span>
+  -S <span style="color: #98be65;">\</span>
+  -emit-llvm <span style="color: #98be65;">\</span>
+  programm.c <span style="color: #98be65;">\</span>
+  -o programm.ll
+</code></pre>
+</div>
+
+<p>
+Optimierte LLVM-IR ausgeben:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>clang <span style="color: #98be65;">\</span>
+  -O3 <span style="color: #98be65;">\</span>
+  -S <span style="color: #98be65;">\</span>
+  -emit-llvm <span style="color: #98be65;">\</span>
+  programm.c <span style="color: #98be65;">\</span>
+  -o programm-O3.ll
+</code></pre>
+</div>
+
+<p>
+Assemblercode erzeugen:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>clang <span style="color: #98be65;">\</span>
+  -O3 <span style="color: #98be65;">\</span>
+  -S <span style="color: #98be65;">\</span>
+  programm.c <span style="color: #98be65;">\</span>
+  -o programm.s
+</code></pre>
+</div>
+
+<p>
+Objektdatei erzeugen:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>clang <span style="color: #98be65;">\</span>
+  -O3 <span style="color: #98be65;">\</span>
+  -c <span style="color: #98be65;">\</span>
+  programm.c <span style="color: #98be65;">\</span>
+  -o programm.o
+</code></pre>
+</div>
+
+<p>
+Maschinencode disassemblieren:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>llvm-objdump <span style="color: #98be65;">\</span>
+  -d <span style="color: #98be65;">\</span>
+  programm.o
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org40a78fe" class="outline-3">
+<h3 id="org40a78fe"><span class="section-number-3">2.30.</span> Ein kleines Experiment</h3>
+<div class="outline-text-3" id="text-2-30">
+<p>
+Erstelle die Datei <code>optimierung.c</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><code><span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">calculate</span>(<span style="color: #ECBE7B;">void</span>) {
+    <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">a</span> = 10;
+    <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">b</span> = 20;
+    <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">result</span> = a * b;
+
+    <span style="color: #51afef;">if</span> (0) {
+        result = 999;
+    }
+
+    <span style="color: #51afef;">return</span> result;
+}
+</code></pre>
+</div>
+
+<p>
+Unoptimierte LLVM-IR erzeugen:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>clang <span style="color: #98be65;">\</span>
+  -O0 <span style="color: #98be65;">\</span>
+  -S <span style="color: #98be65;">\</span>
+  -emit-llvm <span style="color: #98be65;">\</span>
+  optimierung.c <span style="color: #98be65;">\</span>
+  -o optimierung-O0.ll
+</code></pre>
+</div>
+
+<p>
+Optimierte LLVM-IR erzeugen:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>clang <span style="color: #98be65;">\</span>
+  -O3 <span style="color: #98be65;">\</span>
+  -S <span style="color: #98be65;">\</span>
+  -emit-llvm <span style="color: #98be65;">\</span>
+  optimierung.c <span style="color: #98be65;">\</span>
+  -o optimierung-O3.ll
+</code></pre>
+</div>
+
+<p>
+Vergleichen:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>diff -u <span style="color: #98be65;">\</span>
+  optimierung-O0.ll <span style="color: #98be65;">\</span>
+  optimierung-O3.ll
+</code></pre>
+</div>
+
+<p>
+Die optimierte Funktion kann im Wesentlichen auf Folgendes reduziert werden:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-llvm"><code>define i32 @calculate() {
+  ret i32 200
+}
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdc3d90e" class="outline-3">
+<h3 id="orgdc3d90e"><span class="section-number-3">2.31.</span> Kurzer Vergleich der Begriffe</h3>
+<div class="outline-text-3" id="text-2-31">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Begriff</th>
+<th scope="col" class="org-left">Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Compiler</td>
+<td class="org-left">übersetzt Programme</td>
+</tr>
+
+<tr>
+<td class="org-left">Frontend</td>
+<td class="org-left">versteht eine konkrete Programmiersprache</td>
+</tr>
+
+<tr>
+<td class="org-left">AST</td>
+<td class="org-left">abstrakter Syntaxbaum</td>
+</tr>
+
+<tr>
+<td class="org-left">IR</td>
+<td class="org-left">Zwischendarstellung</td>
+</tr>
+
+<tr>
+<td class="org-left">LLVM-IR</td>
+<td class="org-left">relativ niedrige LLVM-Zwischendarstellung</td>
+</tr>
+
+<tr>
+<td class="org-left">MLIR</td>
+<td class="org-left">Infrastruktur für mehrere Abstraktionsebenen</td>
+</tr>
+
+<tr>
+<td class="org-left">Optimierungspass</td>
+<td class="org-left">analysiert oder verändert die Zwischendarstellung</td>
+</tr>
+
+<tr>
+<td class="org-left">Backend</td>
+<td class="org-left">erzeugt Code für eine Zielarchitektur</td>
+</tr>
+
+<tr>
+<td class="org-left">Assembler</td>
+<td class="org-left">übersetzt Assemblersprache in Maschinencode</td>
+</tr>
+
+<tr>
+<td class="org-left">Linker</td>
+<td class="org-left">verbindet Objektdateien und Bibliotheken</td>
+</tr>
+
+<tr>
+<td class="org-left">JIT</td>
+<td class="org-left">kompiliert während der Programmausführung</td>
+</tr>
+
+<tr>
+<td class="org-left">AOT</td>
+<td class="org-left">kompiliert vor der Programmausführung</td>
+</tr>
+
+<tr>
+<td class="org-left">ABI</td>
+<td class="org-left">Regeln für binäre Zusammenarbeit</td>
+</tr>
+
+<tr>
+<td class="org-left">Target Triple</td>
+<td class="org-left">Beschreibung der Zielplattform</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgc0245f8" class="outline-3">
+<h3 id="orgc0245f8"><span class="section-number-3">2.32.</span> Zusammenfassung</h3>
+<div class="outline-text-3" id="text-2-32">
+<p>
+Eine typische LLVM-Kette lautet:
+</p>
+
+<pre class="example" id="org2a8a951">
+Quellcode
+   ↓
+sprachspezifisches Frontend
+   ↓
+LLVM-IR
+   ↓
+Analysen und Optimierungen
+   ↓
+Backend
+   ↓
+Maschinencode
+   ↓
+Linker
+   ↓
+ausführbares Programm
+</pre>
+
+<p>
+Die wichtigsten Punkte:
+</p>
+
+<ol class="org-ol">
+<li>LLVM ist kein einzelner Compiler.</li>
+<li>Clang ist das C- und C++-Frontend aus dem LLVM-Projekt.</li>
+<li>LLVM-IR ist eine gemeinsame, relativ niedrige Zwischendarstellung.</li>
+<li>LLVM kann Code für viele CPUs und Betriebssystemplattformen erzeugen.</li>
+<li>Rust verwendet LLVM als wichtigstes Standard-Backend.</li>
+<li>Zig verwendet LLVM für viele Backends, entwickelt aber zusätzlich eigene Compilerkomponenten.</li>
+<li>Mojo verwendet MLIR und LLVM besonders intensiv.</li>
+<li>MLIR erhält höherwertige Strukturen wie Tensoren, Schleifen und GPU-Operationen länger im Compiler.</li>
+<li>LLVM ist normalerweise keine virtuelle Maschine wie JVM oder .NET CLR.</li>
+<li>LLVM übernimmt nicht die sprachspezifischen Aufgaben wie Parsing, Typprüfung, Borrow Checking oder Paketverwaltung.</li>
+</ol>
+
+<p>
+Kurz formuliert:
+</p>
+
+<blockquote>
+<p>
+Das Frontend versteht die Programmiersprache.
+</p>
+
+<p>
+LLVM optimiert die daraus erzeugte Zwischendarstellung.
+</p>
+
+<p>
+Das Backend erzeugt Maschinencode für die gewünschte Architektur.
+</p>
+</blockquote>
+
+<p>
+Oder noch kürzer:
+</p>
+
+<blockquote>
+<p>
+Clang versteht C und C++.
+</p>
+
+<p>
+rustc versteht Rust.
+</p>
+
+<p>
+Der Mojo-Compiler versteht Mojo.
+</p>
+
+<p>
+LLVM hilft ihnen anschließend beim Optimieren und Erzeugen von Maschinencode.
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Autor: termux</p>
+<p class="date">Erstellt am: 2026-07-23 Thu 10:19</p>
+</div>
+</body>
+</html>

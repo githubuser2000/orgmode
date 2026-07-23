@@ -1,0 +1,33 @@
+# Emacs backup files
+*~
+
+# Emacs auto-save files
+\#*\#
+
+# Emacs lock files
+.\#*
+
+# Emacs desktop/session files
+.emacs.desktop
+.emacs.desktop.lock
+
+# Emacs auto-save list
+auto-save-list/
+
+# Emacs byte-compiled files
+*.elc
+
+# Emacs native compilation cache
+eln-cache/
+
+# Emacs semantic database
+semanticdb/
+
+# Emacs TRAMP persistence
+tramp
+
+# Flycheck temporary files
+flycheck_*.el
+
+# Org Mode generated state
+.org-id-locations

@@ -1,0 +1,3172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+<head>
+<!-- 2026-07-23 Thu 10:22 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Org Mode – große Tastenkürzel- und Steuerungsübersicht Eingang Projekte Termine und regelmäßige Aufgaben Technisches Wissen</title>
+<meta name="author" content="OpenAI" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'JavaScript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Org Mode – große Tastenkürzel- und Steuerungsübersicht Eingang Projekte Termine und regelmäßige Aufgaben Technisches Wissen</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Inhaltsverzeichnis</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org59edea6">1. Hinweise zur Datei</a></li>
+<li><a href="#org502ddf0">2. Tastennotation</a></li>
+<li><a href="#org0ebebc7">3. Hilfe und Entdeckung</a></li>
+<li><a href="#org3967394">4. Überschriften und Baumstruktur</a></li>
+<li><a href="#org533be00">5. Betriebssysteme</a>
+<ul>
+<li><a href="#org3902cd8">5.1. Android</a>
+<ul>
+<li><a href="#org9c4ae27">5.1.1. Termux</a></li>
+<li><a href="#org94ddc1d">5.1.2. Termux:X11</a></li>
+</ul>
+</li>
+<li><a href="#org27f13d6">5.2. Linux</a>
+<ul>
+<li><a href="#org68f709b">5.2.1. Fedora</a></li>
+<li><a href="#org0ef5edb">5.2.2. Gentoo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org460907d">6. Editoren</a>
+<ul>
+<li><a href="#org09c33f9">6.1. Doom Emacs</a></li>
+<li><a href="#orgd1cbce8">6.2. Neovim</a></li>
+</ul>
+</li>
+<li><a href="#orga52400e">7. Sichtbarkeit und Sparse Trees</a></li>
+<li><a href="#orgae4e5de">8. TODO-Aufgaben</a></li>
+<li><a href="#org35cc9e0">9. <span class="todo TODO">TODO</span> Doom konfigurieren</a></li>
+<li><a href="#orgf548633">10. NEXT Org Agenda einrichten</a></li>
+<li><a href="#org4db09b6">11. <span class="todo WAIT">WAIT</span> Paketkorrektur abwarten</a></li>
+<li><a href="#org48e4241">12. <span class="done DONE">DONE</span> Erste Org-Datei anlegen</a>
+<ul>
+<li><a href="#orge79d290">12.1. Eigene TODO-Zustände</a></li>
+</ul>
+</li>
+<li><a href="#org78426a0">13. Prioritäten</a></li>
+<li><a href="#org41447bf">14. <span class="todo TODO">TODO</span> Paketverwaltung reparieren</a></li>
+<li><a href="#orgdd470fe">15. <span class="todo TODO">TODO</span> Org-Dateien ordnen</a></li>
+<li><a href="#org7ca1b2d">16. <span class="todo TODO">TODO</span> Neues Theme testen</a></li>
+<li><a href="#org2ee7899">17. Tags und Eigenschaften</a>
+<ul>
+<li><a href="#org8ff1d3a">17.1. Tags</a></li>
+</ul>
+</li>
+<li><a href="#orgb946657">18. <span class="todo TODO">TODO</span> Doom konfigurieren&nbsp;&nbsp;&nbsp<span class="tag"><span class="emacs">emacs</span>&nbsp;<span class="android">android</span></span></a></li>
+<li><a href="#org26adfdb">19. <span class="todo TODO">TODO</span> Rust-Port testen&nbsp;&nbsp;&nbsp<span class="tag"><span class="rust">rust</span>&nbsp;<span class="reta">reta</span></span></a></li>
+<li><a href="#org53d02a7">20. Notizen zu Termux:X11&nbsp;&nbsp;&nbsp<span class="tag"><span class="termux">termux</span>&nbsp;<span class="x11">x11</span></span></a></li>
+<li><a href="#org0bb436d">21. reta<sub>arch</sub><sub>mojo</sub>&nbsp;&nbsp;&nbsp<span class="tag"><span class="mojo">mojo</span></span></a>
+<ul>
+<li><a href="#org0ccae1c">21.1. <span class="todo TODO">TODO</span> Build testen</a></li>
+<li><a href="#orgb3a103d">21.2. <span class="todo TODO">TODO</span> Unicode-Fehler untersuchen</a></li>
+<li><a href="#org83014c6">21.3. Eigenschaften</a></li>
+</ul>
+</li>
+<li><a href="#org0417df5">22. <span class="todo TODO">TODO</span> Rust-Port weiterführen</a></li>
+<li><a href="#orgf5183f5">23. Listen</a></li>
+<li><a href="#org4bf4b93">24. Kontrollkästchen</a></li>
+<li><a href="#org4a025fd">25. Installation <code>[2/4]</code></a></li>
+<li><a href="#orgb7baeaa">26. Installation <code>[50%]</code></a></li>
+<li><a href="#org44c10b7">27. Zeitstempel und Kalender</a>
+<ul>
+<li><a href="#orgc91a3d0">27.1. Wiederkehrende Aufgaben</a></li>
+</ul>
+</li>
+<li><a href="#org9aa64a8">28. <span class="todo TODO">TODO</span> Wöchentlich Termux aktualisieren</a></li>
+<li><a href="#org3f427f3">29. <span class="todo TODO">TODO</span> Monatliche Projektsicherung</a></li>
+<li><a href="#org9f46372">30. <span class="todo TODO">TODO</span> Täglich Org Agenda prüfen</a></li>
+<li><a href="#org8191890">31. Zeiterfassung mit Clock</a></li>
+<li><a href="#org4ee3ec9">32. <span class="todo TODO">TODO</span> Org-Dokumentation schreiben</a></li>
+<li><a href="#org9954913">33. Links</a></li>
+<li><a href="#org689a9b2">34. Bilder und Vorschauen</a></li>
+<li><a href="#orga6428f2">35. Tabellen</a>
+<ul>
+<li><a href="#org286c8e2">35.1. Tabelle erzeugen</a></li>
+<li><a href="#org8b11992">35.2. Navigation und Bearbeitung</a></li>
+<li><a href="#org6f7794a">35.3. Tabellenformeln</a></li>
+</ul>
+</li>
+<li><a href="#org6d14d76">36. Agenda</a>
+<ul>
+<li><a href="#org25ae13e">36.1. Konfiguration</a></li>
+<li><a href="#org95277dc">36.2. Agenda öffnen</a></li>
+<li><a href="#org446bcfc">36.3. Bedienung in der Agenda</a></li>
+</ul>
+</li>
+<li><a href="#orgaa9d8b1">37. Capture</a>
+<ul>
+<li><a href="#orgb4eeadc">37.1. Beispielkonfiguration</a></li>
+<li><a href="#org3a72d15">37.2. Capture-Befehle</a></li>
+</ul>
+</li>
+<li><a href="#orgf377ead">38. Refile und Archiv</a></li>
+<li><a href="#org8b20729">39. Org Babel</a>
+<ul>
+<li><a href="#orgd1ad697">39.1. Shell-Codeblock als Beispiel</a></li>
+<li><a href="#org03c8316">39.2. Python-Codeblock als Beispiel</a></li>
+<li><a href="#org322047e">39.3. Arbeitsverzeichnis als Beispiel</a></li>
+<li><a href="#org4583983">39.4. Babel-Steuerung</a></li>
+</ul>
+</li>
+<li><a href="#orgb00ec39">40. Strukturvorlagen und Blöcke</a></li>
+<li><a href="#org5e3e41b">41. Export</a></li>
+<li><a href="#org6210112">42. Fußnoten</a></li>
+<li><a href="#org847d540">43. Kommentare und Archivierung</a></li>
+<li><a href="#orgd1eb3a0">44. Formatierung und Anzeige</a></li>
+<li><a href="#org6023bb4">45. Die wichtigsten Befehle für den Alltag</a></li>
+<li><a href="#orga3b6f91">46. Empfohlene Lernreihenfolge</a></li>
+<li><a href="#orgc0210b7">47. Sinnvolle persönliche Org-Struktur</a>
+<ul>
+<li><a href="#orga2ce050">47.1. Beispiel für inbox.org</a></li>
+</ul>
+</li>
+<li><a href="#org90a6ab1">48. Eingang</a></li>
+<li><a href="#org0aad3c2">49. Notizen</a>
+<ul>
+<li><a href="#orgb79f34f">49.1. Beispiel für projekte.org</a></li>
+</ul>
+</li>
+<li><a href="#org5ecf7ac">50. reta<sub>arch</sub><sub>mojo</sub>&nbsp;&nbsp;&nbsp<span class="tag"><span class="mojo">mojo</span></span></a>
+<ul>
+<li><a href="#org5065f99">50.1. NEXT Aktuellen Fehler bearbeiten</a></li>
+<li><a href="#org458627f">50.2. <span class="todo TODO">TODO</span> Dokumentation vervollständigen</a></li>
+<li><a href="#org785e057">50.3. <span class="todo WAIT">WAIT</span> Plattformtest auf AArch64</a></li>
+</ul>
+</li>
+<li><a href="#org040f58d">51. reta<sub>arch</sub><sub>rust</sub>&nbsp;&nbsp;&nbsp<span class="tag"><span class="rust">rust</span></span></a>
+<ul>
+<li><a href="#org251e1ff">51.1. <span class="todo TODO">TODO</span> CLI-Grundstruktur</a></li>
+<li><a href="#org89744a1">51.2. <span class="todo TODO">TODO</span> CSV-Parser</a></li>
+<li><a href="#org3792dc8">51.3. Beispiel für agenda.org</a></li>
+</ul>
+</li>
+<li><a href="#orga803af0">52. <span class="todo TODO">TODO</span> Täglich Agenda prüfen</a></li>
+<li><a href="#org4e828d3">53. <span class="todo TODO">TODO</span> Wöchentliche Sicherung</a>
+<ul>
+<li><a href="#orge9768b7">53.1. Beispiel für wissen.org</a></li>
+</ul>
+</li>
+<li><a href="#org97e04af">54. Emacs</a>
+<ul>
+<li><a href="#org994fb96">54.1. Evil States</a></li>
+<li><a href="#org7ae4547">54.2. Org Mode</a></li>
+<li><a href="#org661243e">54.3. Doom-Konfiguration</a></li>
+</ul>
+</li>
+<li><a href="#orgf8c761f">55. Linux</a>
+<ul>
+<li><a href="#orga6cfc4c">55.1. Termux</a></li>
+<li><a href="#org354649f">55.2. Fedora</a></li>
+<li><a href="#orgcf7b468">55.3. Gentoo</a></li>
+</ul>
+</li>
+<li><a href="#orgf65c121">56. Programmiersprachen</a>
+<ul>
+<li><a href="#orgc067bc6">56.1. Rust</a></li>
+<li><a href="#orgb3f98dd">56.2. Mojo</a></li>
+<li><a href="#org0e159be">56.3. Python</a></li>
+</ul>
+</li>
+<li><a href="#org92ad7f1">57. Praktische Abschlussübung</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org59edea6" class="outline-2">
+<h2 id="org59edea6"><span class="section-number-2">1.</span> Hinweise zur Datei</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Diese Datei ist vollständig und selbstständig.
+</p>
+
+<p>
+Sie enthält absichtlich:
+</p>
+
+<ul class="org-ul">
+<li>keine internen Links auf möglicherweise fehlende Überschriften,</li>
+<li>keinen Verweis auf <code>fig:architektur</code>,</li>
+<li>keine Bilddatei, die lokal vorhanden sein müsste,</li>
+<li>keine ausführbaren Beispielblöcke, die beim Export automatisch gestartet werden.</li>
+</ul>
+
+<p>
+Damit sollte der HTML-Export ohne die zuvor aufgetretenen
+Fehler wegen nicht auflösbarer Links funktionieren.
+</p>
+</div>
+</div>
+<div id="outline-container-org502ddf0" class="outline-2">
+<h2 id="org502ddf0"><span class="section-number-2">2.</span> Tastennotation</h2>
+<div class="outline-text-2" id="text-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Zeichen</th>
+<th scope="col" class="org-left">Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C</td>
+<td class="org-left">Ctrl beziehungsweise Strg</td>
+</tr>
+
+<tr>
+<td class="org-left">M</td>
+<td class="org-left">Meta, normalerweise Alt</td>
+</tr>
+
+<tr>
+<td class="org-left">S</td>
+<td class="org-left">Shift</td>
+</tr>
+
+<tr>
+<td class="org-left">RET</td>
+<td class="org-left">Enter</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC</td>
+<td class="org-left">Leertaste</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Unter Android kann <code>M-x</code> auch so eingegeben werden:
+</p>
+
+<pre class="example" id="org157d32b">
+Esc loslassen, danach x
+</pre>
+
+<p>
+In Doom Emacs zeigt:
+</p>
+
+<pre class="example" id="orgba35656">
+SPC m
+</pre>
+
+<p>
+die Befehle des aktuellen Major Modes an.
+</p>
+</div>
+</div>
+<div id="outline-container-org0ebebc7" class="outline-2">
+<h2 id="org0ebebc7"><span class="section-number-2">3.</span> Hilfe und Entdeckung</h2>
+<div class="outline-text-2" id="text-3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">SPC m</td>
+<td class="org-left">Org-Befehlsmenü in Doom anzeigen</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC h k</td>
+<td class="org-left">erklären, was eine Taste macht</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC h f</td>
+<td class="org-left">Funktion beschreiben</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC h m</td>
+<td class="org-left">aktuellen Major Mode beschreiben</td>
+</tr>
+
+<tr>
+<td class="org-left">C-h k</td>
+<td class="org-left">klassische Emacs-Tastenhilfe</td>
+</tr>
+
+<tr>
+<td class="org-left">C-h m</td>
+<td class="org-left">Hilfe zum aktuellen Mode</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x org-info</td>
+<td class="org-left">Org-Handbuch öffnen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x describe-mode</td>
+<td class="org-left">Org Mode und aktive Minor Modes erklären</td>
+</tr>
+
+<tr>
+<td class="org-left">C-g</td>
+<td class="org-left">begonnenen Befehl abbrechen</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org3967394" class="outline-2">
+<h2 id="org3967394"><span class="section-number-2">4.</span> Überschriften und Baumstruktur</h2>
+<div class="outline-text-2" id="text-4">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">TAB</td>
+<td class="org-left">aktuellen Abschnitt ein- oder ausklappen</td>
+</tr>
+
+<tr>
+<td class="org-left">S-TAB</td>
+<td class="org-left">Sichtbarkeit des ganzen Dokuments wechseln</td>
+</tr>
+
+<tr>
+<td class="org-left">C-u TAB</td>
+<td class="org-left">globale Sichtbarkeit gezielt auswählen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-RET</td>
+<td class="org-left">neue Überschrift einfügen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-RET</td>
+<td class="org-left">Überschrift nach aktuellem Teilbaum einfügen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-S-RET</td>
+<td class="org-left">neue TODO-Überschrift einfügen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-LEFT</td>
+<td class="org-left">Überschrift eine Ebene höherstufen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-RIGHT</td>
+<td class="org-left">Überschrift eine Ebene tieferstufen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-S-LEFT</td>
+<td class="org-left">Teilbaum mitsamt Unterpunkten höherstufen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-S-RIGHT</td>
+<td class="org-left">Teilbaum mitsamt Unterpunkten tieferstufen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-UP</td>
+<td class="org-left">ganzen Teilbaum nach oben verschieben</td>
+</tr>
+
+<tr>
+<td class="org-left">M-DOWN</td>
+<td class="org-left">ganzen Teilbaum nach unten verschieben</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-n</td>
+<td class="org-left">zur nächsten Überschrift</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-p</td>
+<td class="org-left">zur vorherigen Überschrift</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-f</td>
+<td class="org-left">zur nächsten Überschrift gleicher Ebene</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-b</td>
+<td class="org-left">zur vorherigen Überschrift gleicher Ebene</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-u</td>
+<td class="org-left">zur übergeordneten Überschrift</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c @</td>
+<td class="org-left">aktuellen Teilbaum markieren</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x C-w</td>
+<td class="org-left">Teilbaum ausschneiden</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x M-w</td>
+<td class="org-left">Teilbaum kopieren</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x C-y</td>
+<td class="org-left">Teilbaum einfügen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x n s</td>
+<td class="org-left">Ansicht auf aktuellen Teilbaum beschränken</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x n w</td>
+<td class="org-left">Beschränkung wieder aufheben</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Beispiel:
+</p>
+
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+<div id="outline-container-org533be00" class="outline-2">
+<h2 id="org533be00"><span class="section-number-2">5.</span> Betriebssysteme</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-org3902cd8" class="outline-3">
+<h3 id="org3902cd8"><span class="section-number-3">5.1.</span> Android</h3>
+<div class="outline-text-3" id="text-5-1">
+</div>
+<div id="outline-container-org9c4ae27" class="outline-4">
+<h4 id="org9c4ae27"><span class="section-number-4">5.1.1.</span> Termux</h4>
+</div>
+<div id="outline-container-org94ddc1d" class="outline-4">
+<h4 id="org94ddc1d"><span class="section-number-4">5.1.2.</span> Termux:X11</h4>
+</div>
+</div>
+<div id="outline-container-org27f13d6" class="outline-3">
+<h3 id="org27f13d6"><span class="section-number-3">5.2.</span> Linux</h3>
+<div class="outline-text-3" id="text-5-2">
+</div>
+<div id="outline-container-org68f709b" class="outline-4">
+<h4 id="org68f709b"><span class="section-number-4">5.2.1.</span> Fedora</h4>
+</div>
+<div id="outline-container-org0ef5edb" class="outline-4">
+<h4 id="org0ef5edb"><span class="section-number-4">5.2.2.</span> Gentoo</h4>
+</div>
+</div>
+</div>
+<div id="outline-container-org460907d" class="outline-2">
+<h2 id="org460907d"><span class="section-number-2">6.</span> Editoren</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-org09c33f9" class="outline-3">
+<h3 id="org09c33f9"><span class="section-number-3">6.1.</span> Doom Emacs</h3>
+</div>
+<div id="outline-container-orgd1cbce8" class="outline-3">
+<h3 id="orgd1cbce8"><span class="section-number-3">6.2.</span> Neovim</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+#+end<sub>example</sub>
+</p>
+
+<p>
+Die Meta-Pfeiltasten sind kontextabhängig. An einer Überschrift ändert
+<code>M-RIGHT</code> die Ebene. In einer Tabelle verschiebt es eine Spalte.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orga52400e" class="outline-2">
+<h2 id="orga52400e"><span class="section-number-2">7.</span> Sichtbarkeit und Sparse Trees</h2>
+<div class="outline-text-2" id="text-7">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">TAB</td>
+<td class="org-left">aktuellen Abschnitt zyklisch falten</td>
+</tr>
+
+<tr>
+<td class="org-left">S-TAB</td>
+<td class="org-left">gesamtes Dokument zyklisch falten</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-r</td>
+<td class="org-left">Umgebung des Cursors sichtbar machen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-k</td>
+<td class="org-left">Überschriften bis zur aktuellen Ebene zeigen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c /</td>
+<td class="org-left">Sparse-Tree-Menü öffnen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c / t</td>
+<td class="org-left">offene TODO-Einträge anzeigen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c / T</td>
+<td class="org-left">bestimmten TODO-Zustand suchen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c / m</td>
+<td class="org-left">nach Tags und Eigenschaften filtern</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c / r</td>
+<td class="org-left">regulären Ausdruck suchen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c / d</td>
+<td class="org-left">Einträge mit Deadline anzeigen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c / b</td>
+<td class="org-left">Einträge vor einem Datum anzeigen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c / a</td>
+<td class="org-left">Einträge nach einem Datum anzeigen</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgae4e5de" class="outline-2">
+<h2 id="orgae4e5de"><span class="section-number-2">8.</span> TODO-Aufgaben</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Beispiel:
+</p>
+
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+<div id="outline-container-org35cc9e0" class="outline-2">
+<h2 id="org35cc9e0"><span class="section-number-2">9.</span> <span class="todo TODO">TODO</span> Doom konfigurieren</h2>
+</div>
+<div id="outline-container-orgf548633" class="outline-2">
+<h2 id="orgf548633"><span class="section-number-2">10.</span> NEXT Org Agenda einrichten</h2>
+</div>
+<div id="outline-container-org4db09b6" class="outline-2">
+<h2 id="org4db09b6"><span class="section-number-2">11.</span> <span class="todo WAIT">WAIT</span> Paketkorrektur abwarten</h2>
+</div>
+<div id="outline-container-org48e4241" class="outline-2">
+<h2 id="org48e4241"><span class="section-number-2">12.</span> <span class="done DONE">DONE</span> Erste Org-Datei anlegen</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+#+end<sub>example</sub>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-c C-t</td>
+<td class="org-left">TODO-Zustand wechseln</td>
+</tr>
+
+<tr>
+<td class="org-left">S-RIGHT</td>
+<td class="org-left">nächsten TODO-Zustand wählen</td>
+</tr>
+
+<tr>
+<td class="org-left">S-LEFT</td>
+<td class="org-left">vorherigen TODO-Zustand wählen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-S-RET</td>
+<td class="org-left">neue TODO-Überschrift erzeugen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c / t</td>
+<td class="org-left">offene TODOs im aktuellen Dokument</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x org-agenda, t</td>
+<td class="org-left">globale TODO-Liste</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x C-a</td>
+<td class="org-left">abgeschlossenen Teilbaum archivieren</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x C-s</td>
+<td class="org-left">aktuellen Teilbaum archivieren</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x a</td>
+<td class="org-left">ARCHIVE-Tag umschalten</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="outline-container-orge79d290" class="outline-3">
+<h3 id="orge79d290"><span class="section-number-3">12.1.</span> Eigene TODO-Zustände</h3>
+<div class="outline-text-3" id="text-12-1">
+<p>
+Beispielzeile am Anfang einer Org-Datei:
+</p>
+
+<pre class="example" id="org97ffca8">
+#+TODO: TODO(t) NEXT(n) WAIT(w@) | DONE(d!) CANCELED(c@)
+</pre>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Zustand</th>
+<th scope="col" class="org-left">Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">TODO</td>
+<td class="org-left">noch nicht begonnen</td>
+</tr>
+
+<tr>
+<td class="org-left">NEXT</td>
+<td class="org-left">als Nächstes bearbeiten</td>
+</tr>
+
+<tr>
+<td class="org-left">WAIT</td>
+<td class="org-left">wartet auf etwas</td>
+</tr>
+
+<tr>
+<td class="org-left">DONE</td>
+<td class="org-left">abgeschlossen</td>
+</tr>
+
+<tr>
+<td class="org-left">CANCELED</td>
+<td class="org-left">abgebrochen</td>
+</tr>
+</tbody>
+</table>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Zeichen</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">@</td>
+<td class="org-left">beim Wechsel eine Notiz verlangen</td>
+</tr>
+
+<tr>
+<td class="org-left">!</td>
+<td class="org-left">Zeitpunkt des Zustandswechsels protokollieren</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Nach Änderung der <code>#+TODO</code>-Zeile:
+</p>
+
+<pre class="example" id="orgb009918">
+C-c C-c
+</pre>
+
+<p>
+drücken oder die Datei neu öffnen.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org78426a0" class="outline-2">
+<h2 id="org78426a0"><span class="section-number-2">13.</span> Prioritäten</h2>
+<div class="outline-text-2" id="text-13">
+<p>
+Beispiel:
+</p>
+
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+<div id="outline-container-org41447bf" class="outline-2">
+<h2 id="org41447bf"><span class="section-number-2">14.</span> <span class="todo TODO">TODO</span> Paketverwaltung reparieren</h2>
+</div>
+<div id="outline-container-orgdd470fe" class="outline-2">
+<h2 id="orgdd470fe"><span class="section-number-2">15.</span> <span class="todo TODO">TODO</span> Org-Dateien ordnen</h2>
+</div>
+<div id="outline-container-org7ca1b2d" class="outline-2">
+<h2 id="org7ca1b2d"><span class="section-number-2">16.</span> <span class="todo TODO">TODO</span> Neues Theme testen</h2>
+<div class="outline-text-2" id="text-16">
+<p>
+#+end<sub>example</sub>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-c ,</td>
+<td class="org-left">Priorität auswählen</td>
+</tr>
+
+<tr>
+<td class="org-left">S-UP</td>
+<td class="org-left">Priorität erhöhen</td>
+</tr>
+
+<tr>
+<td class="org-left">S-DOWN</td>
+<td class="org-left">Priorität verringern</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC</td>
+<td class="org-left">Priorität im Auswahlmenü entfernen</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org2ee7899" class="outline-2">
+<h2 id="org2ee7899"><span class="section-number-2">17.</span> Tags und Eigenschaften</h2>
+<div class="outline-text-2" id="text-17">
+</div>
+<div id="outline-container-org8ff1d3a" class="outline-3">
+<h3 id="org8ff1d3a"><span class="section-number-3">17.1.</span> Tags</h3>
+<div class="outline-text-3" id="text-17-1">
+<p>
+Beispiel:
+</p>
+
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb946657" class="outline-2">
+<h2 id="orgb946657"><span class="section-number-2">18.</span> <span class="todo TODO">TODO</span> Doom konfigurieren&nbsp;&nbsp;&nbsp<span class="tag"><span class="emacs">emacs</span>&nbsp;<span class="android">android</span></span></h2>
+</div>
+<div id="outline-container-org26adfdb" class="outline-2">
+<h2 id="org26adfdb"><span class="section-number-2">19.</span> <span class="todo TODO">TODO</span> Rust-Port testen&nbsp;&nbsp;&nbsp<span class="tag"><span class="rust">rust</span>&nbsp;<span class="reta">reta</span></span></h2>
+</div>
+<div id="outline-container-org53d02a7" class="outline-2">
+<h2 id="org53d02a7"><span class="section-number-2">20.</span> Notizen zu Termux:X11&nbsp;&nbsp;&nbsp<span class="tag"><span class="termux">termux</span>&nbsp;<span class="x11">x11</span></span></h2>
+<div class="outline-text-2" id="text-20">
+<p>
+#+end<sub>example</sub>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-c C-q</td>
+<td class="org-left">Tags der aktuellen Überschrift setzen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-c</td>
+<td class="org-left">Tags im Überschriftenkontext bearbeiten</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c / m</td>
+<td class="org-left">lokalen Tag-/Property-Filter erzeugen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x org-agenda, m</td>
+<td class="org-left">globale Tag-/Property-Suche</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Tags können geerbt werden:
+</p>
+
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+<div id="outline-container-org0bb436d" class="outline-2">
+<h2 id="org0bb436d"><span class="section-number-2">21.</span> reta<sub>arch</sub><sub>mojo</sub>&nbsp;&nbsp;&nbsp<span class="tag"><span class="mojo">mojo</span></span></h2>
+<div class="outline-text-2" id="text-21">
+</div>
+<div id="outline-container-org0ccae1c" class="outline-3">
+<h3 id="org0ccae1c"><span class="section-number-3">21.1.</span> <span class="todo TODO">TODO</span> Build testen</h3>
+</div>
+<div id="outline-container-orgb3a103d" class="outline-3">
+<h3 id="orgb3a103d"><span class="section-number-3">21.2.</span> <span class="todo TODO">TODO</span> Unicode-Fehler untersuchen</h3>
+<div class="outline-text-3" id="text-21-2">
+<p>
+#+end<sub>example</sub>
+</p>
+</div>
+</div>
+<div id="outline-container-org83014c6" class="outline-3">
+<h3 id="org83014c6"><span class="section-number-3">21.3.</span> Eigenschaften</h3>
+<div class="outline-text-3" id="text-21-3">
+<p>
+Beispiel:
+</p>
+
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org0417df5" class="outline-2">
+<h2 id="org0417df5"><span class="section-number-2">22.</span> <span class="todo TODO">TODO</span> Rust-Port weiterführen</h2>
+<div class="outline-text-2" id="text-22">
+<p>
+#+end<sub>example</sub>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-c C-x p</td>
+<td class="org-left">Property setzen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x d</td>
+<td class="org-left">Property Drawer einfügen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-c</td>
+<td class="org-left">Property-Wert bearbeiten</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x C-c</td>
+<td class="org-left">Spaltenansicht aktivieren</td>
+</tr>
+
+<tr>
+<td class="org-left">q</td>
+<td class="org-left">Spaltenansicht verlassen</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Typische Properties:
+</p>
+
+<pre class="example" id="org2b587bf">
+:OWNER:
+:STATUS:
+:VERSION:
+:AUFWAND:
+:REPOSITORY:
+:CATEGORY:
+</pre>
+</div>
+</div>
+<div id="outline-container-orgf5183f5" class="outline-2">
+<h2 id="orgf5183f5"><span class="section-number-2">23.</span> Listen</h2>
+<div class="outline-text-2" id="text-23">
+<p>
+Ungeordnete Liste:
+</p>
+
+<pre class="example" id="org2bf6cd2">
+- Emacs lernen
+- Org Mode lernen
+  - Tabellen
+  - Agenda
+- Doom konfigurieren
+</pre>
+
+<p>
+Geordnete Liste:
+</p>
+
+<pre class="example" id="orgae45e81">
+1. Datei öffnen
+2. Text bearbeiten
+3. Datei speichern
+</pre>
+
+<p>
+Beschreibungslisten:
+</p>
+
+<pre class="example" id="orgd0bc220">
+- Emacs :: erweiterbarer Texteditor
+- Doom Emacs :: vorkonfigurierte Emacs-Distribution
+- Org Mode :: strukturiertes Klartextsystem
+</pre>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">M-RET</td>
+<td class="org-left">neuen Listenpunkt einfügen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-S-RET</td>
+<td class="org-left">neuen Punkt mit Kontrollkästchen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-LEFT</td>
+<td class="org-left">Listenpunkt weniger einrücken</td>
+</tr>
+
+<tr>
+<td class="org-left">M-RIGHT</td>
+<td class="org-left">Listenpunkt stärker einrücken</td>
+</tr>
+
+<tr>
+<td class="org-left">M-UP</td>
+<td class="org-left">Listenpunkt nach oben verschieben</td>
+</tr>
+
+<tr>
+<td class="org-left">M-DOWN</td>
+<td class="org-left">Listenpunkt nach unten verschieben</td>
+</tr>
+
+<tr>
+<td class="org-left">M-S-LEFT</td>
+<td class="org-left">Unterbaum weniger einrücken</td>
+</tr>
+
+<tr>
+<td class="org-left">M-S-RIGHT</td>
+<td class="org-left">Unterbaum stärker einrücken</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c -</td>
+<td class="org-left">Aufzählungszeichen wechseln</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-c</td>
+<td class="org-left">Kontrollkästchen umschalten</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-*</td>
+<td class="org-left">Listenpunkt in Überschrift umwandeln</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c ^</td>
+<td class="org-left">Liste sortieren</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org4bf4b93" class="outline-2">
+<h2 id="org4bf4b93"><span class="section-number-2">24.</span> Kontrollkästchen</h2>
+<div class="outline-text-2" id="text-24">
+<p>
+Beispiel:
+</p>
+
+<pre class="example" id="org648dc86">
+- [ ] Doom starten
+- [-] Org Mode lernen
+  - [X] Überschriften
+  - [ ] Tabellen
+  - [ ] Agenda
+</pre>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Kästchen</th>
+<th scope="col" class="org-left">Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">[ ]</td>
+<td class="org-left">offen</td>
+</tr>
+
+<tr>
+<td class="org-left">[X]</td>
+<td class="org-left">erledigt</td>
+</tr>
+
+<tr>
+<td class="org-left">[-]</td>
+<td class="org-left">teilweise erledigt</td>
+</tr>
+</tbody>
+</table>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-c C-c</td>
+<td class="org-left">Kontrollkästchen umschalten</td>
+</tr>
+
+<tr>
+<td class="org-left">M-S-RET</td>
+<td class="org-left">neuen Checkbox-Punkt erzeugen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c #</td>
+<td class="org-left">Statistiken aktualisieren</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Fortschrittszähler:
+</p>
+
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+<div id="outline-container-org4a025fd" class="outline-2">
+<h2 id="org4a025fd"><span class="section-number-2">25.</span> Installation <code>[2/4]</code></h2>
+<div class="outline-text-2" id="text-25">
+<ul class="org-ul">
+<li class="on"><code>[X]</code> Termux:X11 installieren</li>
+<li class="on"><code>[X]</code> Emacs installieren</li>
+<li class="off"><code>[&nbsp;]</code> Doom installieren</li>
+<li class="off"><code>[&nbsp;]</code> Konfiguration sichern</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb7baeaa" class="outline-2">
+<h2 id="orgb7baeaa"><span class="section-number-2">26.</span> Installation <code>[50%]</code></h2>
+<div class="outline-text-2" id="text-26">
+<p>
+#+end<sub>example</sub>
+</p>
+</div>
+</div>
+<div id="outline-container-org44c10b7" class="outline-2">
+<h2 id="org44c10b7"><span class="section-number-2">27.</span> Zeitstempel und Kalender</h2>
+<div class="outline-text-2" id="text-27">
+<p>
+Beispiele:
+</p>
+
+<pre class="example" id="org668612f">
+&lt;2026-07-23 Thu&gt;
+[2026-07-23 Thu]
+&lt;2026-07-23 Thu 14:00-16:00&gt;
+
+SCHEDULED: &lt;2026-07-24 Fri&gt;
+DEADLINE: &lt;2026-07-30 Thu&gt;
+</pre>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-c .</td>
+<td class="org-left">aktiven Zeitstempel einfügen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c !</td>
+<td class="org-left">inaktiven Zeitstempel einfügen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c &lt;</td>
+<td class="org-left">Datum aus Kalender einfügen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c &gt;</td>
+<td class="org-left">Kalender beim Datum öffnen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-s</td>
+<td class="org-left">SCHEDULED setzen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-d</td>
+<td class="org-left">DEADLINE setzen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-u C-c C-s</td>
+<td class="org-left">SCHEDULED entfernen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-u C-c C-d</td>
+<td class="org-left">DEADLINE entfernen</td>
+</tr>
+
+<tr>
+<td class="org-left">S-LEFT</td>
+<td class="org-left">Zeitstempel einen Tag zurück</td>
+</tr>
+
+<tr>
+<td class="org-left">S-RIGHT</td>
+<td class="org-left">Zeitstempel einen Tag vor</td>
+</tr>
+
+<tr>
+<td class="org-left">S-UP</td>
+<td class="org-left">Datumsbestandteil erhöhen</td>
+</tr>
+
+<tr>
+<td class="org-left">S-DOWN</td>
+<td class="org-left">Datumsbestandteil verringern</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-y</td>
+<td class="org-left">Zeitspanne berechnen</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="outline-container-orgc91a3d0" class="outline-3">
+<h3 id="orgc91a3d0"><span class="section-number-3">27.1.</span> Wiederkehrende Aufgaben</h3>
+<div class="outline-text-3" id="text-27-1">
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org9aa64a8" class="outline-2">
+<h2 id="org9aa64a8"><span class="section-number-2">28.</span> <span class="todo TODO">TODO</span> Wöchentlich Termux aktualisieren</h2>
+<div class="outline-text-2" id="text-28">
+</div>
+</div>
+<div id="outline-container-org3f427f3" class="outline-2">
+<h2 id="org3f427f3"><span class="section-number-2">29.</span> <span class="todo TODO">TODO</span> Monatliche Projektsicherung</h2>
+<div class="outline-text-2" id="text-29">
+</div>
+</div>
+<div id="outline-container-org9f46372" class="outline-2">
+<h2 id="org9f46372"><span class="section-number-2">30.</span> <span class="todo TODO">TODO</span> Täglich Org Agenda prüfen</h2>
+<div class="outline-text-2" id="text-30">
+<p>
+#+end<sub>example</sub>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Wiederholer</th>
+<th scope="col" class="org-left">Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">+1d</td>
+<td class="org-left">täglich</td>
+</tr>
+
+<tr>
+<td class="org-left">+1w</td>
+<td class="org-left">wöchentlich</td>
+</tr>
+
+<tr>
+<td class="org-left">+1m</td>
+<td class="org-left">monatlich</td>
+</tr>
+
+<tr>
+<td class="org-left">+1y</td>
+<td class="org-left">jährlich</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org8191890" class="outline-2">
+<h2 id="org8191890"><span class="section-number-2">31.</span> Zeiterfassung mit Clock</h2>
+<div class="outline-text-2" id="text-31">
+<p>
+Beispiel:
+</p>
+
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+<div id="outline-container-org4ee3ec9" class="outline-2">
+<h2 id="org4ee3ec9"><span class="section-number-2">32.</span> <span class="todo TODO">TODO</span> Org-Dokumentation schreiben</h2>
+<div class="outline-text-2" id="text-32">
+<p>
+#+end<sub>example</sub>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-c C-x C-i</td>
+<td class="org-left">Zeiterfassung starten</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x C-o</td>
+<td class="org-left">Zeiterfassung beenden</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x C-q</td>
+<td class="org-left">laufende Clock abbrechen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x C-j</td>
+<td class="org-left">zur laufenden Clock springen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x C-e</td>
+<td class="org-left">geschätzten Aufwand setzen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x C-r</td>
+<td class="org-left">Clock-Bericht erzeugen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x org-clock-display</td>
+<td class="org-left">Zeiten im Buffer anzeigen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x org-clock-report</td>
+<td class="org-left">Clock-Tabelle erzeugen</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Clock-Tabelle:
+</p>
+
+<pre class="example" id="org60bec27">
+#+BEGIN: clocktable :scope file :maxlevel 3
+#+END:
+</pre>
+</div>
+</div>
+<div id="outline-container-org9954913" class="outline-2">
+<h2 id="org9954913"><span class="section-number-2">33.</span> Links</h2>
+<div class="outline-text-2" id="text-33">
+<p>
+Die folgenden Zeilen sind nur sichtbare Beispiele in einem Example-Block.
+Sie werden vom Exporter nicht als echte Links aufgelöst.
+</p>
+
+<pre class="example" id="orgbb386c3">
+Weblink:
+[[https://orgmode.org][Org Mode]]
+
+Dateilink:
+[[file:~/repos/projekt/README.org][README]]
+
+Interner Link:
+[[*Eine vorhandene Überschrift][Zum Abschnitt]]
+</pre>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-c C-l</td>
+<td class="org-left">Link einfügen oder bearbeiten</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-o</td>
+<td class="org-left">Link öffnen</td>
+</tr>
+
+<tr>
+<td class="org-left">RET</td>
+<td class="org-left">Link in Doom häufig öffnen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c l</td>
+<td class="org-left">Link zur aktuellen Position speichern</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x C-n</td>
+<td class="org-left">zum nächsten Link</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x C-p</td>
+<td class="org-left">zum vorherigen Link</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c &amp;</td>
+<td class="org-left">zur vorherigen Linkposition springen</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org689a9b2" class="outline-2">
+<h2 id="org689a9b2"><span class="section-number-2">34.</span> Bilder und Vorschauen</h2>
+<div class="outline-text-2" id="text-34">
+<p>
+Auch das Bildbeispiel steht absichtlich in einem Example-Block. Es
+erfordert daher keine echte Datei und erzeugt keinen Exportfehler.
+</p>
+
+<pre class="example" id="org070949f">
+#+caption: Systemarchitektur
+#+name: fig:architektur
+[[file:bilder/architektur.png]]
+
+Siehe [[fig:architektur][Systemarchitektur]].
+</pre>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-c C-x C-v</td>
+<td class="org-left">Inline-Bilder umschalten</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-o</td>
+<td class="org-left">Bilddatei extern öffnen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x C-l</td>
+<td class="org-left">LaTeX-Vorschau erzeugen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-u C-c C-x C-l</td>
+<td class="org-left">Vorschauen im Bereich oder Buffer</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-a</td>
+<td class="org-left">Attachment-Menü öffnen</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orga6428f2" class="outline-2">
+<h2 id="orga6428f2"><span class="section-number-2">35.</span> Tabellen</h2>
+<div class="outline-text-2" id="text-35">
+</div>
+<div id="outline-container-org286c8e2" class="outline-3">
+<h3 id="org286c8e2"><span class="section-number-3">35.1.</span> Tabelle erzeugen</h3>
+<div class="outline-text-3" id="text-35-1">
+<p>
+Direkte Eingabe:
+</p>
+
+<pre class="example" id="org7e1fe86">
+| Name | Sprache | Status |
+|-
+</pre>
+
+<p>
+Danach <code>TAB</code> drücken.
+</p>
+
+<p>
+Ergebnis:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Name</th>
+<th scope="col" class="org-left">Sprache</th>
+<th scope="col" class="org-left">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">reta<sub>arch</sub><sub>mojo</sub></td>
+<td class="org-left">Mojo</td>
+<td class="org-left">aktiv</td>
+</tr>
+
+<tr>
+<td class="org-left">reta<sub>arch</sub><sub>rust</sub></td>
+<td class="org-left">Rust</td>
+<td class="org-left">geplant</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org8b11992" class="outline-3">
+<h3 id="org8b11992"><span class="section-number-3">35.2.</span> Navigation und Bearbeitung</h3>
+<div class="outline-text-3" id="text-35-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-c, danach senkrechter Strich</td>
+<td class="org-left">Tabelle aus Text erzeugen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-c</td>
+<td class="org-left">Tabelle ausrichten</td>
+</tr>
+
+<tr>
+<td class="org-left">TAB</td>
+<td class="org-left">nächste Zelle</td>
+</tr>
+
+<tr>
+<td class="org-left">S-TAB</td>
+<td class="org-left">vorherige Zelle</td>
+</tr>
+
+<tr>
+<td class="org-left">RET</td>
+<td class="org-left">nächste Zeile</td>
+</tr>
+
+<tr>
+<td class="org-left">M-a</td>
+<td class="org-left">Anfang der aktuellen Zelle</td>
+</tr>
+
+<tr>
+<td class="org-left">M-e</td>
+<td class="org-left">Ende der aktuellen Zelle</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c `</td>
+<td class="org-left">Zelle separat bearbeiten</td>
+</tr>
+
+<tr>
+<td class="org-left">M-LEFT</td>
+<td class="org-left">Spalte nach links</td>
+</tr>
+
+<tr>
+<td class="org-left">M-RIGHT</td>
+<td class="org-left">Spalte nach rechts</td>
+</tr>
+
+<tr>
+<td class="org-left">M-UP</td>
+<td class="org-left">Zeile nach oben</td>
+</tr>
+
+<tr>
+<td class="org-left">M-DOWN</td>
+<td class="org-left">Zeile nach unten</td>
+</tr>
+
+<tr>
+<td class="org-left">M-S-LEFT</td>
+<td class="org-left">Spalte löschen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-S-RIGHT</td>
+<td class="org-left">Spalte einfügen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-S-UP</td>
+<td class="org-left">Zeile löschen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-S-DOWN</td>
+<td class="org-left">Zeile einfügen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c -</td>
+<td class="org-left">Trennlinie einfügen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c RET</td>
+<td class="org-left">Trennlinie und neue Zeile</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c ^</td>
+<td class="org-left">Tabelle sortieren</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c +</td>
+<td class="org-left">Bereich summieren</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c }</td>
+<td class="org-left">Tabellenkoordinaten anzeigen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c {</td>
+<td class="org-left">Formel-Debugger umschalten</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org6f7794a" class="outline-3">
+<h3 id="org6f7794a"><span class="section-number-3">35.3.</span> Tabellenformeln</h3>
+<div class="outline-text-3" id="text-35-3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Produkt</th>
+<th scope="col" class="org-right">Anzahl</th>
+<th scope="col" class="org-right">Preis</th>
+<th scope="col" class="org-right">Summe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Adapter</td>
+<td class="org-right">2</td>
+<td class="org-right">12.50</td>
+<td class="org-right">25.00</td>
+</tr>
+
+<tr>
+<td class="org-left">Kabel</td>
+<td class="org-right">3</td>
+<td class="org-right">6.00</td>
+<td class="org-right">18.00</td>
+</tr>
+</tbody>
+</table>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-c =</td>
+<td class="org-left">Spaltenformel setzen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-u C-c =</td>
+<td class="org-left">Formel für einzelne Zelle setzen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c &rsquo;</td>
+<td class="org-left">Formeleditor öffnen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-c</td>
+<td class="org-left">Formel ausführen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c *</td>
+<td class="org-left">Tabellenzeile neu berechnen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-u C-c *</td>
+<td class="org-left">gesamte Tabelle neu berechnen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c +</td>
+<td class="org-left">Summe berechnen</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Beispiel mit Gesamtsumme:
+</p>
+
+<pre class="example" id="org930cc73">
+| Produkt | Anzahl | Preis | Summe |
+|---------+--------+-------+-------|
+| Adapter |      2 | 12.50 | 25.00 |
+| Kabel   |      3 |  6.00 | 18.00 |
+|---------+--------+-------+-------|
+| Gesamt  |        |       | 43.00 |
+#+TBLFM: $4=$2*$3;%.2f::@4$4=vsum(@2$4..@3$4);%.2f
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6d14d76" class="outline-2">
+<h2 id="org6d14d76"><span class="section-number-2">36.</span> Agenda</h2>
+<div class="outline-text-2" id="text-36">
+</div>
+<div id="outline-container-org25ae13e" class="outline-3">
+<h3 id="org25ae13e"><span class="section-number-3">36.1.</span> Konfiguration</h3>
+<div class="outline-text-3" id="text-36-1">
+<p>
+In <code>~/.config/doom/config.el</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #51afef;">setq</span> <span style="color: #dcaeea;">org-directory</span> <span style="color: #98be65;">"~/org/"</span>)
+
+(<span style="color: #51afef;">after!</span> org
+  (<span style="color: #51afef;">setq</span> <span style="color: #dcaeea;">org-agenda-files</span> <span style="color: #51afef;">'</span>(<span style="color: #98be65;">"~/org/"</span>)))
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org95277dc" class="outline-3">
+<h3 id="org95277dc"><span class="section-number-3">36.2.</span> Agenda öffnen</h3>
+<div class="outline-text-3" id="text-36-2">
+<pre class="example" id="orgfcafa2c">
+M-x org-agenda
+</pre>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Ansicht</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">a</td>
+<td class="org-left">Wochen- oder Tagesagenda</td>
+</tr>
+
+<tr>
+<td class="org-left">t</td>
+<td class="org-left">globale TODO-Liste</td>
+</tr>
+
+<tr>
+<td class="org-left">m</td>
+<td class="org-left">Tags und Properties suchen</td>
+</tr>
+
+<tr>
+<td class="org-left">M</td>
+<td class="org-left">Tagsuche nur für TODO-Einträge</td>
+</tr>
+
+<tr>
+<td class="org-left">s</td>
+<td class="org-left">Volltextsuche</td>
+</tr>
+
+<tr>
+<td class="org-left">q</td>
+<td class="org-left">Dispatcher verlassen</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org446bcfc" class="outline-3">
+<h3 id="org446bcfc"><span class="section-number-3">36.3.</span> Bedienung in der Agenda</h3>
+<div class="outline-text-3" id="text-36-3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">n</td>
+<td class="org-left">nächste Zeile</td>
+</tr>
+
+<tr>
+<td class="org-left">p</td>
+<td class="org-left">vorherige Zeile</td>
+</tr>
+
+<tr>
+<td class="org-left">j</td>
+<td class="org-left">zu einem Datum springen</td>
+</tr>
+
+<tr>
+<td class="org-left">.</td>
+<td class="org-left">zum heutigen Datum</td>
+</tr>
+
+<tr>
+<td class="org-left">f</td>
+<td class="org-left">späteren Zeitraum anzeigen</td>
+</tr>
+
+<tr>
+<td class="org-left">b</td>
+<td class="org-left">früheren Zeitraum anzeigen</td>
+</tr>
+
+<tr>
+<td class="org-left">d</td>
+<td class="org-left">Tagesansicht</td>
+</tr>
+
+<tr>
+<td class="org-left">w</td>
+<td class="org-left">Wochenansicht</td>
+</tr>
+
+<tr>
+<td class="org-left">v</td>
+<td class="org-left">Ansichtsmenü</td>
+</tr>
+
+<tr>
+<td class="org-left">g</td>
+<td class="org-left">Agenda neu erzeugen</td>
+</tr>
+
+<tr>
+<td class="org-left">r</td>
+<td class="org-left">Agenda aktualisieren</td>
+</tr>
+
+<tr>
+<td class="org-left">RET</td>
+<td class="org-left">Eintrag in anderem Fenster öffnen</td>
+</tr>
+
+<tr>
+<td class="org-left">TAB</td>
+<td class="org-left">zur Org-Quelle springen</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC</td>
+<td class="org-left">Eintrag anzeigen</td>
+</tr>
+
+<tr>
+<td class="org-left">t</td>
+<td class="org-left">TODO-Zustand ändern</td>
+</tr>
+
+<tr>
+<td class="org-left">:</td>
+<td class="org-left">Tags setzen</td>
+</tr>
+
+<tr>
+<td class="org-left">,</td>
+<td class="org-left">Priorität setzen</td>
+</tr>
+
+<tr>
+<td class="org-left">s</td>
+<td class="org-left">Eintrag planen</td>
+</tr>
+
+<tr>
+<td class="org-left">I</td>
+<td class="org-left">Clock starten</td>
+</tr>
+
+<tr>
+<td class="org-left">O</td>
+<td class="org-left">Clock beenden</td>
+</tr>
+
+<tr>
+<td class="org-left">F</td>
+<td class="org-left">Follow Mode umschalten</td>
+</tr>
+
+<tr>
+<td class="org-left">q</td>
+<td class="org-left">Agenda schließen</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="outline-container-orgaa9d8b1" class="outline-2">
+<h2 id="orgaa9d8b1"><span class="section-number-2">37.</span> Capture</h2>
+<div class="outline-text-2" id="text-37">
+</div>
+<div id="outline-container-orgb4eeadc" class="outline-3">
+<h3 id="orgb4eeadc"><span class="section-number-3">37.1.</span> Beispielkonfiguration</h3>
+<div class="outline-text-3" id="text-37-1">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #51afef;">after!</span> org
+  (<span style="color: #51afef;">setq</span> <span style="color: #dcaeea;">org-capture-templates</span>
+        <span style="color: #51afef;">'</span>((<span style="color: #98be65;">"t"</span> <span style="color: #98be65;">"Aufgabe"</span> entry
+           (file+headline <span style="color: #98be65;">"~/org/inbox.org"</span> <span style="color: #98be65;">"Eingang"</span>)
+           <span style="color: #98be65;">"* TODO %?\n  Eingetragen: %U\n"</span>)
+
+          (<span style="color: #98be65;">"n"</span> <span style="color: #98be65;">"Notiz"</span> entry
+           (file+headline <span style="color: #98be65;">"~/org/inbox.org"</span> <span style="color: #98be65;">"Notizen"</span>)
+           <span style="color: #98be65;">"* %?\n  Eingetragen: %U\n"</span>)
+
+          (<span style="color: #98be65;">"p"</span> <span style="color: #98be65;">"Projektidee"</span> entry
+           (file+headline <span style="color: #98be65;">"~/org/projekte.org"</span> <span style="color: #98be65;">"Ideen"</span>)
+           <span style="color: #98be65;">"* TODO %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n"</span>))))
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3a72d15" class="outline-3">
+<h3 id="org3a72d15"><span class="section-number-3">37.2.</span> Capture-Befehle</h3>
+<div class="outline-text-3" id="text-37-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">M-x org-capture</td>
+<td class="org-left">Capture-Menü öffnen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-c</td>
+<td class="org-left">Eintrag speichern und beenden</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-k</td>
+<td class="org-left">Capture abbrechen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-w</td>
+<td class="org-left">Eintrag direkt refilen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-u M-x org-capture</td>
+<td class="org-left">Vorlage gezielt auswählen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x org-capture-goto-last-stored</td>
+<td class="org-left">letzten Eintrag öffnen</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf377ead" class="outline-2">
+<h2 id="orgf377ead"><span class="section-number-2">38.</span> Refile und Archiv</h2>
+<div class="outline-text-2" id="text-38">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-c C-w</td>
+<td class="org-left">aktuellen Eintrag verschieben</td>
+</tr>
+
+<tr>
+<td class="org-left">C-u C-c C-w</td>
+<td class="org-left">zum zuletzt verwendeten Ziel verschieben</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x C-a</td>
+<td class="org-left">Teilbaum in Archivdatei verschieben</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x C-s</td>
+<td class="org-left">Standard-Archivbefehl</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x a</td>
+<td class="org-left">ARCHIVE-Tag umschalten</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c $</td>
+<td class="org-left">Teilbaum innerhalb des Dokuments verschieben</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Typischer Ablauf:
+</p>
+
+<pre class="example" id="org8e96da5">
+Capture → inbox.org → Refile → Projekt → DONE → Archiv
+</pre>
+</div>
+</div>
+<div id="outline-container-org8b20729" class="outline-2">
+<h2 id="org8b20729"><span class="section-number-2">39.</span> Org Babel</h2>
+<div class="outline-text-2" id="text-39">
+<p>
+Alle Org-Syntaxbeispiele, die selbst <code>#+begin_src</code> enthalten, stehen
+hier in Example-Blöcken. Dadurch bleibt die äußere Datei korrekt.
+</p>
+</div>
+<div id="outline-container-orgd1ad697" class="outline-3">
+<h3 id="orgd1ad697"><span class="section-number-3">39.1.</span> Shell-Codeblock als Beispiel</h3>
+<div class="outline-text-3" id="text-39-1">
+<pre class="example" id="org7f49a2e">
+#+begin_src shell :results output
+uname -a
+emacs --version | head -n 1
+echo "$DISPLAY"
+#+end_src
+</pre>
+</div>
+</div>
+<div id="outline-container-org03c8316" class="outline-3">
+<h3 id="org03c8316"><span class="section-number-3">39.2.</span> Python-Codeblock als Beispiel</h3>
+<div class="outline-text-3" id="text-39-2">
+<pre class="example" id="orgb82822d">
+#+begin_src python :results output
+zahlen = [1, 2, 3, 4, 5]
+print(sum(x * x for x in zahlen))
+#+end_src
+</pre>
+</div>
+</div>
+<div id="outline-container-org322047e" class="outline-3">
+<h3 id="org322047e"><span class="section-number-3">39.3.</span> Arbeitsverzeichnis als Beispiel</h3>
+<div class="outline-text-3" id="text-39-3">
+<pre class="example" id="org426ab62">
+#+begin_src shell :dir ~/repos/reta_arch_mojo :results output
+pwd
+git status --short
+#+end_src
+</pre>
+</div>
+</div>
+<div id="outline-container-org4583983" class="outline-3">
+<h3 id="org4583983"><span class="section-number-3">39.4.</span> Babel-Steuerung</h3>
+<div class="outline-text-3" id="text-39-4">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-c C-c</td>
+<td class="org-left">aktuellen Codeblock ausführen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c &rsquo;</td>
+<td class="org-left">Codeblock separat bearbeiten</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-o</td>
+<td class="org-left">Ergebnis öffnen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-v n</td>
+<td class="org-left">nächster Codeblock</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-v p</td>
+<td class="org-left">vorheriger Codeblock</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-v e</td>
+<td class="org-left">Codeblock ausführen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-v b</td>
+<td class="org-left">alle Codeblöcke im Buffer ausführen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-v s</td>
+<td class="org-left">Codeblöcke im Teilbaum ausführen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-v t</td>
+<td class="org-left">Code tangeln</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-v f</td>
+<td class="org-left">angegebene Org-Datei tangeln</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-v v</td>
+<td class="org-left">expandierten Code anzeigen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-v I</td>
+<td class="org-left">Codeblock-Informationen anzeigen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-v h</td>
+<td class="org-left">Babel-Tastenkürzel erklären</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-v g</td>
+<td class="org-left">zu benanntem Block springen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-v r</td>
+<td class="org-left">zu benanntem Ergebnis springen</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb00ec39" class="outline-2">
+<h2 id="orgb00ec39"><span class="section-number-2">40.</span> Strukturvorlagen und Blöcke</h2>
+<div class="outline-text-2" id="text-40">
+<pre class="example" id="orgd77aace">
+C-c C-,
+</pre>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Blocktyp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">s</td>
+<td class="org-left">Source Block</td>
+</tr>
+
+<tr>
+<td class="org-left">e</td>
+<td class="org-left">Example Block</td>
+</tr>
+
+<tr>
+<td class="org-left">q</td>
+<td class="org-left">Quote Block</td>
+</tr>
+
+<tr>
+<td class="org-left">v</td>
+<td class="org-left">Verse Block</td>
+</tr>
+
+<tr>
+<td class="org-left">c</td>
+<td class="org-left">Center Block</td>
+</tr>
+
+<tr>
+<td class="org-left">C</td>
+<td class="org-left">Comment Block</td>
+</tr>
+</tbody>
+</table>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-c C-,</td>
+<td class="org-left">Strukturvorlage einfügen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-c</td>
+<td class="org-left">Block oder Keyword aktualisieren</td>
+</tr>
+
+<tr>
+<td class="org-left">TAB</td>
+<td class="org-left">Block ein- oder ausklappen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c &rsquo;</td>
+<td class="org-left">Quellcodeblock separat bearbeiten</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org5e3e41b" class="outline-2">
+<h2 id="org5e3e41b"><span class="section-number-2">41.</span> Export</h2>
+<div class="outline-text-2" id="text-41">
+<pre class="example" id="org98374e5">
+C-c C-e
+</pre>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-c C-e h h</td>
+<td class="org-left">nach HTML exportieren</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-e h o</td>
+<td class="org-left">HTML exportieren und öffnen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-e l l</td>
+<td class="org-left">LaTeX-Datei erzeugen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-e l p</td>
+<td class="org-left">PDF über LaTeX erzeugen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-e l o</td>
+<td class="org-left">PDF erzeugen und öffnen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-e t a</td>
+<td class="org-left">Textdatei erzeugen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-e m m</td>
+<td class="org-left">Markdown erzeugen, wenn Backend geladen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-e C-s</td>
+<td class="org-left">nur aktuellen Teilbaum exportieren</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-e C-b</td>
+<td class="org-left">nur sichtbaren Bereich exportieren</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Dokument-Metadaten als Beispiel:
+</p>
+
+<pre class="example" id="org1f218cc">
+#+title: Mein Bericht
+#+author: Alexander
+#+language: de
+#+options: toc:2 num:t
+</pre>
+
+<p>
+Für LuaLaTeX:
+</p>
+
+<pre class="example" id="orgb146a25">
+#+latex_compiler: lualatex
+</pre>
+</div>
+</div>
+<div id="outline-container-org6210112" class="outline-2">
+<h2 id="org6210112"><span class="section-number-2">42.</span> Fußnoten</h2>
+<div class="outline-text-2" id="text-42">
+<p>
+Das folgende Beispiel ist normaler Org-Text und vollständig auflösbar.
+</p>
+
+<p>
+Org Mode verbindet Notizen, Aufgaben und Dokumentation.<sup><a id="fnr.org" class="footref" href="#fn.org" role="doc-backlink">1</a></sup>
+</p>
+</div>
+</div>
+<div id="outline-container-org847d540" class="outline-2">
+<h2 id="org847d540"><span class="section-number-2">43.</span> Kommentare und Archivierung</h2>
+<div class="outline-text-2" id="text-43">
+<p>
+Kommentarzeile:
+</p>
+
+<pre class="example" id="org7d10a72">
+# Dieser Text wird nicht exportiert.
+</pre>
+
+<p>
+Kommentarüberschrift:
+</p>
+
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+<div id="outline-container-orgd1eb3a0" class="outline-2">
+<h2 id="orgd1eb3a0"><span class="section-number-2">44.</span> Formatierung und Anzeige</h2>
+<div class="outline-text-2" id="text-44">
+<pre class="example" id="org8e12ca7">
+*Fett*
+/Kursiv/
+_Unterstrichen_
++Durchgestrichen+
+~Quellcode~
+=Wörtlicher Text=
+</pre>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-c C-x C-f</td>
+<td class="org-left">Textauszeichnung auswählen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x C-v</td>
+<td class="org-left">Inline-Bilder umschalten</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-x C-l</td>
+<td class="org-left">LaTeX-Vorschau</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x org-toggle-pretty-entities</td>
+<td class="org-left">Symbole hübscher anzeigen</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x org-indent-mode</td>
+<td class="org-left">visuelle Einrückung aktivieren</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x visual-line-mode</td>
+<td class="org-left">visuellen Zeilenumbruch aktivieren</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x org-toggle-link-display</td>
+<td class="org-left">Rohlink und Beschreibung wechseln</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x org-toggle-inline-images</td>
+<td class="org-left">Bilder ein- oder ausblenden</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org6023bb4" class="outline-2">
+<h2 id="org6023bb4"><span class="section-number-2">45.</span> Die wichtigsten Befehle für den Alltag</h2>
+<div class="outline-text-2" id="text-45">
+<pre class="example" id="org00fe3e0">
+TAB                 Abschnitt falten
+S-TAB               ganzes Dokument falten
+M-RET               neue Überschrift oder Listenzeile
+M-S-RET             neue TODO- oder Checkbox-Zeile
+M-LEFT/RIGHT        Ebene ändern
+M-UP/DOWN           Element verschieben
+
+C-c C-t             TODO-Status
+C-c C-q             Tags
+C-c ,               Priorität
+C-c C-s             SCHEDULED
+C-c C-d             DEADLINE
+C-c .               Zeitstempel
+
+C-c C-l             Link einfügen
+C-c C-o             Link öffnen
+C-c C-w             Refile
+C-c C-x C-a         archivieren
+
+C-c C-c             kontextabhängige Aktion
+C-c C-e             Export
+C-c /               Sparse Tree
+C-c gefolgt von |   Tabelle erzeugen
+C-c ^               sortieren
+
+M-x org-agenda      Agenda
+M-x org-capture     Capture
+
+C-c C-x C-i         Clock starten
+C-c C-x C-o         Clock beenden
+
+C-c C-c             Codeblock ausführen
+C-c '               Codeblock separat bearbeiten
+C-c C-v t           Code tangeln
+
+SPC m               Doom-Org-Menü
+SPC h k             Taste erklären
+</pre>
+</div>
+</div>
+<div id="outline-container-orga3b6f91" class="outline-2">
+<h2 id="orga3b6f91"><span class="section-number-2">46.</span> Empfohlene Lernreihenfolge</h2>
+<div class="outline-text-2" id="text-46">
+<ol class="org-ol">
+<li>Überschriften erzeugen, verschieben und falten.</li>
+<li>Listen und Kontrollkästchen verwenden.</li>
+<li>TODO-Zustände und Prioritäten benutzen.</li>
+<li>Zeitstempel, SCHEDULED und DEADLINE verstehen.</li>
+<li>Links und interne Verweise erstellen.</li>
+<li>Tabellen bearbeiten und Formeln schreiben.</li>
+<li>Agenda-Dateien einrichten.</li>
+<li>Capture-Vorlagen erstellen.</li>
+<li>Refile und Archivierung benutzen.</li>
+<li>Org-Babel-Codeblöcke ausführen.</li>
+<li>Dokumente nach HTML und PDF exportieren.</li>
+<li>Clocking und Zeitberichte verwenden.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgc0210b7" class="outline-2">
+<h2 id="orgc0210b7"><span class="section-number-2">47.</span> Sinnvolle persönliche Org-Struktur</h2>
+<div class="outline-text-2" id="text-47">
+<pre class="example" id="org9040a30">
+~/org/
+├── inbox.org
+├── projekte.org
+├── agenda.org
+├── wissen.org
+└── journal.org
+</pre>
+</div>
+<div id="outline-container-orga2ce050" class="outline-3">
+<h3 id="orga2ce050"><span class="section-number-3">47.1.</span> Beispiel für inbox.org</h3>
+<div class="outline-text-3" id="text-47-1">
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org90a6ab1" class="outline-2">
+<h2 id="org90a6ab1"><span class="section-number-2">48.</span> Eingang</h2>
+</div>
+
+<div id="outline-container-org0aad3c2" class="outline-2">
+<h2 id="org0aad3c2"><span class="section-number-2">49.</span> Notizen</h2>
+<div class="outline-text-2" id="text-49">
+<p>
+#+end<sub>example</sub>
+</p>
+</div>
+<div id="outline-container-orgb79f34f" class="outline-3">
+<h3 id="orgb79f34f"><span class="section-number-3">49.1.</span> Beispiel für projekte.org</h3>
+<div class="outline-text-3" id="text-49-1">
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org5ecf7ac" class="outline-2">
+<h2 id="org5ecf7ac"><span class="section-number-2">50.</span> reta<sub>arch</sub><sub>mojo</sub>&nbsp;&nbsp;&nbsp<span class="tag"><span class="mojo">mojo</span></span></h2>
+<div class="outline-text-2" id="text-50">
+</div>
+<div id="outline-container-org5065f99" class="outline-3">
+<h3 id="org5065f99"><span class="section-number-3">50.1.</span> NEXT Aktuellen Fehler bearbeiten</h3>
+</div>
+<div id="outline-container-org458627f" class="outline-3">
+<h3 id="org458627f"><span class="section-number-3">50.2.</span> <span class="todo TODO">TODO</span> Dokumentation vervollständigen</h3>
+</div>
+<div id="outline-container-org785e057" class="outline-3">
+<h3 id="org785e057"><span class="section-number-3">50.3.</span> <span class="todo WAIT">WAIT</span> Plattformtest auf AArch64</h3>
+</div>
+</div>
+<div id="outline-container-org040f58d" class="outline-2">
+<h2 id="org040f58d"><span class="section-number-2">51.</span> reta<sub>arch</sub><sub>rust</sub>&nbsp;&nbsp;&nbsp<span class="tag"><span class="rust">rust</span></span></h2>
+<div class="outline-text-2" id="text-51">
+</div>
+<div id="outline-container-org251e1ff" class="outline-3">
+<h3 id="org251e1ff"><span class="section-number-3">51.1.</span> <span class="todo TODO">TODO</span> CLI-Grundstruktur</h3>
+</div>
+<div id="outline-container-org89744a1" class="outline-3">
+<h3 id="org89744a1"><span class="section-number-3">51.2.</span> <span class="todo TODO">TODO</span> CSV-Parser</h3>
+<div class="outline-text-3" id="text-51-2">
+<p>
+#+end<sub>example</sub>
+</p>
+</div>
+</div>
+<div id="outline-container-org3792dc8" class="outline-3">
+<h3 id="org3792dc8"><span class="section-number-3">51.3.</span> Beispiel für agenda.org</h3>
+<div class="outline-text-3" id="text-51-3">
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orga803af0" class="outline-2">
+<h2 id="orga803af0"><span class="section-number-2">52.</span> <span class="todo TODO">TODO</span> Täglich Agenda prüfen</h2>
+<div class="outline-text-2" id="text-52">
+</div>
+</div>
+<div id="outline-container-org4e828d3" class="outline-2">
+<h2 id="org4e828d3"><span class="section-number-2">53.</span> <span class="todo TODO">TODO</span> Wöchentliche Sicherung</h2>
+<div class="outline-text-2" id="text-53">
+<p>
+#+end<sub>example</sub>
+</p>
+</div>
+<div id="outline-container-orge9768b7" class="outline-3">
+<h3 id="orge9768b7"><span class="section-number-3">53.1.</span> Beispiel für wissen.org</h3>
+<div class="outline-text-3" id="text-53-1">
+<p>
+#+begin<sub>example</sub>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org97e04af" class="outline-2">
+<h2 id="org97e04af"><span class="section-number-2">54.</span> Emacs</h2>
+<div class="outline-text-2" id="text-54">
+</div>
+<div id="outline-container-org994fb96" class="outline-3">
+<h3 id="org994fb96"><span class="section-number-3">54.1.</span> Evil States</h3>
+</div>
+<div id="outline-container-org7ae4547" class="outline-3">
+<h3 id="org7ae4547"><span class="section-number-3">54.2.</span> Org Mode</h3>
+</div>
+<div id="outline-container-org661243e" class="outline-3">
+<h3 id="org661243e"><span class="section-number-3">54.3.</span> Doom-Konfiguration</h3>
+</div>
+</div>
+<div id="outline-container-orgf8c761f" class="outline-2">
+<h2 id="orgf8c761f"><span class="section-number-2">55.</span> Linux</h2>
+<div class="outline-text-2" id="text-55">
+</div>
+<div id="outline-container-orga6cfc4c" class="outline-3">
+<h3 id="orga6cfc4c"><span class="section-number-3">55.1.</span> Termux</h3>
+</div>
+<div id="outline-container-org354649f" class="outline-3">
+<h3 id="org354649f"><span class="section-number-3">55.2.</span> Fedora</h3>
+</div>
+<div id="outline-container-orgcf7b468" class="outline-3">
+<h3 id="orgcf7b468"><span class="section-number-3">55.3.</span> Gentoo</h3>
+</div>
+</div>
+<div id="outline-container-orgf65c121" class="outline-2">
+<h2 id="orgf65c121"><span class="section-number-2">56.</span> Programmiersprachen</h2>
+<div class="outline-text-2" id="text-56">
+</div>
+<div id="outline-container-orgc067bc6" class="outline-3">
+<h3 id="orgc067bc6"><span class="section-number-3">56.1.</span> Rust</h3>
+</div>
+<div id="outline-container-orgb3f98dd" class="outline-3">
+<h3 id="orgb3f98dd"><span class="section-number-3">56.2.</span> Mojo</h3>
+</div>
+<div id="outline-container-org0e159be" class="outline-3">
+<h3 id="org0e159be"><span class="section-number-3">56.3.</span> Python</h3>
+<div class="outline-text-3" id="text-56-3">
+<p>
+#+end<sub>example</sub>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org92ad7f1" class="outline-2">
+<h2 id="org92ad7f1"><span class="section-number-2">57.</span> Praktische Abschlussübung</h2>
+<div class="outline-text-2" id="text-57">
+<p>
+Lege <code>~/org/projekte.org</code> an und verwende darin:
+</p>
+
+<ul class="org-ul">
+<li>mindestens drei Überschriftenebenen,</li>
+<li>mindestens fünf TODO-Aufgaben,</li>
+<li>eigene TODO-Zustände,</li>
+<li>zwei Tags,</li>
+<li>drei Properties,</li>
+<li>ein SCHEDULED-Datum,</li>
+<li>eine DEADLINE,</li>
+<li>eine wiederkehrende Aufgabe,</li>
+<li>eine Tabelle,</li>
+<li>eine Tabellenformel,</li>
+<li>einen gültigen Link,</li>
+<li>ein Kontrollkästchen,</li>
+<li>einen Shell-Codeblock,</li>
+<li>einen Python-Codeblock,</li>
+<li>einen Clock-Eintrag.</li>
+</ul>
+
+<p>
+HTML-Export:
+</p>
+
+<pre class="example" id="org4a17956">
+C-c C-e h h
+</pre>
+
+<p>
+PDF-Export mit installierter LaTeX-Umgebung:
+</p>
+
+<pre class="example" id="orgbdfb937">
+C-c C-e l p
+</pre>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Fu&szlig;noten: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.org" class="footnum" href="#fnr.org" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+Eine Fußnote kann mit einem Namen versehen und später definiert werden.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Taste</th>
+<th scope="col" class="org-left">Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-c C-x f</td>
+<td class="org-left">Fußnotenaktion öffnen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-c</td>
+<td class="org-left">Fußnote bearbeiten</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c C-o</td>
+<td class="org-left">zur Fußnotendefinition springen</td>
+</tr>
+</tbody>
+</table></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="author">Autor: OpenAI</p>
+<p class="date">Erstellt am: 2026-07-23 Thu 10:22</p>
+</div>
+</body>
+</html>

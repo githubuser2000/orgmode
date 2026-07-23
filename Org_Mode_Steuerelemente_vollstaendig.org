@@ -1,0 +1,966 @@
+#+title: Org Mode – große Tastenkürzel- und Steuerungsübersicht
+#+author: OpenAI
+#+language: de
+#+options: toc:3 num:t
+#+startup: overview
+#+property: header-args :eval never-export
+
+* Hinweise zur Datei
+
+Diese Datei ist vollständig und selbstständig.
+
+Sie enthält absichtlich:
+
+- keine internen Links auf möglicherweise fehlende Überschriften,
+- keinen Verweis auf =fig:architektur=,
+- keine Bilddatei, die lokal vorhanden sein müsste,
+- keine ausführbaren Beispielblöcke, die beim Export automatisch gestartet werden.
+
+Damit sollte der HTML-Export ohne die zuvor aufgetretenen
+Fehler wegen nicht auflösbarer Links funktionieren.
+
+* Tastennotation
+
+| Zeichen | Bedeutung                       |
+|---------+---------------------------------|
+| C       | Ctrl beziehungsweise Strg       |
+| M       | Meta, normalerweise Alt         |
+| S       | Shift                           |
+| RET     | Enter                           |
+| SPC     | Leertaste                       |
+
+Unter Android kann =M-x= auch so eingegeben werden:
+
+#+begin_example
+Esc loslassen, danach x
+#+end_example
+
+In Doom Emacs zeigt:
+
+#+begin_example
+SPC m
+#+end_example
+
+die Befehle des aktuellen Major Modes an.
+
+* Hilfe und Entdeckung
+
+| Taste             | Wirkung                                  |
+|-------------------+------------------------------------------|
+| SPC m             | Org-Befehlsmenü in Doom anzeigen         |
+| SPC h k           | erklären, was eine Taste macht           |
+| SPC h f           | Funktion beschreiben                     |
+| SPC h m           | aktuellen Major Mode beschreiben         |
+| C-h k             | klassische Emacs-Tastenhilfe             |
+| C-h m             | Hilfe zum aktuellen Mode                 |
+| M-x org-info      | Org-Handbuch öffnen                      |
+| M-x describe-mode | Org Mode und aktive Minor Modes erklären |
+| C-g               | begonnenen Befehl abbrechen              |
+
+* Überschriften und Baumstruktur
+
+| Taste       | Wirkung                                          |
+|-------------+--------------------------------------------------|
+| TAB         | aktuellen Abschnitt ein- oder ausklappen         |
+| S-TAB       | Sichtbarkeit des ganzen Dokuments wechseln       |
+| C-u TAB     | globale Sichtbarkeit gezielt auswählen           |
+| M-RET       | neue Überschrift einfügen                        |
+| C-RET       | Überschrift nach aktuellem Teilbaum einfügen     |
+| M-S-RET     | neue TODO-Überschrift einfügen                   |
+| M-LEFT      | Überschrift eine Ebene höherstufen                |
+| M-RIGHT     | Überschrift eine Ebene tieferstufen               |
+| M-S-LEFT    | Teilbaum mitsamt Unterpunkten höherstufen         |
+| M-S-RIGHT   | Teilbaum mitsamt Unterpunkten tieferstufen        |
+| M-UP        | ganzen Teilbaum nach oben verschieben             |
+| M-DOWN      | ganzen Teilbaum nach unten verschieben            |
+| C-c C-n     | zur nächsten Überschrift                         |
+| C-c C-p     | zur vorherigen Überschrift                       |
+| C-c C-f     | zur nächsten Überschrift gleicher Ebene          |
+| C-c C-b     | zur vorherigen Überschrift gleicher Ebene        |
+| C-c C-u     | zur übergeordneten Überschrift                   |
+| C-c @       | aktuellen Teilbaum markieren                      |
+| C-c C-x C-w | Teilbaum ausschneiden                             |
+| C-c C-x M-w | Teilbaum kopieren                                 |
+| C-c C-x C-y | Teilbaum einfügen                                 |
+| C-x n s     | Ansicht auf aktuellen Teilbaum beschränken        |
+| C-x n w     | Beschränkung wieder aufheben                      |
+
+Beispiel:
+
+#+begin_example
+* Betriebssysteme
+** Android
+*** Termux
+*** Termux:X11
+** Linux
+*** Fedora
+*** Gentoo
+
+* Editoren
+** Doom Emacs
+** Neovim
+#+end_example
+
+Die Meta-Pfeiltasten sind kontextabhängig. An einer Überschrift ändert
+=M-RIGHT= die Ebene. In einer Tabelle verschiebt es eine Spalte.
+
+* Sichtbarkeit und Sparse Trees
+
+| Taste   | Wirkung                                          |
+|---------+--------------------------------------------------|
+| TAB     | aktuellen Abschnitt zyklisch falten              |
+| S-TAB   | gesamtes Dokument zyklisch falten                |
+| C-c C-r | Umgebung des Cursors sichtbar machen             |
+| C-c C-k | Überschriften bis zur aktuellen Ebene zeigen     |
+| C-c /   | Sparse-Tree-Menü öffnen                          |
+| C-c / t | offene TODO-Einträge anzeigen                    |
+| C-c / T | bestimmten TODO-Zustand suchen                   |
+| C-c / m | nach Tags und Eigenschaften filtern              |
+| C-c / r | regulären Ausdruck suchen                        |
+| C-c / d | Einträge mit Deadline anzeigen                   |
+| C-c / b | Einträge vor einem Datum anzeigen                |
+| C-c / a | Einträge nach einem Datum anzeigen               |
+
+* TODO-Aufgaben
+
+Beispiel:
+
+#+begin_example
+* TODO Doom konfigurieren
+* NEXT Org Agenda einrichten
+* WAIT Paketkorrektur abwarten
+* DONE Erste Org-Datei anlegen
+#+end_example
+
+| Taste             | Wirkung                                  |
+|-------------------+------------------------------------------|
+| C-c C-t           | TODO-Zustand wechseln                    |
+| S-RIGHT           | nächsten TODO-Zustand wählen             |
+| S-LEFT            | vorherigen TODO-Zustand wählen           |
+| M-S-RET           | neue TODO-Überschrift erzeugen           |
+| C-c / t           | offene TODOs im aktuellen Dokument       |
+| M-x org-agenda, t | globale TODO-Liste                       |
+| C-c C-x C-a       | abgeschlossenen Teilbaum archivieren     |
+| C-c C-x C-s       | aktuellen Teilbaum archivieren           |
+| C-c C-x a         | ARCHIVE-Tag umschalten                   |
+
+** Eigene TODO-Zustände
+
+Beispielzeile am Anfang einer Org-Datei:
+
+#+begin_example
+#+TODO: TODO(t) NEXT(n) WAIT(w@) | DONE(d!) CANCELED(c@)
+#+end_example
+
+| Zustand  | Bedeutung                   |
+|----------+-----------------------------|
+| TODO     | noch nicht begonnen         |
+| NEXT     | als Nächstes bearbeiten     |
+| WAIT     | wartet auf etwas            |
+| DONE     | abgeschlossen               |
+| CANCELED | abgebrochen                 |
+
+| Zeichen | Wirkung                                       |
+|---------+-----------------------------------------------|
+| @       | beim Wechsel eine Notiz verlangen             |
+| !       | Zeitpunkt des Zustandswechsels protokollieren |
+
+Nach Änderung der =#+TODO=-Zeile:
+
+#+begin_example
+C-c C-c
+#+end_example
+
+drücken oder die Datei neu öffnen.
+
+* Prioritäten
+
+Beispiel:
+
+#+begin_example
+* TODO [#A] Paketverwaltung reparieren
+* TODO [#B] Org-Dateien ordnen
+* TODO [#C] Neues Theme testen
+#+end_example
+
+| Taste  | Wirkung                              |
+|--------+--------------------------------------|
+| C-c ,  | Priorität auswählen                  |
+| S-UP   | Priorität erhöhen                    |
+| S-DOWN | Priorität verringern                 |
+| SPC    | Priorität im Auswahlmenü entfernen   |
+
+* Tags und Eigenschaften
+
+** Tags
+
+Beispiel:
+
+#+begin_example
+* TODO Doom konfigurieren                    :emacs:android:
+* TODO Rust-Port testen                      :rust:reta:
+* Notizen zu Termux:X11                      :termux:x11:
+#+end_example
+
+| Taste             | Wirkung                                  |
+|-------------------+------------------------------------------|
+| C-c C-q           | Tags der aktuellen Überschrift setzen    |
+| C-c C-c           | Tags im Überschriftenkontext bearbeiten  |
+| C-c / m           | lokalen Tag-/Property-Filter erzeugen    |
+| M-x org-agenda, m | globale Tag-/Property-Suche              |
+
+Tags können geerbt werden:
+
+#+begin_example
+* reta_arch_mojo                              :mojo:
+** TODO Build testen
+** TODO Unicode-Fehler untersuchen
+#+end_example
+
+** Eigenschaften
+
+Beispiel:
+
+#+begin_example
+* TODO Rust-Port weiterführen
+  :PROPERTIES:
+  :OWNER: Alexander
+  :SPRACHE: Rust
+  :REPOSITORY: ~/repos/reta_arch_rust
+  :AUFWAND: 4:00
+  :END:
+#+end_example
+
+| Taste       | Wirkung                             |
+|-------------+-------------------------------------|
+| C-c C-x p   | Property setzen                     |
+| C-c C-x d   | Property Drawer einfügen            |
+| C-c C-c     | Property-Wert bearbeiten            |
+| C-c C-x C-c | Spaltenansicht aktivieren           |
+| q           | Spaltenansicht verlassen            |
+
+Typische Properties:
+
+#+begin_example
+:OWNER:
+:STATUS:
+:VERSION:
+:AUFWAND:
+:REPOSITORY:
+:CATEGORY:
+#+end_example
+
+* Listen
+
+Ungeordnete Liste:
+
+#+begin_example
+- Emacs lernen
+- Org Mode lernen
+  - Tabellen
+  - Agenda
+- Doom konfigurieren
+#+end_example
+
+Geordnete Liste:
+
+#+begin_example
+1. Datei öffnen
+2. Text bearbeiten
+3. Datei speichern
+#+end_example
+
+Beschreibungslisten:
+
+#+begin_example
+- Emacs :: erweiterbarer Texteditor
+- Doom Emacs :: vorkonfigurierte Emacs-Distribution
+- Org Mode :: strukturiertes Klartextsystem
+#+end_example
+
+| Taste     | Wirkung                                    |
+|-----------+--------------------------------------------|
+| M-RET     | neuen Listenpunkt einfügen                 |
+| M-S-RET   | neuen Punkt mit Kontrollkästchen           |
+| M-LEFT    | Listenpunkt weniger einrücken              |
+| M-RIGHT   | Listenpunkt stärker einrücken              |
+| M-UP      | Listenpunkt nach oben verschieben          |
+| M-DOWN    | Listenpunkt nach unten verschieben         |
+| M-S-LEFT  | Unterbaum weniger einrücken                |
+| M-S-RIGHT | Unterbaum stärker einrücken                |
+| C-c -     | Aufzählungszeichen wechseln                |
+| C-c C-c   | Kontrollkästchen umschalten                |
+| C-c C-*   | Listenpunkt in Überschrift umwandeln       |
+| C-c ^     | Liste sortieren                            |
+
+* Kontrollkästchen
+
+Beispiel:
+
+#+begin_example
+- [ ] Doom starten
+- [-] Org Mode lernen
+  - [X] Überschriften
+  - [ ] Tabellen
+  - [ ] Agenda
+#+end_example
+
+| Kästchen | Bedeutung          |
+|----------+--------------------|
+| [ ]      | offen              |
+| [X]      | erledigt           |
+| [-]      | teilweise erledigt |
+
+| Taste   | Wirkung                                      |
+|---------+----------------------------------------------|
+| C-c C-c | Kontrollkästchen umschalten                  |
+| M-S-RET | neuen Checkbox-Punkt erzeugen                |
+| C-c #   | Statistiken aktualisieren                    |
+
+Fortschrittszähler:
+
+#+begin_example
+* Installation [2/4]
+  - [X] Termux:X11 installieren
+  - [X] Emacs installieren
+  - [ ] Doom installieren
+  - [ ] Konfiguration sichern
+
+* Installation [50%]
+#+end_example
+
+* Zeitstempel und Kalender
+
+Beispiele:
+
+#+begin_example
+<2026-07-23 Thu>
+[2026-07-23 Thu]
+<2026-07-23 Thu 14:00-16:00>
+
+SCHEDULED: <2026-07-24 Fri>
+DEADLINE: <2026-07-30 Thu>
+#+end_example
+
+| Taste       | Wirkung                                    |
+|-------------+--------------------------------------------|
+| C-c .       | aktiven Zeitstempel einfügen               |
+| C-c !       | inaktiven Zeitstempel einfügen             |
+| C-c <       | Datum aus Kalender einfügen                |
+| C-c >       | Kalender beim Datum öffnen                 |
+| C-c C-s     | SCHEDULED setzen                           |
+| C-c C-d     | DEADLINE setzen                            |
+| C-u C-c C-s | SCHEDULED entfernen                        |
+| C-u C-c C-d | DEADLINE entfernen                         |
+| S-LEFT      | Zeitstempel einen Tag zurück               |
+| S-RIGHT     | Zeitstempel einen Tag vor                  |
+| S-UP        | Datumsbestandteil erhöhen                  |
+| S-DOWN      | Datumsbestandteil verringern               |
+| C-c C-y     | Zeitspanne berechnen                       |
+
+** Wiederkehrende Aufgaben
+
+#+begin_example
+* TODO Wöchentlich Termux aktualisieren
+  SCHEDULED: <2026-07-25 Sat +1w>
+
+* TODO Monatliche Projektsicherung
+  SCHEDULED: <2026-08-01 Sat +1m>
+
+* TODO Täglich Org Agenda prüfen
+  SCHEDULED: <2026-07-22 Wed +1d>
+#+end_example
+
+| Wiederholer | Bedeutung   |
+|-------------+-------------|
+| +1d         | täglich     |
+| +1w         | wöchentlich |
+| +1m         | monatlich   |
+| +1y         | jährlich    |
+
+* Zeiterfassung mit Clock
+
+Beispiel:
+
+#+begin_example
+* TODO Org-Dokumentation schreiben
+  :LOGBOOK:
+  CLOCK: [2026-07-23 Thu 09:00]--[2026-07-23 Thu 10:25] =>  1:25
+  :END:
+#+end_example
+
+| Taste                 | Wirkung                                  |
+|-----------------------+------------------------------------------|
+| C-c C-x C-i           | Zeiterfassung starten                    |
+| C-c C-x C-o           | Zeiterfassung beenden                    |
+| C-c C-x C-q           | laufende Clock abbrechen                 |
+| C-c C-x C-j           | zur laufenden Clock springen             |
+| C-c C-x C-e           | geschätzten Aufwand setzen               |
+| C-c C-x C-r           | Clock-Bericht erzeugen                   |
+| M-x org-clock-display | Zeiten im Buffer anzeigen                |
+| M-x org-clock-report  | Clock-Tabelle erzeugen                   |
+
+Clock-Tabelle:
+
+#+begin_example
+#+BEGIN: clocktable :scope file :maxlevel 3
+#+END:
+#+end_example
+
+* Links
+
+Die folgenden Zeilen sind nur sichtbare Beispiele in einem Example-Block.
+Sie werden vom Exporter nicht als echte Links aufgelöst.
+
+#+begin_example
+Weblink:
+[[https://orgmode.org][Org Mode]]
+
+Dateilink:
+[[file:~/repos/projekt/README.org][README]]
+
+Interner Link:
+[[*Eine vorhandene Überschrift][Zum Abschnitt]]
+#+end_example
+
+| Taste       | Wirkung                                    |
+|-------------+--------------------------------------------|
+| C-c C-l     | Link einfügen oder bearbeiten              |
+| C-c C-o     | Link öffnen                                |
+| RET         | Link in Doom häufig öffnen                 |
+| C-c l       | Link zur aktuellen Position speichern      |
+| C-c C-x C-n | zum nächsten Link                          |
+| C-c C-x C-p | zum vorherigen Link                        |
+| C-c &       | zur vorherigen Linkposition springen       |
+
+* Bilder und Vorschauen
+
+Auch das Bildbeispiel steht absichtlich in einem Example-Block. Es
+erfordert daher keine echte Datei und erzeugt keinen Exportfehler.
+
+#+begin_example
+#+caption: Systemarchitektur
+#+name: fig:architektur
+[[file:bilder/architektur.png]]
+
+Siehe [[fig:architektur][Systemarchitektur]].
+#+end_example
+
+| Taste           | Wirkung                                |
+|-----------------+----------------------------------------|
+| C-c C-x C-v     | Inline-Bilder umschalten              |
+| C-c C-o         | Bilddatei extern öffnen               |
+| C-c C-x C-l     | LaTeX-Vorschau erzeugen               |
+| C-u C-c C-x C-l | Vorschauen im Bereich oder Buffer     |
+| C-c C-a         | Attachment-Menü öffnen                |
+
+* Tabellen
+
+** Tabelle erzeugen
+
+Direkte Eingabe:
+
+#+begin_example
+| Name | Sprache | Status |
+|-
+#+end_example
+
+Danach =TAB= drücken.
+
+Ergebnis:
+
+| Name           | Sprache | Status  |
+|----------------+---------+---------|
+| reta_arch_mojo | Mojo    | aktiv   |
+| reta_arch_rust | Rust    | geplant |
+
+** Navigation und Bearbeitung
+
+| Taste                  | Wirkung                                |
+|------------------------+----------------------------------------|
+| C-c, danach senkrechter Strich | Tabelle aus Text erzeugen       |
+| C-c C-c                | Tabelle ausrichten                     |
+| TAB                    | nächste Zelle                          |
+| S-TAB                  | vorherige Zelle                        |
+| RET                    | nächste Zeile                          |
+| M-a                    | Anfang der aktuellen Zelle             |
+| M-e                    | Ende der aktuellen Zelle               |
+| C-c `                  | Zelle separat bearbeiten               |
+| M-LEFT                 | Spalte nach links                      |
+| M-RIGHT                | Spalte nach rechts                     |
+| M-UP                   | Zeile nach oben                        |
+| M-DOWN                 | Zeile nach unten                       |
+| M-S-LEFT               | Spalte löschen                         |
+| M-S-RIGHT              | Spalte einfügen                        |
+| M-S-UP                 | Zeile löschen                          |
+| M-S-DOWN               | Zeile einfügen                         |
+| C-c -                  | Trennlinie einfügen                    |
+| C-c RET                | Trennlinie und neue Zeile              |
+| C-c ^                  | Tabelle sortieren                      |
+| C-c +                  | Bereich summieren                      |
+| C-c }                  | Tabellenkoordinaten anzeigen           |
+| C-c {                  | Formel-Debugger umschalten             |
+
+** Tabellenformeln
+
+| Produkt | Anzahl | Preis | Summe |
+|---------+--------+-------+-------|
+| Adapter |      2 | 12.50 | 25.00 |
+| Kabel   |      3 |  6.00 | 18.00 |
+#+TBLFM: $4=$2*$3;%.2f
+
+| Taste     | Wirkung                              |
+|-----------+--------------------------------------|
+| C-c =     | Spaltenformel setzen                 |
+| C-u C-c = | Formel für einzelne Zelle setzen     |
+| C-c '     | Formeleditor öffnen                  |
+| C-c C-c   | Formel ausführen                     |
+| C-c *     | Tabellenzeile neu berechnen          |
+| C-u C-c * | gesamte Tabelle neu berechnen        |
+| C-c +     | Summe berechnen                      |
+
+Beispiel mit Gesamtsumme:
+
+#+begin_example
+| Produkt | Anzahl | Preis | Summe |
+|---------+--------+-------+-------|
+| Adapter |      2 | 12.50 | 25.00 |
+| Kabel   |      3 |  6.00 | 18.00 |
+|---------+--------+-------+-------|
+| Gesamt  |        |       | 43.00 |
+#+TBLFM: $4=$2*$3;%.2f::@4$4=vsum(@2$4..@3$4);%.2f
+#+end_example
+
+* Agenda
+
+** Konfiguration
+
+In =~/.config/doom/config.el=:
+
+#+begin_src emacs-lisp
+(setq org-directory "~/org/")
+
+(after! org
+  (setq org-agenda-files '("~/org/")))
+#+end_src
+
+** Agenda öffnen
+
+#+begin_example
+M-x org-agenda
+#+end_example
+
+| Taste | Ansicht                                  |
+|-------+------------------------------------------|
+| a     | Wochen- oder Tagesagenda                |
+| t     | globale TODO-Liste                      |
+| m     | Tags und Properties suchen              |
+| M     | Tagsuche nur für TODO-Einträge          |
+| s     | Volltextsuche                           |
+| /     | Agenda-Befehl auswählen                 |
+| q     | Dispatcher verlassen                   |
+
+** Bedienung in der Agenda
+
+| Taste | Wirkung                                  |
+|-------+------------------------------------------|
+| n     | nächste Zeile                           |
+| p     | vorherige Zeile                         |
+| j     | zu einem Datum springen                 |
+| .     | zum heutigen Datum                      |
+| f     | späteren Zeitraum anzeigen              |
+| b     | früheren Zeitraum anzeigen              |
+| d     | Tagesansicht                            |
+| w     | Wochenansicht                           |
+| v     | Ansichtsmenü                            |
+| g     | Agenda neu erzeugen                     |
+| r     | Agenda aktualisieren                    |
+| RET   | Eintrag in anderem Fenster öffnen       |
+| TAB   | zur Org-Quelle springen                 |
+| SPC   | Eintrag anzeigen                        |
+| t     | TODO-Zustand ändern                     |
+| :     | Tags setzen                             |
+| ,     | Priorität setzen                        |
+| s     | Eintrag planen                          |
+| I     | Clock starten                           |
+| O     | Clock beenden                           |
+| F     | Follow Mode umschalten                  |
+| q     | Agenda schließen                        |
+
+* Capture
+
+** Beispielkonfiguration
+
+#+begin_src emacs-lisp
+(after! org
+  (setq org-capture-templates
+        '(("t" "Aufgabe" entry
+           (file+headline "~/org/inbox.org" "Eingang")
+           "* TODO %?\n  Eingetragen: %U\n")
+
+          ("n" "Notiz" entry
+           (file+headline "~/org/inbox.org" "Notizen")
+           "* %?\n  Eingetragen: %U\n")
+
+          ("p" "Projektidee" entry
+           (file+headline "~/org/projekte.org" "Ideen")
+           "* TODO %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n"))))
+#+end_src
+
+** Capture-Befehle
+
+| Taste                            | Wirkung                              |
+|----------------------------------+--------------------------------------|
+| M-x org-capture                  | Capture-Menü öffnen                  |
+| C-c C-c                          | Eintrag speichern und beenden        |
+| C-c C-k                          | Capture abbrechen                    |
+| C-c C-w                          | Eintrag direkt refilen               |
+| C-u M-x org-capture              | Vorlage gezielt auswählen            |
+| M-x org-capture-goto-last-stored | letzten Eintrag öffnen               |
+
+* Refile und Archiv
+
+| Taste       | Wirkung                                      |
+|-------------+----------------------------------------------|
+| C-c C-w     | aktuellen Eintrag verschieben                |
+| C-u C-c C-w | zum zuletzt verwendeten Ziel verschieben     |
+| C-c C-x C-a | Teilbaum in Archivdatei verschieben          |
+| C-c C-x C-s | Standard-Archivbefehl                        |
+| C-c C-x a   | ARCHIVE-Tag umschalten                       |
+| C-c $       | Teilbaum innerhalb des Dokuments verschieben |
+
+Typischer Ablauf:
+
+#+begin_example
+Capture → inbox.org → Refile → Projekt → DONE → Archiv
+#+end_example
+
+* Org Babel
+
+Alle Org-Syntaxbeispiele, die selbst =#+begin_src= enthalten, stehen
+hier in Example-Blöcken. Dadurch bleibt die äußere Datei korrekt.
+
+** Shell-Codeblock als Beispiel
+
+#+begin_example
+#+begin_src shell :results output
+uname -a
+emacs --version | head -n 1
+echo "$DISPLAY"
+#+end_src
+#+end_example
+
+** Python-Codeblock als Beispiel
+
+#+begin_example
+#+begin_src python :results output
+zahlen = [1, 2, 3, 4, 5]
+print(sum(x * x for x in zahlen))
+#+end_src
+#+end_example
+
+** Arbeitsverzeichnis als Beispiel
+
+#+begin_example
+#+begin_src shell :dir ~/repos/reta_arch_mojo :results output
+pwd
+git status --short
+#+end_src
+#+end_example
+
+** Babel-Steuerung
+
+| Taste     | Wirkung                                    |
+|-----------+--------------------------------------------|
+| C-c C-c   | aktuellen Codeblock ausführen              |
+| C-c '     | Codeblock separat bearbeiten               |
+| C-c C-o   | Ergebnis öffnen                            |
+| C-c C-v n | nächster Codeblock                         |
+| C-c C-v p | vorheriger Codeblock                       |
+| C-c C-v e | Codeblock ausführen                        |
+| C-c C-v b | alle Codeblöcke im Buffer ausführen        |
+| C-c C-v s | Codeblöcke im Teilbaum ausführen           |
+| C-c C-v t | Code tangeln                               |
+| C-c C-v f | angegebene Org-Datei tangeln               |
+| C-c C-v v | expandierten Code anzeigen                 |
+| C-c C-v I | Codeblock-Informationen anzeigen           |
+| C-c C-v h | Babel-Tastenkürzel erklären                |
+| C-c C-v g | zu benanntem Block springen                |
+| C-c C-v r | zu benanntem Ergebnis springen             |
+
+* Strukturvorlagen und Blöcke
+
+#+begin_example
+C-c C-,
+#+end_example
+
+| Taste | Blocktyp      |
+|-------+---------------|
+| s     | Source Block  |
+| e     | Example Block |
+| q     | Quote Block   |
+| v     | Verse Block   |
+| c     | Center Block  |
+| C     | Comment Block |
+
+| Taste   | Wirkung                              |
+|---------+--------------------------------------|
+| C-c C-, | Strukturvorlage einfügen             |
+| C-c C-c | Block oder Keyword aktualisieren     |
+| TAB     | Block ein- oder ausklappen           |
+| C-c '   | Quellcodeblock separat bearbeiten    |
+
+* Export
+
+#+begin_example
+C-c C-e
+#+end_example
+
+| Taste       | Wirkung                                  |
+|-------------+------------------------------------------|
+| C-c C-e h h | nach HTML exportieren                   |
+| C-c C-e h o | HTML exportieren und öffnen             |
+| C-c C-e l l | LaTeX-Datei erzeugen                    |
+| C-c C-e l p | PDF über LaTeX erzeugen                 |
+| C-c C-e l o | PDF erzeugen und öffnen                 |
+| C-c C-e t a | Textdatei erzeugen                      |
+| C-c C-e m m | Markdown erzeugen, wenn Backend geladen |
+| C-c C-e C-s | nur aktuellen Teilbaum exportieren      |
+| C-c C-e C-b | nur sichtbaren Bereich exportieren      |
+
+Dokument-Metadaten als Beispiel:
+
+#+begin_example
+#+title: Mein Bericht
+#+author: Alexander
+#+language: de
+#+options: toc:2 num:t
+#+end_example
+
+Für LuaLaTeX:
+
+#+begin_example
+#+latex_compiler: lualatex
+#+end_example
+
+* Fußnoten
+
+Das folgende Beispiel ist normaler Org-Text und vollständig auflösbar.
+
+Org Mode verbindet Notizen, Aufgaben und Dokumentation.[fn:org]
+
+[fn:org] Eine Fußnote kann mit einem Namen versehen und später definiert werden.
+
+| Taste     | Wirkung                           |
+|-----------+-----------------------------------|
+| C-c C-x f | Fußnotenaktion öffnen             |
+| C-c C-c   | Fußnote bearbeiten                |
+| C-c C-o   | zur Fußnotendefinition springen   |
+
+* Kommentare und Archivierung
+
+Kommentarzeile:
+
+#+begin_example
+# Dieser Text wird nicht exportiert.
+#+end_example
+
+Kommentarüberschrift:
+
+#+begin_example
+* COMMENT Interne Notiz
+#+end_example
+
+Kommentarblock:
+
+#+begin_example
+#+begin_comment
+Dieser Bereich wird nicht exportiert.
+#+end_comment
+#+end_example
+
+| Taste       | Wirkung                                 |
+|-------------+-----------------------------------------|
+| C-c ;       | Kommentar an Zeile umschalten           |
+| C-c C-x C-a | Teilbaum archivieren                    |
+| C-c C-x a   | ARCHIVE-Tag umschalten                  |
+
+* Formatierung und Anzeige
+
+#+begin_example
+*Fett*
+/Kursiv/
+_Unterstrichen_
++Durchgestrichen+
+~Quellcode~
+=Wörtlicher Text=
+#+end_example
+
+| Taste                          | Wirkung                             |
+|--------------------------------+-------------------------------------|
+| C-c C-x C-f                    | Textauszeichnung auswählen          |
+| C-c C-x C-v                    | Inline-Bilder umschalten            |
+| C-c C-x C-l                    | LaTeX-Vorschau                      |
+| M-x org-toggle-pretty-entities | Symbole hübscher anzeigen           |
+| M-x org-indent-mode            | visuelle Einrückung aktivieren      |
+| M-x visual-line-mode           | visuellen Zeilenumbruch aktivieren  |
+| M-x org-toggle-link-display    | Rohlink und Beschreibung wechseln   |
+| M-x org-toggle-inline-images   | Bilder ein- oder ausblenden         |
+
+* Die wichtigsten Befehle für den Alltag
+
+#+begin_example
+TAB                 Abschnitt falten
+S-TAB               ganzes Dokument falten
+M-RET               neue Überschrift oder Listenzeile
+M-S-RET             neue TODO- oder Checkbox-Zeile
+M-LEFT/RIGHT        Ebene ändern
+M-UP/DOWN           Element verschieben
+
+C-c C-t             TODO-Status
+C-c C-q             Tags
+C-c ,               Priorität
+C-c C-s             SCHEDULED
+C-c C-d             DEADLINE
+C-c .               Zeitstempel
+
+C-c C-l             Link einfügen
+C-c C-o             Link öffnen
+C-c C-w             Refile
+C-c C-x C-a         archivieren
+
+C-c C-c             kontextabhängige Aktion
+C-c C-e             Export
+C-c /               Sparse Tree
+C-c gefolgt von |   Tabelle erzeugen
+C-c ^               sortieren
+
+M-x org-agenda      Agenda
+M-x org-capture     Capture
+
+C-c C-x C-i         Clock starten
+C-c C-x C-o         Clock beenden
+
+C-c C-c             Codeblock ausführen
+C-c '               Codeblock separat bearbeiten
+C-c C-v t           Code tangeln
+
+SPC m               Doom-Org-Menü
+SPC h k             Taste erklären
+#+end_example
+
+* Empfohlene Lernreihenfolge
+
+1. Überschriften erzeugen, verschieben und falten.
+2. Listen und Kontrollkästchen verwenden.
+3. TODO-Zustände und Prioritäten benutzen.
+4. Zeitstempel, SCHEDULED und DEADLINE verstehen.
+5. Links und interne Verweise erstellen.
+6. Tabellen bearbeiten und Formeln schreiben.
+7. Agenda-Dateien einrichten.
+8. Capture-Vorlagen erstellen.
+9. Refile und Archivierung benutzen.
+10. Org-Babel-Codeblöcke ausführen.
+11. Dokumente nach HTML und PDF exportieren.
+12. Clocking und Zeitberichte verwenden.
+
+* Sinnvolle persönliche Org-Struktur
+
+#+begin_example
+~/org/
+├── inbox.org
+├── projekte.org
+├── agenda.org
+├── wissen.org
+└── journal.org
+#+end_example
+
+** Beispiel für inbox.org
+
+#+begin_example
+#+title: Eingang
+
+* Eingang
+
+* Notizen
+#+end_example
+
+** Beispiel für projekte.org
+
+#+begin_example
+#+title: Projekte
+
+* reta_arch_mojo                              :mojo:
+** NEXT Aktuellen Fehler bearbeiten
+** TODO Dokumentation vervollständigen
+** WAIT Plattformtest auf AArch64
+
+* reta_arch_rust                              :rust:
+** TODO CLI-Grundstruktur
+** TODO CSV-Parser
+#+end_example
+
+** Beispiel für agenda.org
+
+#+begin_example
+#+title: Termine und regelmäßige Aufgaben
+
+* TODO Täglich Agenda prüfen
+  SCHEDULED: <2026-07-22 Wed +1d>
+
+* TODO Wöchentliche Sicherung
+  SCHEDULED: <2026-07-25 Sat +1w>
+#+end_example
+
+** Beispiel für wissen.org
+
+#+begin_example
+#+title: Technisches Wissen
+
+* Emacs
+** Evil States
+** Org Mode
+** Doom-Konfiguration
+
+* Linux
+** Termux
+** Fedora
+** Gentoo
+
+* Programmiersprachen
+** Rust
+** Mojo
+** Python
+#+end_example
+
+* Praktische Abschlussübung
+
+Lege =~/org/projekte.org= an und verwende darin:
+
+- mindestens drei Überschriftenebenen,
+- mindestens fünf TODO-Aufgaben,
+- eigene TODO-Zustände,
+- zwei Tags,
+- drei Properties,
+- ein SCHEDULED-Datum,
+- eine DEADLINE,
+- eine wiederkehrende Aufgabe,
+- eine Tabelle,
+- eine Tabellenformel,
+- einen gültigen Link,
+- ein Kontrollkästchen,
+- einen Shell-Codeblock,
+- einen Python-Codeblock,
+- einen Clock-Eintrag.
+
+HTML-Export:
+
+#+begin_example
+C-c C-e h h
+#+end_example
+
+PDF-Export mit installierter LaTeX-Umgebung:
+
+#+begin_example
+C-c C-e l p
+#+end_example

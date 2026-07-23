@@ -1,0 +1,2477 @@
+#+TITLE: Rust, Zig, Mojo, C, C++ und LLVM
+#+SUBTITLE: Plattformunterstützung, Computerarchitekturen, Betriebssysteme und Compiler-Infrastruktur
+#+LANGUAGE: de
+#+OPTIONS: toc:3 num:t
+#+STARTUP: overview
+#+PROPERTY: header-args :exports code
+
+* Teil I: Unterstützte Computerarchitekturen und Betriebssysteme
+
+** Grundsätzliches
+
+Nicht allein die Programmiersprache entscheidet, auf welchen Systemen ein Programm funktioniert.
+
+Entscheidend ist die Kombination aus:
+
+- Programmiersprache
+- Compiler
+- Standardbibliothek
+- Linker
+- Zielarchitektur
+- Betriebssystem
+- ABI
+- Betriebssystem-SDK
+- C-Laufzeitbibliothek
+- unterstützter Toolchain
+
+Eine Sprache kann eine CPU-Architektur grundsätzlich unterstützen, ohne dass für jedes Betriebssystem auf dieser Architektur eine vollständige Toolchain existiert.
+
+Beispielsweise bedeutet:
+
+#+begin_example
+ARM64 wird unterstützt
+#+end_example
+
+nicht automatisch, dass alle folgenden Systeme gleichermaßen unterstützt werden:
+
+- ARM64-Linux
+- ARM64-Android
+- ARM64-Windows
+- ARM64-macOS
+- ARM64-FreeBSD
+- ARM64 ohne Betriebssystem
+
+Eine vollständige Zielplattform wird häufig mit einem sogenannten *Target Triple* beschrieben.
+
+Beispiele:
+
+#+begin_example
+x86_64-unknown-linux-gnu
+aarch64-unknown-linux-gnu
+x86_64-pc-windows-msvc
+aarch64-apple-darwin
+riscv64-unknown-linux-gnu
+wasm32-wasi
+#+end_example
+
+** Überblick
+
+Die Plattformabdeckung lässt sich grob folgendermaßen einordnen:
+
+| Sprache | Plattformbreite | Cross-Compilation | Embedded | Mobile Systeme |
+|---------+------------------+-------------------+----------+----------------|
+| C       | hervorragend     | sehr gut          | hervorragend | hervorragend |
+| C++     | hervorragend     | sehr gut          | sehr gut | hervorragend |
+| Rust    | sehr groß        | gut               | sehr gut | sehr gut |
+| Zig     | sehr groß        | hervorragend      | sehr gut | teilweise |
+| Mojo    | derzeit klein    | eingeschränkt     | kaum     | kaum |
+
+Nach realer Plattformbreite ergibt sich ungefähr:
+
+1. C
+2. C++
+3. Rust
+4. Zig
+5. Mojo
+
+Nach eingebauter und einfacher Cross-Compilation:
+
+1. Zig
+2. C und C++ mit Clang
+3. Rust
+4. Mojo
+
+** Rust
+
+Rust unterstützt zahlreiche Architekturen und Betriebssysteme.
+
+Die Rust-Zielplattformen werden in verschiedene Qualitätsstufen eingeteilt.
+
+*** Rust-Supportstufen
+
+Rust unterscheidet insbesondere:
+
+- Tier 1
+- Tier 2
+- Tier 3
+
+Tier 1 bedeutet ungefähr:
+
+- Compiler wird offiziell bereitgestellt
+- Standardbibliothek wird bereitgestellt
+- Zielplattform wird regelmäßig getestet
+- Fehler verhindern normalerweise einen Rust-Release
+
+Tier 2 bedeutet ungefähr:
+
+- Compiler und Standardbibliothek können bereitgestellt werden
+- Tests sind weniger vollständig
+- nicht jedes Ziel wird auf echter Hardware getestet
+
+Tier 3 bedeutet ungefähr:
+
+- der Compiler kennt das Ziel
+- Unterstützung kann experimentell sein
+- offizielle Binärpakete fehlen möglicherweise
+- eigene Toolchain-Builds können erforderlich sein
+
+*** Rust auf Linux
+
+Sehr gut unterstützt sind insbesondere:
+
+| Architektur | Betriebssystem | Typische ABI |
+|-------------+----------------+--------------|
+| x86-64      | Linux          | GNU/glibc |
+| x86-64      | Linux          | Musl |
+| x86 32 Bit  | Linux          | GNU/glibc |
+| ARM64       | Linux          | GNU/glibc |
+| ARM64       | Linux          | Musl |
+| ARMv6       | Linux          | GNU |
+| ARMv7       | Linux          | GNU |
+| RISC-V 64   | Linux          | GNU |
+| PowerPC     | Linux          | GNU |
+| PowerPC64   | Linux          | GNU |
+| PowerPC64LE | Linux          | GNU |
+| s390x       | Linux          | GNU |
+| LoongArch64 | Linux          | GNU |
+
+Wichtige Linux-Ziele sind beispielsweise:
+
+#+begin_example
+x86_64-unknown-linux-gnu
+x86_64-unknown-linux-musl
+aarch64-unknown-linux-gnu
+aarch64-unknown-linux-musl
+armv7-unknown-linux-gnueabihf
+riscv64gc-unknown-linux-gnu
+powerpc64le-unknown-linux-gnu
+s390x-unknown-linux-gnu
+loongarch64-unknown-linux-gnu
+#+end_example
+
+*** Rust auf Windows
+
+Rust unterstützt unter Windows hauptsächlich:
+
+| Architektur | Toolchain |
+|-------------+-----------|
+| x86 32 Bit  | MSVC |
+| x86 32 Bit  | GNU/MinGW |
+| x86-64      | MSVC |
+| x86-64      | GNU/MinGW |
+| ARM64       | MSVC |
+
+Wichtige Ziele:
+
+#+begin_example
+i686-pc-windows-msvc
+i686-pc-windows-gnu
+x86_64-pc-windows-msvc
+x86_64-pc-windows-gnu
+aarch64-pc-windows-msvc
+#+end_example
+
+Für normale Windows-Programme ist die MSVC-Toolchain meist die beste Wahl.
+
+*** Rust auf macOS
+
+Rust unterstützt:
+
+| Architektur | Betriebssystem |
+|-------------+----------------|
+| x86-64      | macOS |
+| ARM64       | macOS |
+
+Ziele:
+
+#+begin_example
+x86_64-apple-darwin
+aarch64-apple-darwin
+#+end_example
+
+ARM64 wird für Apple-Silicon-Prozessoren wie M1, M2, M3, M4 und folgende Generationen verwendet.
+
+*** Rust auf Android
+
+Rust unterstützt Android für:
+
+| Architektur | Android-ABI |
+|-------------+-------------|
+| ARMv7       | armeabi-v7a |
+| ARM64       | arm64-v8a |
+| x86         | x86 |
+| x86-64      | x86_64 |
+
+Typische Rust-Ziele:
+
+#+begin_example
+armv7-linux-androideabi
+aarch64-linux-android
+i686-linux-android
+x86_64-linux-android
+#+end_example
+
+Zum Linken wird normalerweise das Android NDK benötigt.
+
+Rust funktioniert daher grundsätzlich auch für Android-Anwendungen und native Android-Bibliotheken.
+
+*** Rust auf Apple-Mobilsystemen
+
+Rust unterstützt unter anderem:
+
+- iOS
+- iPadOS
+- tvOS
+- watchOS
+- visionOS
+
+Dabei werden hauptsächlich folgende Architekturen verwendet:
+
+- ARM64 auf realen Geräten
+- ARM64 oder x86-64 im Simulator, abhängig vom Host
+
+Beispiele:
+
+#+begin_example
+aarch64-apple-ios
+aarch64-apple-ios-sim
+x86_64-apple-ios
+#+end_example
+
+*** Rust auf BSD-Systemen und weiteren Betriebssystemen
+
+Rust unterstützt unter anderem:
+
+- FreeBSD
+- NetBSD
+- OpenBSD
+- DragonFly BSD, eingeschränkter
+- Redox OS
+- Fuchsia
+- illumos
+- Solaris
+- Haiku, teilweise
+- QNX, teilweise
+- VxWorks, teilweise
+- NuttX
+- RTEMS
+- UEFI
+- Hermit
+- Systeme ohne Betriebssystem
+
+*** Rust und WebAssembly
+
+Wichtige Ziele:
+
+#+begin_example
+wasm32-unknown-unknown
+wasm32-wasip1
+wasm32-wasip2
+wasm32-unknown-emscripten
+#+end_example
+
+Einsatzbereiche:
+
+- Browser
+- Webanwendungen
+- Node.js
+- WASI-Runtimes
+- Plugins
+- serverseitige Sandbox-Systeme
+
+*** Rust auf Mikrocontrollern
+
+Rust kann ohne vollständige Standardbibliothek mit =#![no_std]= auf Embedded-Systemen verwendet werden.
+
+Unterstützte Architekturen sind unter anderem:
+
+- ARM Cortex-M
+- ARM Cortex-R
+- ARM Cortex-A
+- RISC-V 32 Bit
+- RISC-V 64 Bit
+- AVR, teilweise
+- MSP430, teilweise
+- Xtensa, teilweise über externe Toolchains
+- x86 ohne Betriebssystem
+
+Typische ARM-Mikrocontroller-Ziele:
+
+#+begin_example
+thumbv6m-none-eabi
+thumbv7m-none-eabi
+thumbv7em-none-eabi
+thumbv7em-none-eabihf
+thumbv8m.base-none-eabi
+thumbv8m.main-none-eabi
+#+end_example
+
+*** Rust-Zusammenfassung
+
+Rust eignet sich besonders gut für:
+
+- Linux
+- Windows
+- macOS
+- Android
+- WebAssembly
+- Embedded-Systeme
+- Netzwerksoftware
+- Betriebssystemkomponenten
+- Kommandozeilenprogramme
+- Server
+- sicherheitskritische Systemsoftware
+
+Rust ist weniger universell als C, bietet dafür aber wesentlich stärkere statische Speichersicherheitsgarantien.
+
+** Zig
+
+Zig besitzt eine sehr breite Zielarchitektur-Unterstützung.
+
+Eine besondere Stärke von Zig ist die eingebaute Cross-Compilation.
+
+Alle bekannten Ziele können angezeigt werden mit:
+
+#+begin_src sh
+zig targets
+#+end_src
+
+*** Zig-Zielbeschreibung
+
+Zig verwendet Ziele, die aus mehreren Teilen bestehen:
+
+- CPU-Architektur
+- Betriebssystem
+- ABI
+- CPU-Modell
+- CPU-Eigenschaften
+- Betriebssystemversion
+- libc-Version
+
+Beispiel:
+
+#+begin_src sh
+zig build-exe \
+  -target aarch64-linux-gnu \
+  programm.zig
+#+end_src
+
+*** Zig auf Linux
+
+Zig unterstützt Linux unter anderem für:
+
+| Architektur | Betriebssystem |
+|-------------+----------------|
+| x86         | Linux |
+| x86-64      | Linux |
+| ARM         | Linux |
+| ARM64       | Linux |
+| RISC-V 32   | Linux |
+| RISC-V 64   | Linux |
+| MIPS        | Linux |
+| MIPS64      | Linux |
+| PowerPC     | Linux |
+| PowerPC64   | Linux |
+| PowerPC64LE | Linux |
+| s390x       | Linux |
+| LoongArch64 | Linux |
+| Hexagon     | Linux |
+
+Zig kann häufig sowohl glibc als auch Musl verwenden.
+
+Beispiele:
+
+#+begin_example
+x86_64-linux-gnu
+x86_64-linux-musl
+aarch64-linux-gnu
+aarch64-linux-musl
+riscv64-linux-gnu
+powerpc64le-linux-gnu
+#+end_example
+
+*** Zig auf Windows und macOS
+
+Zig unterstützt unter Windows insbesondere:
+
+- x86
+- x86-64
+- ARM64
+
+Beispiele:
+
+#+begin_example
+x86-windows-gnu
+x86_64-windows-gnu
+aarch64-windows-gnu
+#+end_example
+
+Auf macOS unterstützt Zig:
+
+#+begin_example
+x86_64-macos
+aarch64-macos
+#+end_example
+
+Für Apple-Ziele können Apple-SDKs und technische oder rechtliche Einschränkungen relevant sein.
+
+*** Zig auf Android
+
+Zig kann Android-Ziele grundsätzlich ansprechen.
+
+Typische Architekturen:
+
+- ARMv7
+- ARM64
+- x86
+- x86-64
+
+Beispiel:
+
+#+begin_src sh
+zig build-exe \
+  -target aarch64-linux-android \
+  programm.zig
+#+end_src
+
+In der Praxis werden häufig zusätzlich benötigt:
+
+- Android NDK
+- Android-Sysroot
+- passende API-Level
+- Android-Bibliotheken
+- korrekte Linkeroptionen
+
+*** Zig auf BSD-Systemen und Apple-Mobilsystemen
+
+Zig unterstützt unter anderem:
+
+- FreeBSD
+- NetBSD
+- OpenBSD
+- DragonFly BSD
+- iOS
+- tvOS
+- watchOS
+- visionOS
+
+Die genaue Qualitätsstufe hängt von der Kombination und Zig-Version ab.
+
+*** Zig und WebAssembly
+
+Beispiele:
+
+#+begin_example
+wasm32-freestanding
+wasm32-wasi
+wasm64-wasi
+#+end_example
+
+Zig eignet sich gut für:
+
+- Browsermodule
+- WASI-Programme
+- Plugins
+- kleine portable Binärmodule
+- Spiele- und Grafikcode
+
+*** Zig auf Embedded-Systemen
+
+Zig unterstützt zahlreiche freestanding Architekturen:
+
+- ARM
+- Thumb
+- ARM64
+- AVR
+- MSP430
+- RISC-V
+- x86
+- MIPS
+- PowerPC
+- SPARC
+- Motorola 68000
+- LoongArch
+- BPF
+
+Beispiele:
+
+#+begin_example
+thumb-freestanding-eabi
+riscv32-freestanding
+riscv64-freestanding
+avr-freestanding
+msp430-freestanding
+#+end_example
+
+*** Zig und GPUs
+
+Zig kennt auch Ziele für:
+
+- NVIDIA PTX
+- AMDGCN
+- SPIR-V
+- Vulkan
+- OpenCL
+- OpenGL-nahe Shader-Ziele
+
+Diese Ziele sind teilweise experimentell.
+
+*** Zig als C- und C++-Compiler
+
+C kompilieren:
+
+#+begin_src sh
+zig cc programm.c -o programm
+#+end_src
+
+C++ kompilieren:
+
+#+begin_src sh
+zig c++ programm.cpp -o programm
+#+end_src
+
+C für ARM64-Linux cross-compilieren:
+
+#+begin_src sh
+zig cc \
+  -target aarch64-linux-gnu \
+  programm.c \
+  -o programm-arm64
+#+end_src
+
+C für Windows cross-compilieren:
+
+#+begin_src sh
+zig cc \
+  -target x86_64-windows-gnu \
+  programm.c \
+  -o programm.exe
+#+end_src
+
+*** Zig-Zusammenfassung
+
+Zig eignet sich besonders gut für:
+
+- Cross-Compilation
+- Betriebssystementwicklung
+- Embedded-Systeme
+- C-Ersatz
+- kleine native Programme
+- Compiler und Toolchains
+- Build-Systeme
+- Programme ohne Garbage Collector
+- Software mit expliziter Speicherverwaltung
+
+Die Zahl der theoretisch bekannten Ziele ist sehr groß. Die tatsächliche Reife unterscheidet sich deutlich zwischen den Zielplattformen.
+
+** Mojo
+
+Mojo besitzt derzeit eine wesentlich kleinere Plattformabdeckung als Rust, Zig, C und C++.
+
+Mojo ist stark auf moderne CPUs, MLIR, LLVM, KI-Berechnungen und Hochleistungsrechnen ausgerichtet.
+
+*** Offiziell unterstützte Hostsysteme
+
+Mojo unterstützt hauptsächlich:
+
+| Architektur | Betriebssystem |
+|-------------+----------------|
+| x86-64      | Linux |
+| ARM64       | Linux |
+| ARM64       | macOS |
+
+*** Mojo auf x86-64-Linux
+
+Für x86-64 wird eine moderne CPU vorausgesetzt.
+
+Die Anforderungen entsprechen ungefähr der Mikroarchitekturstufe =x86-64-v3=.
+
+Dazu gehören typischerweise CPU-Funktionen wie:
+
+- AVX
+- AVX2
+- BMI1
+- BMI2
+- FMA
+- weitere moderne x86-Erweiterungen
+
+Geeignete Prozessoren sind ungefähr:
+
+- Intel Haswell oder neuer
+- vergleichbare moderne AMD-Prozessoren
+
+Sehr alte x86-64-Prozessoren funktionieren daher nicht.
+
+*** Mojo auf ARM64-Linux und macOS
+
+Mojo unterstützt moderne ARM64-Linux-Systeme.
+
+Als CPU-Klasse wird ungefähr ARM Neoverse N1 oder neuer vorausgesetzt.
+
+Mojo unterstützt macOS auf Apple Silicon:
+
+- Apple M1
+- Apple M2
+- Apple M3
+- Apple M4
+- spätere Apple-Silicon-Generationen
+
+Intel-Macs werden nicht offiziell unterstützt.
+
+*** Mojo auf Windows
+
+Mojo wird nicht als normales natives Windows-Programm unterstützt.
+
+Vorgesehene Umgebung:
+
+#+begin_example
+Windows
+   ↓
+WSL
+   ↓
+Linux
+   ↓
+Mojo
+#+end_example
+
+Die erzeugten Programme sind dabei zunächst Linux-Programme.
+
+*** Mojo auf Android, BSD und RISC-V
+
+Nicht offiziell unterstützt werden insbesondere:
+
+- Android
+- Termux
+- FreeBSD
+- OpenBSD
+- NetBSD
+- DragonFly BSD
+- RISC-V als normale native Mojo-Plattform
+- klassische Mikrocontroller
+- Bare Metal
+
+Android verwendet Bionic statt glibc und besitzt eine andere ABI und Laufzeitumgebung.
+
+*** Mojo-Cross-Compilation
+
+Mojo kann Zielparameter wie Target Triple und Ziel-CPU verwenden.
+
+Beispiel:
+
+#+begin_src sh
+mojo build \
+  --target-triple aarch64-unknown-linux-gnu \
+  --target-cpu cortex-a72 \
+  --emit object \
+  -o programm.o \
+  programm.mojo
+#+end_src
+
+Mojo kann für fremde Ziele unter anderem erzeugen:
+
+- LLVM-IR
+- LLVM-Bitcode
+- Assemblersprache
+- Objektdateien
+
+Für fertige Executables können zusätzlich erforderlich sein:
+
+- externer Linker
+- Ziel-Sysroot
+- C-Laufzeit
+- Zielbibliotheken
+- passende Mojo-Runtime
+- kompatible Standardbibliothek
+
+*** Mojo und GPUs
+
+Mojo unterstützt GPU-Programmierung insbesondere für:
+
+- NVIDIA-GPUs
+- AMD-GPUs
+- Apple-Silicon-GPUs
+
+Das ist GPU-Gerätecode innerhalb einer unterstützten Hostumgebung und keine allgemeine zusätzliche Betriebssystemunterstützung.
+
+*** Mojo-Zusammenfassung
+
+Mojo eignet sich derzeit vor allem für:
+
+- moderne x86-64-Linux-Systeme
+- moderne ARM64-Linux-Systeme
+- Apple-Silicon-macOS
+- KI-Berechnungen
+- numerische Hochleistungsprogramme
+- SIMD
+- CPU- und GPU-Kernel
+- MLIR-basierte Compilertechnik
+
+Mojo ist derzeit weniger geeignet für:
+
+- Android
+- Termux
+- Windows ohne WSL
+- BSD-Systeme
+- RISC-V-Systeme
+- alte x86-64-Prozessoren
+- Mikrocontroller
+- Bare Metal
+- exotische Betriebssysteme
+
+** C
+
+C besitzt die größte reale Plattformunterstützung aller hier verglichenen Sprachen.
+
+Wichtige C-Compiler sind:
+
+- GCC
+- Clang
+- Microsoft Visual C
+- Intel-Compiler
+- TinyCC
+- PCC
+- SDCC
+- IAR
+- Keil
+- herstellerspezifische Embedded-Compiler
+
+*** C auf Desktop- und Serversystemen
+
+| Architektur | Betriebssysteme |
+|-------------+-----------------|
+| x86         | Linux, Windows, BSD, ältere Unix-Systeme |
+| x86-64      | Linux, Windows, macOS, BSD, Solaris, illumos |
+| ARM         | Linux, BSD, Android, Embedded-Systeme |
+| ARM64       | Linux, Windows, macOS, Android, BSD |
+| RISC-V      | Linux, BSD, Embedded-Systeme |
+| PowerPC     | Linux, BSD, AIX, Embedded-Systeme |
+| MIPS        | Linux, BSD, Router, Embedded-Systeme |
+| s390x       | Linux, IBM-Systeme |
+| SPARC       | Solaris, Linux, BSD |
+| LoongArch   | Linux |
+| Motorola 68k | ältere Unix-, Amiga- und Embedded-Systeme |
+
+*** C auf Windows, macOS und Android
+
+C funktioniert unter Windows auf:
+
+- x86
+- x86-64
+- ARM64
+
+C wird auf folgenden Apple-Systemen unterstützt:
+
+- macOS
+- iOS
+- iPadOS
+- tvOS
+- watchOS
+- visionOS
+
+Das Android NDK unterstützt hauptsächlich:
+
+| ABI | Architektur |
+|-----+-------------|
+| armeabi-v7a | ARMv7 |
+| arm64-v8a | ARM64 |
+| x86 | x86 |
+| x86_64 | x86-64 |
+
+*** C auf BSD, Unix und Mikrocontrollern
+
+C funktioniert unter anderem auf:
+
+- FreeBSD
+- OpenBSD
+- NetBSD
+- DragonFly BSD
+- Solaris
+- illumos
+- AIX
+- HP-UX
+- QNX
+- Haiku
+- Minix
+
+C ist die am weitesten verbreitete Mikrocontrollersprache.
+
+Unterstützte Architekturen sind unter anderem:
+
+- AVR
+- PIC
+- MSP430
+- ARM Cortex-M
+- ARM Cortex-R
+- RISC-V
+- 8051
+- MIPS
+- Xtensa
+- ESP8266
+- ESP32
+- Motorola 68000
+- PowerPC
+- Renesas RX
+- Renesas RL78
+- Infineon TriCore
+
+*** C und Echtzeitbetriebssysteme
+
+C wird häufig verwendet mit:
+
+- FreeRTOS
+- Zephyr
+- ThreadX
+- VxWorks
+- QNX
+- NuttX
+- RTEMS
+- embedded Linux
+- proprietären RTOS
+
+*** C und WebAssembly
+
+C kann über Clang oder Emscripten nach WebAssembly kompiliert werden.
+
+Beispiel:
+
+#+begin_src sh
+emcc programm.c -o programm.js
+#+end_src
+
+*** Einschränkungen von C
+
+Die breite Plattformunterstützung bedeutet nicht, dass jedes C-Programm unverändert überall funktioniert.
+
+Probleme können entstehen durch:
+
+- unterschiedliche Integergrößen
+- unterschiedliche Zeigergrößen
+- Endianness
+- unterschiedliche Betriebssystem-APIs
+- unterschiedliche Threadmodelle
+- unterschiedliche Dateisysteme
+- verschiedene ABIs
+- nicht verfügbare Bibliotheken
+- undefiniertes Verhalten
+- Annahmen über Speicherlayout
+
+** C++
+
+C++ funktioniert grundsätzlich auf fast allen Plattformen, auf denen auch C verfügbar ist.
+
+Wichtige C++-Compiler sind:
+
+- GCC/G++
+- Clang/Clang++
+- Microsoft Visual C++
+- Intel-Compiler
+- Apple Clang
+- IAR C++
+- Keil C++
+- herstellerspezifische Embedded-Compiler
+
+*** C++ auf Desktop- und Serversystemen
+
+| Architektur | Betriebssysteme |
+|-------------+-----------------|
+| x86         | Linux, Windows, BSD |
+| x86-64      | Linux, Windows, macOS, BSD, Solaris |
+| ARM         | Linux, Android, Embedded-Systeme |
+| ARM64       | Linux, Windows, macOS, Android, BSD |
+| RISC-V      | Linux, BSD, Embedded-Systeme |
+| PowerPC     | Linux, BSD, AIX, Embedded-Systeme |
+| MIPS        | Linux, BSD, Embedded-Systeme |
+| s390x       | Linux |
+| SPARC       | Solaris, Linux |
+| LoongArch   | Linux |
+
+*** C++ auf Windows, Linux, Apple und Android
+
+C++ besitzt unter Windows sehr starke Unterstützung auf:
+
+- x86
+- x86-64
+- ARM64
+
+C++ wird von Apple Clang unterstützt für:
+
+- macOS
+- iOS
+- iPadOS
+- tvOS
+- watchOS
+- visionOS
+
+C++ wird über das Android NDK unterstützt auf:
+
+- ARMv7
+- ARM64
+- x86
+- x86-64
+
+*** C++ auf Embedded-Systemen
+
+C++ kann auf vielen Mikrocontrollern und Embedded-Systemen verwendet werden.
+
+Architekturen:
+
+- ARM Cortex-M
+- ARM Cortex-R
+- AVR
+- RISC-V
+- ESP32
+- Xtensa
+- PowerPC
+- MIPS
+- viele Automotive-Controller
+
+Häufig werden bestimmte Funktionen deaktiviert:
+
+#+begin_src sh
+-fno-exceptions
+-fno-rtti
+#+end_src
+
+*** Unterschied zwischen C und C++ bei kleinen Plattformen
+
+C benötigt oft nur:
+
+- Startcode
+- wenige Laufzeitfunktionen
+- eventuell keine Standardbibliothek
+
+C++ kann zusätzlich benötigen:
+
+- Konstruktorinitialisierung
+- C++-Runtime
+- Exception-Unterstützung
+- RTTI
+- Operator =new= und =delete=
+- C++-Standardbibliothek
+- Threadunterstützung
+
+Daher kann gelten:
+
+#+begin_example
+C vollständig verfügbar
+C++-Compiler vorhanden
+C++-Standardbibliothek nur teilweise verfügbar
+#+end_example
+
+** Direkter Vergleich
+
+*** Linux x86-64
+
+| Sprache | Unterstützung |
+|---------+---------------|
+| C       | hervorragend |
+| C++     | hervorragend |
+| Rust    | hervorragend |
+| Zig     | hervorragend |
+| Mojo    | gut, aber moderne CPU erforderlich |
+
+*** Linux ARM64
+
+| Sprache | Unterstützung |
+|---------+---------------|
+| C       | hervorragend |
+| C++     | hervorragend |
+| Rust    | hervorragend |
+| Zig     | sehr gut |
+| Mojo    | unterstützt, moderne CPU erforderlich |
+
+*** Windows x86-64
+
+| Sprache | Unterstützung |
+|---------+---------------|
+| C       | hervorragend |
+| C++     | hervorragend |
+| Rust    | hervorragend |
+| Zig     | gut |
+| Mojo    | nur innerhalb von WSL |
+
+*** Windows ARM64
+
+| Sprache | Unterstützung |
+|---------+---------------|
+| C       | sehr gut |
+| C++     | sehr gut |
+| Rust    | gut |
+| Zig     | gut bis eingeschränkt |
+| Mojo    | nicht nativ unterstützt |
+
+*** macOS ARM64
+
+| Sprache | Unterstützung |
+|---------+---------------|
+| C       | hervorragend |
+| C++     | hervorragend |
+| Rust    | hervorragend |
+| Zig     | gut |
+| Mojo    | offiziell unterstützt |
+
+*** Android
+
+| Sprache | Unterstützung |
+|---------+---------------|
+| C       | hervorragend |
+| C++     | hervorragend |
+| Rust    | gut |
+| Zig     | möglich, aber weniger bequem |
+| Mojo    | nicht offiziell unterstützt |
+
+*** WebAssembly
+
+| Sprache | Unterstützung |
+|---------+---------------|
+| C       | hervorragend |
+| C++     | hervorragend |
+| Rust    | hervorragend |
+| Zig     | sehr gut |
+| Mojo    | derzeit kein verbreiteter Hauptweg |
+
+*** Mikrocontroller und Bare Metal
+
+| Sprache | Unterstützung |
+|---------+---------------|
+| C       | hervorragend |
+| C++     | sehr gut |
+| Rust    | sehr gut |
+| Zig     | sehr gut |
+| Mojo    | nicht offiziell unterstützt |
+
+** Welche Sprache für welchen Einsatz?
+
+*** C als erste Wahl
+
+- maximale Plattformabdeckung
+- Betriebssystemkerne
+- sehr kleine Mikrocontroller
+- stabile C-ABI
+- alte oder exotische Hardware
+- vorhandene Systembibliotheken
+
+*** C++ als erste Wahl
+
+- große native Anwendungen
+- Spiele oder Spiele-Engines
+- umfangreiche bestehende C++-Bibliotheken
+- Qt, Unreal Engine oder ähnliche Frameworks
+- komplexe Echtzeitsoftware
+
+*** Rust als erste Wahl
+
+- Speichersicherheit
+- sichere Nebenläufigkeit
+- langfristig wartbare Systemsoftware
+- moderne Server- und Netzwerkprogramme
+- Linux, Windows, macOS oder WebAssembly
+- Vermeidung von Use-after-free
+
+*** Zig als erste Wahl
+
+- Cross-Compilation
+- C-Ersatz
+- explizite Speicherverwaltung
+- Compiler oder Build-Systeme
+- kleine Laufzeitumgebung
+- Embedded- und freestanding Systeme
+
+*** Mojo als erste Wahl
+
+- moderne Linux- oder Apple-Silicon-Systeme
+- KI- oder numerische Hochleistungsberechnungen
+- MLIR-basierte Optimierung
+- CPU- und GPU-Kernel
+- geringe Plattformabdeckung ist akzeptabel
+
+** Ranglisten
+
+*** Nach realer Plattformbreite
+
+1. C
+2. C++
+3. Rust
+4. Zig
+5. Mojo
+
+*** Nach Cross-Compilation
+
+1. Zig
+2. C und C++ mit Clang
+3. Rust
+4. Mojo
+
+*** Nach Embedded-Eignung
+
+1. C
+2. Rust, Zig und C++, je nach Plattform
+3. Mojo
+
+*** Nach statischer Speichersicherheit
+
+1. Rust
+2. Mojo, abhängig von verwendeten Funktionen und Bibliotheken
+3. Zig
+4. C++
+5. C
+
+Diese Rangfolge ist vereinfacht. Mojo bietet derzeit nicht dieselben durchgängigen statischen Garantien wie Rust. Zig besitzt keinen Borrow Checker wie Rust.
+
+*** Nach Unterstützung alter und exotischer Systeme
+
+1. C
+2. C++
+3. Zig
+4. Rust
+5. Mojo
+
+** Wichtig für Android und Termux
+
+| Sprache | Direkt in Android/Termux |
+|---------+--------------------------|
+| C       | sehr gut |
+| C++     | sehr gut |
+| Rust    | gut, Toolchain-Anpassungen erforderlich |
+| Zig     | grundsätzlich möglich |
+| Mojo    | nicht offiziell unterstützt |
+
+Für native Android-Programme sind C und C++ über das Android NDK besonders etabliert. Rust kann ebenfalls Android-Bibliotheken und Anwendungen erzeugen. Zig kann als Cross-Compiler verwendet werden. Mojo ist derzeit ungeeignet.
+
+** Wichtig für das Samsung Galaxy Note 8
+
+Das Modell =SM-N950F= verwendet einen ARM64-fähigen Exynos-Prozessor.
+
+Geeignete Sprachen:
+
+- C
+- C++
+- Rust
+- Zig, mit zusätzlicher Einrichtung
+
+Mojo funktioniert nicht allein deshalb, weil die CPU ARM64 unterstützt. Es fehlt eine offiziell unterstützte Kombination aus:
+
+#+begin_example
+ARM64 + Android + Bionic + Mojo-Runtime
+#+end_example
+
+** Wichtig für einen alten AMD-Turion-Rechner
+
+| Sprache | Eignung |
+|---------+---------|
+| C       | sehr gut |
+| C++     | sehr gut |
+| Rust    | möglicherweise, abhängig vom genauen Modell |
+| Zig     | möglicherweise, abhängig von Compiler-Version und CPU |
+| Mojo    | ungeeignet |
+
+Mojo verlangt eine moderne x86-64-v3-CPU.
+
+C und C++ können gezielt für ältere x86-64-CPUs kompiliert werden:
+
+#+begin_src sh
+gcc \
+  -march=x86-64 \
+  -mtune=generic \
+  programm.c \
+  -o programm
+#+end_src
+
+Bei Rust kann ein konservativer Ziel-CPU-Wert verwendet werden:
+
+#+begin_src sh
+RUSTFLAGS="-C target-cpu=x86-64" \
+cargo build
+#+end_src
+
+** Wichtig für RISC-V
+
+| Sprache | RISC-V-Unterstützung |
+|---------+----------------------|
+| C       | hervorragend |
+| C++     | sehr gut |
+| Rust    | sehr gut |
+| Zig     | sehr gut bis experimentell |
+| Mojo    | nicht als normale Plattform |
+
+** Wichtig für Betriebssystementwicklung
+
+| Sprache | Betriebssystementwicklung |
+|---------+----------------------------|
+| C       | hervorragend und traditionell |
+| C++     | gut, aber Runtime muss kontrolliert werden |
+| Rust    | sehr gut und speichersicherer |
+| Zig     | sehr gut und systemnah |
+| Mojo    | derzeit ungeeignet |
+
+** Zusammenfassung
+
+1. Für maximale Plattformbreite ist C die erste Wahl.
+2. Für große native Anwendungen mit umfangreichen Bibliotheken ist C++ häufig sinnvoll.
+3. Für moderne sichere Systemsoftware ist Rust besonders stark.
+4. Für Cross-Compilation, Toolchains und systemnahe Kontrolle ist Zig besonders attraktiv.
+5. Für moderne KI-, SIMD- und GPU-Berechnungen auf wenigen unterstützten Plattformen ist Mojo interessant.
+6. Für Android sind C, C++ und Rust wesentlich besser geeignet als Mojo.
+7. Für alte Rechner und exotische CPUs sind C und C++ am zuverlässigsten.
+8. Für Embedded-Systeme sind C, Rust und Zig besonders geeignet.
+9. Für WebAssembly sind C, C++, Rust und Zig gut geeignet.
+10. Die Unterstützung einer CPU allein garantiert noch keine Unterstützung des darauf laufenden Betriebssystems.
+
+* Teil II: Was ist LLVM?
+
+** Grundidee
+
+*LLVM ist eine modulare Compiler-Infrastruktur.*
+
+LLVM ist kein einzelner Compiler und trotz seines historischen Namens normalerweise auch keine virtuelle Maschine.
+
+Vereinfacht besteht eine Compilerkette mit LLVM aus folgenden Schritten:
+
+#+begin_example
+Quellcode
+   ↓
+Frontend
+   ↓
+LLVM-IR
+   ↓
+Optimierungen
+   ↓
+Maschinencode für x86-64, ARM64, RISC-V usw.
+#+end_example
+
+LLVM stellt wiederverwendbare Komponenten bereit für:
+
+- Zwischendarstellungen
+- Programmanalysen
+- Optimierungen
+- Maschinencodeerzeugung
+- Objektdateierzeugung
+- Linken
+- Debugging
+- Just-in-time-Kompilierung
+
+** Die drei Hauptteile einer LLVM-Compilerkette
+
+*** 1. Das Frontend
+
+Das Frontend versteht die jeweilige Programmiersprache.
+
+Beispiele:
+
+- *Clang* für C, C++ und Objective-C
+- =rustc= für Rust
+- der Mojo-Compiler für Mojo
+- der Zig-Compiler für Zig
+- Swift-Compiler
+- Fortran-Compiler wie Flang
+
+Das Frontend erledigt sprachspezifische Aufgaben wie:
+
+- Quelltext lexikalisch analysieren
+- Syntax analysieren
+- Typen überprüfen
+- Namen und Variablen auflösen
+- Sprachregeln überprüfen
+- Makros oder Generics verarbeiten
+- eine interne Zwischendarstellung erzeugen
+
+LLVM selbst versteht nicht automatisch die ursprüngliche Programmiersprache.
+
+LLVM kennt beispielsweise nicht unmittelbar:
+
+- Rust-Lifetimes
+- den Rust-Borrow-Checker
+- C++-Templates
+- Mojo-Traits
+- Zig-=comptime=
+- Python-Syntax
+
+*** 2. LLVM-IR
+
+LLVM-IR bedeutet:
+
+#+begin_quote
+LLVM Intermediate Representation
+#+end_quote
+
+Auf Deutsch:
+
+#+begin_quote
+LLVM-Zwischendarstellung
+#+end_quote
+
+Ein einfaches Beispiel:
+
+#+begin_src llvm
+define i32 @add(i32 %a, i32 %b) {
+  %result = add i32 %a, %b
+  ret i32 %result
+}
+#+end_src
+
+Dieser LLVM-IR-Code entspricht ungefähr:
+
+#+begin_src c
+int add(int a, int b) {
+    return a + b;
+}
+#+end_src
+
+LLVM-IR ist:
+
+- niedriger als C
+- höher als konkreter Maschinencode
+- streng typisiert
+- weitgehend unabhängig von der Ziel-CPU
+- für Analysen geeignet
+- für Optimierungen geeignet
+- als Text darstellbar
+- als binärer LLVM-Bitcode speicherbar
+- als interne Datenstruktur im Speicher verwendbar
+
+LLVM-IR arbeitet unter anderem mit:
+
+- Funktionen
+- Basic Blocks
+- Instruktionen
+- Registern
+- Sprüngen
+- Vergleichen
+- Speicherzugriffen
+- Funktionsaufrufen
+- Zeigern
+- Vektoren
+- atomaren Operationen
+
+**** SSA-Form
+
+LLVM-IR verwendet hauptsächlich die *Static Single Assignment Form*, abgekürzt *SSA*.
+
+Dabei wird jedem virtuellen Register nur einmal ein Wert zugewiesen.
+
+#+begin_src llvm
+%a = add i32 %x, %y
+%b = mul i32 %a, 2
+#+end_src
+
+SSA erleichtert:
+
+- Konstantenpropagierung
+- Dead-Code-Elimination
+- Datenflussanalyse
+- Erkennung redundanter Berechnungen
+- Schleifenoptimierungen
+
+*** 3. Das Backend
+
+Das LLVM-Backend übersetzt LLVM-IR in Code für eine konkrete Zielarchitektur.
+
+Typische Zielarchitekturen:
+
+- x86
+- x86-64
+- ARM
+- ARM64 beziehungsweise AArch64
+- RISC-V
+- PowerPC
+- System Z beziehungsweise s390x
+- MIPS
+- LoongArch
+- WebAssembly
+- AMDGPU
+- NVIDIA PTX beziehungsweise NVPTX
+
+Das Backend übernimmt unter anderem:
+
+- Auswahl konkreter Maschinenbefehle
+- Registerzuweisung
+- Instruktions-Scheduling
+- Umsetzung von Funktionsaufrufen
+- Einhaltung der ABI
+- Stack-Layout
+- CPU-spezifische Optimierungen
+- Erzeugung von Assemblercode
+- Erzeugung von Objektdateien
+
+** Warum LLVM so wichtig ist
+
+Ohne eine gemeinsame Compiler-Infrastruktur müsste jede Programmiersprache für jede Zielarchitektur ein eigenes Backend entwickeln.
+
+Mit LLVM kann die Architektur vereinfacht werden:
+
+#+begin_example
+C ───────┐
+C++ ─────┤
+Rust ────┤
+Mojo ────┤
+Swift ───┤
+         ↓
+      LLVM-IR
+         ↓
+  LLVM-Optimierungen
+         ↓
+x86-64 / ARM64 / RISC-V / WebAssembly / GPU
+#+end_example
+
+LLVM übernimmt danach einen großen Teil von:
+
+- Optimierung
+- Maschinencodeerzeugung
+- Unterstützung verschiedener CPUs
+- Objektdateierzeugung
+- Debug-Informationen
+
+** Wichtige LLVM-Komponenten und Werkzeuge
+
+*** Clang
+
+=clang= ist das C-, C++- und Objective-C-Frontend des LLVM-Projekts.
+
+#+begin_src sh
+clang programm.c -o programm
+#+end_src
+
+Für C++:
+
+#+begin_src sh
+clang++ programm.cpp -o programm
+#+end_src
+
+*** llvm-as
+
+=llvm-as= übersetzt lesbare LLVM-IR in binären LLVM-Bitcode.
+
+#+begin_src sh
+llvm-as programm.ll -o programm.bc
+#+end_src
+
+*** llvm-dis
+
+=llvm-dis= wandelt LLVM-Bitcode zurück in lesbare LLVM-IR um.
+
+#+begin_src sh
+llvm-dis programm.bc -o programm.ll
+#+end_src
+
+*** opt
+
+=opt= analysiert und optimiert LLVM-IR.
+
+#+begin_src sh
+opt -O2 programm.ll -S -o programm-optimiert.ll
+#+end_src
+
+*** llc
+
+=llc= übersetzt LLVM-IR oder LLVM-Bitcode in Assemblercode oder Objektcode.
+
+#+begin_src sh
+llc programm.ll -o programm.s
+#+end_src
+
+Für eine Objektdatei:
+
+#+begin_src sh
+llc -filetype=obj programm.ll -o programm.o
+#+end_src
+
+*** lld
+
+=lld= ist der Linker aus dem LLVM-Projekt.
+
+Ein Linker verbindet:
+
+- Objektdateien
+- statische Bibliotheken
+- dynamische Bibliotheken
+- Laufzeitbibliotheken
+
+*** LLDB
+
+=lldb= ist der Debugger des LLVM-Projekts.
+
+#+begin_src sh
+lldb ./programm
+#+end_src
+
+*** llvm-objdump
+
+=llvm-objdump= zeigt Informationen aus Objektdateien und ausführbaren Dateien.
+
+#+begin_src sh
+llvm-objdump -d programm
+#+end_src
+
+*** Weitere Werkzeuge
+
+| Werkzeug | Aufgabe |
+|----------------------+-------------------------------------------|
+| =llvm-nm=            | Symbole einer Objektdatei anzeigen        |
+| =llvm-readobj=       | Objektdateiformate untersuchen            |
+| =llvm-readelf=       | ELF-Dateien untersuchen                   |
+| =llvm-ar=            | statische Bibliotheken erstellen          |
+| =llvm-strip=         | Symbole und Debug-Daten entfernen         |
+| =llvm-link=          | mehrere LLVM-Bitcode-Dateien verbinden    |
+| =llvm-cov=           | Code-Coverage auswerten                   |
+| =llvm-profdata=      | Profilinformationen verarbeiten           |
+| =llvm-size=          | Größen von Binärdateibereichen anzeigen   |
+| =llvm-symbolizer=    | Adressen in Symbolnamen umwandeln         |
+
+** Beispiel einer vollständigen LLVM-Kette
+
+Ausgangsprogramm:
+
+#+begin_src c
+#include <stdio.h>
+
+int square(int value) {
+    return value * value;
+}
+
+int main(void) {
+    printf("%d\n", square(7));
+    return 0;
+}
+#+end_src
+
+C nach LLVM-IR übersetzen:
+
+#+begin_src sh
+clang -S -emit-llvm test.c -o test.ll
+#+end_src
+
+LLVM-IR optimieren:
+
+#+begin_src sh
+opt -O3 test.ll -S -o test-opt.ll
+#+end_src
+
+LLVM-IR in Assembler übersetzen:
+
+#+begin_src sh
+llc test-opt.ll -o test.s
+#+end_src
+
+Assembler linken:
+
+#+begin_src sh
+clang test.s -o test
+#+end_src
+
+Programm starten:
+
+#+begin_src sh
+./test
+#+end_src
+
+Ausgabe:
+
+#+begin_example
+49
+#+end_example
+
+** LLVM ist nicht der vollständige Compiler
+
+Bei Rust sieht die Kette vereinfacht so aus:
+
+#+begin_example
+Rust-Quellcode
+   ↓
+Lexer und Parser
+   ↓
+Rust-interne Darstellungen
+   ↓
+Namensauflösung
+   ↓
+Typprüfung
+   ↓
+Borrow Checker
+   ↓
+Monomorphisierung
+   ↓
+LLVM-IR
+   ↓
+LLVM-Optimierungen
+   ↓
+Maschinencode
+   ↓
+Linker
+   ↓
+ausführbares Programm
+#+end_example
+
+LLVM kennt dabei nicht:
+
+- Borrow Checking
+- Lifetimes
+- Traits
+- Cargo
+- Rust-Makros
+- Rust-Module
+- Rust-Sichtbarkeitsregeln
+
+Diese Aufgaben übernimmt =rustc= vor der Übergabe an LLVM.
+
+** LLVM und Optimierungen
+
+*** Konstantenfaltung
+
+Aus:
+
+#+begin_src c
+int value = 10 * 20;
+#+end_src
+
+kann werden:
+
+#+begin_src c
+int value = 200;
+#+end_src
+
+*** Dead-Code-Elimination
+
+Nicht erreichbarer oder wirkungsloser Code kann entfernt werden.
+
+*** Inlining
+
+Ein Funktionsaufruf kann durch den Funktionskörper ersetzt werden.
+
+*** Schleifenoptimierungen
+
+LLVM kann Schleifen unter anderem:
+
+- entrollen
+- vektorisieren
+- vereinfachen
+- zusammenfassen
+- invarianten Code aus der Schleife verschieben
+
+*** Vektorisierung
+
+Skalare Operationen können durch SIMD-Befehle ersetzt werden.
+
+*** Escape- und Alias-Analysen
+
+LLVM untersucht, welche Zeiger auf dieselben Speicherbereiche zeigen könnten.
+
+** Optimierungsstufen
+
+| Stufe | Bedeutung |
+|-------+---------------------------------------------------|
+| =-O0= | kaum Optimierung, meist besser zum Debuggen       |
+| =-O1= | grundlegende Optimierungen                        |
+| =-O2= | starke Optimierung ohne extreme Maßnahmen         |
+| =-O3= | aggressive Optimierung                            |
+| =-Os= | auf geringe Codegröße optimieren                  |
+| =-Oz= | noch stärker auf minimale Codegröße optimieren    |
+
+Beispiel:
+
+#+begin_src sh
+clang -O3 programm.c -o programm
+#+end_src
+
+** LLVM und MLIR
+
+MLIR bedeutet:
+
+#+begin_quote
+Multi-Level Intermediate Representation
+#+end_quote
+
+Eine Compilerkette kann beispielsweise so aussehen:
+
+#+begin_example
+Mojo-Quellcode
+   ↓
+hochsprachliche MLIR-Darstellung
+   ↓
+Tensor-Darstellung
+   ↓
+Schleifen-Darstellung
+   ↓
+Parallelitäts-Darstellung
+   ↓
+GPU-Darstellung
+   ↓
+niedrigere MLIR-Darstellung
+   ↓
+LLVM-Dialekt
+   ↓
+LLVM-IR
+   ↓
+Maschinencode
+#+end_example
+
+Solange der Compiler weiß, dass eine Operation beispielsweise eine Matrixmultiplikation ist, kann er sie gezielt optimieren:
+
+- Aufteilung in Blöcke
+- Vektorisierung
+- Parallelisierung
+- GPU-Ausführung
+- Nutzung spezieller Tensor-Einheiten
+- Anpassung an Cachegrößen
+
+*** MLIR-Dialekte
+
+Beispiele:
+
+- =arith= für arithmetische Operationen
+- =func= für Funktionen
+- =scf= für strukturierte Kontrollflüsse
+- =affine= für affine Schleifen und Speicherzugriffe
+- =gpu= für GPU-Ausführung
+- =vector= für Vektoroperationen
+- =llvm= für LLVM-nahe Operationen
+- =tensor= für Tensoren
+- =memref= für Speicherreferenzen
+- =linalg= für lineare Algebra
+
+Die schrittweise Umwandlung in niedrigere Darstellungen heißt *Lowering*.
+
+** Ist LLVM eine virtuelle Maschine?
+
+Ursprünglich stand LLVM für:
+
+#+begin_quote
+Low Level Virtual Machine
+#+end_quote
+
+LLVM ist normalerweise keine virtuelle Maschine wie:
+
+- Java Virtual Machine
+- .NET Common Language Runtime
+- WebAssembly-Runtime
+- QEMU
+
+LLVM dient hauptsächlich dazu, Programme zu analysieren, zu optimieren und in nativen Maschinencode zu übersetzen.
+
+LLVM kann allerdings auch Just-in-time-Kompilierung ermöglichen.
+
+** Ahead-of-time- und Just-in-time-Kompilierung
+
+*** Ahead-of-time-Kompilierung
+
+#+begin_example
+Quellcode
+   ↓
+Compiler
+   ↓
+fertige Binärdatei
+   ↓
+späterer Programmstart
+#+end_example
+
+*** Just-in-time-Kompilierung
+
+#+begin_example
+Programm oder Bytecode
+   ↓
+laufende JIT-Engine
+   ↓
+Maschinencode wird bei Bedarf erzeugt
+   ↓
+direkte Ausführung
+#+end_example
+
+LLVM besitzt dafür unter anderem ORC JIT.
+
+JIT-Kompilierung wird beispielsweise verwendet bei:
+
+- dynamischen Programmiersprachen
+- Datenbankabfragen
+- numerischen Kerneln
+- Shadern
+- Emulatoren
+- Laufzeit-Spezialisierung
+
+** LLVM gegenüber GCC
+
+GCC bedeutet:
+
+#+begin_quote
+GNU Compiler Collection
+#+end_quote
+
+Vereinfacht:
+
+#+begin_example
+GCC:
+Sprachfrontend + GCC-interne IR + Optimierer + Backend
+
+LLVM:
+Frontend wie Clang + LLVM-IR + LLVM-Optimierer + LLVM-Backend
+#+end_example
+
+| Bereich | GCC | LLVM/Clang |
+|----------------------+----------------------------------+----------------------------------|
+| C-Frontend           | GCC                              | Clang                            |
+| C++-Frontend         | G++                              | Clang++                          |
+| interne Darstellung | GCC-eigene Darstellungen         | LLVM-IR                          |
+| Modularität          | historisch stärker monolithisch  | stark bibliotheksorientiert      |
+| Fehlermeldungen      | inzwischen gut                   | oft besonders verständlich      |
+| Erweiterbarkeit      | möglich                          | häufig gut über Bibliotheken     |
+| Lizenz               | GPL                              | Apache-2.0 mit LLVM-Ausnahmen    |
+| Linker               | häufig GNU ld oder gold          | häufig LLD                       |
+| Debugger             | GDB                              | LLDB                             |
+
+** LLVM gegenüber einer virtuellen Maschine
+
+| Eigenschaft | LLVM-IR | JVM-Bytecode |
+|---------------------------+----------------------------------+---------------------------------|
+| Hauptzweck                | Compileroptimierung und Codegen  | portable Laufzeitausführung     |
+| Typisches Ausführungsmodell | AOT oder JIT                  | normalerweise VM mit JIT        |
+| Abstraktionsebene         | relativ niedrig                  | stärker laufzeitorientiert      |
+| Speicherverwaltung       | keine vorgeschriebene GC         | normalerweise Garbage Collector |
+| Ziel                     | nativer Maschinencode             | JVM-Laufzeitumgebung             |
+
+** Verwendung von LLVM durch verschiedene Sprachen
+
+*** C
+
+#+begin_example
+C
+ ↓
+Clang
+ ↓
+LLVM-IR
+ ↓
+LLVM
+ ↓
+Maschinencode
+#+end_example
+
+*** C++
+
+#+begin_example
+C++
+ ↓
+Clang++
+ ↓
+LLVM-IR
+ ↓
+LLVM
+ ↓
+Maschinencode
+#+end_example
+
+*** Rust
+
+#+begin_example
+Rust
+ ↓
+rustc-Frontend
+ ↓
+Rust-interne IR
+ ↓
+MIR
+ ↓
+LLVM-IR
+ ↓
+LLVM
+ ↓
+Maschinencode
+#+end_example
+
+MIR bedeutet:
+
+#+begin_quote
+Mid-level Intermediate Representation
+#+end_quote
+
+*** Zig
+
+#+begin_example
+Zig
+ ↓
+Zig-Frontend
+ ↓
+Zig-interne Darstellungen
+ ↓
+LLVM oder eigenes Backend
+ ↓
+Maschinencode
+#+end_example
+
+Zig kann auch als C- und C++-Toolchain verwendet werden:
+
+#+begin_src sh
+zig cc programm.c -o programm
+#+end_src
+
+*** Mojo
+
+#+begin_example
+Mojo
+ ↓
+Mojo-Frontend
+ ↓
+MLIR-Dialekte
+ ↓
+weitere Lowering-Schritte
+ ↓
+LLVM-Dialekt
+ ↓
+LLVM-IR
+ ↓
+LLVM-Backend
+ ↓
+CPU- oder GPU-Code
+#+end_example
+
+** LLVM und Cross-Compilation
+
+LLVM kann Code für eine andere Architektur erzeugen als diejenige, auf der der Compiler läuft.
+
+Beispiel:
+
+#+begin_example
+Compiler läuft auf:
+x86-64-Linux
+
+erzeugtes Ziel:
+ARM64-Linux
+#+end_example
+
+Clang-Beispiel:
+
+#+begin_src sh
+clang \
+  --target=aarch64-linux-gnu \
+  programm.c \
+  -c \
+  -o programm.o
+#+end_src
+
+Zusätzlich können erforderlich sein:
+
+- Zielsystem-Header
+- Zielsystem-Bibliotheken
+- passende C-Laufzeit
+- Sysroot
+- passender Linker
+- Betriebssystem-SDK
+- ABI-Informationen
+
+** Target Triple
+
+Beispiel:
+
+#+begin_example
+x86_64-unknown-linux-gnu
+#+end_example
+
+Typischer Aufbau:
+
+#+begin_example
+Architektur-Hersteller-Betriebssystem-ABI
+#+end_example
+
+Weitere Beispiele:
+
+#+begin_example
+aarch64-unknown-linux-gnu
+aarch64-unknown-linux-musl
+x86_64-pc-windows-msvc
+x86_64-pc-windows-gnu
+aarch64-apple-darwin
+wasm32-wasi
+riscv64-unknown-linux-gnu
+#+end_example
+
+** LLVM und ABI
+
+ABI bedeutet:
+
+#+begin_quote
+Application Binary Interface
+#+end_quote
+
+Eine ABI legt fest:
+
+- Übergabe von Funktionsargumenten
+- Rückgabewerte
+- verwendete Register
+- Stack-Ausrichtung
+- Namensdarstellung
+- Struktur-Layout
+- Aufrufkonventionen
+- Behandlung von Exceptions
+- Binärformat
+
+** LLVM und Linker
+
+#+begin_example
+Quelldatei 1
+   ↓
+Objektdatei 1
+
+Quelldatei 2
+   ↓
+Objektdatei 2
+
+Bibliotheken
+   ↓
+
+Linker
+   ↓
+fertiges Programm
+#+end_example
+
+Mögliche Linker:
+
+- LLD
+- GNU ld
+- GNU gold
+- mold
+- Microsoft Linker
+- Apple ld
+
+** LLVM und Objektdateiformate
+
+| Format | Typische Betriebssysteme |
+|---------+--------------------------------------|
+| ELF     | Linux, BSD, Solaris und viele andere |
+| PE/COFF | Windows                              |
+| Mach-O  | macOS und andere Apple-Systeme       |
+| Wasm    | WebAssembly                          |
+
+** LLVM und Debug-Informationen
+
+Typische Debug-Formate:
+
+- DWARF auf Linux und vielen Unix-Systemen
+- CodeView beziehungsweise PDB unter Windows
+
+Kompilieren mit Debug-Informationen:
+
+#+begin_src sh
+clang -g programm.c -o programm
+#+end_src
+
+** LLVM und Sanitizer
+
+*** AddressSanitizer
+
+#+begin_src sh
+clang \
+  -fsanitize=address \
+  -g \
+  programm.c \
+  -o programm
+#+end_src
+
+Findet unter anderem:
+
+- Zugriffe außerhalb von Puffern
+- Use-after-free
+- bestimmte Stackfehler
+
+*** UndefinedBehaviorSanitizer
+
+#+begin_src sh
+clang \
+  -fsanitize=undefined \
+  -g \
+  programm.c \
+  -o programm
+#+end_src
+
+*** ThreadSanitizer
+
+#+begin_src sh
+clang \
+  -fsanitize=thread \
+  -g \
+  programm.c \
+  -o programm
+#+end_src
+
+** LLVM und Link-Time Optimization
+
+#+begin_example
+a.c ─┐
+     ├→ gemeinsame Optimierung → Programm
+b.c ─┘
+#+end_example
+
+Beispiel:
+
+#+begin_src sh
+clang \
+  -O3 \
+  -flto \
+  a.c \
+  b.c \
+  -o programm
+#+end_src
+
+** LLVM und Profile-Guided Optimization
+
+#+begin_example
+Quellcode
+   ↓
+instrumentierte Version
+   ↓
+typische Programmausführung
+   ↓
+Profilinformationen
+   ↓
+erneute Übersetzung
+   ↓
+optimierte Version
+#+end_example
+
+PGO kann dem Compiler zeigen:
+
+- welche Funktionen häufig aufgerufen werden
+- welche Verzweigungen meistens genommen werden
+- welche Schleifen besonders wichtig sind
+- welche Codepfade selten sind
+
+** LLVM und GPUs
+
+Wichtige GPU-Backends:
+
+- AMDGPU
+- NVPTX
+
+Eine mögliche Kette:
+
+#+begin_example
+Hochsprache
+   ↓
+GPU-Zwischendarstellung
+   ↓
+LLVM-IR
+   ↓
+AMDGPU- oder NVPTX-Backend
+   ↓
+GPU-Code
+#+end_example
+
+LLVM allein ersetzt nicht:
+
+- CUDA
+- ROCm
+- HIP
+- Metal
+- OpenCL
+- Vulkan
+
+** Grenzen von LLVM
+
+LLVM stellt nicht automatisch bereit:
+
+- Parser für eine neue Sprache
+- Typsystem einer Sprache
+- Borrow Checker
+- Paketmanager
+- Build-System
+- Standardbibliothek
+- Garbage Collector
+- Sprachserver
+- vollständige Betriebssystem-SDKs
+- Anwendungsframeworks
+- automatische Programmsicherheit
+
+Wer eine eigene Sprache mit LLVM entwickelt, muss typischerweise selbst bauen:
+
+- Lexer
+- Parser
+- AST
+- Namensauflösung
+- Typprüfung
+- Fehlermeldungen
+- Laufzeitbibliothek
+- Standardbibliothek
+- Sprachwerkzeuge
+- Übersetzung nach LLVM-IR oder MLIR
+
+** Kann man eine eigene Sprache mit LLVM bauen?
+
+Ja.
+
+#+begin_example
+eigene Sprache
+   ↓
+Lexer
+   ↓
+Parser
+   ↓
+AST
+   ↓
+Typprüfung
+   ↓
+eigene Zwischenrepräsentation
+   ↓
+LLVM-IR
+   ↓
+LLVM-Optimierungen
+   ↓
+Maschinencode
+#+end_example
+
+*** Lexer
+
+Aus:
+
+#+begin_src text
+result = 10 + 20
+#+end_src
+
+können Tokens werden:
+
+#+begin_example
+IDENTIFIER(result)
+EQUALS
+INTEGER(10)
+PLUS
+INTEGER(20)
+#+end_example
+
+*** Parser und AST
+
+Mögliche Struktur:
+
+#+begin_example
+Assignment
+├── Name: result
+└── Add
+    ├── Integer: 10
+    └── Integer: 20
+#+end_example
+
+AST bedeutet:
+
+#+begin_quote
+Abstract Syntax Tree
+#+end_quote
+
+*** LLVM-IR-Erzeugung
+
+#+begin_src llvm
+%result = add i32 10, 20
+#+end_src
+
+** LLVM als Bibliothek
+
+LLVM ist nicht nur eine Sammlung von Kommandozeilenprogrammen.
+
+Ein eigener Compiler kann LLVM verwenden, um:
+
+- Module anzulegen
+- Funktionen zu erzeugen
+- Basic Blocks zu erstellen
+- Instruktionen einzufügen
+- Optimierungspässe auszuführen
+- Objektdateien zu erzeugen
+- JIT-Code auszuführen
+
+LLVM besitzt hauptsächlich eine C++-API, außerdem eine C-API und Bindings für andere Sprachen.
+
+** LLVM-Versionen und Kompatibilität
+
+Zwischen Versionen können sich ändern:
+
+- C++-APIs
+- Optimierungspässe
+- Kommandozeilenoptionen
+- IR-Details
+- Standardverhalten
+- unterstützte Zielplattformen
+
+LLVM-Bitcode ist nicht zwingend als langfristig stabiles Austauschformat zwischen beliebigen LLVM-Versionen gedacht.
+
+** Praktische Befehle zum Ausprobieren
+
+LLVM-Version anzeigen:
+
+#+begin_src sh
+clang --version
+#+end_src
+
+#+begin_src sh
+llvm-config --version
+#+end_src
+
+C-Code als LLVM-IR ausgeben:
+
+#+begin_src sh
+clang \
+  -S \
+  -emit-llvm \
+  programm.c \
+  -o programm.ll
+#+end_src
+
+Optimierte LLVM-IR ausgeben:
+
+#+begin_src sh
+clang \
+  -O3 \
+  -S \
+  -emit-llvm \
+  programm.c \
+  -o programm-O3.ll
+#+end_src
+
+Assemblercode erzeugen:
+
+#+begin_src sh
+clang \
+  -O3 \
+  -S \
+  programm.c \
+  -o programm.s
+#+end_src
+
+Objektdatei erzeugen:
+
+#+begin_src sh
+clang \
+  -O3 \
+  -c \
+  programm.c \
+  -o programm.o
+#+end_src
+
+Maschinencode disassemblieren:
+
+#+begin_src sh
+llvm-objdump \
+  -d \
+  programm.o
+#+end_src
+
+** Ein kleines Experiment
+
+Erstelle die Datei =optimierung.c=:
+
+#+begin_src c
+int calculate(void) {
+    int a = 10;
+    int b = 20;
+    int result = a * b;
+
+    if (0) {
+        result = 999;
+    }
+
+    return result;
+}
+#+end_src
+
+Unoptimierte LLVM-IR erzeugen:
+
+#+begin_src sh
+clang \
+  -O0 \
+  -S \
+  -emit-llvm \
+  optimierung.c \
+  -o optimierung-O0.ll
+#+end_src
+
+Optimierte LLVM-IR erzeugen:
+
+#+begin_src sh
+clang \
+  -O3 \
+  -S \
+  -emit-llvm \
+  optimierung.c \
+  -o optimierung-O3.ll
+#+end_src
+
+Vergleichen:
+
+#+begin_src sh
+diff -u \
+  optimierung-O0.ll \
+  optimierung-O3.ll
+#+end_src
+
+Die optimierte Funktion kann im Wesentlichen auf Folgendes reduziert werden:
+
+#+begin_src llvm
+define i32 @calculate() {
+  ret i32 200
+}
+#+end_src
+
+** Kurzer Vergleich der Begriffe
+
+| Begriff | Bedeutung |
+|-------------------+---------------------------------------------------|
+| Compiler           | übersetzt Programme                               |
+| Frontend           | versteht eine konkrete Programmiersprache         |
+| AST                | abstrakter Syntaxbaum                             |
+| IR                 | Zwischendarstellung                               |
+| LLVM-IR            | relativ niedrige LLVM-Zwischendarstellung         |
+| MLIR               | Infrastruktur für mehrere Abstraktionsebenen      |
+| Optimierungspass   | analysiert oder verändert die Zwischendarstellung |
+| Backend            | erzeugt Code für eine Zielarchitektur             |
+| Assembler          | übersetzt Assemblersprache in Maschinencode        |
+| Linker             | verbindet Objektdateien und Bibliotheken          |
+| JIT                | kompiliert während der Programmausführung         |
+| AOT                | kompiliert vor der Programmausführung              |
+| ABI                | Regeln für binäre Zusammenarbeit                   |
+| Target Triple      | Beschreibung der Zielplattform                    |
+
+** Zusammenfassung
+
+Eine typische LLVM-Kette lautet:
+
+#+begin_example
+Quellcode
+   ↓
+sprachspezifisches Frontend
+   ↓
+LLVM-IR
+   ↓
+Analysen und Optimierungen
+   ↓
+Backend
+   ↓
+Maschinencode
+   ↓
+Linker
+   ↓
+ausführbares Programm
+#+end_example
+
+Die wichtigsten Punkte:
+
+1. LLVM ist kein einzelner Compiler.
+2. Clang ist das C- und C++-Frontend aus dem LLVM-Projekt.
+3. LLVM-IR ist eine gemeinsame, relativ niedrige Zwischendarstellung.
+4. LLVM kann Code für viele CPUs und Betriebssystemplattformen erzeugen.
+5. Rust verwendet LLVM als wichtigstes Standard-Backend.
+6. Zig verwendet LLVM für viele Backends, entwickelt aber zusätzlich eigene Compilerkomponenten.
+7. Mojo verwendet MLIR und LLVM besonders intensiv.
+8. MLIR erhält höherwertige Strukturen wie Tensoren, Schleifen und GPU-Operationen länger im Compiler.
+9. LLVM ist normalerweise keine virtuelle Maschine wie JVM oder .NET CLR.
+10. LLVM übernimmt nicht die sprachspezifischen Aufgaben wie Parsing, Typprüfung, Borrow Checking oder Paketverwaltung.
+
+Kurz formuliert:
+
+#+begin_quote
+Das Frontend versteht die Programmiersprache.
+
+LLVM optimiert die daraus erzeugte Zwischendarstellung.
+
+Das Backend erzeugt Maschinencode für die gewünschte Architektur.
+#+end_quote
+
+Oder noch kürzer:
+
+#+begin_quote
+Clang versteht C und C++.
+
+rustc versteht Rust.
+
+Der Mojo-Compiler versteht Mojo.
+
+LLVM hilft ihnen anschließend beim Optimieren und Erzeugen von Maschinencode.
+#+end_quote
