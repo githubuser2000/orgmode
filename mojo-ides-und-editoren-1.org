@@ -1,0 +1,838 @@
+#+TITLE: IDEs und Editoren für Mojo
+#+SUBTITLE: Offizielle Unterstützung, Community-Lösungen und Einrichtung
+#+DATE: 2026-07-23
+#+LANGUAGE: de
+#+OPTIONS: toc:3 num:t
+#+STARTUP: overview
+#+PROPERTY: header-args :exports code
+
+* Kurzantwort
+
+Die derzeit beste und vollständigste Entwicklungsumgebung für Mojo ist:
+
+#+begin_quote
+Visual Studio Code mit der offiziellen Erweiterung
+=modular-mojotools.vscode-mojo=
+#+end_quote
+
+Die offizielle Erweiterung funktioniert außerdem in vielen Editoren, die auf
+Visual Studio Code beziehungsweise Code-OSS beruhen und VS-Code-Erweiterungen
+unterstützen. Modular nennt insbesondere Cursor.
+
+Helix besitzt mittlerweile eingebaute Mojo-Unterstützung. Emacs, Doom Emacs
+und Neovim können Mojo über den Mojo-Language-Server verwenden, benötigen aber
+mehr manuelle Konfiguration. JupyterLab unterstützt interaktive Mojo-Zellen.
+
+* Übersicht
+
+| IDE oder Editor | Mojo-Unterstützung | Herkunft | LSP | Debugger | Empfehlung |
+|--------------------------+--------------------------+----------------------+-----+----------+----------------------------|
+| Visual Studio Code       | sehr vollständig         | offiziell von Modular| ja  | ja       | beste allgemeine Wahl      |
+| Cursor                   | sehr vollständig         | offizielle VS-Code-Erweiterung | ja | ja | sehr gute Wahl |
+| VSCodium / Code-OSS      | gut bis sehr vollständig | offizielle Erweiterung über Open VSX oder VSIX | ja | meist | gute freie Alternative |
+| andere VS-Code-Ableger   | abhängig vom Ableger     | offizielle Erweiterung | meist | abhängig | grundsätzlich geeignet |
+| Helix                    | gut                      | eingebaut/community   | ja  | begrenzt | beste Terminal-Standardlösung |
+| Neovim                   | gut nach Einrichtung     | community/manuell     | ja  | manuell  | gut für Neovim-Nutzer      |
+| Emacs                    | gut nach Einrichtung     | community/manuell     | ja  | manuell  | gut für Emacs-Nutzer       |
+| Doom Emacs               | gut nach Einrichtung     | community/manuell     | ja  | manuell  | gut für Doom-Nutzer        |
+| JupyterLab               | gut für Experimente      | offiziell dokumentiert| nicht wie normale IDE | nein | gut für Notebooks |
+| JetBrains-IDEs           | eingeschränkt/veraltet  | Community-Plugin      | teilweise | nein | derzeit nicht erste Wahl |
+| Vim                      | hauptsächlich Text/Syntax| manuell/community     | möglich | manuell | nur für erfahrene Nutzer |
+| Sublime Text             | manuell möglich         | generischer LSP       | möglich | nein | keine etablierte Mojo-Lösung |
+| Zed                      | derzeit keine etablierte offizielle Erweiterung | eventuell selbst konfigurierbar | theoretisch | abhängig | nicht erste Wahl |
+
+* Was bedeutet „Mojo beherrschen“?
+
+Es gibt mehrere Stufen der Sprachunterstützung.
+
+** Stufe 1: reine Textbearbeitung
+
+Der Editor erkennt lediglich Dateien mit der Endung =.mojo=.
+
+Mögliche Funktionen:
+
+- Einrückung
+- Kommentare
+- Klammerpaare
+- grundlegende Syntaxfarben
+
+Das ist noch keine vollständige IDE-Unterstützung.
+
+** Stufe 2: Syntaxparser
+
+Ein TextMate- oder Tree-sitter-Parser erkennt die syntaktische Struktur.
+
+Zusätzliche Funktionen:
+
+- genauere Syntaxhervorhebung
+- Code-Faltung
+- strukturelle Navigation
+- teilweise automatische Einrückung
+
+** Stufe 3: Language Server Protocol
+
+Der Editor startet =mojo-lsp-server= und erhält semantische Informationen.
+
+Mögliche Funktionen:
+
+- Codevervollständigung
+- Fehlermeldungen während des Tippens
+- Hover-Dokumentation
+- Signaturhilfe
+- Symbolnavigation
+- Quick Fixes
+- Formatierung
+- Finden von Deklarationen
+
+** Stufe 4: vollständige IDE-Integration
+
+Zusätzlich zum LSP werden Mojo-spezifische Befehle und Debugger integriert.
+
+Beispiele:
+
+- aktuelle Datei starten
+- Breakpoints setzen
+- Variablen betrachten
+- Mojo-SDK automatisch erkennen
+- Umgebungen auswählen
+- Format on Save
+- Mojo-Befehle in der Befehlspalette
+
+Diese Stufe bietet gegenwärtig vor allem die offizielle VS-Code-Erweiterung.
+
+* Visual Studio Code
+
+** Status
+
+Visual Studio Code besitzt die vollständigste offizielle Mojo-Unterstützung.
+
+Die Erweiterung stammt direkt vom Modular-Team:
+
+#+begin_example
+modular-mojotools.vscode-mojo
+#+end_example
+
+** Unterstützte Funktionen
+
+Die offizielle Erweiterung bietet unter anderem:
+
+- Syntaxhervorhebung für =.mojo=-Dateien
+- Codevervollständigung
+- Signaturhilfe
+- semantische Diagnosen
+- Quick Fixes
+- Hover-Dokumentation
+- Navigation zu Symbolen
+- Outline-Ansicht
+- Formatierung
+- Formatierung beim Speichern
+- Ausführung einer Mojo-Datei
+- LLDB-basierte Debugger-Integration
+- LSP-Unterstützung in Codeblöcken von Docstrings
+- automatische Erkennung installierter Mojo-SDKs
+- Auswahl eines bestimmten Mojo-SDKs pro Projekt
+
+** Installation über die Oberfläche
+
+1. Visual Studio Code öffnen.
+2. Die Erweiterungsansicht öffnen.
+3. Nach =Mojo= suchen.
+4. Darauf achten, dass der Herausgeber Modular ist.
+5. Die Erweiterung installieren.
+
+** Installation über die Kommandozeile
+
+#+begin_src sh
+code --install-extension modular-mojotools.vscode-mojo
+#+end_src
+
+** SDK aus einer virtuellen Python-Umgebung verwenden
+
+Bei einer mit =uv= erzeugten Umgebung kann der Pfad ausdrücklich eingetragen
+werden.
+
+Beispiel für =.vscode/settings.json=:
+
+#+begin_src json
+{
+  "mojo.sdk.path": "/root/mojo/.venv",
+  "[mojo]": {
+    "editor.defaultFormatter": "modular-mojotools.vscode-mojo",
+    "editor.formatOnSave": true
+  }
+}
+#+end_src
+
+Der Wert von =mojo.sdk.path= soll auf das Wurzelverzeichnis der Umgebung
+zeigen, nicht direkt auf die ausführbare Datei =bin/mojo=.
+
+Für eine Benutzerinstallation könnte der Pfad beispielsweise so aussehen:
+
+#+begin_src json
+{
+  "mojo.sdk.path": "/home/alex/mojo/.venv"
+}
+#+end_src
+
+** SDK automatisch erkennen lassen
+
+Die Erweiterung sucht das SDK unter anderem über:
+
+- eine explizite Einstellung =mojo.sdk.path=
+- eine SDK-Struktur innerhalb eines Modular-Monorepositorys
+- die von der Python-Erweiterung gewählte Python-Umgebung
+- Pixi-, Conda- oder Wheel-Umgebungen
+
+Wird das falsche SDK gefunden, kann in der Befehlspalette zunächst Folgendes
+ausgeführt werden:
+
+#+begin_example
+Python: Select Interpreter
+#+end_example
+
+Danach wird die Umgebung ausgewählt, in der Mojo installiert ist.
+
+** Urteil
+
+#+begin_quote
+Visual Studio Code ist die erste Wahl, wenn möglichst viel ohne manuelle
+Konfiguration funktionieren soll.
+#+end_quote
+
+* Cursor und andere VS-Code-Ableger
+
+** Cursor
+
+Modular nennt Cursor ausdrücklich als unterstützten Editor für die offizielle
+Mojo-Erweiterung.
+
+Die Erweiterung kann je nach Cursor-Version über den Erweiterungsdialog oder
+über Open VSX installiert werden.
+
+Suche nach:
+
+#+begin_example
+Mojo
+Herausgeber: Modular
+#+end_example
+
+Cursor erhält damit im Wesentlichen dieselben Mojo-Funktionen wie VS Code:
+
+- Syntaxhervorhebung
+- LSP
+- Vervollständigung
+- Diagnosen
+- Hover
+- Formatierung
+- Ausführung
+- möglicherweise Debugger-Integration
+
+** VSCodium und Code-OSS
+
+VSCodium und andere Code-OSS-Versionen verwenden häufig Open VSX statt des
+Microsoft Marketplace.
+
+Die offizielle Mojo-Erweiterung wird ebenfalls über Open VSX angeboten.
+
+Je nach Distribution kann man:
+
+1. im Erweiterungsdialog nach =Mojo= suchen;
+2. die Erweiterung aus Open VSX installieren;
+3. eine =.vsix=-Datei manuell installieren.
+
+Manuelle VSIX-Installation:
+
+#+begin_src sh
+codium --install-extension datei.vsix
+#+end_src
+
+** Windsurf und weitere Ableger
+
+Andere VS-Code-kompatible Editoren können die Erweiterung grundsätzlich
+verwenden, sofern sie:
+
+- VS-Code-Erweiterungen unterstützen;
+- Zugriff auf den Marketplace oder Open VSX besitzen;
+- die benötigten VS-Code-APIs implementieren;
+- lokale Prozesse wie den Mojo-LSP starten dürfen.
+
+Nicht jeder Ableger garantiert vollständige Debugger- oder SDK-Erkennung.
+Syntax, LSP und Formatierung funktionieren meist eher als komplexere
+Debugger-Funktionen.
+
+* Helix
+
+** Status
+
+Helix besitzt Mojo als eingebaute Sprache. In den offiziellen
+Helix-Änderungsprotokollen wird Mojo als hinzugefügte Sprache geführt.
+Später wurden auch Language-Server- und Formatter-Konfigurationen aktualisiert.
+
+Helix bietet damit ohne ein großes Plugin-System:
+
+- Erkennung von =.mojo=-Dateien
+- Tree-sitter-Syntaxhervorhebung
+- LSP-Anbindung
+- Formatierung
+- strukturelle Navigation
+- Terminal-basierte Bedienung
+
+** Installation prüfen
+
+#+begin_src sh
+hx --health mojo
+#+end_src
+
+Die Ausgabe zeigt, ob folgende Bestandteile gefunden werden:
+
+- Mojo-Language-Server
+- Formatter
+- Tree-sitter-Grammatik
+- Debug-Adapter, sofern vorhanden
+
+** Mojo-Werkzeuge prüfen
+
+#+begin_src sh
+command -v mojo
+command -v mojo-lsp-server
+mojo --version
+#+end_src
+
+** Vorteil von Helix
+
+Helix benötigt für viele Sprachen keine separate Plugin-Sammlung. Die
+Sprachkonfiguration gehört zum Editor beziehungsweise dessen Runtime-Dateien.
+
+** Einschränkung
+
+Die Mojo-Integration wird nicht vom Modular-Team gepflegt. Die
+Debugger-Integration ist nicht so vollständig und komfortabel wie in VS Code.
+
+** Urteil
+
+#+begin_quote
+Helix ist die beste einfache Terminal-Lösung für Mojo, sofern die installierte
+Helix-Version aktuell ist und den Mojo-LSP findet.
+#+end_quote
+
+* Neovim
+
+** Status
+
+Neovim besitzt keinen offiziellen Mojo-Plugin-Stack vom Modular-Team.
+
+Mojo kann trotzdem gut verwendet werden durch:
+
+- Neovims eingebauten LSP-Client
+- =mojo-lsp-server=
+- eine Mojo-Tree-sitter-Grammatik
+- manuelle Dateityperkennung
+- einen Terminalbefehl für =mojo run=
+- optional eine DAP-/LLDB-Konfiguration
+
+** Voraussetzungen prüfen
+
+#+begin_src sh
+command -v nvim
+command -v mojo
+command -v mojo-lsp-server
+#+end_src
+
+** Minimale Dateityperkennung
+
+In =~/.config/nvim/init.lua=:
+
+#+begin_src lua
+vim.filetype.add({
+  extension = {
+    mojo = "mojo",
+  },
+})
+#+end_src
+
+** Minimaler LSP-Start für aktuelles Neovim
+
+Für Neovim-Versionen mit =vim.lsp.config()= und =vim.lsp.enable()=:
+
+#+begin_src lua
+vim.lsp.config("mojo", {
+  cmd = { "mojo-lsp-server" },
+  filetypes = { "mojo" },
+  root_markers = {
+    "pixi.toml",
+    "pyproject.toml",
+    ".git",
+  },
+})
+
+vim.lsp.enable("mojo")
+#+end_src
+
+Falls =mojo-lsp-server= nicht im normalen =PATH= liegt, kann der absolute Pfad
+verwendet werden:
+
+#+begin_src lua
+vim.lsp.config("mojo", {
+  cmd = {
+    "/home/alex/mojo/.venv/bin/mojo-lsp-server",
+  },
+  filetypes = { "mojo" },
+  root_markers = {
+    "pixi.toml",
+    "pyproject.toml",
+    ".git",
+  },
+})
+
+vim.lsp.enable("mojo")
+#+end_src
+
+** Mojo-Datei aus Neovim starten
+
+#+begin_src lua
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "mojo",
+  callback = function()
+    vim.keymap.set(
+      "n",
+      "<leader>mr",
+      function()
+        vim.cmd("split | terminal mojo run " .. vim.fn.shellescape(vim.fn.expand("%:p")))
+      end,
+      {
+        buffer = true,
+        desc = "Mojo-Datei ausführen",
+      }
+    )
+  end,
+})
+#+end_src
+
+** Syntaxhervorhebung
+
+Es existieren Community-Grammatiken wie =tree-sitter-mojo=. Deren
+Kompatibilität mit der aktuellen Mojo-Syntax und der jeweiligen
+=nvim-treesitter=-Generation muss geprüft werden.
+
+Als grober Übergang kann eine =.mojo=-Datei wie Python hervorgehoben werden.
+Das ist aber semantisch ungenau, weil Mojo eigene Schlüsselwörter,
+Eigentumsregeln, Typausdrücke und Compile-Time-Konstrukte besitzt.
+
+** Debugging
+
+Debugging kann über LLDB und =nvim-dap= eingerichtet werden. Dies ist jedoch
+keine offizielle Mojo-Neovim-Integration und benötigt eine eigene
+Startkonfiguration.
+
+** Urteil
+
+#+begin_quote
+Neovim ist für Mojo gut geeignet, wenn der Nutzer LSP, Tree-sitter und
+Debugger selbst konfigurieren möchte. Es ist nicht so sofort einsatzbereit wie
+VS Code oder Helix.
+#+end_quote
+
+* Emacs und Doom Emacs
+
+** Status
+
+Für Emacs gibt es keine offizielle Mojo-Erweiterung von Modular.
+
+Mojo kann dennoch über einen generischen Major Mode und einen LSP-Client
+verwendet werden.
+
+Mögliche LSP-Clients:
+
+- Eglot
+- lsp-mode
+- lsp-bridge
+
+=lsp-bridge= führt Mojo ausdrücklich in seiner Liste unterstützter
+Language-Server-Konfigurationen.
+
+** Ein einfacher eigener Mojo-Mode
+
+Diese Konfiguration kann in normales Emacs oder in Doom Emacs übernommen
+werden.
+
+Für Doom Emacs gehört sie typischerweise nach:
+
+#+begin_example
+~/.config/doom/config.el
+#+end_example
+
+Konfiguration:
+
+#+begin_src emacs-lisp
+(define-derived-mode mojo-mode python-mode "Mojo"
+  "Ein einfacher Major Mode für die Programmiersprache Mojo."
+  (setq-local comment-start "#")
+  (setq-local comment-end "")
+  (setq-local indent-tabs-mode nil)
+  (setq-local tab-width 4))
+
+(add-to-list 'auto-mode-alist '("\\.mojo\\'" . mojo-mode))
+
+(with-eval-after-load 'eglot
+  (add-to-list
+   'eglot-server-programs
+   '(mojo-mode . ("mojo-lsp-server"))))
+
+(add-hook 'mojo-mode-hook #'eglot-ensure)
+#+end_src
+
+Danach Doom Emacs neu synchronisieren und starten:
+
+#+begin_src sh
+doom sync
+#+end_src
+
+** Absoluten LSP-Pfad verwenden
+
+Liegt Mojo in einer =uv=-Umgebung, kann der vollständige Pfad eingetragen
+werden:
+
+#+begin_src emacs-lisp
+(with-eval-after-load 'eglot
+  (add-to-list
+   'eglot-server-programs
+   '(mojo-mode
+     . ("/home/alex/mojo/.venv/bin/mojo-lsp-server"))))
+#+end_src
+
+** Mojo aus Emacs starten
+
+Eine einfache interaktive Funktion:
+
+#+begin_src emacs-lisp
+(defun mojo-run-current-file ()
+  "Führe die aktuelle Mojo-Datei mit `mojo run` aus."
+  (interactive)
+  (unless buffer-file-name
+    (user-error "Der aktuelle Puffer besitzt keine Datei"))
+  (save-buffer)
+  (compile
+   (format
+    "mojo run %s"
+    (shell-quote-argument buffer-file-name))))
+
+(define-key mojo-mode-map
+            (kbd "C-c C-r")
+            #'mojo-run-current-file)
+#+end_src
+
+** Grenzen dieses einfachen Modes
+
+Der Mode erbt seine Syntaxgrundlage von =python-mode=. Dadurch funktionieren:
+
+- Einrückung
+- Kommentare
+- viele grundlegende Farben
+- Navigation
+- Eglot-LSP-Funktionen
+
+Nicht exakt abgebildet werden möglicherweise:
+
+- Mojo-spezifische Schlüsselwörter
+- Traits
+- Ownership- und Argumentkonventionen
+- =comptime=-Konstrukte
+- spezielle Typausdrücke
+- neue Sprachmerkmale
+
+Der Language Server gleicht einen Teil dieser Schwächen durch semantische
+Diagnosen und Vervollständigung aus.
+
+** Doom-Emacs-Urteil
+
+#+begin_quote
+Doom Emacs kann Mojo brauchbar bearbeiten und über Eglot oder lsp-bridge
+semantisch verstehen. Es gibt aber gegenwärtig keine offizielle, vollständig
+integrierte Mojo-Doom-Schicht.
+#+end_quote
+
+* JupyterLab und Jupyter Notebook
+
+** Status
+
+Mojo dokumentiert offiziell die Verwendung in JupyterLab und in
+Jupyter-Notebook-Umgebungen.
+
+Der aktuelle Ansatz verwendet einen Python-Kernel und lädt
+=mojo.notebook=. Mojo-Code wird in Zellen mit der Magic-Anweisung =%%mojo=
+ausgeführt.
+
+** Lokale Installation mit Pixi
+
+#+begin_src sh
+pixi add mojo jupyterlab ipykernel
+#+end_src
+
+JupyterLab starten:
+
+#+begin_src sh
+jupyter lab
+#+end_src
+
+** Mojo im Notebook aktivieren
+
+In einer Python-Zelle:
+
+#+begin_src python
+import mojo.notebook
+#+end_src
+
+Danach eine Mojo-Zelle:
+
+#+begin_src mojo
+%%mojo
+
+def main():
+    print("Hallo aus Mojo")
+#+end_src
+
+** Geeignete Einsatzbereiche
+
+JupyterLab eignet sich für:
+
+- Experimente
+- numerische Berechnungen
+- schrittweise Erklärungen
+- GPU-Beispiele
+- Visualisierung zusammen mit Python
+- Lehrmaterial
+- kurze Benchmarks
+
+** Grenzen
+
+JupyterLab ist kein vollständiger Ersatz für eine Projekt-IDE.
+
+Insbesondere sind große Mehrdateienprojekte, Refactorings und klassisches
+Debugger-Arbeiten in VS Code oder einem LSP-Editor meist angenehmer.
+
+* JetBrains-IDEs
+
+Zu den JetBrains-IDEs gehören unter anderem:
+
+- IntelliJ IDEA
+- PyCharm
+- CLion
+- DataSpell
+- RustRover
+
+** Community-Plugin
+
+Im JetBrains Marketplace existierte beziehungsweise existiert ein
+Community-Plugin namens =Mojo=.
+
+Es bot hauptsächlich:
+
+- grundlegende Bearbeitung
+- Syntaxprüfung
+- Syntaxhervorhebung
+- Kommentare
+- Formatierung
+- teilweise LSP-Anbindung in kommerziellen JetBrains-Varianten
+
+** Wichtige Einschränkung
+
+Das zugehörige öffentliche Repository wurde am 18. Mai 2025 archiviert und ist
+nur noch lesbar.
+
+Damit besteht ein erhebliches Risiko, dass:
+
+- neue Mojo-Syntax nicht vollständig erkannt wird;
+- das Plugin mit neueren JetBrains-Versionen nicht kompatibel ist;
+- der aktuelle Mojo-LSP nicht sauber integriert wird;
+- Fehler nicht mehr behoben werden.
+
+** Urteil
+
+#+begin_quote
+JetBrains ist für Mojo derzeit nicht die erste Wahl. Das Community-Plugin kann
+für einfache Bearbeitung ausreichen, ist aber keine gleichwertige Alternative
+zur offiziellen VS-Code-Erweiterung.
+#+end_quote
+
+* Vim
+
+Vim kann Mojo-Dateien grundsätzlich bearbeiten.
+
+Mögliche Einrichtung:
+
+- =.mojo=-Dateien einem eigenen Dateityp zuordnen
+- vorläufig Python-Syntax verwenden
+- einen generischen LSP-Client installieren
+- =mojo-lsp-server= manuell konfigurieren
+- =mojo format= als externen Formatter verwenden
+- =mojo run= über einen Vim-Befehl starten
+
+Eine einfache Dateityperkennung in =~/.vim/ftdetect/mojo.vim=:
+
+#+begin_src vim
+au BufRead,BufNewFile *.mojo set filetype=mojo
+#+end_src
+
+Ein einfacher Syntax-Fallback in =~/.vim/syntax/mojo.vim=:
+
+#+begin_src vim
+runtime! syntax/python.vim
+let b:current_syntax = "mojo"
+#+end_src
+
+Dieser Fallback ist nicht vollständig korrekt. Neovim oder Helix sind für
+moderne LSP- und Tree-sitter-Funktionen normalerweise einfacher.
+
+* Sublime Text
+
+Sublime Text besitzt einen generischen LSP-Client und kann prinzipiell einen
+über Standard-Ein-/Ausgabe arbeitenden Language Server starten.
+
+Dafür wären notwendig:
+
+- LSP-Paket für Sublime Text
+- manuelle Sprachdefinition für =.mojo=
+- Startbefehl =mojo-lsp-server=
+- gegebenenfalls eine TextMate-Syntax
+- eigener Build-Befehl für =mojo run=
+
+Eine aktuelle offizielle Mojo-Erweiterung von Modular für Sublime Text ist
+nicht etabliert.
+
+* Zed
+
+Zed unterstützt über Erweiterungen:
+
+- Tree-sitter-Sprachen
+- Language Server
+- Debug-Adapter
+- eigene Sprachdefinitionen
+
+Eine Mojo-Erweiterung wäre deshalb technisch möglich.
+
+Gegenwärtig ist jedoch keine etablierte offizielle Mojo-Erweiterung von
+Modular für Zed dokumentiert. Ohne eigene oder Community-Erweiterung erkennt
+Zed Mojo daher nicht in derselben Qualität wie VS Code oder Helix.
+
+* Reine Kommandozeilenentwicklung
+
+Mojo kann unabhängig von jeder IDE verwendet werden.
+
+Wichtige Befehle:
+
+#+begin_src sh
+mojo --version
+mojo run programm.mojo
+mojo build programm.mojo
+mojo format programm.mojo
+mojo test
+#+end_src
+
+Mit einem beliebigen Editor kann man daher immer mindestens:
+
+1. =.mojo=-Dateien bearbeiten;
+2. im Terminal kompilieren;
+3. das Programm starten;
+4. den Formatter ausführen;
+5. Tests ausführen.
+
+Die IDE entscheidet vor allem über Komfort, nicht darüber, ob Mojo grundsätzlich
+kompiliert werden kann.
+
+* Empfehlungen nach Nutzertyp
+
+** Möglichst vollständig und unkompliziert
+
+#+begin_quote
+Visual Studio Code mit der offiziellen Mojo-Erweiterung
+#+end_quote
+
+** VS Code mit KI-Funktionen
+
+#+begin_quote
+Cursor mit der offiziellen Mojo-Erweiterung
+#+end_quote
+
+** Freie VS-Code-Variante
+
+#+begin_quote
+VSCodium mit der Erweiterung aus Open VSX
+#+end_quote
+
+Dabei muss geprüft werden, ob alle Debugger-Funktionen im jeweiligen Build
+verfügbar sind.
+
+** Terminal und wenig Konfiguration
+
+#+begin_quote
+Helix
+#+end_quote
+
+** Bereits erfahrener Neovim-Nutzer
+
+#+begin_quote
+Neovim mit =mojo-lsp-server= und Tree-sitter
+#+end_quote
+
+** Bereits erfahrener Doom-Emacs-Nutzer
+
+#+begin_quote
+Doom Emacs mit eigenem =mojo-mode= und Eglot oder lsp-bridge
+#+end_quote
+
+** Interaktive Experimente
+
+#+begin_quote
+JupyterLab mit =mojo.notebook= und =%%mojo=
+#+end_quote
+
+** JetBrains-Nutzer
+
+JetBrains kann für einfache Bearbeitung versucht werden. Für ernsthafte
+Mojo-Entwicklung ist derzeit ein paralleles VS-Code- oder Helix-Setup
+vernünftiger.
+
+* Gesamturteil
+
+Die Mojo-IDE-Landschaft ist noch deutlich kleiner als bei Python, Rust, C++
+oder Java.
+
+Die Rangfolge lautet gegenwärtig ungefähr:
+
+1. Visual Studio Code
+2. Cursor und andere gut kompatible VS-Code-Ableger
+3. Helix
+4. Neovim
+5. Emacs beziehungsweise Doom Emacs
+6. JupyterLab für interaktive Aufgaben
+7. JetBrains mit veraltetem Community-Plugin
+8. Vim, Sublime Text und Zed mit eigener Einrichtung
+
+Die wichtigste Unterscheidung ist:
+
+#+begin_quote
+VS Code besitzt eine offizielle vollständige Mojo-Integration.
+
+Andere Editoren verwenden überwiegend den mit Mojo gelieferten Language Server
+und eigene Syntaxdefinitionen.
+#+end_quote
+
+* Quellen
+
+** Offizielle Mojo-Quellen
+
+- [[https://mojolang.org/install/][Mojo installieren]]
+- [[https://mojolang.org/docs/faq/][Offizielle Mojo-FAQ]]
+- [[https://github.com/modular/vscode-mojo][Offizielle Mojo-Erweiterung für Visual Studio Code]]
+- [[https://marketplace.visualstudio.com/items?itemName=modular-mojotools.vscode-mojo][Mojo im Visual Studio Marketplace]]
+- [[https://mojolang.org/nightly/docs/tools/notebooks/][Offizielle Anleitung für Jupyter-Notebooks]]
+- [[https://mojolang.org/releases/][Mojo-Releases]]
+
+** Weitere Projekte
+
+- [[https://github.com/helix-editor/helix][Helix-Editor]]
+- [[https://github.com/helix-editor/helix/blob/master/CHANGELOG.md][Helix-Änderungsprotokoll mit Mojo-Unterstützung]]
+- [[https://github.com/manateelazycat/lsp-bridge][lsp-bridge für Emacs]]
+- [[https://github.com/lsh/tree-sitter-mojo][Community-Grammatik tree-sitter-mojo]]
+- [[https://plugins.jetbrains.com/plugin/23371-mojo][Mojo-Plugin im JetBrains Marketplace]]
+- [[https://github.com/kishmakov/mojo-at-jetbrains][Archiviertes Repository des JetBrains-Plugins]]
